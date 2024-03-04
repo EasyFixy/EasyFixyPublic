@@ -8,6 +8,8 @@ interface CommonInputProps {
     placeholder: string;
     name: string;
     required: boolean;
+    isPassword?: boolean;
+    showPassword?: boolean
   }
 const CommonInput = ({
     label,
@@ -16,13 +18,15 @@ const CommonInput = ({
     onChange,
     placeholder,
     name,
-    required = false
+    required = false,
+    isPassword = false,
+    showPassword = false,
 }:CommonInputProps) => {
     return(
         <div className="w-[400px] flex flex-col mb-6">
             <label className="text-base"> {label}</label>
             <input 
-                className="w-full h-10 border border-solid border-[#666666] text-[#666666]"
+                className="w-full h-10 border border-solid border-[#666666] text-[#666666] pl-4 relative"
                 type={type}
                 value={value}
                 onChange={onChange}
@@ -31,6 +35,7 @@ const CommonInput = ({
                 required ={required}
                 
             />
+            
         </div>
     );
 }

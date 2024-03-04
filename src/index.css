@@ -21,3 +21,11 @@ body {
 .textVerde{
     color: var(--colorVerde);
 }
+#rfs-btn{
+    border: none;
+    height: 100%;
+}
+
+input:focus {
+    outline: none;
+}
