@@ -9,7 +9,8 @@ interface CommonInputProps {
     name: string;
     required: boolean;
     isPassword?: boolean;
-    showPassword?: boolean
+    showPassword?: boolean;
+    margin?: boolean
   }
 const CommonInput = ({
     label,
@@ -21,9 +22,11 @@ const CommonInput = ({
     required = false,
     isPassword = false,
     showPassword = false,
+    margin = true
+
 }:CommonInputProps) => {
     return(
-        <div className="w-[400px] flex flex-col mb-6">
+        <div className={`w-full flex flex-col ${margin ? 'mb-6' : ''}`}>
             <label className="text-base"> {label}</label>
             <input 
                 className="w-full h-10 border border-solid border-[#666666] text-[#666666] pl-4 relative"
