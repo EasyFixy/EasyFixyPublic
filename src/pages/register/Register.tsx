@@ -3,6 +3,7 @@ import ContenedorLogoHorizontal from '../../componentes/contenedorLogoVerde/Cont
 import CommonInput from './components/CommonImput';
 import ReactFlagsSelect from 'react-flags-select';
 import { countries } from '../../data/Countries';
+import { Link } from 'react-router-dom';
 
 
 
@@ -32,6 +33,16 @@ const Register = () => {
     });
     const [countrySelected, setCountrySelected] = useState<string>("");
     const [showPassword, setShowPassword] = useState<boolean>(false);
+    const [politicasChecked, setPoliticasChecked] = useState(false);
+    const [terminosCondicionesChecked, setTerminosCondicionesChecked] = useState(false);
+
+    const handlePoliticasChange = () => {
+        setPoliticasChecked(!politicasChecked);
+    };
+
+    const handleTerminosCondicionesChange = () => {
+        setTerminosCondicionesChecked(!terminosCondicionesChecked);
+    };
     const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
         console.log('change ',e.target.value )
         setFormData({
@@ -78,8 +89,7 @@ const Register = () => {
                 <div className='flex flex-col items-center'>
 
                     <h1 className='text-3xl font-bold mb-6'>Crea tu cuenta</h1>
-                    <button className='backgroundVerde h-14 text-white w-64 opacity-80 rounded-full border border-black border-solid mb-6'>Sign In with Google Account</button>
-                    <form >
+                    <form className='flex flex-col w-[400px]'>
                         <CommonInput
                             label="Nombre Completo"
                             type="text"
@@ -116,7 +126,7 @@ const Register = () => {
                             name='email'
                             required
                         />
-                        <div className='w-[400px] flex flex-row mb-6 h-10 border border-solid border-[#666666]'>
+                        <div className='w-full flex flex-row mb-6 h-10 border border-solid border-[#666666]'>
                             <ReactFlagsSelect
                                 className='w-2/5 h-full border-none'
                                 selected={countrySelected}
@@ -128,8 +138,8 @@ const Register = () => {
                                         ['prefixCountry']: countries[code].prefijo
                                     });
                                     setCountrySelected(code);
-                                    }
                                 }
+                            }
                                 customLabels={{
                                     "CO": { primary: "Colombia", secondary: "+57" },
                                     "AR": { primary: "Argentina", secondary: "+54" },
@@ -167,14 +177,37 @@ const Register = () => {
                             required
                             isPassword
                             showPassword ={showPassword}
+                            margin ={false}
                         />
-                        <p className='text-[#666666] text-xs'> 
+                        <p className='text-[#666666] text-xs mb-6'> 
                             Password must contain a minimum of 8 characters <br />
                             Password must contain at least one symbol e.g. @, !
                         </p>
+                        <label className='text-xs font-normal text-[#666666] flex items-center'>
+                            <input
+                            type="checkbox"
+                            checked={terminosCondicionesChecked}
+                            onChange={handleTerminosCondicionesChange}
+                            />
+                            <p>He leído y acepto los <Link to={'/terms-conditions'} className='textVerde'> términos y condiciones de uso</Link> </p>
+                        </label>
+                        <label className='text-xs font-normal text-[#666666] flex items-center mb-6'>
+                            <input
+                            type="checkbox"
+                            checked={politicasChecked}
+                            onChange={handlePoliticasChange}
+                            />
+                            <p> He leído y acepto la <Link to={'/policies-privacity'} className='textVerde'> politica de privacidad </Link></p>
+                        </label>
                         
-                        <button type='submit'>Register</button>
+                        <button type='submit'className='backgroundVerde h-10 text-white w-full rounded-full border border-black border-solid mb-6'>Registrarte</button>
+                        
                     </form>
+                    <div className='flex flex-row gap-1'>
+                        <p className='font-bold text-[#666666]'>Tengo una cuenta! </p>
+                        <Link to={'/login'} className='underline text-[#24445B]'> Iniciar sesión</Link>
+
+                    </div>
                 </div>
 
             </div>

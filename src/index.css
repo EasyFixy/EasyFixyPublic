@@ -13,7 +13,7 @@ body {
     left: 0;
 }
 :root{
-    --colorVerde: #096C8A;
+    --colorVerde: rgb(9,108,138,0.8);
 }
 .backgroundVerde{
     background-color: var(--colorVerde);
