@@ -1,5 +1,6 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import ContenedorLogoHorizontal from '../../componentes/contenedorLogoVerde/ContenedorLogoHorizontal';
+import { Navigate, useNavigate } from 'react-router-dom';
 import CommonInput from './components/CommonImput';
 import ReactFlagsSelect from 'react-flags-select';
 import { countries } from '../../data/Countries';
@@ -12,12 +13,12 @@ import axios from 'axios';
 // import axios from 'axios';
 interface UserFormData {
     userName: string;
-    userNationalId: number | string;
+    userNationalId: string;
     userDateOfBirth : string 
     userEmail: string;
     userNationality: string;
     userPrefixNational: string;
-    userPhoneNumber: number | string;
+    userPhoneNumber: string;
     userPassword: string;
 
 }
@@ -36,7 +37,7 @@ const Register = () => {
     const [showPassword, setShowPassword] = useState<boolean>(false);
     const [politicasChecked, setPoliticasChecked] = useState(false);
     const [terminosCondicionesChecked, setTerminosCondicionesChecked] = useState(false);
-
+    const navigate = useNavigate();
     const handlePoliticasChange = () => {
         setPoliticasChecked(!politicasChecked);
     };
@@ -54,7 +55,7 @@ const Register = () => {
     };
 
     
-    const verifyFields = () =>{
+    const verifyFields = ():boolean => {
         const currentDate = new Date();
         const birthdate = new Date(formData.userDateOfBirth);
         let ageDifference = currentDate.getFullYear() - birthdate.getFullYear();
@@ -66,54 +67,69 @@ const Register = () => {
         }
         if (ageDifference < 18) {
             alert('Debes ser mayor de 18 años para registrarte.');
-            return ;
+            return false;
         }
         // Validar el formato del correo electrónico
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(formData.userEmail)) {
-        alert('Por favor, ingrese un correo electrónico válido.');
-        return;
+            alert('Por favor, ingrese un correo electrónico válido.');
+            return false;
         }
         // Validar que el campo del país no esté vacío
         if (!formData.userNationality || !formData.userPrefixNational) {
             alert('Por favor, seleccione un país.');
-            return;
+            return false;
         }
         // Validar la contraseña
-        const passwordRegex = /^(?=.*[!/@#$%^&*])(?=.*[a-zA-Z0-9]).{8,}$/;
+        const passwordRegex = /^(?=.*[.,;{}´¨+*/!$%&#?¿'_-])(?=.*[a-zA-Z0-9]).{8,}$/;
         if (!passwordRegex.test(formData.userPassword)) {
             alert('La contraseña debe contener al menos 8 caracteres y al menos un carácter especial.');
-            return;
+            return false;
         }
         if(!politicasChecked || !terminosCondicionesChecked){
             alert('Por favor, acepte los términos y condiciones.');
+            return false;
         }
+        return true;
        
     }
     useEffect(()=>{
         console.log('formData ', formData)
     },[formData])
 
-  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    verifyFields();
-    try {
+    const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        
+        try {
+            if(verifyFields()){
+                const params = Object.entries(formData)
+                    .map(([key, value]) => `${key}=${value}`)
+                    .join('&');
+                const config = {
+                    method: 'get',
+                    url: `http://localhost:3000/userRegistration?${params.toString()}`,
+                    data: formData,
+                    headers: {
+                    'Content-Type': 'application/json'
+                    }
+                };
+        
+        
+                axios(config)
+                    .then((response) => {
+                        if (response.status === 200) {
+                            navigate("/selectRol");
+                        }
+                    })
+                    .catch((error) => {
+                        // Manejar el error si es necesario
+                    });
+            }
 
-      const config = {
-        headers: {
-          'Content-Type': 'application/json'
+        } catch (err) {
+        console.error(err.response.data); 
         }
-      };
-
-      const body = JSON.stringify(formData);
-
-      const res = await axios.post('/api/register', body, config);
-
-      console.log(res.data);
-    } catch (err) {
-      console.error(err.response.data); 
-    }
-};
+    };
 
     return (
         <div className='w-screen h-screen flex flex-row '>
@@ -169,7 +185,7 @@ const Register = () => {
                                 onSelect={(code) => {
                                     setFormData({
                                         ...formData,
-                                        ['userNationality']: countries[code].name,
+                                        ['userNationality']: code,
                                         ['userPrefixNational']: countries[code].prefijo
                                     });
                                     setCountrySelected(code);
