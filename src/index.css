@@ -13,11 +13,19 @@ body {
     left: 0;
 }
 :root{
-    --colorVerde: #27806C;
+    /* #27806C; */
+    --colorVerde: #FD7401;
+    --color3: #292929;
 }
 .backgroundVerde{
     background-color: var(--colorVerde);
 }
+
+.color3{
+    background-color: var(--color3);
+}
+
+
 .textVerde{
     color: var(--colorVerde);
 }

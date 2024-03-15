@@ -72,7 +72,7 @@ const Login = () => {
                         <Link to={'/recuperarPassword'} className="textVerde ml-4">¿Olvidaste la contraseña?</Link>
                     </div>
 
-                    <button className="w-full mt-10 backgroundVerde h-14 text-white w-64 opacity-80 rounded-full border border-black border-solid mb-6" onClick={handdleLogin}>Iniciar sesión →</button>
+                    <button className="w-full mt-10 backgroundVerde h-14 text-white w-64 rounded-full border border-black border-solid mb-6" onClick={handdleLogin}>Iniciar sesión →</button>
                     <div className="flex flex-row flex justify-center items-center ">
                         <h1>No tengo una cuenta!</h1>
                         <Link to={'/register'} className="textVerde ml-4">Sign Up</Link>

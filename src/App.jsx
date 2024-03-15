@@ -5,6 +5,7 @@ import TermsConditions from './pages/PoliticasYCondiciones/TermsConditions';
 import PoliciesPrivacy from './pages/PoliticasYCondiciones/PoliciesPrivacy';
 import NewPassword from './pages/Password/NewPassword';
 import RecuperarPassword from './pages/Password/RecuperarPassword';
+import VisualizarPerfilEmpleado from './pages/DatosPerfilEmpleado/DatosPerfilEmpleado';
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
         <Route path="/policies-privacity" element ={<PoliciesPrivacy/>}/>
         <Route path="/newPassword" element ={<NewPassword/>}/>
         <Route path="/recuperarPassword" element ={<RecuperarPassword/>}/>
+        <Route path='/datosPerfilEmpleado' element={<VisualizarPerfilEmpleado/>}/>
         {/* Otras rutas */}
       </Routes>
     </BrowserRouter>
