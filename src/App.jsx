@@ -5,7 +5,8 @@ import TermsConditions from './pages/PoliticasYCondiciones/TermsConditions';
 import PoliciesPrivacy from './pages/PoliticasYCondiciones/PoliciesPrivacy';
 import NewPassword from './pages/Password/NewPassword';
 import RecuperarPassword from './pages/Password/RecuperarPassword';
-import VisualizarPerfilEmpleado from './pages/DatosPerfilEmpleado/DatosPerfilEmpleado';
+import DatosPerfilEmpleado from './pages/DatosPerfilEmpleado/DatosPerfilEmpleado';
+import VerPerfilEmpleado from './pages/VisualizarEmpleado/VisualizarPerfil';
 
 const App = () => {
   return (
@@ -17,7 +18,8 @@ const App = () => {
         <Route path="/policies-privacity" element ={<PoliciesPrivacy/>}/>
         <Route path="/newPassword" element ={<NewPassword/>}/>
         <Route path="/recuperarPassword" element ={<RecuperarPassword/>}/>
-        <Route path='/datosPerfilEmpleado' element={<VisualizarPerfilEmpleado/>}/>
+        <Route path='/datosPerfilEmpleado' element={<DatosPerfilEmpleado/>}/>
+        <Route path='/verPerfilEmpleado' element={<VerPerfilEmpleado/>}/>
         {/* Otras rutas */}
       </Routes>
     </BrowserRouter>

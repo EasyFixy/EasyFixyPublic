@@ -1,7 +1,7 @@
 import React from "react";
 import ToolbarDefault from "../components/ToolbarDefaul";
 
-const DatosrPerfilEmpleado = () => {
+const DatosPerfilEmpleado = () => {
     return(
         <div className='w-screen h-screen flex flex-col'>
 
@@ -44,4 +44,4 @@ const DatosrPerfilEmpleado = () => {
     );
 }
 
-export default DatosrPerfilEmpleado;
+export default DatosPerfilEmpleado;
