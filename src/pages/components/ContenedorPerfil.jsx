@@ -1,8 +1,18 @@
 import React from "react";
+import { useState } from "react";
+import  EditarPerfil from "./EditarPerfil";
 
-const ContenedorPerfil = () => {
+const ContenedorPerfil = (props) => {
+
+    const [estadoDialog, setEstadoDialog] = useState(false);
+    const mostrarEditar = () => {
+        setEstadoDialog(!estadoDialog);
+    }
+    console.log(estadoDialog)
+
     return(
         <div className='mt-10 content-center px-32 py-10 w-screen h-auto flex flex-row'>
+            <div>{(estadoDialog===true ? (<EditarPerfil/>) : (<p></p>))}</div>
             <div className="w-70 h-70">
                 <img src="/icons/icon-user.png" alt="Imagen usuario" className="bg-gray-300 px-2 py-2" />
             </div>
@@ -35,6 +45,11 @@ const ContenedorPerfil = () => {
                         <img src="/icons/like.png" alt="Manito de me gusta" className="px-2 w-10 " />
                         <h2>0 Recommendations</h2>
                     </div>
+                    <div>{(props.estado===true ? 
+                        (<div>
+                            <button className="w-14 ml-2 mt-4 backgroundVerde h-7 text-white w-64 rounded-full border border-black border-solid mb-6" onClick={() => (mostrarEditar())}>Editar Perfil</button>
+                            
+                        </div>) : (<div></div>) )}</div>
                     
                 </div>
             </div>

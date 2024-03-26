@@ -1,15 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import ToolbarDefault from "../components/ToolbarDefaul";
 import ContenedorPerfil from "../components/ContenedorPerfil";
 import Comentarios from "../components/Comentarios";
 
 const VisualizarPerfil = () => {
+
+    const [isMyAccount, setIsMyAccount] = useState(true);
+
     return(
         <div className='w-screen h-screen flex flex-col overflow-y-scroll'>
             
             <ToolbarDefault/>
 
-            <ContenedorPerfil/>
+            <ContenedorPerfil estado={isMyAccount}/>
             <div className="w-full h-auto flex flex-row">
 
                 <div className="w-1/2 h-auto flex flex-col">
