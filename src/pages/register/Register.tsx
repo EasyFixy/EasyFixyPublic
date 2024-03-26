@@ -6,6 +6,7 @@ import ReactFlagsSelect from 'react-flags-select';
 import { countries } from '../../data/Countries';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 
 
@@ -47,7 +48,6 @@ const Register = () => {
     };
 
     const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-        console.log('change ',e.target.value )
         setFormData({
             ...formData,
             [e.target.name]: e.target.value
@@ -66,36 +66,33 @@ const Register = () => {
                 ageDifference--;
         }
         if (ageDifference < 18) {
-            alert('Debes ser mayor de 18 años para registrarte.');
+            toast.info('Debes ser mayor de 18 años para registrarte.');
             return false;
         }
         // Validar el formato del correo electrónico
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(formData.userEmail)) {
-            alert('Por favor, ingrese un correo electrónico válido.');
+            toast.info('Por favor, ingrese un correo electrónico válido.');
             return false;
         }
         // Validar que el campo del país no esté vacío
         if (!formData.userNationality || !formData.userPrefixNational) {
-            alert('Por favor, seleccione un país.');
+            toast.info('Por favor, seleccione un país.');
             return false;
         }
         // Validar la contraseña
         const passwordRegex = /^(?=.*[.,;{}´¨+*/!$%&#?¿'_-])(?=.*[a-zA-Z0-9]).{8,}$/;
         if (!passwordRegex.test(formData.userPassword)) {
-            alert('La contraseña debe contener al menos 8 caracteres y al menos un carácter especial.');
+            toast.info('La contraseña debe contener al menos 8 caracteres y al menos un carácter especial.');
             return false;
         }
         if(!politicasChecked || !terminosCondicionesChecked){
-            alert('Por favor, acepte los términos y condiciones.');
+            toast.info('Por favor, acepte los términos y condiciones.');
             return false;
         }
         return true;
        
     }
-    useEffect(()=>{
-        console.log('formData ', formData)
-    },[formData])
 
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
