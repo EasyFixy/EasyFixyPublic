@@ -5,21 +5,31 @@ import TermsConditions from './pages/PoliticasYCondiciones/TermsConditions';
 import PoliciesPrivacy from './pages/PoliticasYCondiciones/PoliciesPrivacy';
 import NewPassword from './pages/Password/NewPassword';
 import SelectRol from './pages/selectRol/SelectRol';
-
+import LandingPage from './pages/landingPage/LandingPage';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const App = () => {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path='/register' element={<Register/>} />
-        <Route path='/login' element={<Login/>} />
-        <Route path="/terms-conditions" element ={<TermsConditions/>}/>
-        <Route path="/policies-privacity" element ={<PoliciesPrivacy/>}/>
-        <Route path="/newPassword" element ={<NewPassword/>}/>
-        <Route path="/selectRol" element ={<SelectRol/>}/>
+    <>
+      <BrowserRouter>
+        <Routes>
+        <Route path='/' element={<LandingPage/>} />
+          <Route path='/register' element={<Register/>} />
+          <Route path='/login' element={<Login/>} />
+          <Route path="/terms-conditions" element ={<TermsConditions/>}/>
+          <Route path="/policies-privacity" element ={<PoliciesPrivacy/>}/>
+          <Route path="/newPassword" element ={<NewPassword/>}/>
+          <Route path="/selectRol" element ={<SelectRol/>}/>
 
-        {/* Otras rutas */}
-      </Routes>
-    </BrowserRouter>
+          {/* Otras rutas */}
+        </Routes>
+      </BrowserRouter>
+      <ToastContainer 
+        position="top-right" 
+        autoClose={4000}
+        closeOnClick
+      />
+    </>
   );
 };
 
