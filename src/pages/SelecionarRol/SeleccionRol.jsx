@@ -15,17 +15,17 @@ function SeleccionRol() {
 
             <div>
                 <div className="flex flex-row mx-4 my-2 w-auto h-auto border border-black border-solid">
-                    <img src="/icons/equis.svg" alt="provisional" className="w-25 h-25 px-4 py-4"/>
-                    <p className="ml-4 mt-14">Quiero trabajar</p>
-                    <p className="ml-4 mt-14 font-bold text-2xl">⭢</p>
+                    <img src="/icons/rol1.png" alt="provisional" className="w-25 h-25 px-4 py-4"/>
+                    <p className="ml-4 mt-16">Quiero trabajar</p>
+                    <button className="ml-4 font-bold text-5xl text-orange-400">⭢</button>
                 </div>
             </div>
 
             <div>
                 <div className="flex flex-row mx-4 my-2 w-auto h-auto border border-black border-solid">
-                    <img src="/icons/equis.svg" alt="provisional" className="w-25 h-25 px-4 py-4"/>
-                    <p className="ml-4 mt-14">Quiero trabajar</p>
-                    <p className="ml-4 mt-14 font-bold text-2xl">⭢</p>
+                    <img src="/icons/rol2.png" alt="provisional" className="w-25 h-25 px-4 py-4"/>
+                    <p className="ml-4 mt-16">Quiero contratar</p>
+                    <button className="ml-4 font-bold text-5xl text-orange-400">⭢</button>
                 </div> 
             </div>
         </section>
