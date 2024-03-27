@@ -7,6 +7,7 @@ import NewPassword from './pages/Password/NewPassword';
 import RecuperarPassword from './pages/Password/RecuperarPassword';
 import DatosPerfilEmpleado from './pages/DatosPerfilEmpleado/DatosPerfilEmpleado';
 import VerPerfilEmpleado from './pages/VisualizarEmpleado/VisualizarPerfil';
+import SeleccionRol from './pages/SelecionarRol/SeleccionRol';
 
 const App = () => {
   return (
@@ -20,6 +21,7 @@ const App = () => {
         <Route path="/recuperarPassword" element ={<RecuperarPassword/>}/>
         <Route path='/datosPerfilEmpleado' element={<DatosPerfilEmpleado/>}/>
         <Route path='/verPerfilEmpleado' element={<VerPerfilEmpleado/>}/>
+        <Route path='/selectrol' element={<SeleccionRol/>}/>
         {/* Otras rutas */}
       </Routes>
     </BrowserRouter>
