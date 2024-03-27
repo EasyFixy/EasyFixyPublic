@@ -6,12 +6,7 @@
 body {
   font-family: 'Space Grotesk';
 }
-#root{
-    display: block;
-    position: fixed;
-    top: 0;
-    left: 0;
-}
+
 :root{
     /* #27806C; */
     --colorVerde: #FD7401;

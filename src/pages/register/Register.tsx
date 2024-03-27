@@ -1,41 +1,44 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import ContenedorLogoHorizontal from '../../componentes/contenedorLogoVerde/ContenedorLogoHorizontal';
+import { Navigate, useNavigate } from 'react-router-dom';
 import CommonInput from './components/CommonImput';
 import ReactFlagsSelect from 'react-flags-select';
 import { countries } from '../../data/Countries';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { toast } from 'react-toastify';
 
 
 
 
 // import axios from 'axios';
 interface UserFormData {
-    name: string;
-    documentNumber: number | undefined;
-    dateOfBirth : string 
-    email: string;
-    country: string;
-    prefixCountry: string;
-    phoneNumber: number | undefined;
-    password: string;
+    userName: string;
+    userNationalId: string;
+    userDateOfBirth : string 
+    userEmail: string;
+    userNationality: string;
+    userPrefixNational: string;
+    userPhoneNumber: string;
+    userPassword: string;
 
 }
 const Register = () => {
     const [formData, setFormData] = useState<UserFormData>({
-        name: '',
-        documentNumber: undefined,
-        dateOfBirth: '',
-        email:'',
-        country: '',
-        prefixCountry:'',
-        phoneNumber: undefined,
-        password: ''
+        userName: '',
+        userNationalId: '',
+        userDateOfBirth: '',
+        userEmail:'',
+        userNationality: '',
+        userPrefixNational:'',
+        userPhoneNumber: '',
+        userPassword: ''
     });
     const [countrySelected, setCountrySelected] = useState<string>("");
     const [showPassword, setShowPassword] = useState<boolean>(false);
     const [politicasChecked, setPoliticasChecked] = useState(false);
     const [terminosCondicionesChecked, setTerminosCondicionesChecked] = useState(false);
-
+    const navigate = useNavigate();
     const handlePoliticasChange = () => {
         setPoliticasChecked(!politicasChecked);
     };
@@ -43,42 +46,87 @@ const Register = () => {
     const handleTerminosCondicionesChange = () => {
         setTerminosCondicionesChecked(!terminosCondicionesChecked);
     };
+
     const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-        console.log('change ',e.target.value )
         setFormData({
-          ...formData,
-          [e.target.name]: e.target.value
+            ...formData,
+            [e.target.name]: e.target.value
         });
     };
-  
-    useEffect(()=>{
-        console.log('formData ', formData)
-    },[formData])
 
-//   const onSubmit = async e => {
-//     e.preventDefault();
-//     try {
-//       const newUser = {
-//         username,
-//         email,
-//         password
-//       };
+    
+    const verifyFields = ():boolean => {
+        const currentDate = new Date();
+        const birthdate = new Date(formData.userDateOfBirth);
+        let ageDifference = currentDate.getFullYear() - birthdate.getFullYear();
+        if (currentDate.getMonth() < birthdate.getMonth() ||
+            (currentDate.getMonth() === birthdate.getMonth() && currentDate.getDate() < birthdate.getDate())) {
+            // Restar un año si el mes actual es anterior al mes de nacimiento,
+            // o si es el mismo mes pero el día actual es anterior al día de nacimiento.
+                ageDifference--;
+        }
+        if (ageDifference < 18) {
+            toast.info('Debes ser mayor de 18 años para registrarte.');
+            return false;
+        }
+        // Validar el formato del correo electrónico
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(formData.userEmail)) {
+            toast.info('Por favor, ingrese un correo electrónico válido.');
+            return false;
+        }
+        // Validar que el campo del país no esté vacío
+        if (!formData.userNationality || !formData.userPrefixNational) {
+            toast.info('Por favor, seleccione un país.');
+            return false;
+        }
+        // Validar la contraseña
+        const passwordRegex = /^(?=.*[.,;{}´¨+*/!$%&#?¿'_-])(?=.*[a-zA-Z0-9]).{8,}$/;
+        if (!passwordRegex.test(formData.userPassword)) {
+            toast.info('La contraseña debe contener al menos 8 caracteres y al menos un carácter especial.');
+            return false;
+        }
+        if(!politicasChecked || !terminosCondicionesChecked){
+            toast.info('Por favor, acepte los términos y condiciones.');
+            return false;
+        }
+        return true;
+       
+    }
 
-//       const config = {
-//         headers: {
-//           'Content-Type': 'application/json'
-//         }
-//       };
+    const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        
+        try {
+            if(verifyFields()){
+                const params = Object.entries(formData)
+                    .map(([key, value]) => `${key}=${value}`)
+                    .join('&');
+                const config = {
+                    method: 'get',
+                    url: `http://localhost:3000/userRegistration?${params.toString()}`,
+                    data: formData,
+                    headers: {
+                    'Content-Type': 'application/json'
+                    }
+                };
+        
+        
+                axios(config)
+                    .then((response) => {
+                        if (response.status === 200) {
+                            navigate("/selectRol");
+                        }
+                    })
+                    .catch((error) => {
+                        // Manejar el error si es necesario
+                    });
+            }
 
-//       const body = JSON.stringify(newUser);
-
-//       const res = await axios.post('/api/register', body, config);
-
-//       console.log(res.data); // Handle success response
-//     } catch (err) {
-//       console.error(err.response.data); // Handle error response
-//     }
-// };
+        } catch (err) {
+        console.error(err.response.data); 
+        }
+    };
 
     return (
         <div className='w-screen h-screen flex flex-row '>
@@ -89,53 +137,53 @@ const Register = () => {
                 <div className='flex flex-col items-center'>
 
                     <h1 className='text-3xl font-bold mb-6'>Crea tu cuenta</h1>
-                    <form className='flex flex-col w-[400px]'>
+                    <form onSubmit={onSubmit} className='flex flex-col w-[400px]'>
                         <CommonInput
                             label="Nombre Completo"
                             type="text"
-                            value={formData.name}
+                            value={formData.userName}
                             onChange={handleInputChange}
                             placeholder='nombre'
-                            name='name'
+                            name='userName'
                             required
                         />
                         <CommonInput
                             label="Número de documento"
                             type="number"
-                            value={formData.documentNumber}
+                            value={formData.userNationalId}
                             onChange={handleInputChange}
                             placeholder='xxxxx'
-                            name='documentNumber'
+                            name='userNationalId'
                             required
                         />
                         <CommonInput
                             label="Fecha de nacimiento"
                             type="date"
-                            value={formData.dateOfBirth}
+                            value={formData.userDateOfBirth}
                             onChange={handleInputChange}
                             placeholder='DD/MM/AA'
-                            name='dateOfBirth'
+                            name='userDateOfBirth'
                             required
                         />
                         <CommonInput
                             label="Correo electronico"
                             type="text"
-                            value={formData.email}
+                            value={formData.userEmail}
                             onChange={handleInputChange}
                             placeholder='name@email.com'
-                            name='email'
+                            name='userEmail'
                             required
                         />
                         <div className='w-full flex flex-row mb-6 h-10 border border-solid border-[#666666]'>
                             <ReactFlagsSelect
-                                className='w-2/5 h-full border-none'
+                                className='w-2/6 h-full border-none'
                                 selected={countrySelected}
-                                placeholder ="selecciona pais"
+                                placeholder ="pais"
                                 onSelect={(code) => {
                                     setFormData({
                                         ...formData,
-                                        ['country']: countries[code].name,
-                                        ['prefixCountry']: countries[code].prefijo
+                                        ['userNationality']: code,
+                                        ['userPrefixNational']: countries[code].prefijo
                                     });
                                     setCountrySelected(code);
                                 }
@@ -153,16 +201,16 @@ const Register = () => {
                                 showSecondarySelectedLabel={true}
                                 showSelectedLabel ={false}
                                 showOptionLabel ={true}
-                                showSecondaryOptionLabel={true}
+                                showSecondaryOptionLabel={false}
                                 countries={["CO", "AR", "PE", "BR", "CL", "VE", "EC", "UY"]}
                             />
                             <input 
-                                className="border-none w-3/5 pl-4"
-                                type="tel"
-                                value={formData.phoneNumber}
+                                className="border-none w-4/6 pl-4"
+                                type="number"
+                                value={formData.userPhoneNumber}
                                 onChange={handleInputChange}
                                 placeholder='ingresa telefono'
-                                name='phoneNumber'
+                                name='userPhoneNumber'
                                 required
                                 
                             />
@@ -170,10 +218,10 @@ const Register = () => {
                         <CommonInput
                             label="Crear Contraseña"
                             type="password"
-                            value={formData.password}
+                            value={formData.userPassword}
                             onChange={handleInputChange}
                             placeholder='*****'
-                            name='password'
+                            name='userPassword'
                             required
                             isPassword
                             showPassword ={showPassword}
@@ -188,14 +236,18 @@ const Register = () => {
                             type="checkbox"
                             checked={terminosCondicionesChecked}
                             onChange={handleTerminosCondicionesChange}
+                            required
+                            className='mr-[5px]'
                             />
                             <p>He leído y acepto los <Link to={'/terms-conditions'} className='textVerde'> términos y condiciones de uso</Link> </p>
                         </label>
                         <label className='text-xs font-normal text-[#666666] flex items-center mb-6'>
                             <input
                             type="checkbox"
+                            className='mr-[5px]'
                             checked={politicasChecked}
                             onChange={handlePoliticasChange}
+                            required
                             />
                             <p> He leído y acepto la <Link to={'/policies-privacity'} className='textVerde'> politica de privacidad </Link></p>
                         </label>
