@@ -8,11 +8,19 @@ body {
 }
 
 :root{
-    --colorVerde: rgb(9,108,138,0.8);
+    /* #27806C; */
+    --colorVerde: #FD7401;
+    --color3: #292929;
 }
 .backgroundVerde{
     background-color: var(--colorVerde);
 }
+
+.color3{
+    background-color: var(--color3);
+}
+
+
 .textVerde{
     color: var(--colorVerde);
 }
