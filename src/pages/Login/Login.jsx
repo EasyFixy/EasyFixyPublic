@@ -68,13 +68,13 @@ const Login = () => {
                     <div className="flex flex-row flex justify-center items-center">
                         <input name="cbipeliculas" type="checkbox" />
                         <h1>Remember me</h1>
-                        <h1 className="textVerde ml-4">¿Olvidaste la contraseña?</h1>
+                        <h1 className="textNaranja ml-4">¿Olvidaste la contraseña?</h1>
                     </div>
 
-                    <button className="w-full mt-10 backgroundVerde h-14 text-white w-64 opacity-80 rounded-full border border-black border-solid mb-6" onClick={handdleLogin}>Iniciar sesión →</button>
+                    <button className="w-full mt-10 mainBackground h-14 text-white w-64 opacity-80 rounded-full border border-black border-solid mb-6" onClick={handdleLogin}>Iniciar sesión →</button>
                     <div className="flex flex-row flex justify-center items-center ">
                         <h1>No tengo una cuenta!</h1>
-                        <a href='https://github.com' className="textVerde ml-4">Sign Up</a>
+                        <a href='https://github.com' className="textNaranja ml-4">Sign Up</a>
                     </div>
                 </form>
                 <div className="mt-5"> {loginSuccessful ? "Te logueaste" : "no logueado"}</div>

@@ -132,7 +132,7 @@ const Register = () => {
         <div className='w-screen h-screen flex flex-row '>
             <div className='w-1/2 flex flex-col px-16 py-10 overflow-y-scroll'> 
                 <div>
-                    <span className='textVerde text-2xl font-bold'>EasyFixy</span>
+                    <span className='textNaranja text-2xl font-bold'>EasyFixy</span>
                 </div>
                 <div className='flex flex-col items-center'>
 
@@ -239,7 +239,7 @@ const Register = () => {
                             required
                             className='mr-[5px]'
                             />
-                            <p>He leído y acepto los <Link to={'/terms-conditions'} className='textVerde'> términos y condiciones de uso</Link> </p>
+                            <p>He leído y acepto los <Link to={'/terms-conditions'} className='textNaranja'> términos y condiciones de uso</Link> </p>
                         </label>
                         <label className='text-xs font-normal text-[#666666] flex items-center mb-6'>
                             <input
@@ -249,10 +249,10 @@ const Register = () => {
                             onChange={handlePoliticasChange}
                             required
                             />
-                            <p> He leído y acepto la <Link to={'/policies-privacity'} className='textVerde'> politica de privacidad </Link></p>
+                            <p> He leído y acepto la <Link to={'/policies-privacity'} className='textNaranja'> politica de privacidad </Link></p>
                         </label>
                         
-                        <button type='submit'className='backgroundVerde h-10 text-white w-full rounded-full border border-black border-solid mb-6'>Registrarte</button>
+                        <button type='submit'className='mainBackground h-10 text-white w-full rounded-full border border-black border-solid mb-6'>Registrarte</button>
                         
                     </form>
                     <div className='flex flex-row gap-1'>

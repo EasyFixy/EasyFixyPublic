@@ -1,7 +1,7 @@
 import React from "react";
 const ToolbarDefault = () =>{
     return(
-        <div className="w-full h-24 backgroundVerde px-4 flex">
+        <div className="w-full h-24 mainBackground px-4 flex">
             <div className="w-2/4 flex flex-row justify-start items-center">
                 <p className="text-3xl "> EasyFixy</p>
                 <img src="" alt="logo" className="w-[10%]" />
