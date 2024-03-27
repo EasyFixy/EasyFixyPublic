@@ -4,6 +4,10 @@ import Login from './pages/Login/Login';
 import TermsConditions from './pages/PoliticasYCondiciones/TermsConditions';
 import PoliciesPrivacy from './pages/PoliticasYCondiciones/PoliciesPrivacy';
 import NewPassword from './pages/Password/NewPassword';
+import RecuperarPassword from './pages/Password/RecuperarPassword';
+import DatosPerfilEmpleado from './pages/DatosPerfilEmpleado/DatosPerfilEmpleado';
+import VerPerfilEmpleado from './pages/VisualizarEmpleado/VisualizarPerfil';
+import SeleccionRol from './pages/SelecionarRol/SeleccionRol';
 import SelectRol from './pages/selectRol/SelectRol';
 import LandingPage from './pages/landingPage/LandingPage';
 import { ToastContainer } from 'react-toastify';
@@ -19,7 +23,10 @@ const App = () => {
           <Route path="/terms-conditions" element ={<TermsConditions/>}/>
           <Route path="/policies-privacity" element ={<PoliciesPrivacy/>}/>
           <Route path="/newPassword" element ={<NewPassword/>}/>
-          <Route path="/selectRol" element ={<SelectRol/>}/>
+        <Route path="/recuperarPassword" element ={<RecuperarPassword/>}/>
+        <Route path='/datosPerfilEmpleado' element={<DatosPerfilEmpleado/>}/>
+        <Route path='/verPerfilEmpleado' element={<VerPerfilEmpleado/>}/>
+        <Route path='/selectrol' element={<SeleccionRol/>}/>
 
           {/* Otras rutas */}
         </Routes>

@@ -14,6 +14,9 @@ body {
     left: 0;
 }
 :root{
+    /* #27806C; */
+    --colorVerde: #FD7401;
+    --color3: #292929;
     --colorNaranja: rgb(253,116,1);
     --colorGris: rgb(41,41,41);
 }
@@ -23,6 +26,12 @@ body {
 .backgroundGris {
     background-color: var(--colorGris);
 }
+
+.color3{
+    background-color: var(--color3);
+}
+
+
 .textNaranja{
     color: var(--colorNaranja);
 }
