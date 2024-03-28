@@ -3,8 +3,8 @@ import { useState } from "react";
 
 const EditarPerfil = () =>{
 
-    const [residencia, setResidencia] = useState('');
-    const [hora, setHora] = useState('');
+    const [prefijo, setPrefijo] = useState('');
+    const [nacionalidad, setNacionalidad] = useState('');
     const [telefono, setTelefono] = useState('');
 
     return(
@@ -13,23 +13,23 @@ const EditarPerfil = () =>{
             <form>
                     <h1 className="mt-10 text-3xl font-bold">Editar mis datos</h1>
                     <div className="w-[400px] flex flex-col mb-6 mt-8">
-                        <label className="font-boldv">Lugar de residencia</label>
+                        <label className="font-boldv">Prefijo nacional</label>
                         <input
                             className="w-full h-12 border border-solid border-[#666666] text-[#666666] pl-4 relative rounded-3xl" 
-                            onChange={(event) => { setResidencia(event.target.value) }}
+                            onChange={(event) => { setPrefijo(event.target.value) }}
                             placeholder="Type here"
                             type="text" />
                     </div>
                     <div className="w-[400px] flex flex-col mb-6">
-                        <label className="custom-label">Zona horaria</label>
+                        <label className="custom-label">Nacionalidad</label>
                         <input 
                             className="w-full h-12 border border-solid border-[#666666] text-[#666666] pl-4 relative rounded-3xl" 
-                            onChange={(event) => { setHora(event.target.value) }}
+                            onChange={(event) => { setNacionalidad(event.target.value) }}
                             placeholder="Type here"
                             type="text" />
                     </div>
                     <div className="w-[400px] flex flex-col mb-6">
-                        <label className="custom-label">Número de telefono</label>
+                        <label className="custom-label">Número de teléfono</label>
                         <input 
                             className="w-full h-12 border border-solid border-[#666666] text-[#666666] pl-4 relative rounded-3xl" 
                             onChange={(event) => { setTelefono(event.target.value) }}
