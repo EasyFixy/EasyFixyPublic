@@ -44,7 +44,7 @@ const ContenedorPerfil = (props) => {
                     </div>
                     <div>{(props.estado===true ? 
                         (<div>
-                            <button className="w-14 ml-2 mt-4 backgroundVerde h-7 text-white w-64 rounded-full border border-black border-solid mb-6" onClick={() => (mostrarEditar())}>Editar Perfil</button>
+                            <button className="w-14 ml-2 mt-4 mainBackground h-7 text-white w-64 rounded-full border border-black border-solid mb-6" onClick={() => (mostrarEditar())}>Editar Perfil</button>
                             
                         </div>) : (<div></div>) )}</div>
                     
