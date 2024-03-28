@@ -36,7 +36,7 @@ const DatosPerfilEmpleado = () => {
                 />
                 <div className="flex justify-center items-center">
                     <button className="w-auto mt-10 mr-80 py-0 color3 h-14 text-white px-4 rounded-full border border-black border-solid">Regresar</button>
-                    <button className="w-auto mt-10 backgroundVerde h-14 text-white px-4 py-0 rounded-full border border-black border-solid">Siguiente</button>
+                    <button className="w-auto mt-10 mainBackground h-14 text-white px-4 py-0 rounded-full border border-black border-solid">Siguiente</button>
                 </div>
             </div>
 
