@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -6,14 +7,24 @@
 body {
   font-family: 'Space Grotesk';
 }
-
+#root{
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
 :root{
     /* #27806C; */
     --colorVerde: #FD7401;
     --color3: #292929;
+    --colorNaranja: rgb(253,116,1);
+    --colorGris: rgb(41,41,41);
 }
-.backgroundVerde{
-    background-color: var(--colorVerde);
+.mainBackground{
+    background-color: var(--colorNaranja);
+}
+.backgroundGris {
+    background-color: var(--colorGris);
 }
 
 .color3{
@@ -21,14 +32,32 @@ body {
 }
 
 
-.textVerde{
-    color: var(--colorVerde);
+.textNaranja{
+    color: var(--colorNaranja);
+}
+.fontNameLogo {
+    font-family: 'Black Ops One';
+}
+.backgroundLanding{
+    background-color: rgb(41, 41, 41);
+    background-image: url('public/ColombiaMap.png');
+    background-repeat: no-repeat;
+    background-position: top right;
+    background-size: contain;
+}
+.backgroundLanding2{
+    background-color: rgb(41, 41, 41);
+    background-image: url('public/landingImage2.png');
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 #rfs-btn{
     border: none;
     height: 100%;
 }
-
+ul{
+    list-style:disc;
+}
 input:focus {
     outline: none;
 }

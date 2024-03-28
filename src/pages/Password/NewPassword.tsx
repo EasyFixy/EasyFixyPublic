@@ -46,7 +46,7 @@ const NewPassword = () =>{
                     </div>
                     <div className="flex flex-row justify-end px-[5%] py-3 gap-4">
                         <button className="w-[22%] h-10 bg-[#585858] rounded-full text-white">Cancelar</button>
-                        <button className="w-[22%] h-10 backgroundVerde rounded-full text-white">Continuar</button>
+                        <button className="w-[22%] h-10 mainBackground rounded-full text-white">Continuar</button>
                     </div>
 
                 </div>
