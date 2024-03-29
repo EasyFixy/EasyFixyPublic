@@ -4,7 +4,7 @@ import ToolbarDefault from "../components/ToolbarDefaul";
 const HomeEmpleado = () =>{
     return(
         <div className="w-screen h-screen flex flex-col">
-            <ToolbarDefault/>
+            <ToolbarDefault tipe="employee"/>
             <h1>HOLA ESTOY EN EL HOME DE EMPLEADO</h1>
         </div>
     )

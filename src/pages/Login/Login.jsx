@@ -1,19 +1,20 @@
 import { useState } from "react";
 import ContenedorLogoHorizontal from '../../componentes/contenedorLogoVerde/ContenedorLogoHorizontal';
 import { Link } from "react-router-dom";
+import { Navigate, useNavigate } from 'react-router-dom';
 const Login = () => {
 
     const [password, setPassword] = useState('');
     const [username, setUsername] = useState('');
     const [loginSuccessful, setLoginSuccessful] = useState(false);
-
+    const navigate = useNavigate();
     const handdleLogin = (e) => {
         e.preventDefault();
         const data = {
             username: username,
             password: password
         };
-        const url = `http://localhost:3000/userLogin?email=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`;
+        const url = `http://localhost:3000/userLogin?userEmail=${encodeURIComponent(username)}&userPassword=${encodeURIComponent(password)}`;
         fetch(url)
             .then(response => {
                 if (!response.ok) {
@@ -27,6 +28,7 @@ const Login = () => {
                     console.log(result.token);
                     localStorage.setItem('token', result.token)
                     setLoginSuccessful(true);
+                    navigate("/my/selectrole");
                 } else {
                     setLoginSuccessful(false);
                 }
