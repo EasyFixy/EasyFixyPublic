@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 function SeleccionRol() {
     return (
     <div className="flex items-center justify-center h-screen w-screen">
@@ -17,7 +18,7 @@ function SeleccionRol() {
                 <div className="flex flex-row mx-4 my-2 w-auto h-auto border border-black border-solid">
                     <img src="/icons/rol1.png" alt="provisional" className="w-25 h-25 px-4 py-4"/>
                     <p className="ml-4 mt-16">Quiero trabajar</p>
-                    <button className="ml-4 font-bold text-5xl text-orange-400">⭢</button>
+                    <Link to={'/my/profile/employee/create/personalinformation'} className="ml-4 mt-14 font-bold text-5xl text-orange-400">⭢</Link>
                 </div>
             </div>
 
@@ -25,7 +26,7 @@ function SeleccionRol() {
                 <div className="flex flex-row mx-4 my-2 w-auto h-auto border border-black border-solid">
                     <img src="/icons/rol2.png" alt="provisional" className="w-25 h-25 px-4 py-4"/>
                     <p className="ml-4 mt-16">Quiero contratar</p>
-                    <button className="ml-4 font-bold text-5xl text-orange-400">⭢</button>
+                    <Link to={'/my/home/employer'} className="ml-4 mt-14 font-bold text-5xl text-orange-400">⭢</Link>
                 </div> 
             </div>
         </section>

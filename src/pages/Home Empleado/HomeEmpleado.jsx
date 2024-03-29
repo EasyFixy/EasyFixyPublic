@@ -3,9 +3,9 @@ import ToolbarDefault from "../components/ToolbarDefaul";
 
 const HomeEmpleado = () =>{
     return(
-        <div className="className='w-screen h-screen flex flex-col">
+        <div className="w-screen h-screen flex flex-col">
             <ToolbarDefault/>
-            <h1>HOLLA ESTOY EN EL HOME DE EMPLEADO</h1>
+            <h1>HOLA ESTOY EN EL HOME DE EMPLEADO</h1>
         </div>
     )
 }
