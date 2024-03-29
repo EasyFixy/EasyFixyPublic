@@ -1,18 +1,28 @@
 import React, { useState } from "react";
 import ToolbarDefault from "../components/ToolbarDefaul";
 
-const RecuperarPassword = () =>{
-    const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
-    const [message, setMessage] = useState('');
+const RecuperarPassword = () => {
+    const [email, setEmail] = useState("");
+    const [message, setMessage] = useState("");
 
-    const handlePasswordChange = (e) => {
-        setPassword(e.target.value);
-    };
+    const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+  };
 
-    const handleConfirmPasswordChange = (e) => {
-        setConfirmPassword(e.target.value);
-    };
+    const handleSendResetEmail = async () => {
+        try {
+          const response = await fetch(`http://localhost:3000/sendResetMail?userEmail=${email}`);
+          if (response.ok) {
+            setMessage("Se ha enviado un correo electrónico con instrucciones para restablecer tu contraseña.");
+          } else {
+            setMessage("Hubo un error al enviar el correo electrónico. Por favor, inténtalo de nuevo más tarde.");
+          }
+        } catch (error) {
+          console.error("Error:", error);
+          setMessage("Hubo un error al enviar el correo electrónico. Por favor, inténtalo de nuevo más tarde.");
+        }
+      };
+
     return(
         <div className='w-screen h-screen flex flex-col'>
             <ToolbarDefault/>
@@ -33,19 +43,20 @@ const RecuperarPassword = () =>{
                             <h1 className="mb-0 mt-4">Obtener un link de recuperación en tu correo: </h1>
                         </div>
                         <input
-                            type="password"
-                            id="confirmPassword"
-                            value={confirmPassword}
-                            onChange={handleConfirmPasswordChange}
-                            required
-                            className="w-full h-10 border border-solid border-[#666666] text-[#666666] pl-4"
-                            placeholder="Ingrese tu correo"
-                        />
+                          type="email"
+                          id="email"
+                          value={email}
+                          onChange={handleEmailChange}
+                          required
+                          className="w-full h-10 border border-solid border-[#666666] text-[#666666] pl-4"
+                          placeholder="Ingresa tu correo"
+                          />
                     </div>
                     <div className="flex flex-row justify-end px-[5%] py-3 gap-4">
-                        <button className="w-[22%] h-10 backgroundVerde rounded-full text-white">Continuar</button>
+                    <button onClick={handleSendResetEmail} className="w-[22%] h-10 mainBackground rounded-full text-white">Continuar</button>
                     </div>
-
+                    <br />
+                    {message && <div className="px-[5%] pb-3 text-orange-500">{message}</div>}
                 </div>
             </div>
         </div>

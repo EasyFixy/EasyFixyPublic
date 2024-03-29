@@ -34,6 +34,7 @@ const NewPassword = () =>{
                             onChange={handlePasswordChange}
                             required
                             className="w-full h-10 border border-solid border-[#666666] text-[#666666] pl-4 mb-6"
+                            placeholder="Contraseña nueva"
                         />
                         <input
                             type="password"
@@ -42,6 +43,7 @@ const NewPassword = () =>{
                             onChange={handleConfirmPasswordChange}
                             required
                             className="w-full h-10 border border-solid border-[#666666] text-[#666666] pl-4"
+                            placeholder="Repetir contraseña nueva"
                         />
                     </div>
                     <div className="flex flex-row justify-end px-[5%] py-3 gap-4">
