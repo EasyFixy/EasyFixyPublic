@@ -1,5 +1,6 @@
 import React from "react";
 import ToolbarDefault from "../components/ToolbarDefaul";
+import { Link } from "react-router-dom";
 
 const DatosPerfilEmpleado = () => {
     return(
@@ -36,7 +37,8 @@ const DatosPerfilEmpleado = () => {
                 />
                 <div className="flex justify-center items-center">
                     <button className="w-auto mt-10 mr-80 py-0 color3 h-14 text-white px-4 rounded-full border border-black border-solid">Regresar</button>
-                    <button className="w-auto mt-10 backgroundVerde h-14 text-white px-4 py-0 rounded-full border border-black border-solid">Siguiente</button>
+                    {/* <button className="w-auto mt-10 mainBackground h-14 text-white px-4 py-0 rounded-full border border-black border-solid">Siguiente</button> */}
+                    <Link to={'/my/home/employee'} className="pt-4 w-auto mt-10 mainBackground h-14 text-white px-4 py-0 rounded-full border border-black border-solid">Siguiente</Link>
                 </div>
             </div>
 

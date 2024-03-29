@@ -2,6 +2,37 @@ import React from "react";
 import ContenedorLogoHorizontal from "../../componentes/contenedorLogoVerde/ContenedorLogoHorizontal";
 
 const CreateJob = () => {
+
+
+    
+    // FUNCION BUSCAR EMPLEADOS
+    // DESCOMENTAR Y AGREGAR PARAMETROS NECESARIOS
+
+    // const buscarEmpleados = (e) => {
+    //     e.preventDefault();
+    //     const data = {
+    //         isActivo: isActivo,
+    //         categoria: categoria
+    //     };
+    //     const url = `http://localhost:3000/buscarEmpleados?estado=${isActivo}&categoria=${categoria}`;
+    //     fetch(url)
+    //         .then(response => {
+    //             if (!response.ok) {
+    //                 throw new Error('La solicitud no fue exitosa');
+    //             }
+    //             return response.json(); // Si esperas una respuesta JSON
+    //         })
+    //         .then(result => {
+    //             // Aquí puedes trabajar con los datos obtenidos en la respuesta            
+                
+    //         })
+    //         .catch(error => {
+    //             console.error('Hubo un problema con la solicitud fetch:', error);
+    //         });
+
+    // }
+
+
     return(
     <div className="w-screen h-screen flex flex-row relative">
         <button className="absolute left-4 top-4">

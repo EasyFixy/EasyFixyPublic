@@ -33,7 +33,7 @@ const RecuperarPassword = () =>{
                             <h1 className="mb-0 mt-4">Obtener un link de recuperación en tu correo: </h1>
                         </div>
                         <input
-                            type="password"
+                            type="text"
                             id="confirmPassword"
                             value={confirmPassword}
                             onChange={handleConfirmPasswordChange}
