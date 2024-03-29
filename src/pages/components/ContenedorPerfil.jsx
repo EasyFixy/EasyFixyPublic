@@ -33,21 +33,18 @@ const ContenedorPerfil = (props) => {
                         <img src="/icons/bandera.png" alt="bandera país" />
                         <h2>Bogotá,Colombia</h2>
                     </div>
-                    <div className="flex flex-row mt-2">
-                        <img src="/icons/clock.png" alt="Reloj" className="px-2 w-10 " />
-                        <h2>It's currently 2:26 AM here</h2>
-                    </div>
+                    
                     <div className="flex flex-row mt-2">
                         <img src="/icons/joined.png" alt="Joined" className="px-2 w-10 " />
                         <h2>Joined March 6, 2024</h2>
                     </div>
-                    <div className="flex flex-row mt-2">
-                        <img src="/icons/like.png" alt="Manito de me gusta" className="px-2 w-10 " />
-                        <h2>0 Recommendations</h2>
+                    <div className="w-full h-auto mt-4 ml-4 border border-black border-solid px-8 py-4 rounded-3xl">
+                        <p>Describe tus habilidades, fortalezas y experiencias. Proporcione más detalles 
+                            sobre los servicios que ofrece, las cosas en las que le interesa trabajar y lo que le gusta hacer.</p>
                     </div>
                     <div>{(props.estado===true ? 
                         (<div>
-                            <button className="w-14 ml-2 mt-4 backgroundVerde h-7 text-white w-64 rounded-full border border-black border-solid mb-6" onClick={() => (mostrarEditar())}>Editar Perfil</button>
+                            <button className="w-14 ml-2 mt-4 mainBackground h-7 text-white w-64 rounded-full border border-black border-solid mb-6" onClick={() => (mostrarEditar())}>Editar Perfil</button>
                             
                         </div>) : (<div></div>) )}</div>
                     

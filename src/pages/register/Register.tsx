@@ -115,7 +115,7 @@ const Register = () => {
                 axios(config)
                     .then((response) => {
                         if (response.status === 200) {
-                            navigate("/selectRol");
+                            navigate("/my/selectrole");
                         }
                     })
                     .catch((error) => {
