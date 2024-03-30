@@ -43,6 +43,7 @@ const RecuperarPassword = () => {
                             <h1 className="mb-0 mt-4">Obtener un link de recuperación en tu correo: </h1>
                         </div>
                         <input
+
                           type="email"
                           id="email"
                           value={email}
@@ -51,6 +52,7 @@ const RecuperarPassword = () => {
                           className="w-full h-10 border border-solid border-[#666666] text-[#666666] pl-4"
                           placeholder="Ingresa tu correo"
                           />
+
                     </div>
                     <div className="flex flex-row justify-end px-[5%] py-3 gap-4">
                     <button onClick={handleSendResetEmail} className="w-[22%] h-10 mainBackground rounded-full text-white">Continuar</button>

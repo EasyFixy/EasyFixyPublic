@@ -1,7 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
 
 const LandingPage = () =>{
+
     return(
         <>
             <div className="w-full h-20 mainBackground px-[5%] flex fixed text-white">
