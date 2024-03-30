@@ -1,14 +1,45 @@
 import React from "react";
 import { useState } from "react";
 import  EditarPerfil from "./EditarPerfil";
+import { useEffect } from "react";
 
 const ContenedorPerfil = (props) => {
 
+    let idUser = 1;
+    const [loading, setLoading] = useState(true);
     const [estadoDialog, setEstadoDialog] = useState(false);
     const mostrarEditar = () => {
         setEstadoDialog(!estadoDialog);
     }
-    console.log(estadoDialog)
+    //console.log(estadoDialog)
+
+    const [userData, setUserData] = useState(null);
+
+    function getInfoPerfil() {
+        setLoading(true);
+        const options = {
+            method: "GET"
+        };
+        let url = new URL("http://localhost:3000/getUserProfile?userId="+idUser);
+        fetch(url, options)
+            .then(response => response.text())
+            .then(data => {
+                const json = JSON.parse(data);
+                console.log(json);
+                setUserData(json.data);
+            })
+            .catch(error => {
+                console.error('Error fetching user profile:', error);
+            })
+            .finally(() => {
+                setLoading(false);
+            });
+    }
+    
+        // se usa useEffect((),[]) sin parametros para solo hacer una vez la consulta a la BD, no se debe hacer cada vez que se renderice
+    useEffect(() => {
+        getInfoPerfil();
+    }, []);
 
     return(
         <div className='mt-10 content-center px-32 py-10 w-screen h-auto flex flex-row'>
@@ -18,7 +49,13 @@ const ContenedorPerfil = (props) => {
             </div>
             <div className="px-16 flex flex-col">
                 <div>
-                    <h1 className="text-3xl font-bold">Nombre del empleado</h1>
+                    <h1 className="text-3xl font-bold">{loading ? (
+            <p>Cargando perfil...</p>
+        ) : (
+            <>
+                {userData.mainData[0].userName}
+            </>
+        )}</h1>
                     <section className="flex flex-row mt-4">
                         <img src="/icons/icon-star.png" alt="Estrellita"  className="px-1"/>
                         <img src="/icons/icon-star.png" alt="Estrellita"  className="px-1"/>
@@ -26,7 +63,13 @@ const ContenedorPerfil = (props) => {
                         <img src="/icons/icon-star.png" alt="Estrellita"  className="px-1"/>
                         <img src="/icons/icon-star.png" alt="Estrellita"  className="px-1"/>
                         <h3 className="px-16">0.0 2 Calificaciones</h3>
-                        <h3>N/A Trabajos realizados</h3>
+                        <h3>{loading ? (
+            <p>Cargando perfil...</p>
+        ) : (
+            <>
+                {userData.mainData[0].antiguedadYears}
+            </>
+        )}  trabajos realizados</h3>
                     </section>
                     <h2 className="mt-8 text-orange-500 px-4"> • Estoy en linea</h2>
                     <div className="flex flex-row mt-2">
@@ -39,8 +82,13 @@ const ContenedorPerfil = (props) => {
                         <h2>Joined March 6, 2024</h2>
                     </div>
                     <div className="w-full h-auto mt-4 ml-4 border border-black border-solid px-8 py-4 rounded-3xl">
-                        <p>Describe tus habilidades, fortalezas y experiencias. Proporcione más detalles 
-                            sobre los servicios que ofrece, las cosas en las que le interesa trabajar y lo que le gusta hacer.</p>
+                        <p>{loading ? (
+            <p>Cargando perfil...</p>
+        ) : (
+            <>
+                {userData.resumes.join(", ")}
+            </>
+        )}</p>
                     </div>
                     <div>{(props.estado===true ? 
                         (<div>

@@ -61,3 +61,12 @@ ul{
 input:focus {
     outline: none;
 }
+
+.orange-link {
+    color: black; 
+    transition: color 0.1s; 
+  }
+  
+  .orange-link:hover {
+    color: #FD7401; 
+  }
