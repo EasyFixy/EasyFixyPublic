@@ -8,6 +8,7 @@ import CreateJob from '../pages/Jobs/CreateJob';
 import HomeEmpleado from "../pages/Home Empleado/HomeEmpleado";
 import HomeEmpleador from "../pages/Home Empleador/HomeEmpleador";
 import CategoriesLabors from "../pages/Labors/CategoriesLabors";
+import Skills from "../pages/Skills/Skills";
 
 const UserLogueado = () =>{
     return(
@@ -19,6 +20,7 @@ const UserLogueado = () =>{
             <Route path='home/employer' element={<HomeEmpleador/>}/>
             <Route path='createjob' element={<CreateJob/>}/>
             <Route path="categories" element= {<CategoriesLabors/>}/>
+            <Route path='profile/employee/create/skills' element={<Skills/>}/>
         </Routes>
     )
 }
