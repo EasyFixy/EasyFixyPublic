@@ -43,7 +43,7 @@ const VisualizarPerfil = () => {
             
             <ToolbarDefault/>
 
-            <ContenedorPerfil estado={isMyAccount}/>
+            <ContenedorPerfil estado={isMyAccount} />
 
             <section className="w-90 h-auto mt-4 ml-4 border border-black border-solid px-8 py-4 rounded-3xl mr-8">
                 <h1 className="font-bold text-3xl">Skills</h1>
