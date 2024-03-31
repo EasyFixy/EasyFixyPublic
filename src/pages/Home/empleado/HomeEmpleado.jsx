@@ -1,5 +1,5 @@
 import React from "react";
-import ToolbarDefault from "../components/ToolbarDefaul";
+import ToolbarDefault from "../../components/ToolbarDefaul";
 
 const HomeEmpleado = () =>{
     return(

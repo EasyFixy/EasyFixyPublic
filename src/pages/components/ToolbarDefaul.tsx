@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
-import HomeEmpleado from "../Home Empleado/HomeEmpleado";
-import HomeEmpleador from "../Home Empleador/HomeEmpleador";
+import HomeEmpleado from "../Home/empleado/HomeEmpleado";
+import HomeEmpleador from "../Home/Empleador/HomeEmpleador";
 
 const ToolbarDefault = () =>{
 

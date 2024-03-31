@@ -5,8 +5,8 @@ import DatosPerfilEmpleado from '../pages/DatosPerfilEmpleado/DatosPerfilEmplead
 import VerPerfilEmpleado from '../pages/VisualizarEmpleado/VisualizarPerfil';
 import SeleccionRol from '../pages/SelecionarRol/SeleccionRol';
 import CreateJob from '../pages/Jobs/CreateJob';
-import HomeEmpleado from "../pages/Home Empleado/HomeEmpleado";
-import HomeEmpleador from "../pages/Home Empleador/HomeEmpleador";
+import HomeEmpleado from "../pages/Home/empleado/HomeEmpleado";
+import HomeEmpleador from "../pages/Home/Empleador/HomeEmpleador";
 import CategoriesLabors from "../pages/Labors/CategoriesLabors";
 
 const UserLogueado = () =>{
