@@ -2,16 +2,23 @@ import React from "react";
 import { useState } from "react";
 import HomeEmpleado from "../Home Empleado/HomeEmpleado";
 import HomeEmpleador from "../Home Empleador/HomeEmpleador";
+import { Navigate, useNavigate } from 'react-router-dom';
 
-const ToolbarDefault = () =>{
+const ToolbarDefault = (props) =>{
 
     let imagen = '/icons/usuario.png'
     let nombre = 'Nombre de usuario'
-
-    const [checked, setChecked] = useState(false);
+    const navigate = useNavigate();
+    let location = props.tipe=="employee"
+    const [checked, setChecked] = useState(!location);
 
     const toggleChecked = () => {
         setChecked(prev => !prev);
+        if(checked){
+            navigate("/my/home/employee");
+        }else{
+            navigate("/my/home/employer");
+        }
     };
 
 
