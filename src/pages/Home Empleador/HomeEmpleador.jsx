@@ -59,9 +59,8 @@ const HomeEmpleador = () => {
                     return response.json();
                 })
                 .then(data => {
-                    console.log("cambiando");
+                    console.log(data);
                     setJobOffertedOffers(data.data);
-                    console.log(data.data[0].jobOfferDateAtCreate)
                     setHorizontalRender(prevRender => {
                         const newRender = [...prevRender];
                         newRender[2] = {
@@ -104,9 +103,8 @@ const HomeEmpleador = () => {
                     return response.json();
                 })
                 .then(data => {
-                    console.log("cambiando");
+                    console.log(data);
                     setJobPendingOffers(data.data);
-                    console.log(data.data[0].jobOfferDateAtCreate)
                     setHorizontalRender(prevRender => {
                         const newRender = [...prevRender];
                         newRender[0] = {
@@ -149,7 +147,7 @@ const HomeEmpleador = () => {
                     return response.json();
                 })
                 .then(data => {
-                    console.log("cambiando");
+                    console.log(data);
                     setJobsDone(data.data);
                     setHorizontalRender(prevRender => {
                         const newRender = [...prevRender];

@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const NavbarEmpleado = () =>{
 
@@ -14,7 +15,7 @@ const NavbarEmpleado = () =>{
             <div className="flex flex-row justify-start items-center">
                 <button className="text-white ml-12">Chats</button>
                 <button className="text-white ml-12">Crear habilidades</button>
-                <button className="text-white ml-12">Crear perfil</button>
+                <Link to={"/my/profile/employee/create/personalinformation"}><button className="text-white ml-12">Crear perfil</button></Link>
             </div>
             <div className="w-2/4 flex flex-row justify-end items-center">
                 <p className="text-white mr-4">No activo</p>

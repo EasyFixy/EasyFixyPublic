@@ -9,7 +9,7 @@ const HomeEmpleado = () => {
         <div className="w-screen h-screen flex flex-col">
 
             <ToolbarDefault/>
-            <NavbarEmpleado/>
+            <NavbarEmpleado tipe="employee"/>
             
             <div className="w-screen flex mt-8">
                 <div className="w-3/4 h-auto ml-12 mr-4"><MisTrabajos/></div>
