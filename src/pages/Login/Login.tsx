@@ -2,11 +2,17 @@ import { useState } from "react";
 import ContenedorLogoHorizontal from '../../componentes/contenedorLogoVerde/ContenedorLogoHorizontal';
 import { Link } from "react-router-dom";
 import { Navigate, useNavigate } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { login } from "../../features/Auth/Auth";
+import React from "react";
+import { decodeJWT } from "../../Helpers/Token";
+import { handleRequestWithToken } from "../../Helpers/Request";
 const Login = () => {
-
     const [password, setPassword] = useState('');
     const [username, setUsername] = useState('');
     const [loginSuccessful, setLoginSuccessful] = useState(false);
+    const token = useAppSelector(state => state.Auth.isLogged);
+    const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const handdleLogin = (e) => {
         e.preventDefault();
@@ -25,9 +31,10 @@ const Login = () => {
             .then(result => {
                 // Aquí puedes trabajar con los datos obtenidos en la respuesta            
                 if (result.token) {
-                    console.log(result.token);
                     localStorage.setItem('token', result.token)
                     setLoginSuccessful(true);
+                    const tokenDecode = decodeJWT();
+                    dispatch(login({token: result.token.toString(), id: tokenDecode.userId, date: tokenDecode.exp}))
                     navigate("/my/selectrole");
                 } else {
                     setLoginSuccessful(false);
