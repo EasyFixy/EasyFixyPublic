@@ -4,6 +4,7 @@ import ContenedorPerfil from "../components/ContenedorPerfil";
 import Comentarios from "../components/Comentarios";
 
 import { useEffect } from "react";
+import { handleRequestWithToken } from "../../Helpers/Request";
 
 const VisualizarPerfil = () => {
 
@@ -14,6 +15,9 @@ const VisualizarPerfil = () => {
 
     function getInfoPerfil() {
         setLoading(true);
+        handleRequestWithToken(request);
+    }
+    const request = () =>{
         const options = {
             method: "GET"
         };

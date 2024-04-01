@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import  EditarPerfil from "./EditarPerfil";
 import { useEffect } from "react";
+import { handleRequestWithToken } from "../../Helpers/Request";
 
 const ContenedorPerfil = (props) => {
 
@@ -17,6 +18,10 @@ const ContenedorPerfil = (props) => {
 
     function getInfoPerfil() {
         setLoading(true);
+        handleRequestWithToken(handleRequest);
+    }
+
+    const handleRequest = () => {
         const options = {
             method: "GET"
         };
@@ -38,6 +43,7 @@ const ContenedorPerfil = (props) => {
     
         // se usa useEffect((),[]) sin parametros para solo hacer una vez la consulta a la BD, no se debe hacer cada vez que se renderice
     useEffect(() => {
+        console.log('entre')
         getInfoPerfil();
     }, []);
 
