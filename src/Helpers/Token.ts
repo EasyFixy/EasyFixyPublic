@@ -23,7 +23,6 @@ export const removeToken = () => {
 
 export function validationToken() {
     const infoToken = decodeJWT();
-    console.log('infoToken ', infoToken);
     const now = new Date();
     // arreglar la fecha que se trae del backend para validar con la fecha actual
 
@@ -33,7 +32,7 @@ export function validationToken() {
     //     removeToken();
     //     return false
     // }
-    return false;
+    return true;
 }
 
 

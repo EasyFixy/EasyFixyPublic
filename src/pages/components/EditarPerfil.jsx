@@ -26,7 +26,6 @@ const EditarPerfil = () =>{
             .then(result => {
                 // Aquí puedes trabajar con los datos obtenidos en la respuesta            
                 if (result.token) {
-                    console.log(result.token);
                     localStorage.setItem('token', result.token)
                     setCambios(true);
                 } else {

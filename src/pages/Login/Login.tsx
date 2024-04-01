@@ -12,7 +12,6 @@ const Login = () => {
     const [username, setUsername] = useState('');
     const [loginSuccessful, setLoginSuccessful] = useState(false);
     const token = useAppSelector(state => state.Auth.isLogged);
-    console.log('token',token);
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const handdleLogin = (e) => {
@@ -32,7 +31,6 @@ const Login = () => {
             .then(result => {
                 // Aquí puedes trabajar con los datos obtenidos en la respuesta            
                 if (result.token) {
-                    console.log('result ', result);
                     localStorage.setItem('token', result.token)
                     setLoginSuccessful(true);
                     const tokenDecode = decodeJWT();
