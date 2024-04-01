@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import { handleRequestWithToken } from "../../Helpers/Request";
 
 const EditarPerfil = () =>{
 
@@ -10,6 +11,10 @@ const EditarPerfil = () =>{
 
     const editUserData = (e) => {
         e.preventDefault();
+        handleRequestWithToken(request)
+
+    }
+    const request = () => {
         const data = {
             prefijo: prefijo,
             nacionalidad: nacionalidad,
@@ -35,7 +40,6 @@ const EditarPerfil = () =>{
             .catch(error => {
                 console.error('Hubo un problema con la solicitud fetch:', error);
             });
-
     }
 
     return(

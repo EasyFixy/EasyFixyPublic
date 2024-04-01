@@ -18,8 +18,7 @@ const ContenedorPerfil = (props) => {
 
     function getInfoPerfil() {
         setLoading(true);
-        // handleRequestWithToken(handleRequest);
-        handleRequest()
+        handleRequestWithToken(handleRequest);
     }
 
     const handleRequest = () => {
