@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import HomeEmpleado from "../Home Empleado/HomeEmpleado";
-import HomeEmpleador from "../Home Empleador/HomeEmpleador";
+//import HomeEmpleado from "../Home Empleado/HomeEmpleado";
+//import HomeEmpleador from "../Home Empleador/HomeEmpleador";
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { handleRequestWithToken } from "../../Helpers/Request";

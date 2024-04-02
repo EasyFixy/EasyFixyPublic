@@ -12,7 +12,9 @@ const MisTrabajos = () =>{
             <h1 className="text-4xl font-bold mt-4">Mis trabajos</h1>
             <section className="mt-8 w-full h-auto flex flex-row ">
                 <button onClick={toggleEstado} className={`font-bold ${estado ? 'underline text-orange-500' : ''}`}>Pendientes</button>
-                <button onClick={toggleEstado} className={`pl-16 font-bold ${estado ? '' : 'underline text-orange-500'}`}>Realizados</button>
+
+                <button onClick={toggleEstado} className={`pl-16 font-bold ${estado ? '' : 'underline text-orange-500x'}`}>Realizados</button>
+
             </section>
             <div className="mt-4 relative w-full">
                 <input
