@@ -7,7 +7,57 @@ import PerfilesLaborales from "../../components/PerfilesLaborales";
 
 const Negociacion = () => {
     const [loading, setLoading] = useState(true);
-    const [isMyAccount, setIsMyAccount] = useState(true);
+
+    let userId = 1
+
+    
+
+    // PARAMETROS DE LA PETICION 
+    const [bestWorkers, setBestWorkest] = useState();
+    const labores = [1,2,3];
+    let latitud = 0;
+    let longitud = 0;
+    if ("geolocation" in navigator) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+        longitud = position.coords.longitude;
+
+        });
+    } else {
+        console.log("La geolocalización no está disponible en este navegador.");
+    }
+  
+
+    // Peticion al back para obtener los mejores trabajadores
+    function getBestWorkersForLabors() {
+        const options = {
+            method: "POST"
+        };
+        let url = new URL(`http://localhost:3000/getBestWorkersForLabors?labors=${labores}&userLatitude=${latitud}&userLongitude=${longitud}`);
+        fetch(url, options)
+            .then(response => response.text())
+            .then(data => {
+                const json = JSON.parse(data);
+                console.log(json);
+                setBestWorkest(json.data);
+                userId = json.data[0].userId;
+                console.log(json.data[0].userId);
+                
+            })
+            .catch(error => {
+                console.error('Error fetching user profile:', error);
+            })
+            .finally(() => {
+                
+            });
+    }
+    
+        // se usa useEffect((),[]) sin parametros para solo hacer una vez la consulta a la BD, no se debe hacer cada vez que se renderice
+    useEffect(() => {
+        getBestWorkersForLabors();
+    }, []);
+
+    console.log(userId);
+    
    
     const [userData, setUserData] = useState<UserData>({
         mainData: [
@@ -57,8 +107,6 @@ const Negociacion = () => {
             }
         ]
     });
-
-    console.log(userData.skills[0].skillName);
     
 
     function getInfoPerfil() {
@@ -66,7 +114,7 @@ const Negociacion = () => {
         const options = {
             method: "GET"
         };
-        let url = new URL("http://localhost:3000/getUserProfile?userId="+1);
+        let url = new URL("http://localhost:3000/getUserProfile?userId="+userId);
         fetch(url, options)
             .then(response => response.text())
             .then(data => {
@@ -129,12 +177,12 @@ const Negociacion = () => {
                 <section className="flex justify-between items-center p-16 w-90 h-auto mt-4 ml-4 px-8 py-4  mr-8">
                     <div className="flex flex-col flex justify-between items-center">
                         <h1 className="text-white text-3xl font-bold">Cancelar</h1>
-                        <img src="/icons/Cancelar.svg" alt="boton cancelar" className="w-10" />
+                        <button ><img src="/icons/Cancelar.svg" alt="boton cancelar" className="w-10" /></button>
                     </div>
                     <div className="p-4 text-white border border-white border-solid rounded-2xl">Precio acordado</div>
                     <div className="flex flex-col flex justify-between items-center">
                         <h1 className="text-white text-3xl font-bold">Aceptar</h1>
-                        <img src="/icons/Cancelar.svg" alt="boton cancelar" className="w-10" />
+                        <button><img src="/icons/Aceptar.svg" alt="boton cancelar" className="w-10" /></button>
                     </div>
                 </section>
             </div>
