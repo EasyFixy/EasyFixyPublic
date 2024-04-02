@@ -9,11 +9,12 @@ import HomeEmpleador from "../pages/Home/Empleador/HomeEmpleador";
 import CategoriesLabors from "../pages/Labors/CategoriesLabors";
 import { validationToken } from "../Helpers/Token";
 import Skills from "../pages/Skills/Skills";
-
+import { useAppDispatch, useAppSelector } from "../app/hooks";
 const UserLogueado = () => {
+    const dispatch = useAppDispatch();
     const [isLogged, setIsLogged] = useState<boolean>(false);
     useEffect(() => {
-        const isLogged = validationToken();
+        const isLogged = validationToken(dispatch);
         setIsLogged(isLogged)
     }, []);
     return(

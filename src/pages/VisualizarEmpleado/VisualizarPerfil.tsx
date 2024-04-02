@@ -12,7 +12,11 @@ const VisualizarPerfil = () => {
 
     const [loading, setLoading] = useState(true);
     const [isMyAccount, setIsMyAccount] = useState(true);
-   
+    const searchParams = new URLSearchParams(location.search);
+
+    // Obtener valores específicos de la URL
+    const userId = searchParams.get('userId');
+
     const [userData, setUserData] = useState<UserData>({
         mainData: [
             {
@@ -63,53 +67,53 @@ const VisualizarPerfil = () => {
     });
 
     console.log(userData.skills[0].skillName);
-    
+
 
     function getInfoPerfil() {
         setLoading(true);
-        const options = {
-            method: "GET"
-        };
-        let url = new URL("http://localhost:3000/getUserProfile?userId="+1);
-        fetch(url, options)
-            .then(response => response.text())
+        
+            fetch("http://localhost:3000/getUserProfile?userId="+userId)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
             .then(data => {
-                const json = JSON.parse(data);
-                console.log(json);
-                setUserData(json.data);
+                console.log(data)
+                setUserData(data.data);
+                setLoading(false);
             })
             .catch(error => {
-                console.error('Error fetching user profile:', error);
-            })
-            .finally(() => {
-                setLoading(false);
+                console.error('Fetch error:', error);
+                // Aquí puedes manejar errores, como mostrar un mensaje de error al usuario
             });
     }
-    
-        // se usa useEffect((),[]) sin parametros para solo hacer una vez la consulta a la BD, no se debe hacer cada vez que se renderice
+
+    // se usa useEffect((),[]) sin parametros para solo hacer una vez la consulta a la BD, no se debe hacer cada vez que se renderice
     useEffect(() => {
         getInfoPerfil();
     }, []);
 
-    
-    return(
-        <div className='w-screen h-screen flex flex-col overflow-y-scroll'>
-            
-            <ToolbarDefault/>
 
-            <ContenedorPerfil estado={isMyAccount} isLoading={loading} userData={userData}/>
+    return (
+        <div className='w-screen h-screen flex flex-col overflow-y-scroll'>
+
+            <ToolbarDefault />
+
+            <ContenedorPerfil estado={isMyAccount} isLoading={loading} userData={userData} />
 
             <section className="w-90 h-auto mt-4 ml-4 border border-black border-solid px-8 py-4 rounded-3xl mr-8">
                 <h1 className="font-bold text-3xl">Skills</h1>
                 <ul className="flex flex-wrap mt-4">
-                {loading ? (
-                    <p>Cargando perfil...</p>
-                ) : (
-                    <>
-                        {userData.skills.map((skill) => (<li className="mx-4">{skill.skillName}</li>))}
-                    </>
-                )}
-                    
+                    {loading ? (
+                        <p>Cargando perfil...</p>
+                    ) : (
+                        <>
+                            {userData.skills.map((skill) => (<li className="mx-4">{skill.skillName}</li>))}
+                        </>
+                    )}
+
                 </ul>
             </section>
 
@@ -123,7 +127,7 @@ const VisualizarPerfil = () => {
                             <p>Cargando comentarios...</p>
                         ) : (
                             <>
-                                {userData.comments.fullComments.map((comentario) => (<Comentarios isLoading={loading} comenData={comentario}/>))}
+                                {userData.comments.fullComments.map((comentario) => (<Comentarios isLoading={loading} comenData={comentario} />))}
                             </>
                         )}
                     </div>
@@ -132,18 +136,18 @@ const VisualizarPerfil = () => {
                 <div className="w-full-">
                     <h1 className="ml-8 pl-8 font-bold text-3xl text-orange-400 ">Perfiles laborales del empleado</h1>
                     <ul className="w-full ml-16 pl-2 mt-4 border-2 rounded-3xl border-grey-500 p-1">
-                    {loading && userData.comments ? (
+                        {loading && userData.comments ? (
                             <p>Cargando comentarios...</p>
                         ) : (
                             <>
-                                {userData.resumes.map((resume) => (<PerfilesLaborales isLoading={loading} laboresData={resume}/>))}
+                                {userData.resumes.map((resume) => (<PerfilesLaborales isLoading={loading} laboresData={resume} />))}
                             </>
                         )}
                     </ul>
                 </div>
-                
+
             </div>
-            
+
         </div>
     );
 }

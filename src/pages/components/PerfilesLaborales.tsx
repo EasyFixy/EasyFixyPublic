@@ -61,7 +61,7 @@ const PerfilesLaborales = ({
             {isLoading && laboresData.labors ? (
                             <p>No hay labores agregadas...</p>
                         ) : (
-                            laboresData.labors.map((labor) => (<li className={`${textColor} ml-8`}>{labor.laborName}</li>))
+                            laboresData.labors.map((labor, index) => (<li key={index} className={`${textColor} ml-8`}>{labor.laborName}</li>))
                             
                         )}
             </ul>

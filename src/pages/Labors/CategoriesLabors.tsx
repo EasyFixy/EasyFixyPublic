@@ -91,6 +91,7 @@ const CategoriesLabors = () => {
     const [selectedLabors, setSelectedLabors] = useState<number[]>([]);
     const [categories, setCategories] = useState<Category[]>([]);
     const [renderLabors, setRenderLabors] = useState<Labor[]>([]);
+    
 
     const saveResumeToDB = (resume: Resume) => {
         console.log(JSON.stringify(resume))
@@ -140,7 +141,7 @@ const CategoriesLabors = () => {
                 console.log(data); // Guardar la respuesta del servidor en el estado
                 if (data.statusCode == 200) {
                     console.log("exitos")
-                    navigate("/my/home/employer");
+                    navigate("/my/home/employer?tipe=negotiation&labors="+encodeURIComponent(JSON.stringify(selectedLabors)));
                 } else {
                     toast.warn("Error Subiendo");
                 }

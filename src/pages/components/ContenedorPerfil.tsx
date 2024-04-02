@@ -1,13 +1,13 @@
 import React from "react";
 import { useState } from "react";
-import  EditarPerfil from "./EditarPerfil";
+import EditarPerfil from "./EditarPerfil";
 import { useEffect } from "react";
 import { UserData } from "../../models/PerfilEmpleado";
 
 
 interface PropsContenedorPerfil {
     estado: boolean,
-    nameColor?: string, 
+    nameColor?: string,
     width?: string,
     textColor?: string,
     paddingX?: string,
@@ -27,15 +27,15 @@ const ContenedorPerfil = ({
     isLoading = false,
     userData
 
-}:PropsContenedorPerfil) => {
+}: PropsContenedorPerfil) => {
 
-    
-    
+
+
     const [estadoDialog, setEstadoDialog] = useState(false);
     const mostrarEditar = () => {
         setEstadoDialog(!estadoDialog);
     }
-   
+
 
     const meses = {
         '01': 'enero',
@@ -50,16 +50,17 @@ const ContenedorPerfil = ({
         '10': 'octubre',
         '11': 'noviembre',
         '12': 'diciembre'
-      };
-      let mesNumero = userData.tempData[0].userTempDataLastUpdate.slice(5, 7)
-      let mesNombre = meses[mesNumero];
-      
+    };
+    let mesNumero = userData.tempData[0].userTempDataLastUpdate.slice(5, 7)
+    let mesNombre = meses[mesNumero];
+    console.log("userData");
+    console.log(isLoading)
+    console.log(userData)
 
-      
-    
-    return(
+
+    return (
         <div className={` content-center ${paddingX} py-10 ${width} h-auto flex flex-row`}>
-            <div>{(estadoDialog===true ? <EditarPerfil/> : <></>)}</div>
+            <div>{(estadoDialog === true ? <EditarPerfil /> : <></>)}</div>
             <div className="w-1/3 pl-16 pr-16 pb-16"><img src="/icons/icon-user.png" alt="Imagen usuario" className="bg-gray-300 px-2 py-2 w-full aspect-square" /></div>
             <div className="px-16 flex flex-col w-2/3">
                 <div>
@@ -77,56 +78,56 @@ const ContenedorPerfil = ({
 
                             {isLoading && userData.comments ? (
                                 <div>
-                                    <img src={`/icons/icon-star${whiteStar ? '-white' : ''}.svg`} alt="Estrellita"  className="w-1/5 flex-initial px-1"/>
-                                    <img src={`/icons/icon-star${whiteStar ? '-white' : ''}.svg`} alt="Estrellita"  className="w-1/5 flex-initial px-1"/>
-                                    <img src={`/icons/icon-star${whiteStar ? '-white' : ''}.svg`} alt="Estrellita"  className="w-1/5 flex-initial px-1"/>
-                                    <img src={`/icons/icon-star${whiteStar ? '-white' : ''}.svg`} alt="Estrellita"  className="w-1/5 flex-initial px-1"/>
-                                    <img src={`/icons/icon-star${whiteStar ? '-white' : ''}.svg`} alt="Estrellita"  className="w-1/5 flex-initial px-1"/>
+                                    <img src={`/icons/icon-star${whiteStar ? '-white' : ''}.svg`} alt="Estrellita" className="w-1/5 flex-initial px-1" />
+                                    <img src={`/icons/icon-star${whiteStar ? '-white' : ''}.svg`} alt="Estrellita" className="w-1/5 flex-initial px-1" />
+                                    <img src={`/icons/icon-star${whiteStar ? '-white' : ''}.svg`} alt="Estrellita" className="w-1/5 flex-initial px-1" />
+                                    <img src={`/icons/icon-star${whiteStar ? '-white' : ''}.svg`} alt="Estrellita" className="w-1/5 flex-initial px-1" />
+                                    <img src={`/icons/icon-star${whiteStar ? '-white' : ''}.svg`} alt="Estrellita" className="w-1/5 flex-initial px-1" />
                                 </div>
-                                ) : (<>{Array.from({ length: userData.comments.data[0].mediaCalificaciones }, (_, index) => (
-                                    <img key={index} src={'/icons/star.svg'} alt={`Imagen ${index}`} className="w-1/5 flex-initial px-1" />
-                                ))}{Array.from({ length: 5-userData.comments.data[0].mediaCalificaciones }, (_, index) => (
-                                    <img key={index} src={`/icons/icon-star${whiteStar ? '-white' : ''}.svg`} alt={`Imagen ${index}`} className="w-1/5 flex-initial px-1" />
-                                ))}</>
-                            )}
-                            
+                            ) : (userData.comments.data.length > 0 ? (<>{Array.from({ length: userData.comments.data[0].mediaCalificaciones }, (_, index) => (
+                                <img key={index} src={'/icons/star.svg'} alt={`Imagen ${index}`} className="w-1/5 flex-initial px-1" />
+                            ))}{Array.from({ length: 5 - userData.comments.data[0].mediaCalificaciones }, (_, index) => (
+                                <img key={index} src={`/icons/icon-star${whiteStar ? '-white' : ''}.svg`} alt={`Imagen ${index}`} className="w-1/5 flex-initial px-1" />
+                            ))}</>
+                            ) : (""))}
+
                         </div>
                         <h3 className={`${textColor} w-1/3 flex-initial px-16`}>
                             {isLoading && userData.comments ? (
                                 <p>0</p>
-                                ) : (<>({userData.comments.data[0].mediaCalificaciones} estrellas) <br/>
-                                        {userData.comments.data[0].cantidadTotalComentariosEmployee} Calificaciones </>
-                            )}
+                            ) : (userData.comments.data.length > 0 ? (<>({userData.comments.data[0].mediaCalificaciones} estrellas) <br />
+                                {userData.comments.data[0].cantidadTotalComentariosEmployee} Calificaciones </>
+                            ):(""))}
                         </h3>
                         <h3 className={`${textColor} w-1/3 flex-initial`}>{isLoading ? (
                             <p>Cargando perfil...</p>
-                            ) : (
-                                <>
-                                    {userData.mainData[0].antiguedadYears}
-                                </>
-                            )}  trabajos realizados
+                        ) : (
+                            <>
+                                {userData.mainData[0].antiguedadYears}
+                            </>
+                        )}  trabajos realizados
                         </h3>
                     </section>
-                    <h2 className="mt-8 text-orange-500 px-4"> {userData.tempData[0].userTempDataActive==1 ? <>· Estoy en linea!</> : <>· No estoy en linea</>}</h2>
+                    <h2 className="mt-8 text-orange-500 px-4"> {userData.tempData[0].userTempDataActive == 1 ? <>· Estoy en linea!</> : <>· No estoy en linea</>}</h2>
                     <div className="flex flex-row mt-2">
                         <img src="/icons/bandera.png" alt="bandera país" />
                         <h2 className={`${textColor}`}>Bogotá,Colombia</h2>
                     </div>
-                    
+
                     <div className="flex flex-row mt-2">
                         <img src="/icons/joined.png" alt="Joined" className="px-2 w-10 " />
                         <h2 className={`${textColor}`}>Joined {mesNombre} {userData.tempData[0].userTempDataLastUpdate.slice(8, 10)}, {userData.tempData[0].userTempDataLastUpdate.slice(0, 4)} </h2>
                     </div>
-                    
-                    <div>{(estado===true ? 
+
+                    <div>{(estado === true ?
                         (<div>
                             <button className="w-14 ml-2 mt-4 mainBackground h-7 text-white w-64 rounded-full border border-black border-solid mb-6" onClick={() => (mostrarEditar())}>Editar Perfil</button>
-                            
-                        </div>) : (<div></div>) )}</div>
-                    
+
+                        </div>) : (<div></div>))}</div>
+
                 </div>
             </div>
-            
+
         </div>
     );
 }

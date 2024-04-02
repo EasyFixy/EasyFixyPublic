@@ -1,8 +1,8 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import ToolbarDefault from "../components/ToolbarDefaul";
-import HorizontalNavContainerSwitch from "../components/HorizontalNavContainerSwitch";
-import NavbarEmpleador from "../components/NavbarEmpleador";
+import ToolbarDefault from "../../components/ToolbarDefaul";
+import HorizontalNavContainerSwitch from "../../components/HorizontalNavContainerSwitch";
+import NavbarEmpleador from "../../components/NavbarEmpleador";
 import { Link } from "react-router-dom";
 //import jwt from 'jsonwebtoken';
 const NavigatorDisplayElement = (props) => {

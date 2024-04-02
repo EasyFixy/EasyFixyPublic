@@ -79,7 +79,7 @@ const ToolbarDefault = (props) => {
 
     const userId = useAppSelector((login) => login.Auth.id)
 
-    console.log(userId)
+    //console.log(userId)
     let imagen = '/icons/usuario.png'
     let nombre = 'Nombre de usuario'
     const navigate = useNavigate();
@@ -89,7 +89,7 @@ const ToolbarDefault = (props) => {
 
     const handleRequest = () => {
 
-        console.log("llega")
+        //console.log("llega")
         fetch('http://localhost:3000/getUserProfile?userId=' + userId)
             .then(response => {
                 if (!response.ok) {
