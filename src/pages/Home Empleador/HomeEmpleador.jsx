@@ -2,37 +2,30 @@ import React from "react";
 import { useState, useEffect } from "react";
 import ToolbarDefault from "../components/ToolbarDefaul";
 import HorizontalNavContainerSwitch from "../components/HorizontalNavContainerSwitch";
+import NavbarEmpleador from "../components/NavbarEmpleador";
+import { Link } from "react-router-dom";
+import NaigatorMenuElement from "./NavigatorMenuElement";
+import NavigatorDisplayElement from "./NavigatorDisplayElement";
+import HorizontalNavigator from "./HorizontalNavigator";
 //import jwt from 'jsonwebtoken';
 const HomeEmpleador = () => {
     const [jobOffertedOffers, setJobOffertedOffers] = useState([]);
     const [jobPendingOffers, setJobPendingOffers] = useState([]);
     const [jobsDone, setJobsDone] = useState([]);
     const [seccionActiva, setSeccionActiva] = useState(0);
-    const [horizontalRender, setHorizontalRender] = useState([
+
+    const sections = [
         {
             name: "Pendientes",
-            content: (
-                <div className="">
-                    
-                </div>
-            )
+            array: jobPendingOffers
         }, {
             name: "Realizados",
-            content: (
-                <div className="">
-                    
-                </div>
-            )
+            array: jobsDone
         }, {
             name: "Ofertados",
-            content: (
-                <div className="">
-                    
-                </div>
-
-            )
-        }
-    ]);
+            array: jobOffertedOffers
+        },
+    ]
 
     function decodeJWT() {
         const token = localStorage.getItem('token');
@@ -61,25 +54,8 @@ const HomeEmpleador = () => {
                 .then(data => {
                     console.log(data);
                     setJobOffertedOffers(data.data);
-                    setHorizontalRender(prevRender => {
-                        const newRender = [...prevRender];
-                        newRender[2] = {
-                            ...newRender[2],
-                            content: (  
-                                <div className="">
-                                    {jobOffertedOffers.map((offer, index) => (
-                                        <div className="mx-auto bg-white rounded-xl shadow-md" key={index} >
-                                            <div className="border-t border-b border-gray-200 py-4 px-6 flex justify-between">
-                                                <div>{offer.jobOfferDescription}</div>
-                                                <div>{offer.jobOfferDateAtCreate}</div>
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
-                            )
-                        };
-                        return newRender;
-                    });
+                    console.log(jobOffertedOffers)
+
                     // Aquí puedes hacer algo con los datos, como actualizar el estado de un componente en React
                 })
                 .catch(error => {
@@ -105,25 +81,7 @@ const HomeEmpleador = () => {
                 .then(data => {
                     console.log(data);
                     setJobPendingOffers(data.data);
-                    setHorizontalRender(prevRender => {
-                        const newRender = [...prevRender];
-                        newRender[0] = {
-                            ...newRender[0],
-                            content: (
-                                <div className="">
-                                    {jobPendingOffers.map((offer, index) => (
-                                        <div className="mx-auto bg-white rounded-xl shadow-md" key={index} >
-                                            <div className="border-t border-b border-gray-200 py-4 px-6 flex justify-between">
-                                                <div>{offer.jobOfferDescription}</div>
-                                                <div>{offer.jobOfferDateAtCreate}</div>
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
-                            )
-                        };
-                        return newRender;
-                    });
+
                     // Aquí puedes hacer algo con los datos, como actualizar el estado de un componente en React
                 })
                 .catch(error => {
@@ -149,25 +107,7 @@ const HomeEmpleador = () => {
                 .then(data => {
                     console.log(data);
                     setJobsDone(data.data);
-                    setHorizontalRender(prevRender => {
-                        const newRender = [...prevRender];
-                        newRender[1] = {
-                            ...newRender[1],
-                            content: (
-                                <div className="">
-                                    {jobsDone.map((offer, index) => (
-                                        <div className="mx-auto bg-white rounded-xl shadow-md" key={index} >
-                                            <div className="border-t border-b border-gray-200 py-4 px-6 flex justify-between">
-                                                <div>{offer.jobOfferDescription}</div>
-                                                <div>{offer.jobOfferDateAtCreate}</div>
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
-                            )
-                        };
-                        return newRender;
-                    });
+
                     // Aquí puedes hacer algo con los datos, como actualizar el estado de un componente en React
                 })
                 .catch(error => {
@@ -186,26 +126,18 @@ const HomeEmpleador = () => {
         fetchDoneJobs();
     }, []);
 
-    let horizontalExtra = (
-        <div className="">
-            un extra
-        </div>
-    )
-
     return (
-        <div className='w-screen h-screen flex flex-col'>
+        <div className='w-screen h-screen flex flex-col overflow-y-scroll'>
             <ToolbarDefault tipe="employer" />
-            <h1>HOLLA ESTOY EN EL HOME DEl EMPLEADOR</h1>
-
-            <div className="flex flex-col justify-center items-center w-full">
-                <h2>Mis trabajos</h2>
-                <div className="" style={{ width: '70%' }}>
-                    <HorizontalNavContainerSwitch content={horizontalRender}></HorizontalNavContainerSwitch>
+            <NavbarEmpleador></NavbarEmpleador>
+            <div className="flex flex-col justify-center w-full " style={{padding: 30 + 'px'}}>
+                <h2 className="text-4xl font-bold mt-4">Mis trabajos</h2>
+                <HorizontalNavigator sections={sections}></HorizontalNavigator>
+                <div>
+                    <Link to={"/my/createjob"}><button className="mainBackground self-end w-[185px] h-10 rounded-full text-white shadow-1">Crear Trabajo
+                    </button></Link>
                 </div>
-
-
             </div>
-
         </div>
     )
 }

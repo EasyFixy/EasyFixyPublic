@@ -70,6 +70,15 @@ interface Resume {
     token: string
 }
 
+interface Job {
+    jobOfferDescription: string;
+    jobOfferDateAtWork: string;
+    jobOfferStimatePrice: number;
+    jobOfferTittle: string;
+    labors: number[];
+    token: string
+}
+
 const CategoriesLabors = () => {
     const navigate = useNavigate();
     const location = useLocation();
@@ -77,10 +86,6 @@ const CategoriesLabors = () => {
 
     // Obtener valores específicos de la URL
     const tipe = searchParams.get('tipe');
-    const title = searchParams.get('title');
-    const experience = searchParams.get('experience');
-    const description = searchParams.get('description');
-    console.log(title, experience, description)
 
     const [selectedCategory, setCategorySelected] = useState<string>('');
     const [selectedLabors, setSelectedLabors] = useState<number[]>([]);
@@ -104,9 +109,39 @@ const CategoriesLabors = () => {
             })
             .then(data => {
                 console.log(data); // Guardar la respuesta del servidor en el estado
-                if(data.statusCode == 200){
+                if (data.statusCode == 200) {
                     navigate("/my/home/employee");
-                }else {
+                } else {
+                    toast.warn("Error Subiendo");
+                }
+            })
+            .catch(error => {
+                console.error('Error al enviar los datos:', error);
+                toast.warn("Error Subiendo");
+            });
+    }
+
+    const saveJobToDB = (job: Job) => {
+        console.log(JSON.stringify(job))
+        fetch('http://localhost:3000/createJobOffer', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(job),
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Error en la solicitud');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log(data); // Guardar la respuesta del servidor en el estado
+                if (data.statusCode == 200) {
+                    console.log("exitos")
+                    navigate("/my/home/employer");
+                } else {
                     toast.warn("Error Subiendo");
                 }
             })
@@ -118,7 +153,10 @@ const CategoriesLabors = () => {
 
     const saveCategoriesToResume = () => {
         console.log("opirmido")
-        
+        const title = searchParams.get('title');
+        const experience = searchParams.get('experience');
+        const description = searchParams.get('description');
+
         if (title && experience && description) {
 
             if (selectedLabors.length < 1) {
@@ -139,10 +177,40 @@ const CategoriesLabors = () => {
         }
     }
 
+    const saveCategoriesToJob = () => {
+        console.log("opirmido")
+        const title = searchParams.get('title');
+        const estimatePrice = searchParams.get('estimatePrice');
+        const description = searchParams.get('description');
+        const dateAtWork = searchParams.get('dateAtWork');
+
+        if (title && description && estimatePrice && dateAtWork) {
+
+            if (selectedLabors.length < 1) {
+                toast.warn("Seleccione almenos una labor");
+            } else {
+                console.log(selectedLabors)
+                const job: Job = {
+                    jobOfferDescription: description,
+                    jobOfferDateAtWork: dateAtWork,
+                    jobOfferStimatePrice: Number(estimatePrice),
+                    jobOfferTittle: title,
+                    labors: selectedLabors,
+                    token: localStorage.getItem('token') || ""
+                }
+                saveJobToDB(job);
+            }
+        } else {
+            toast.warn("Datos incompletos sección anterior");
+        }
+    }
+
     const handleSaveInfoCategories = () => {
         if (tipe) {
             if (tipe === "createResume") {
                 saveCategoriesToResume();
+            } else if(tipe === "createJob"){
+                saveCategoriesToJob();
             }
         }
     }
@@ -221,7 +289,7 @@ const CategoriesLabors = () => {
     return (
         <div className="w-screen h-screen flex flex-col">
             <ToastContainer />
-            <ToolbarDefault tipe={tipe === "createResume" ? ("employee"):("employer")}/>
+            <ToolbarDefault tipe={tipe === "createResume" ? ("employee") : ("employer")} />
             <div className="w-full flex-1 px-[5%] flex flex-col pb-[5%] pt-[3%] font-bold overflow-y-scroll">
                 <h1 className="text-5xl">
                     Categorias y labores

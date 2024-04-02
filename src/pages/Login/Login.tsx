@@ -7,6 +7,8 @@ import { login } from "../../features/Auth/Auth";
 import React from "react";
 import { decodeJWT } from "../../Helpers/Token";
 import { handleRequestWithToken } from "../../Helpers/Request";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const Login = () => {
     const [password, setPassword] = useState('');
     const [username, setUsername] = useState('');
@@ -20,6 +22,7 @@ const Login = () => {
             username: username,
             password: password
         };
+
         const url = `http://localhost:3000/userLogin?userEmail=${encodeURIComponent(username)}&userPassword=${encodeURIComponent(password)}`;
         fetch(url)
             .then(response => {
@@ -29,16 +32,30 @@ const Login = () => {
                 return response.json(); // Si esperas una respuesta JSON
             })
             .then(result => {
-                // Aquí puedes trabajar con los datos obtenidos en la respuesta            
-                if (result.token) {
-                    localStorage.setItem('token', result.token)
-                    setLoginSuccessful(true);
-                    const tokenDecode = decodeJWT();
-                    dispatch(login({token: result.token.toString(), id: tokenDecode.userId, date: tokenDecode.exp}))
-                    navigate("/my/selectrole");
-                } else {
-                    setLoginSuccessful(false);
+
+                console.log(result)
+                if (result) {
+                    if (result.statusCode === 200) {
+                        if (result.token) {
+                            localStorage.setItem('token', result.token)
+                            setLoginSuccessful(true);
+
+                            const tokenDecode = decodeJWT();
+                            toast.success("Exitoso");
+                            dispatch(login({ token: result.token.toString(), id: tokenDecode.userId, date: tokenDecode.exp }))
+
+                            navigate("/my/selectrole");
+                            console.log("llega")
+                        } else {
+                            setLoginSuccessful(false);
+                        }
+                    } else if (result.statusCode === 400 && result.message === "wrong user/password") {
+                        toast.warn("Contraseña/Usuario incorrectos");
+                    }
+
                 }
+                // Aquí puedes trabajar con los datos obtenidos en la respuesta            
+
             })
             .catch(error => {
                 console.error('Hubo un problema con la solicitud fetch:', error);
@@ -48,33 +65,33 @@ const Login = () => {
 
     return (
         <div className="w-screen h-screen flex flex-row ">
+            <ToastContainer />
+            <ContenedorLogoHorizontal />
 
-             <ContenedorLogoHorizontal/>
+            <div className='w-1/2 flex flex-col justify-center items-center px-16 py-10'>
 
-            <div className='w-1/2 flex flex-col justify-center items-center px-16 py-10'> 
-                
                 <div className='flex flex-col items-center'>
-                <   h1 className='text-4xl font-bold mb-6'>Iniciar sesión</h1>
+                    <   h1 className='text-4xl font-bold mb-6'>Iniciar sesión</h1>
                 </div>
 
                 <form>
                     <div className="w-[400px] flex flex-col mb-6">
                         <label className="font-boldv">Correo electrónico</label>
                         <input
-                            className="w-full h-12 border border-solid border-[#666666] text-[#666666] pl-4 relative rounded-3xl" 
+                            className="w-full h-12 border border-solid border-[#666666] text-[#666666] pl-4 relative rounded-3xl"
                             onChange={(event) => { setUsername(event.target.value) }}
                             placeholder="Type here"
                             type="text" />
                     </div>
                     <div className="w-[400px] flex flex-col mb-6">
                         <label className="custom-label">Password:</label>
-                        <input 
-                            className="w-full h-12 border border-solid border-[#666666] text-[#666666] pl-4 relative rounded-3xl" 
+                        <input
+                            className="w-full h-12 border border-solid border-[#666666] text-[#666666] pl-4 relative rounded-3xl"
                             onChange={(event) => { setPassword(event.target.value) }}
                             placeholder="password"
                             type="password" />
                     </div>
-                    
+
                     <div className="flex flex-row flex justify-center items-center">
                         <input name="cbipeliculas" type="checkbox" />
                         <h1>Remember me</h1>
@@ -87,7 +104,7 @@ const Login = () => {
                         <Link to={'/register'} className="textNaranja ml-4">Sign Up</Link>
                     </div>
                 </form>
-                <div className="mt-5"> {loginSuccessful ? "Te logueaste" : "no logueado"}</div>
+                <div className="mt-5"> </div>
             </div>
 
         </div>

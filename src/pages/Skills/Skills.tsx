@@ -5,7 +5,7 @@ import { MultiValue } from "react-select";
 import { useAppSelector } from "../../app/hooks";
 import { handleRequestWithToken } from "../../Helpers/Request";
 import { useNavigate } from "react-router-dom";
-
+import { useAppDispatch } from "../../app/hooks";
 interface Skill {
     value: string;
     label: string;
@@ -17,6 +17,7 @@ interface requestData {
 
 const Skills = () => {
     const [selectedOption, setSelectedOption] = useState<MultiValue<Skill>>([]);
+    const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const token = useAppSelector(state => state.Auth.token)
     const handleChange = (newValue: MultiValue<Skill>) => {
@@ -24,7 +25,7 @@ const Skills = () => {
         setSelectedOption(newValue);
     };
     const onClickButton = () =>{
-        handleRequestWithToken(handleRequest)
+        handleRequestWithToken(dispatch,handleRequest)
     }
     
 
@@ -62,7 +63,7 @@ const Skills = () => {
 
     return(
         <div className="w-screen h-screen flex flex-col">
-            <ToolbarDefault/>
+            <ToolbarDefault tipe="employee"/>
             <div className="flex flex-1 flex-col px-[7%] pt-[7%]">
                 <h1 className="font-bold text-3xl">
                 Cuentanos cuales son tus habilidades
