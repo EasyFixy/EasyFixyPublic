@@ -15,7 +15,7 @@ function SeleccionRol() {
                 </div>
 
                 <div>
-                    <Link to={'/my/profile/employee/create/personalinformation'}>
+                    <Link to={'/my/home/employee'}>
                         <div className="flex flex-row mx-4 my-2 w-auto h-auto border border-black border-solid">
                             <img src="/icons/rol1.png" alt="provisional" className="w-25 h-25 px-4 py-4" />
                             <p className="ml-4 mt-16">Quiero trabajar</p>

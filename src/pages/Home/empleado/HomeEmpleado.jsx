@@ -1,6 +1,6 @@
 import React from "react";
-import ToolbarDefault from "../components/ToolbarDefaul";
-import NavbarEmpleado from "../components/NavbarEmpleado";
+import ToolbarDefault from "../../components/ToolbarDefaul";
+import NavbarEmpleado from "../../components/NavbarEmpleado";
 import CajaGanancias from "./CajaGanancias";
 import MisTrabajos from "./MisTrabajos";
 
@@ -8,7 +8,7 @@ const HomeEmpleado = () => {
     return (
         <div className="w-screen h-screen flex flex-col">
 
-            <ToolbarDefault/>
+            <ToolbarDefault tipe="employee"/>
             <NavbarEmpleado/>
             
             <div className="w-screen flex mt-8">

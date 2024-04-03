@@ -10,29 +10,32 @@ export function decodeJWT() {
         const jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
             return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
         }).join(''));
-        
+
         return JSON.parse(jsonPayload);
     }
 }
 
-export const removeToken = () => {
-    const dispatch = useAppDispatch();
+export const removeToken = (dispatch) => {
     localStorage.removeItem('token');
     dispatch(logout());
 };
 
-export function validationToken() {
+export function validationToken(dispatch) {
     const infoToken = decodeJWT();
-    const now = new Date();
-    // arreglar la fecha que se trae del backend para validar con la fecha actual
 
-    // if (now < new Date(infoToken.exp)) {
-    //     return true;
-    // } else {;
-    //     removeToken();
-    //     return false
-    // }
-    return true;
+    //arreglar la fecha que se trae del backend para validar con la fecha actual
+    if (infoToken) {
+        const now = new Date();
+        if (now < new Date(infoToken.exp * 1000)) {
+            return true;
+        } else {
+            
+            removeToken(dispatch);
+            return false
+        }
+    }
+    return false
+
 }
 
 

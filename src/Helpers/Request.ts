@@ -1,7 +1,7 @@
 import { removeToken, validationToken } from "./Token";
 
-export function handleRequestWithToken(callBack: () => void ) {
-    const tokenIsValid = validationToken(); // Validar el token
+export function handleRequestWithToken(dispatch, callBack: () => void ) {
+    const tokenIsValid = validationToken(dispatch); // Validar el token
   
     if (tokenIsValid) {
       try {
@@ -12,7 +12,7 @@ export function handleRequestWithToken(callBack: () => void ) {
         return null;
       }
     } else {
-        removeToken();
+        removeToken(dispatch);
         console.error('Token inválido');
         // Manejo de token inválido
         return null;
