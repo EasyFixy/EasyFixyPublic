@@ -15,8 +15,8 @@ const VisualizarPerfil = () => {
     const searchParams = new URLSearchParams(location.search);
 
     // Obtener valores específicos de la URL
-    const userId = searchParams.get('userId');
-
+    // const userId = searchParams.get('userId');
+    const userId = 1
     const [userData, setUserData] = useState<UserData>({
         mainData: [
             {
@@ -66,7 +66,6 @@ const VisualizarPerfil = () => {
         ]
     });
 
-    console.log(userData.skills[0].skillName);
 
 
     function getInfoPerfil() {
@@ -95,24 +94,28 @@ const VisualizarPerfil = () => {
         getInfoPerfil();
     }, []);
 
+    console.log(userData);
+    
 
     return (
-        <div className='w-screen h-screen flex flex-col overflow-y-scroll'>
+        <div className='w-screen h-screen flex flex-col overflow-y-scroll overflow-x-hidden'>
 
-            <ToolbarDefault />
+            {/* <ToolbarDefault /> */}
 
             <ContenedorPerfil estado={isMyAccount} isLoading={loading} userData={userData} />
 
-            <section className="w-90 h-auto mt-4 ml-4 border border-black border-solid px-8 py-4 rounded-3xl mr-8">
+            <section className="w-70 h-auto mt-4 ml-4 border border-black border-solid px-8 py-4 rounded-3xl">
                 <h1 className="font-bold text-3xl">Skills</h1>
                 <ul className="flex flex-wrap mt-4">
-                    {loading ? (
-                        <p>Cargando perfil...</p>
-                    ) : (
-                        <>
-                            {userData.skills.map((skill) => (<li className="mx-4">{skill.skillName}</li>))}
-                        </>
-                    )}
+                {loading && !userData.skills.length ? (
+                    <p>Cargando perfil...</p>
+                ) : (
+                    <>
+                        {userData.skills.map((skill, index) => (
+                            <li key={index} className="mx-4">{skill.skillName}</li>
+                        ))}
+                    </>
+                )}
 
                 </ul>
             </section>
@@ -121,26 +124,25 @@ const VisualizarPerfil = () => {
 
                 <div className="w-1/2 h-auto flex flex-col">
                     <h1 className="text-3xl font-bold pl-4">Calificaciones</h1>
-                    <div className="ml-4 mt-2 pr-8 w-full h-screen flex flex-col border-2 border-grey-500 p-1">
-                        {/* <Comentarios isLoading={loading} comenData={userData}/> */}
+                    <div className="ml-4 mt-2 pr-8 w-full h-auto flex flex-col border-2 rounded-3xl border-grey-500 p-1">
                         {loading && userData.comments ? (
                             <p>Cargando comentarios...</p>
                         ) : (
                             <>
-                                {userData.comments.fullComments.map((comentario) => (<Comentarios isLoading={loading} comenData={comentario} />))}
+                                {userData.comments.fullComments.map((comentario,index) => (<Comentarios key={index} isLoading={loading} comenData={comentario} />))}
                             </>
                         )}
                     </div>
                 </div>
 
-                <div className="w-full-">
+                <div className="w-50 h-auto">
                     <h1 className="ml-8 pl-8 font-bold text-3xl text-orange-400 ">Perfiles laborales del empleado</h1>
                     <ul className="w-full ml-16 pl-2 mt-4 border-2 rounded-3xl border-grey-500 p-1">
                         {loading && userData.comments ? (
                             <p>Cargando comentarios...</p>
                         ) : (
                             <>
-                                {userData.resumes.map((resume) => (<PerfilesLaborales isLoading={loading} laboresData={resume} />))}
+                                {userData.resumes.map((resume,index) => (<PerfilesLaborales key={index} isLoading={loading} laboresData={resume} />))}
                             </>
                         )}
                     </ul>
