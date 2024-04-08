@@ -235,12 +235,16 @@ const CategoriesLabors = () => {
     }
 
     const fetchLabors = (indexCategory: number) => {
+        console.log("fetching labors")
+        console.log(categories[indexCategory].laborCategoryId)
+        console.log(indexCategory)
+
         fetch('http://localhost:3000/getLaborsPerCategories', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ categories: [indexCategory] }),
+            body: JSON.stringify({ categories: [categories[indexCategory].laborCategoryId] }),
         })
             .then(response => {
                 if (!response.ok) {
@@ -302,7 +306,7 @@ const CategoriesLabors = () => {
                         {
                             categories.map((item, index) => {
                                 return (
-                                    <div className={`rounded-xl flex flex-col items-center justify-center text-center duration-300 px-[2%] ${index.toString() === selectedCategory ? 'shadow-2' : 'shadow-1'}`}
+                                    <div key={index} className={`rounded-xl flex flex-col items-center justify-center text-center duration-300 px-[2%] ${index.toString() === selectedCategory ? 'shadow-2' : 'shadow-1'}`}
                                         onClick={() => handleSelectedCategory(index)}
                                     >
                                         <img src={`${item.laborCategoryIcon}`} alt="" className="h-20" />
@@ -318,7 +322,7 @@ const CategoriesLabors = () => {
                         {
                             renderLabors.map((value, index) => {
                                 return (
-                                    <div className={`text-xl w-full h-16 shadow-1 rounded-xl flex flex-row px-[5%] max-w-[450px] justify-between items-center ${selectedLabors.includes(value.laborId) ? 'bg-[#FD7401]' : ''}`} >
+                                    <div key={index} className={`text-xl w-full h-16 shadow-1 rounded-xl flex flex-row px-[5%] max-w-[450px] justify-between items-center ${selectedLabors.includes(value.laborId) ? 'bg-[#FD7401]' : ''}`} >
                                         <p>{value.laborName}</p>
                                         <input type="checkbox" className=""
                                             checked={selectedLabors.includes(value.laborId)}
