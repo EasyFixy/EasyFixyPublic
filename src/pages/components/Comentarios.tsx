@@ -31,7 +31,7 @@ const Comentarios = ({
 
 }:PropsComentarios) => {
     return(
-        <div className='w-full h-auto flex flex-col rounded-3xl border-2 border-grey-500 p-2'>
+        <div className='mt-1 w-full h-auto flex flex-col rounded-3xl border-2 border-grey-500 p-2'>
             <div className='w-full h-auto flex flex-row'>
                 <img src="/icons/icon-user.png" alt="foto usuario" className="h-14 w-14 bg-gray-300 px-2 py-1" />
                 <section className='px-2 w-full h-auto flex flex-col'>
