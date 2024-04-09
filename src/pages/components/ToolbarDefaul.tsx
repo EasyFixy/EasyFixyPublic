@@ -65,12 +65,16 @@ interface TempData {
 }
 
 interface User {
-    userId: string;
-    mainData: MainData[];
-    skills: Skill[];
-    resumes: Resume[];
-    comments: Comments;
-    tempData: TempData[];
+    antiguedadMonths: number;
+    antiguedadYears: number;
+    edad: number;
+    userDateOfRegister: string;
+    userEmail: string;
+    userName: string;
+    userNationalId: string;
+    userNationality: string;
+    userPhoneNumber: string;
+    userPrefixNational: string;
 }
 
 const ToolbarDefault = (props) => {
@@ -90,7 +94,7 @@ const ToolbarDefault = (props) => {
     const handleRequest = () => {
 
         //console.log("llega")
-        fetch('http://localhost:3000/getUserProfile?userId=' + userId)
+        fetch('http://localhost:3000/getBasicUserInfo?userId=' + userId)
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
@@ -98,7 +102,7 @@ const ToolbarDefault = (props) => {
                 return response.json();
             })
             .then(data => {
-                setUser(data.data)
+                setUser(data.data[0])
             })
             .catch(error => {
                 console.error('Error:', error);
@@ -174,7 +178,7 @@ const ToolbarDefault = (props) => {
 
                 <div className="flex flex-row items-center">
                     <img src={user ? imagen : ""} alt="foto del usuario" />
-                    <p className="text-white ml-4">{user ? user.mainData[0].userName : ""}</p>
+                    <p className="text-white ml-4">{user ? user.userName : ""}</p>
                 </div>
             </div>
 
