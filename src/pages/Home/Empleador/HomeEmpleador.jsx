@@ -17,12 +17,8 @@ const HomeEmpleador = () => {
     const searchParams = new URLSearchParams(location.search);
     const [tipe, setTipe] = useState();
     // Obtener valores específicos de la UR
-    try{
-        const laborsOfJobOffer = JSON.parse(decodeURIComponent(searchParams.get('labors') ?? ''));
-    }catch{
-
-    }
-    
+    let laborsUriComponent = decodeURIComponent(searchParams.get('labors') ?? '')
+    const laborsOfJobOffer = laborsUriComponent? JSON.parse(laborsUriComponent): null;
     
     const sections = [
         {
