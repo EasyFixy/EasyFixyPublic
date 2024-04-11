@@ -169,7 +169,8 @@ const Negociacion = (props) => {
 
     return (
         <div className="absolute w-screen h-screen z-10 flex items-center justify-center top-0 left-0 m-auto bg-black bg-opacity-75 overflow-auto">
-            <div className="w-4/5 h-auto bg-[#292929] pt-[600px]">
+            <div className="w-4/5 h-full">
+            <div className="w-full h-auto bg-[#292929] ">
 
                 <ContenedorPerfil userData={userData} estado={false} isLoading={loading} nameColor={'textNaranja'} width="w-full" textColor="text-white" paddingX="px-[2%]" whiteStar={true} showDescription={false} />
                 <section className="w-90 h-auto mt-4 ml-4 border border-white border-solid px-8 py-4 rounded-3xl mr-8">
@@ -218,6 +219,7 @@ const Negociacion = (props) => {
                         <button><img src="/icons/Aceptar.svg" alt="boton cancelar" className="w-10" /></button>
                     </div>
                 </section>
+            </div>
             </div>
         </div>
     );
