@@ -59,7 +59,7 @@ const ContenedorPerfil = ({
     let acno = '2000';
 
     // Verificacion de si hay datos en tempData
-    if (userData.tempData.length){
+    if (userData && userData.tempData && userData.tempData.length){
         mesNumero=userData.tempData[0].userTempDataLastUpdate.slice(5, 7);
         isActive=userData.tempData[0].userTempDataActive;
         dia=userData.tempData[0].userTempDataLastUpdate.slice(8, 10);
@@ -78,10 +78,10 @@ const ContenedorPerfil = ({
                         <p>Cargando perfil...</p>
                     ) : (
                         <>
-                            {userData.mainData.length > 0 ? (
+                            {userData && userData.mainData && userData.mainData.length > 0 ? (
                                 userData.mainData[0].userName
                             ) : (
-                                <p>El id proporcionado no exixte.</p>
+                                <p>El id proporcionado no existe.</p>
                             )}
                         </>
                     )}
@@ -90,47 +90,67 @@ const ContenedorPerfil = ({
                     <section className="flex flex-wrap mt-4">
                         <div className="w-1/3 flex flex-row">
 
-                            {isLoading && !userData.comments.data ? (
-                                <>
-                                    <img src={`/icons/icon-star${whiteStar ? '-white' : ''}.svg`} alt="Estrellita" className="w-1/5 flex-initial px-1" />
-                                    <img src={`/icons/icon-star${whiteStar ? '-white' : ''}.svg`} alt="Estrellita" className="w-1/5 flex-initial px-1" />
-                                    <img src={`/icons/icon-star${whiteStar ? '-white' : ''}.svg`} alt="Estrellita" className="w-1/5 flex-initial px-1" />
-                                    <img src={`/icons/icon-star${whiteStar ? '-white' : ''}.svg`} alt="Estrellita" className="w-1/5 flex-initial px-1" />
-                                    <img src={`/icons/icon-star${whiteStar ? '-white' : ''}.svg`} alt="Estrellita" className="w-1/5 flex-initial px-1" />
-                                </>
-                            ) : 
-                            (userData.comments.data.length > 0 ? 
-                                (<>
-                                
-                                {Array.from({ length: (((userData.comments.data[0].mediaCalificaciones - Math.floor(userData.comments.data[0].mediaCalificaciones)) >= 0.5) ? (Math.ceil(userData.comments.data[0].mediaCalificaciones)) : (Math.floor(userData.comments.data[0].mediaCalificaciones))) }, (_, index) => (
-                                    <img key={index} src={'/icons/star.svg'} alt={`Imagen ${index}`} className="w-1/5 flex-initial px-1" />
-                                ))}
-                            
-                                {Array.from({ length: 5 - (((userData.comments.data[0].mediaCalificaciones - Math.floor(userData.comments.data[0].mediaCalificaciones)) >= 0.5) ? (Math.ceil(userData.comments.data[0].mediaCalificaciones)) : (Math.floor(userData.comments.data[0].mediaCalificaciones))) }, (_, index) => (
-                                    <img key={index} src={`/icons/icon-star${whiteStar ? '-white' : ''}.svg`} alt={`Imagen ${index}`} className="w-1/5 flex-initial px-1" />
-                                ))} 
+                        {isLoading && userData.comments.length > 0 ? (
+                            <>
+                                {userData.comments[0].data.length > 0 ? (
+                                    <>
+                                        {Array.from({ length: (((userData.comments[0].data[0].mediaCalificaciones - Math.floor(userData.comments[0].data[0].mediaCalificaciones)) >= 0.5) ? (Math.ceil(userData.comments[0].data[0].mediaCalificaciones)) : (Math.floor(userData.comments[0].data[0].mediaCalificaciones))) }, (_, index) => (
+                                            <img key={index} src={'/icons/star.svg'} alt={`Imagen ${index}`} className="w-1/5 flex-initial px-1" />
+                                        ))}
+                                        
+                                        {Array.from({ length: 5 - (((userData.comments[0].data[0].mediaCalificaciones - Math.floor(userData.comments[0].data[0].mediaCalificaciones)) >= 0.5) ? (Math.ceil(userData.comments[0].data[0].mediaCalificaciones)) : (Math.floor(userData.comments[0].data[0].mediaCalificaciones))) }, (_, index) => (
+                                            <img key={index} src={`/icons/icon-star${whiteStar ? '-white' : ''}.svg`} alt={`Imagen ${index}`} className="w-1/5 flex-initial px-1" />
+                                        ))}
+                                    </>
+                                ) : (
+                                    <>
+                                        <img src={`/icons/icon-star${whiteStar ? '-white' : ''}.svg`} alt="Estrellita" className="w-1/5 flex-initial px-1" />
+                                        <img src={`/icons/icon-star${whiteStar ? '-white' : ''}.svg`} alt="Estrellita" className="w-1/5 flex-initial px-1" />
+                                        <img src={`/icons/icon-star${whiteStar ? '-white' : ''}.svg`} alt="Estrellita" className="w-1/5 flex-initial px-1" />
+                                        <img src={`/icons/icon-star${whiteStar ? '-white' : ''}.svg`} alt="Estrellita" className="w-1/5 flex-initial px-1" />
+                                        <img src={`/icons/icon-star${whiteStar ? '-white' : ''}.svg`} alt="Estrellita" className="w-1/5 flex-initial px-1" />
+                                    </>
+                                )}
                             </>
-                            ) : (<>
+                        ) : (
+                            <>
                                 <img src={`/icons/icon-star${whiteStar ? '-white' : ''}.svg`} alt="Estrellita" className="w-1/5 flex-initial px-1" />
                                 <img src={`/icons/icon-star${whiteStar ? '-white' : ''}.svg`} alt="Estrellita" className="w-1/5 flex-initial px-1" />
                                 <img src={`/icons/icon-star${whiteStar ? '-white' : ''}.svg`} alt="Estrellita" className="w-1/5 flex-initial px-1" />
                                 <img src={`/icons/icon-star${whiteStar ? '-white' : ''}.svg`} alt="Estrellita" className="w-1/5 flex-initial px-1" />
                                 <img src={`/icons/icon-star${whiteStar ? '-white' : ''}.svg`} alt="Estrellita" className="w-1/5 flex-initial px-1" />
-                            </>))}
+                            </>
+                        )}
+
 
                         </div>
                         <h3 className={`${textColor} w-1/3 flex-initial px-16`}>
-                            {isLoading && userData.comments ? (
-                                <p>0</p>
-                            ) : (userData.comments.data.length > 0 ? (<>({parseFloat(userData.comments.data[0].mediaCalificaciones).toFixed(2)} estrellas) <br />
-                                {userData.comments.data[0].cantidadTotalComentariosEmployee} Calificaciones </>
-                            ):(<p>0 Calificaciones</p>))}
+                        {isLoading ? (
+                            <p>Cargando perfil...</p>
+                        ) : (
+                            <>
+                                {userData && userData.comments && userData.comments.length > 0 ? (
+                                    <>
+                                        {userData.comments[0].data.length > 0 ? (
+                                            <>
+                                                {parseFloat(userData.comments[0].data[0].mediaCalificaciones.toString()).toFixed(2)} estrellas <br />
+                                                {userData.comments[0].data[0].cantidadTotalComentariosEmployee} Calificaciones
+                                            </>
+                                        ) : (
+                                            <p>0 Calificaciones</p>
+                                        )}
+                                    </>
+                                ) : (
+                                    <p>No hay comentarios disponibles</p>
+                                )}
+                            </>
+                        )}
                         </h3>
                         <h3 className={`${textColor} w-1/3 flex-initial`}>{isLoading ? (
                             <p>Cargando perfil...</p>
                         ) : (
                             <>
-                                {userData.mainData.length > 0 ? (
+                                {userData && userData.mainData && userData.mainData.length > 0 ? (
                                     userData.mainData[0].antiguedadYears
                                 ) : (
                                     <p>El id proporcionado no existe.</p>

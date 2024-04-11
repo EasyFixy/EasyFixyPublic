@@ -285,6 +285,7 @@ const CategoriesLabors = () => {
         const labores = categories[index].labors
         if (labores) {
             console.log("existen")
+            console.log(categories[index].labors)
             setRenderLabors(categories[index].labors)
         } else {
             console.log("no existen")

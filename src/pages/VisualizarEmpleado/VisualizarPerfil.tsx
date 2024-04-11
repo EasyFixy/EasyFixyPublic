@@ -15,8 +15,7 @@ const VisualizarPerfil = () => {
     const searchParams = new URLSearchParams(location.search);
 
     // Obtener valores específicos de la URL
-    // const userId = searchParams.get('userId');
-    const userId = 1
+    const userId = searchParams.get('userId');
     const [userData, setUserData] = useState<UserData>({
         mainData: [
             {
@@ -107,11 +106,11 @@ const VisualizarPerfil = () => {
             <section className="w-70 h-auto mt-4 ml-4 border border-black border-solid px-8 py-4 rounded-3xl">
                 <h1 className="font-bold text-3xl">Skills</h1>
                 <ul className="flex flex-wrap mt-4">
-                {loading && !userData.skills.length ? (
+                {loading && userData && (!userData.skills || userData.skills.length === 0) ? (
                     <p>Cargando perfil...</p>
                 ) : (
                     <>
-                        {userData.skills.map((skill, index) => (
+                        {userData && userData.skills && userData.skills.map((skill, index) => (
                             <li key={index} className="mx-4">{skill.skillName}</li>
                         ))}
                     </>
@@ -125,24 +124,30 @@ const VisualizarPerfil = () => {
                 <div className="w-1/2 h-auto flex flex-col">
                     <h1 className="text-3xl font-bold pl-4">Calificaciones</h1>
                     <div className="ml-4 mt-2 pr-8 w-full h-auto flex flex-col border-2 rounded-3xl border-grey-500 p-1">
-                        {loading && userData.comments ? (
-                            <p>Cargando comentarios...</p>
-                        ) : (
-                            <>
-                                {userData.comments.fullComments.map((comentario,index) => (<Comentarios key={index} isLoading={loading} comenData={comentario} />))}
-                            </>
-                        )}
+                    {loading && userData && userData.comments ? (
+                        <div className="ml-4 mt-2 pr-8 w-full h-auto flex flex-col border-2 rounded-3xl border-grey-500 p-1">
+                            {userData.comments.map((commentGroup, index) => (
+                                <React.Fragment key={index}>
+                                    {commentGroup.fullComments && commentGroup.fullComments.map((comentario, subIndex) => (
+                                        <Comentarios key={subIndex} isLoading={loading} comenData={comentario} />
+                                    ))}
+                                </React.Fragment>
+                            ))}
+                        </div>
+                    ) : (
+                        <p>Cargando comentarios...</p>
+                    )}
                     </div>
                 </div>
 
                 <div className="w-50 h-auto">
                     <h1 className="ml-8 pl-8 font-bold text-3xl text-orange-400 ">Perfiles laborales del empleado</h1>
                     <ul className="w-full ml-16 pl-2 mt-4 border-2 rounded-3xl border-grey-500 p-1">
-                        {loading && userData.comments ? (
+                        {loading && userData && (!userData.comments || userData.comments.length === 0) ? (
                             <p>Cargando comentarios...</p>
                         ) : (
                             <>
-                                {userData.resumes.map((resume,index) => (<PerfilesLaborales key={index} isLoading={loading} laboresData={resume} />))}
+                                {userData && userData.resumes && userData.resumes.map((resume,index) => (<PerfilesLaborales key={index} isLoading={loading} laboresData={resume} />))}
                             </>
                         )}
                     </ul>
