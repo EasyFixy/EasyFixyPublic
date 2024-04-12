@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { UserData } from "../../../models/PerfilEmpleado";
 import Comentarios from "../../components/Comentarios";
 import PerfilesLaborales from "../../components/PerfilesLaborales";
+import Chat from "../../components/Chat";
 
 interface queryWorker {
     labors: number[];
@@ -207,6 +208,10 @@ const Negociacion = (props) => {
                             {userData.comments.fullComments.map((comentario) => (<Comentarios isLoading={loading} comenData={comentario} textColor="text-white" />))}
                         </>
                     )}
+                </div>
+                <div className="ml-4 mt-2 pr-8 w-1/2 h-auto flex flex-col p-1">
+                    chat
+                    <Chat userId={4} destinatary={2}></Chat>
                 </div>
                 <section className="flex justify-between items-center p-16 w-90 h-auto mt-4 ml-4 px-8 py-4  mr-8">
                     <div className="flex flex-col flex justify-between items-center">
