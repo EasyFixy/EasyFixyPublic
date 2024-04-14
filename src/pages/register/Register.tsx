@@ -38,6 +38,7 @@ const Register = () => {
     const [showPassword, setShowPassword] = useState<boolean>(false);
     const [politicasChecked, setPoliticasChecked] = useState(false);
     const [terminosCondicionesChecked, setTerminosCondicionesChecked] = useState(false);
+    const baseUrl = import.meta.env.VITE_BASE_URL;
     const navigate = useNavigate();
     const handlePoliticasChange = () => {
         setPoliticasChecked(!politicasChecked);
@@ -104,7 +105,7 @@ const Register = () => {
                     .join('&');
                 const config = {
                     method: 'get',
-                    url: `http://localhost:3000/userRegistration?${params.toString()}`,
+                    url: `${baseUrl}userRegistration?${params.toString()}`,
                     data: formData,
                     headers: {
                     'Content-Type': 'application/json'

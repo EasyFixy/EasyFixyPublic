@@ -15,6 +15,7 @@ const HomeEmpleador = () => {
     const [jobsDone, setJobsDone] = useState([]);
     const [seccionActiva, setSeccionActiva] = useState(0);
     const searchParams = new URLSearchParams(location.search);
+    const baseUrl = import.meta.env.VITE_BASE_URL;
     const [tipe, setTipe] = useState();
     // Obtener valores específicos de la UR
     let laborsUriComponent = decodeURIComponent(searchParams.get('labors') ?? '')
@@ -50,7 +51,7 @@ const HomeEmpleador = () => {
         const token = decodeJWT()
         console.log(token)
         if (token) {
-            fetch("http://localhost:3000/getJobOffertedOffersByEmployer?token=" + localStorage.getItem('token'))
+            fetch(`${baseUrl}getJobOffertedOffersByEmployer?token=${localStorage.getItem('token')}`)
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Network response was not ok');
@@ -77,7 +78,7 @@ const HomeEmpleador = () => {
     const fetchPendingJobs = () => {
         const token = decodeJWT()
         if (token) {
-            fetch("http://localhost:3000/getJobPendingOffersByEmployer?token=" + localStorage.getItem('token'))
+            fetch(`${baseUrl}getJobPendingOffersByEmployer?token=${localStorage.getItem('token')}`)
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Network response was not ok');
@@ -103,7 +104,7 @@ const HomeEmpleador = () => {
     const fetchDoneJobs = () => {
         const token = decodeJWT()
         if (token) {
-            fetch("http://localhost:3000/getJobDoneByEmployer?token=" + localStorage.getItem('token'))
+            fetch(`${baseUrl}getJobDoneByEmployer?token=${localStorage.getItem('token')}`)
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Network response was not ok');
