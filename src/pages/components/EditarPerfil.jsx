@@ -8,6 +8,7 @@ const EditarPerfil = () =>{
     const [nacionalidad, setNacionalidad] = useState('');
     const [telefono, setTelefono] = useState('');
     const [cambios, setCambios] = useState(false);
+    const baseUrl = import.meta.env.VITE_BASE_URL;
 
     const editUserData = (e) => {
         e.preventDefault();
@@ -20,7 +21,7 @@ const EditarPerfil = () =>{
             nacionalidad: nacionalidad,
             telefono: telefono
         };
-        const url = `http://localhost:3000/editUserData?prefijo=${encodeURIComponent(prefijo)}&nacionalidad=${encodeURIComponent(nacionalidad)}&telefono=${encodeURIComponent(telefono)}`;
+        const url = `${baseUrl}editUserData?prefijo=${encodeURIComponent(prefijo)}&nacionalidad=${encodeURIComponent(nacionalidad)}&telefono=${encodeURIComponent(telefono)}`;
         fetch(url)
             .then(response => {
                 if (!response.ok) {

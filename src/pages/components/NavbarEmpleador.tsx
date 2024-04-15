@@ -1,12 +1,13 @@
 import React from "react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../app/hooks";
 import { removeToken } from "../../Helpers/Token"
 
 const NavbarEmpleador = () =>{
 
     const [checked, setChecked] = useState(false);
+    const navigate = useNavigate();
     const dispatch = useAppDispatch();
 
     const toggleChecked = () => {
@@ -15,7 +16,7 @@ const NavbarEmpleador = () =>{
     const logOut = () => {
         console.log("saliendo")
         removeToken(dispatch)
-        //navigate("/");
+        navigate("/");
     }
 
     return(

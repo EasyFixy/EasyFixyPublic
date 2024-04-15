@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import ToolbarDefault from "../components/ToolbarDefaul";
 import { useLocation } from 'react-router-dom';
 import { Navigate, useNavigate } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const trabajos = [
@@ -75,6 +75,7 @@ interface Job {
     jobOfferDateAtWork: string;
     jobOfferStimatePrice: number;
     jobOfferTittle: string;
+    jobOfferUbication: string;
     labors: number[];
     token: string
 }
@@ -83,7 +84,7 @@ const CategoriesLabors = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
-
+    const baseUrl = import.meta.env.VITE_BASE_URL;
     // Obtener valores específicos de la URL
     const tipe = searchParams.get('tipe');
 
@@ -95,7 +96,7 @@ const CategoriesLabors = () => {
 
     const saveResumeToDB = (resume: Resume) => {
         console.log(JSON.stringify(resume))
-        fetch('http://localhost:3000/createLaboralUserResume', {
+        fetch(`${baseUrl}createLaboralUserResume`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -124,7 +125,7 @@ const CategoriesLabors = () => {
 
     const saveJobToDB = (job: Job) => {
         console.log(JSON.stringify(job))
-        fetch('http://localhost:3000/createJobOffer', {
+        fetch(`${baseUrl}createJobOffer`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -184,8 +185,10 @@ const CategoriesLabors = () => {
         const estimatePrice = searchParams.get('estimatePrice');
         const description = searchParams.get('description');
         const dateAtWork = searchParams.get('dateAtWork');
-
-        if (title && description && estimatePrice && dateAtWork) {
+        const ubication = searchParams.get('ubication');
+        console.log(ubication);
+        
+        if (title && description && estimatePrice && dateAtWork && ubication) {
 
             if (selectedLabors.length < 1) {
                 toast.warn("Seleccione almenos una labor");
@@ -196,6 +199,7 @@ const CategoriesLabors = () => {
                     jobOfferDateAtWork: dateAtWork,
                     jobOfferStimatePrice: Number(estimatePrice),
                     jobOfferTittle: title,
+                    jobOfferUbication: ubication,
                     labors: selectedLabors,
                     token: localStorage.getItem('token') || ""
                 }
@@ -217,7 +221,7 @@ const CategoriesLabors = () => {
     }
 
     const fetchCategories = () => {
-        fetch("http://localhost:3000/getJobCategories")
+        fetch(`${baseUrl}getJobCategories`)
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
@@ -239,7 +243,7 @@ const CategoriesLabors = () => {
         console.log(categories[indexCategory].laborCategoryId)
         console.log(indexCategory)
 
-        fetch('http://localhost:3000/getLaborsPerCategories', {
+        fetch(`${baseUrl}getLaborsPerCategories`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -293,7 +297,6 @@ const CategoriesLabors = () => {
     }
     return (
         <div className="w-screen h-screen flex flex-col">
-            <ToastContainer />
             <ToolbarDefault tipe={tipe === "createResume" ? ("employee") : ("employer")} />
             <div className="w-full flex-1 px-[5%] flex flex-col pb-[5%] pt-[3%] font-bold overflow-y-scroll">
                 <h1 className="text-5xl">
