@@ -75,6 +75,7 @@ interface Job {
     jobOfferDateAtWork: string;
     jobOfferStimatePrice: number;
     jobOfferTittle: string;
+    jobOfferUbication: string;
     labors: number[];
     token: string
 }
@@ -184,8 +185,9 @@ const CategoriesLabors = () => {
         const estimatePrice = searchParams.get('estimatePrice');
         const description = searchParams.get('description');
         const dateAtWork = searchParams.get('dateAtWork');
+        const ubication = searchParams.get('ubication');
 
-        if (title && description && estimatePrice && dateAtWork) {
+        if (title && description && estimatePrice && dateAtWork && ubication) {
 
             if (selectedLabors.length < 1) {
                 toast.warn("Seleccione almenos una labor");
@@ -196,6 +198,7 @@ const CategoriesLabors = () => {
                     jobOfferDateAtWork: dateAtWork,
                     jobOfferStimatePrice: Number(estimatePrice),
                     jobOfferTittle: title,
+                    jobOfferUbication: ubication,
                     labors: selectedLabors,
                     token: localStorage.getItem('token') || ""
                 }

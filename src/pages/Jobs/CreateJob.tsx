@@ -5,11 +5,11 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const CreateJob = () => {
-
     const [title, setTitle] = useState<String>();
     const [dateAtWork, setDateAtWork] = useState<String>();
     const [description, setDescription] = useState<String>();
-    const [estimatePrice, setEtimatePrice] = useState<Number>();
+    const [estimatePrice, setEtimatePrice] = useState<number>(10000);
+    const [ubication, setUbication] = useState<string>('');
 
     // FUNCION BUSCAR EMPLEADOS
     // DESCOMENTAR Y AGREGAR PARAMETROS NECESARIOS
@@ -37,14 +37,42 @@ const CreateJob = () => {
     //         });
 
     // }
+    // Función para aumentar el precio en 5000
+    const aumentarPrecio = () => {
+        setEtimatePrice(prevPrecio => prevPrecio + 5000);
+    };
+
+    // Función para disminuir el precio en 5000
+    const disminuirPrecio = () => {
+        
+        if(estimatePrice- 5000 >= 10000){
+
+            setEtimatePrice(prevPrecio => prevPrecio - 5000);
+        }
+    };
 
     const handleFieldsVerification = (e) => {
-        if (!(title && description && dateAtWork && estimatePrice)) {
+        const fechaActual = new Date().toISOString().split("T")[0]; // Obtener la fecha actual en formato ISO (yyyy-mm-dd)
+        if (!(title && description && dateAtWork && ubication)) {
 
             e.preventDefault(); // Evita que el enlace se abra si no se cumple la condición
             toast.warn("Complete todos los datos");
+        }else if(estimatePrice < 10000){
+            e.preventDefault(); // Evita que el enlace se abra si no se cumple la condición
+            toast.info("el precio estimado debe ser como minimo 10.000 cop");
+        }else if(dateAtWork < fechaActual){
+            e.preventDefault(); // Evita que el enlace se abra si no se cumple la condición
+            toast.info("recuerda que no debes ingresar una fecha invalida. la fecha debe ser superior a la actual");
+        }else if(dateAtWork < fechaActual){
+            e.preventDefault(); // Evita que el enlace se abra si no se cumple la condición
+            toast.info("recuerda que no debes ingresar una fecha invalida. la fecha debe ser superior a la actual");
         }
     };
+    const handleChange = (event) => {
+        const nuevoPrecio = Number(event.target.value);
+        setEtimatePrice(nuevoPrecio);
+    };
+    
 
     return (
         <div className="w-screen flex flex-row relative overflow-y-scroll">
@@ -60,41 +88,49 @@ const CreateJob = () => {
                 <h1 className="font-bold text-5xl mb-8">Cuentanos que es lo que necesitas <span className="textNaranja">hacer.</span></h1>
                 <input className="w-full border border-solid border-[#292929] h-8 rounded-xl mb-5 pl-[3%]"
                     onChange={(event) => { setTitle(event.target.value) }} type="text" placeholder="Nombre del Problema" />
-                <textarea className="w-full border border-solid border-[#292929] h-24 rounded-xl mb-5 pl-[3%] resize-none border rounded-md"
+                <textarea className="w-full border-solid border-[#292929] h-24 mb-5 pl-[3%] resize-none border rounded-md"
                     placeholder="Descripcion de problema"
                     onChange={(event) => { setDescription(event.target.value) }} />
+                <input
+                    className="w-full border border-solid border-[#292929] h-8 rounded-xl mb-5 pl-[3%]"
+                    type="text"
+                    value={ubication}
+                    onChange={(event) => { setUbication(event.target.value) }}
+                    placeholder="Dirección de trabajo"
+                />
                 <div className="flex flex-row justify-between w-full mb-5 h-10">
                     <div className="w-2/6 flex flex-row items-center justify-between h-full">
-                        <button className="w-[10%]">
+                        
+                        <button className={`w-[10%] ${estimatePrice < 15000 ? 'invisible' : ''}`} onClick={disminuirPrecio}>
                             <img src="/public/menos.svg" alt="" />
                         </button>
                         <input
                             className="border border-solid border-[#292929] w-[75%] rounded-xl h-full  pl-[3%]"
                             type="number"
+                            value={estimatePrice}
                             min={10000}
                             max={500000}
                             step={5000}
                             name="precio"
-                            onChange={(event) => { setEtimatePrice(Number(event.target.value)) }}
+                            onChange={handleChange}
                             id="precio"
                             placeholder="$ Precio estimado" />
-                        <button className="w-[10%]">
+                        <button className="w-[10%]" onClick={aumentarPrecio}>
                             <img src="/public/mas.svg" alt="" />
                         </button>
                     </div>
                     <input
-                        className="border border-solid border-[#292929] w-2/6 h-full rounded-xl"
-                        type="date"
-                        name=""
+                        className="border border-solid border-[#292929] w-fit h-full rounded-xl"
+                        type="datetime-local"
+                        name="date"
                         onChange={(event) => { setDateAtWork(event.target.value) }}
-                        id=""
+                        id="date"
                         placeholder="Fecha de realizacion" />
                 </div>
-                <Link to={'/my/categories?tipe=createJob&title=' + title + '&description=' + description + '&estimatePrice=' + estimatePrice + '&dateAtWork=' + dateAtWork}
-                    onClick={handleFieldsVerification} className="pt-4 w-auto mt-10 mainBackground h-14 text-white px-4 py-0 rounded-full border border-black border-solid">
-                    <button className="px-[30px] mainBackground h-10 text-white rounded-full mb-5">
-                        Siguiente
-                    </button>
+                <Link to={'/my/categories?tipe=createJob&title=' + title + '&description=' + description + '&estimatePrice=' + estimatePrice + '&dateAtWork=' + dateAtWork +'&ubication=' + ubication} className="px-[30px] mainBackground h-10 text-white rounded-full mb-5 w-fit text-center flex justify-center items-center"
+                    onClick={handleFieldsVerification}
+                >
+                    Siguiente
                 </Link>
 
                 <div className="flex flex-col gap-4">
