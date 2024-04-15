@@ -15,7 +15,7 @@ const Negociacion = (props) => {
     const [loading, setLoading] = useState(true);
     const [userId, setUserId] = useState(true);
 
-
+    const baseUrl = import.meta.env.VITE_BASE_URL;
     // PARAMETROS DE LA PETICION 
     const [bestWorkers, setBestWorkest] = useState();
     //const labores = [1,2,3];
@@ -59,7 +59,7 @@ const Negociacion = (props) => {
             userLatitude: latitud,
             userLongitude: longitud
         }
-        fetch('http://localhost:3000/getBestWorkersForLabors', {
+        fetch(`${baseUrl}getBestWorkersForLabors`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -142,7 +142,7 @@ const Negociacion = (props) => {
         const options = {
             method: "GET"
         };
-        let url = new URL("http://localhost:3000/getUserProfile?userId=" + userId);
+        let url = new URL(`${baseUrl}getUserProfile?userId=${userId}`);
         fetch(url, options)
             .then(response => response.text())
             .then(data => {

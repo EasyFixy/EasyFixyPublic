@@ -13,6 +13,7 @@ const VisualizarPerfil = () => {
     const [loading, setLoading] = useState(true);
     const [isMyAccount, setIsMyAccount] = useState(true);
     const searchParams = new URLSearchParams(location.search);
+    const baseUrl = import.meta.env.VITE_BASE_URL;
 
     // Obtener valores específicos de la URL
     // const userId = searchParams.get('userId');
@@ -71,7 +72,7 @@ const VisualizarPerfil = () => {
     function getInfoPerfil() {
         setLoading(true);
         
-            fetch("http://localhost:3000/getUserProfile?userId="+userId)
+            fetch(`${baseUrl}getUserProfile?userId=${userId}`)
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');

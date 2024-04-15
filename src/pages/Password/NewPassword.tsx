@@ -11,7 +11,7 @@ const NewPassword = () => {
     // Define estado para almacenar los valores de id y tempPass
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-
+    const baseUrl = import.meta.env.VITE_BASE_URL;
     const searchParams = new URLSearchParams(location.search);
     const id = searchParams.get('id')
     const tempPass = searchParams.get('tempPass')
@@ -28,7 +28,7 @@ const NewPassword = () => {
             };
             console.log(tempPass);
 
-            const url = `http://localhost:3000/resetPassword?user_id=${encodeURIComponent(String(id))}&tempPasswordChangeValue=${encodeURIComponent(String(tempPass))}&newPassword=${encodeURIComponent(password)}`;
+            const url = `${baseUrl}resetPassword?user_id=${encodeURIComponent(String(id))}&tempPasswordChangeValue=${encodeURIComponent(String(tempPass))}&newPassword=${encodeURIComponent(password)}`;
             fetch(url)
                 .then(response => {
                     if (!response.ok) {

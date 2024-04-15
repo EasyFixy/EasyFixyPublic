@@ -11,14 +11,14 @@ import LandingPage from './pages/landingPage/LandingPage';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { decodeJWT, validationToken } from './Helpers/Token';
-import { useAppDispatch } from './app/hooks';
+import { useAppDispatch, useAppSelector } from './app/hooks';
 import { login } from './features/Auth/Auth';
 
 const App = () => {
   const dispatch = useAppDispatch();
+  const reduxToken = useAppSelector(state => state.Auth);
   const tokenIsValid = validationToken(dispatch);
-  console.log('is valid '+tokenIsValid)
-  if (tokenIsValid) {
+  if (tokenIsValid && reduxToken.token.length<=0) {
     const token = localStorage.getItem('token');
     const tokenDecode = decodeJWT();
     dispatch(login({ token: token ? token.toString() : '', id: tokenDecode.userId, date: tokenDecode.exp }))

@@ -84,7 +84,7 @@ const CategoriesLabors = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
-
+    const baseUrl = import.meta.env.VITE_BASE_URL;
     // Obtener valores específicos de la URL
     const tipe = searchParams.get('tipe');
 
@@ -96,7 +96,7 @@ const CategoriesLabors = () => {
 
     const saveResumeToDB = (resume: Resume) => {
         console.log(JSON.stringify(resume))
-        fetch('http://localhost:3000/createLaboralUserResume', {
+        fetch(`${baseUrl}createLaboralUserResume`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -125,7 +125,7 @@ const CategoriesLabors = () => {
 
     const saveJobToDB = (job: Job) => {
         console.log(JSON.stringify(job))
-        fetch('http://localhost:3000/createJobOffer', {
+        fetch(`${baseUrl}createJobOffer`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -220,7 +220,7 @@ const CategoriesLabors = () => {
     }
 
     const fetchCategories = () => {
-        fetch("http://localhost:3000/getJobCategories")
+        fetch(`${baseUrl}getJobCategories`)
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
@@ -242,7 +242,7 @@ const CategoriesLabors = () => {
         console.log(categories[indexCategory].laborCategoryId)
         console.log(indexCategory)
 
-        fetch('http://localhost:3000/getLaborsPerCategories', {
+        fetch(`${baseUrl}getLaborsPerCategories`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

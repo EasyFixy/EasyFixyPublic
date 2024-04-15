@@ -19,7 +19,8 @@ const Skills = () => {
     const [selectedOption, setSelectedOption] = useState<MultiValue<Skill>>([]);
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
-    const token = useAppSelector(state => state.Auth.token)
+    const token = useAppSelector(state => state.Auth.token);
+    const baseUrl = import.meta.env.VITE_BASE_URL;
     const handleChange = (newValue: MultiValue<Skill>) => {
         console.log(newValue)
         setSelectedOption(newValue);
@@ -43,7 +44,7 @@ const Skills = () => {
             },
             body: JSON.stringify(requestData) // Convertir el objeto a JSON
         };
-        const url = 'http://localhost:3000/insertUserSkills';
+        const url = `${baseUrl}insertUserSkills`;
         fetch(url, requestOptions)
             .then(response => {
                 if (!response.ok) {
