@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ContenedorLogoHorizontal from "../../componentes/contenedorLogoVerde/ContenedorLogoHorizontal";
 import { Link } from "react-router-dom";
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const CreateJob = () => {
@@ -53,6 +53,8 @@ const CreateJob = () => {
 
     const handleFieldsVerification = (e) => {
         const fechaActual = new Date().toISOString().split("T")[0]; // Obtener la fecha actual en formato ISO (yyyy-mm-dd)
+        const fechaUnAnioDespues = new Date();
+        fechaUnAnioDespues.setFullYear(fechaUnAnioDespues.getFullYear() + 1)
         if (!(title && description && dateAtWork && ubication)) {
 
             e.preventDefault(); // Evita que el enlace se abra si no se cumple la condición
@@ -63,9 +65,9 @@ const CreateJob = () => {
         }else if(dateAtWork < fechaActual){
             e.preventDefault(); // Evita que el enlace se abra si no se cumple la condición
             toast.info("recuerda que no debes ingresar una fecha invalida. la fecha debe ser superior a la actual");
-        }else if(dateAtWork < fechaActual){
+        }else if (dateAtWork > fechaUnAnioDespues.toISOString().split("T")[0]) {
             e.preventDefault(); // Evita que el enlace se abra si no se cumple la condición
-            toast.info("recuerda que no debes ingresar una fecha invalida. la fecha debe ser superior a la actual");
+            toast.info("no puedes elegir una fecha tan lejana. Por favor, elige una fecha más cercana.");
         }
     };
     const handleChange = (event) => {
@@ -73,80 +75,81 @@ const CreateJob = () => {
         setEtimatePrice(nuevoPrecio);
     };
     
-
     return (
-        <div className="w-screen flex flex-row relative overflow-y-scroll">
-            <ToastContainer />
+        <div className="w-screen h-screen flex flex-row relative">
             <button className="absolute left-4 top-4">
                 <img src="/public/ButtonBack.svg" alt="" />
             </button>
-            <div className="w-[55%] px-[5%] py-[5%] flex flex-col">
-                <div className="flex flex-row items-center mb-14">
-                    <img src="/public/logo.svg" alt="logo" className="h-20" />
-                    <p className="text-4xl fontNameLogo"> EasyFixy</p>
-                </div>
-                <h1 className="font-bold text-5xl mb-8">Cuentanos que es lo que necesitas <span className="textNaranja">hacer.</span></h1>
-                <input className="w-full border border-solid border-[#292929] h-8 rounded-xl mb-5 pl-[3%]"
-                    onChange={(event) => { setTitle(event.target.value) }} type="text" placeholder="Nombre del Problema" />
-                <textarea className="w-full border-solid border-[#292929] h-24 mb-5 pl-[3%] resize-none border rounded-md"
-                    placeholder="Descripcion de problema"
-                    onChange={(event) => { setDescription(event.target.value) }} />
-                <input
-                    className="w-full border border-solid border-[#292929] h-8 rounded-xl mb-5 pl-[3%]"
-                    type="text"
-                    value={ubication}
-                    onChange={(event) => { setUbication(event.target.value) }}
-                    placeholder="Dirección de trabajo"
-                />
-                <div className="flex flex-row justify-between w-full mb-5 h-10">
-                    <div className="w-2/6 flex flex-row items-center justify-between h-full">
-                        
-                        <button className={`w-[10%] ${estimatePrice < 15000 ? 'invisible' : ''}`} onClick={disminuirPrecio}>
-                            <img src="/public/menos.svg" alt="" />
-                        </button>
-                        <input
-                            className="border border-solid border-[#292929] w-[75%] rounded-xl h-full  pl-[3%]"
-                            type="number"
-                            value={estimatePrice}
-                            min={10000}
-                            max={500000}
-                            step={5000}
-                            name="precio"
-                            onChange={handleChange}
-                            id="precio"
-                            placeholder="$ Precio estimado" />
-                        <button className="w-[10%]" onClick={aumentarPrecio}>
-                            <img src="/public/mas.svg" alt="" />
-                        </button>
+            <div className="w-[55%] px-[5%] py-[5%] flex flex-col overflow-y-scroll">
+                <div>
+
+                    <div className="flex flex-row items-center mb-14">
+                        <img src="/public/logo.svg" alt="logo" className="h-20" />
+                        <p className="text-4xl fontNameLogo"> EasyFixy</p>
                     </div>
+                    <h1 className="font-bold text-5xl mb-8">Cuentanos que es lo que necesitas <span className="textNaranja">hacer.</span></h1>
+                    <input className="w-full border border-solid border-[#292929] h-8 rounded-xl mb-5 pl-[3%]"
+                        onChange={(event) => { setTitle(event.target.value) }} type="text" placeholder="Nombre del Problema" />
+                    <textarea className="w-full border-solid border-[#292929] h-24 mb-5 pl-[3%] resize-none border rounded-md"
+                        placeholder="Descripcion de problema"
+                        onChange={(event) => { setDescription(event.target.value) }} />
                     <input
-                        className="border border-solid border-[#292929] w-fit h-full rounded-xl"
-                        type="datetime-local"
-                        name="date"
-                        onChange={(event) => { setDateAtWork(event.target.value) }}
-                        id="date"
-                        placeholder="Fecha de realizacion" />
-                </div>
-                <Link to={'/my/categories?tipe=createJob&title=' + title + '&description=' + description + '&estimatePrice=' + estimatePrice + '&dateAtWork=' + dateAtWork +'&ubication=' + ubication} className="px-[30px] mainBackground h-10 text-white rounded-full mb-5 w-fit text-center flex justify-center items-center"
-                    onClick={handleFieldsVerification}
-                >
-                    Siguiente
-                </Link>
+                        className="w-full border border-solid border-[#292929] h-8 rounded-xl mb-5 pl-[3%]"
+                        type="text"
+                        value={ubication}
+                        onChange={(event) => { setUbication(event.target.value) }}
+                        placeholder="Dirección de trabajo"
+                    />
+                    <div className="flex flex-row justify-between w-full mb-5 h-10">
+                        <div className="w-2/6 flex flex-row items-center justify-between h-full">
+                            
+                            <button className={`w-[10%] ${estimatePrice < 15000 ? 'invisible' : ''}`} onClick={disminuirPrecio}>
+                                <img src="/public/menos.svg" alt="" />
+                            </button>
+                            <input
+                                className="border border-solid border-[#292929] w-[75%] rounded-xl h-full  pl-[3%]"
+                                type="number"
+                                value={estimatePrice}
+                                min={10000}
+                                max={500000}
+                                step={5000}
+                                name="precio"
+                                onChange={handleChange}
+                                id="precio"
+                                placeholder="$ Precio estimado" />
+                            <button className="w-[10%]" onClick={aumentarPrecio}>
+                                <img src="/public/mas.svg" alt="" />
+                            </button>
+                        </div>
+                        <input
+                            className="border border-solid border-[#292929] w-fit h-full rounded-xl"
+                            type="datetime-local"
+                            name="date"
+                            onChange={(event) => { setDateAtWork(event.target.value) }}
+                            id="date"
+                            placeholder="Fecha de realizacion" />
+                    </div>
+                    <Link to={'/my/categories?tipe=createJob&title=' + title + '&description=' + description + '&estimatePrice=' + estimatePrice + '&dateAtWork=' + dateAtWork +'&ubication=' + encodeURIComponent(ubication)} className="px-[30px] mainBackground h-10 text-white rounded-full mb-5 w-fit text-center flex justify-center items-center"
+                        onClick={handleFieldsVerification}
+                    >
+                        Siguiente
+                    </Link>
 
-                <div className="flex flex-col gap-4">
-                    <div className="flex flex-row gap-2  items-center">
-                        <img src="/public/likeIcon.svg" alt="" />
-                        <p className=" font-normal text-base"> Encuentra trabajadores capacitados en cuestion de minutos </p>
-                    </div>
-                    <div className="flex flex-row gap-2  items-center">
-                        <img src="/public/likeIcon.svg" alt="" />
-                        <p className=" font-normal text-base"> Chatea con los candidatos para encontrar al trabajador adecuado</p>
-                    </div>
-                    <div className="flex flex-row gap-2  items-center">
-                        <img src="/public/likeIcon.svg" alt="" />
-                        <p className=" font-normal text-base"> Paga solo cuando estés 100% satisfecho</p>
-                    </div>
+                    <div className="flex flex-col gap-4">
+                        <div className="flex flex-row gap-2  items-center">
+                            <img src="/public/likeIcon.svg" alt="" />
+                            <p className=" font-normal text-base"> Encuentra trabajadores capacitados en cuestion de minutos </p>
+                        </div>
+                        <div className="flex flex-row gap-2  items-center">
+                            <img src="/public/likeIcon.svg" alt="" />
+                            <p className=" font-normal text-base"> Chatea con los candidatos para encontrar al trabajador adecuado</p>
+                        </div>
+                        <div className="flex flex-row gap-2  items-center">
+                            <img src="/public/likeIcon.svg" alt="" />
+                            <p className=" font-normal text-base"> Paga solo cuando estés 100% satisfecho</p>
+                        </div>
 
+                    </div>
                 </div>
             </div>
             <ContenedorLogoHorizontal width="w-[45%]" />

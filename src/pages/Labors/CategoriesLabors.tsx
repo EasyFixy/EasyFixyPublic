@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import ToolbarDefault from "../components/ToolbarDefaul";
 import { useLocation } from 'react-router-dom';
 import { Navigate, useNavigate } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const trabajos = [
@@ -186,7 +186,8 @@ const CategoriesLabors = () => {
         const description = searchParams.get('description');
         const dateAtWork = searchParams.get('dateAtWork');
         const ubication = searchParams.get('ubication');
-
+        console.log(ubication);
+        
         if (title && description && estimatePrice && dateAtWork && ubication) {
 
             if (selectedLabors.length < 1) {
@@ -296,7 +297,6 @@ const CategoriesLabors = () => {
     }
     return (
         <div className="w-screen h-screen flex flex-col">
-            <ToastContainer />
             <ToolbarDefault tipe={tipe === "createResume" ? ("employee") : ("employer")} />
             <div className="w-full flex-1 px-[5%] flex flex-col pb-[5%] pt-[3%] font-bold overflow-y-scroll">
                 <h1 className="text-5xl">

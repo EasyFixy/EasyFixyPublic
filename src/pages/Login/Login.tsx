@@ -7,7 +7,7 @@ import { login } from "../../features/Auth/Auth";
 import React from "react";
 import { decodeJWT } from "../../Helpers/Token";
 import { handleRequestWithToken } from "../../Helpers/Request";
-import { ToastContainer, toast } from 'react-toastify';
+import {  toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 const Login = () => {
     const [password, setPassword] = useState('');
@@ -66,7 +66,6 @@ const Login = () => {
 
     return (
         <div className="w-screen h-screen flex flex-row ">
-            <ToastContainer />
             <ContenedorLogoHorizontal />
 
             <div className='w-1/2 flex flex-col justify-center items-center px-16 py-10'>

@@ -3,7 +3,7 @@ import ToolbarDefault from "../components/ToolbarDefaul";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const NewPassword = () => {
@@ -68,7 +68,6 @@ const NewPassword = () => {
     return (
         <div className='w-screen h-screen flex flex-col'>
             {/* <ToolbarDefault/> */}
-            <ToastContainer />
             <div className="flex-1 flex w-full items-center justify-center relative">
                 <Link to={"/"}>
                     <div className="absolute top-4 left-5 flex flex-row gap-2">

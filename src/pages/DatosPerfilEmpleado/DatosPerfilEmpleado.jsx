@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ToolbarDefault from "../components/ToolbarDefaul";
 import { Link } from "react-router-dom";
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const DatosPerfilEmpleado = () => {
@@ -19,7 +19,6 @@ const DatosPerfilEmpleado = () => {
       };
     return (
         <div className='w-screen flex flex-col h-screen overflow-y-scroll'>
-            <ToastContainer />
             <ToolbarDefault tipe="employee"/>
 
 
