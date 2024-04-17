@@ -10,6 +10,7 @@ import CategoriesLabors from "../pages/Labors/CategoriesLabors";
 import { validationToken } from "../Helpers/Token";
 import Skills from "../pages/Skills/Skills";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
+import UserChats from "../pages/Chats/UserChats";
 const UserLogueado = () => {
     const dispatch = useAppDispatch();
     const [isLogged, setIsLogged] = useState<boolean>(false);
@@ -27,6 +28,7 @@ const UserLogueado = () => {
             <Route path='createjob' element={<CreateJob/>}/>
             <Route path="categories" element= {<CategoriesLabors/>}/>
             <Route path='profile/employee/create/skills' element={<Skills/>}/>
+            <Route path='chats' element={<UserChats/>}/>
         </Routes>
     )
 }
