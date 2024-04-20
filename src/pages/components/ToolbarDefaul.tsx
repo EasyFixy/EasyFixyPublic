@@ -80,7 +80,7 @@ interface User {
 const ToolbarDefault = (props) => {
     const dispatch = useAppDispatch();
     const [user, setUser] = useState<User>();
-
+    const baseUrl = import.meta.env.VITE_BASE_URL;
     const userId = useAppSelector((login) => login.Auth.id)
 
     //console.log(userId)
@@ -94,7 +94,7 @@ const ToolbarDefault = (props) => {
     const handleRequest = () => {
 
         //console.log("llega")
-        fetch('http://localhost:3000/getBasicUserInfo?userId=' + userId)
+        fetch(`${baseUrl}getBasicUserInfo?userId='${userId}`)
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');

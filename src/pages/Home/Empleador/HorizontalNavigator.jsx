@@ -6,7 +6,7 @@ import NavbarEmpleador from "../../components/NavbarEmpleador";
 import { Link } from "react-router-dom";
 import NaigatorMenuElement from "./NavigatorMenuElement";
 import NavigatorDisplayElement from "./NavigatorDisplayElement";
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 //import jwt from 'jsonwebtoken';
 const HorizontalNavigator = (props) => {
@@ -32,7 +32,6 @@ const HorizontalNavigator = (props) => {
 
     return (
         <div className="" style={{ width: '70%' }}>
-            <ToastContainer />
             <div className="w-100">
                 <div className="flex">
                     {props.sections.map((section, index) => (

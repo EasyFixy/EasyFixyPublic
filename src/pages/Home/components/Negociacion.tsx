@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { UserData } from "../../../models/PerfilEmpleado";
 import Comentarios from "../../components/Comentarios";
 import PerfilesLaborales from "../../components/PerfilesLaborales";
+import Chat from "../../components/Chat";
 
 interface queryWorker {
     labors: number[];
@@ -15,7 +16,7 @@ const Negociacion = (props) => {
     const [loading, setLoading] = useState(true);
     const [userId, setUserId] = useState(true);
 
-
+    const baseUrl = import.meta.env.VITE_BASE_URL;
     // PARAMETROS DE LA PETICION 
     const [bestWorkers, setBestWorkest] = useState();
     //const labores = [1,2,3];
@@ -59,7 +60,7 @@ const Negociacion = (props) => {
             userLatitude: latitud,
             userLongitude: longitud
         }
-        fetch('http://localhost:3000/getBestWorkersForLabors', {
+        fetch(`${baseUrl}getBestWorkersForLabors`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -142,7 +143,7 @@ const Negociacion = (props) => {
         const options = {
             method: "GET"
         };
-        let url = new URL("http://localhost:3000/getUserProfile?userId=" + userId);
+        let url = new URL(`${baseUrl}getUserProfile?userId=${userId}`);
         fetch(url, options)
             .then(response => response.text())
             .then(data => {
@@ -207,6 +208,10 @@ const Negociacion = (props) => {
                             {userData.comments.fullComments.map((comentario) => (<Comentarios isLoading={loading} comenData={comentario} textColor="text-white" />))}
                         </>
                     )}
+                </div>
+                <div className="ml-4 mt-2 pr-8 w-1/2 h-auto flex flex-col p-1">
+                    chat
+                    <Chat userId={4} destinatary={2}></Chat>
                 </div>
                 <section className="flex justify-between items-center p-16 w-90 h-auto mt-4 ml-4 px-8 py-4  mr-8">
                     <div className="flex flex-col flex justify-between items-center">

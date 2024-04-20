@@ -4,14 +4,14 @@ import ToolbarDefault from "../components/ToolbarDefaul";
 const RecuperarPassword = () => {
     const [email, setEmail] = useState("");
     const [message, setMessage] = useState("");
-
+    const baseUrl = import.meta.env.VITE_BASE_URL;
     const handleEmailChange = (e) => {
     setEmail(e.target.value);
   };
 
     const handleSendResetEmail = async () => {
         try {
-          const response = await fetch(`http://localhost:3000/sendResetMail?userEmail=${email}`);
+          const response = await fetch(`${baseUrl}sendResetMail?userEmail=${email}`);
           if (response.ok) {
             setMessage("Se ha enviado un correo electrónico con instrucciones para restablecer tu contraseña.");
           } else {

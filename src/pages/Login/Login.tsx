@@ -7,11 +7,12 @@ import { login } from "../../features/Auth/Auth";
 import React from "react";
 import { decodeJWT } from "../../Helpers/Token";
 import { handleRequestWithToken } from "../../Helpers/Request";
-import { ToastContainer, toast } from 'react-toastify';
+import {  toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 const Login = () => {
     const [password, setPassword] = useState('');
     const [username, setUsername] = useState('');
+    const baseUrl = import.meta.env.VITE_BASE_URL;
     const [loginSuccessful, setLoginSuccessful] = useState(false);
     const token = useAppSelector(state => state.Auth.isLogged);
     const dispatch = useAppDispatch();
@@ -23,7 +24,7 @@ const Login = () => {
             password: password
         };
 
-        const url = `http://localhost:3000/userLogin?userEmail=${encodeURIComponent(username)}&userPassword=${encodeURIComponent(password)}`;
+        const url = `${baseUrl}userLogin?userEmail=${encodeURIComponent(username)}&userPassword=${encodeURIComponent(password)}`;
         fetch(url)
             .then(response => {
                 if (!response.ok) {
@@ -65,7 +66,6 @@ const Login = () => {
 
     return (
         <div className="w-screen h-screen flex flex-row ">
-            <ToastContainer />
             <ContenedorLogoHorizontal />
 
             <div className='w-1/2 flex flex-col justify-center items-center px-16 py-10'>
