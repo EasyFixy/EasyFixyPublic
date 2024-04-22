@@ -167,6 +167,7 @@ const Negociacion = (props) => {
         }, 2000);
 
     }, []);
+    console.log('userData ',userData)
 
     return (
         <div className="absolute w-screen h-screen z-10 flex items-center justify-center top-0 left-0 m-auto bg-black bg-opacity-75 overflow-auto">
@@ -210,8 +211,8 @@ const Negociacion = (props) => {
                     )}
                 </div>
                 <div className="ml-4 mt-2 pr-8 w-1/2 h-auto flex flex-col p-1">
-                    chat
-                    <Chat userId={4} destinatary={2}></Chat>
+                chat
+                    <Chat userId={4} destinatary={2} userData ={userData}></Chat>
                 </div>
                 <section className="flex justify-between items-center p-16 w-90 h-auto mt-4 ml-4 px-8 py-4  mr-8">
                     <div className="flex flex-col flex justify-between items-center">

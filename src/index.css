@@ -67,6 +67,17 @@ input:focus {
     transition: color 0.1s; 
   }
   
-  .orange-link:hover {
+.orange-link:hover {
     color: #FD7401; 
-  }
+}
+
+@keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+.blink {
+    color: var(--colorVerde);
+    animation: blink 1s infinite;
+}
