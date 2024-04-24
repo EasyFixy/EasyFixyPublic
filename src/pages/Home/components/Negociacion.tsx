@@ -6,7 +6,7 @@ import Comentarios from "../../components/Comentarios";
 import PerfilesLaborales from "../../components/PerfilesLaborales";
 import Chat from "../../components/Chat";
 import { useAppSelector } from '../../../app/hooks';
-import { log } from "console";
+
 
 interface queryWorker {
     labors: number[];
@@ -45,8 +45,8 @@ const Negociacion = (props) => {
         console.log("La geolocalización no está disponible en este navegador.");
     }
 
-    console.log("los mejores trabajadores: ",bestWorkers);
-    console.log(userId);
+    // console.log("los mejores trabajadores: ",bestWorkers);
+    
     
     
     
@@ -177,7 +177,7 @@ const Negociacion = (props) => {
         }
         
     }
-    console.log("base url: ",baseUrl);
+    
     
     return (
         <div className="absolute w-screen h-screen z-10 flex items-center justify-center top-0 left-0 m-auto bg-black bg-opacity-75 overflow-auto">
@@ -230,7 +230,7 @@ const Negociacion = (props) => {
                 {/* Sección de la derecha, el chat */}
                 <div className="ml-4 mt-2 pr-8 w-1/2 flex flex-col p-1 h-96">
                     chat
-                    <Chat userId={4} destinatary={userId}></Chat>
+                    <Chat userId={userEnPlataforma} destinatary={userId}></Chat>
                 </div>
 
                 </section>

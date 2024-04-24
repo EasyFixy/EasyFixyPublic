@@ -10,8 +10,8 @@ import io from "socket.io-client";
 const Chat = (props) => {
 
     const messagesContainerRef = useRef(null);  // <-- variable para tener el scroll abajo
-    const userId = props.userId
-    const destinatary = props.destinatary
+    //const props.userId = props.props.userId <-- este es el del usuario que esta en plataforma
+    // const destinatary = props.destinatary <-- este es el que cambia, el destinatario
 
     const [socket, setSocket] = useState()
     const [message, setMessage] = useState("")
@@ -20,8 +20,8 @@ const Chat = (props) => {
     const handleSendMessage = () => { //manda mensaje
         //console.log(message, destinatary)
         if (message && message !== "") {
-            socket.emit('chat message', { destinatary: destinatary, msg: message })
-            addMessage({ msg: message, username: userId})
+            socket.emit('chat message', { destinatary: props.destinatary, msg: message })
+            addMessage({ msg: message, username: props.userId})
             setMessage("")
 
         }
@@ -35,7 +35,7 @@ const Chat = (props) => {
     useEffect(() => {
         const socket = io("http://localhost:3000/", {
             auth: {
-                userId: userId
+                userId: props.userId
             }
         });
         socket.on('chat message', (msg) => { // recibe mensaje
@@ -55,16 +55,19 @@ const Chat = (props) => {
         scrollToBottom();
     }, [messages]);
     
-    
+
+    useEffect(() => {
+        setMessages([]);
+    }, [props.destinatary]);
 
     return (
         <>
             <div className="bg-white w-full h-full flex flex-col border rounded-2xl">
                 <ul id="messages" ref={messagesContainerRef} className="flex-1 overflow-auto p-2 ">
                     {messages.map((elemento, index) => (
-                        <span key={index} className={`w-100 flex justify-${elemento.from === userId ? 'end' : 'start'}`}>
+                        <span key={index} className={`w-100 flex justify-${elemento.from === props.userId ? 'end' : 'start'}`}>
                         <li className={`text-white 
-                        ${elemento.from === userId ? 'bg-black' : 'bg-orange-500'}
+                        ${elemento.from === props.userId ? 'bg-black' : 'bg-orange-500'}
                         py-2 px-8 rounded-2xl mb-1 w-auto break-all`} 
                         key={index}>
                         {elemento.msg}</li></span>
