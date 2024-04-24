@@ -104,15 +104,7 @@ const Chat = (props) => {
                         </div>
                     )}
                 </div>
-                <div className="flex flex-col items-center justify-center text-center">
-                    <h1 className="text-white">Puedes aumentar o disminuir el precio de la negociación</h1>
-                    <EstimatePrice estimatePrice={bidPrice} setEstimatePrice={handleBidPrice}/>
-                    {lastBidPrice !== "" && (
-                        <div className="blink">
-                            <p>¡El precio fue cambiado por {lastBidPrice}!</p>
-                        </div>
-                    )}
-                </div>
+                
             </div>
         </>
     )
