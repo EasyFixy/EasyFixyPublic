@@ -1,3 +1,5 @@
+import { Comments } from "./Comments";
+
 export interface UserData {
     mainData: {
         userName: string;
@@ -14,17 +16,7 @@ export interface UserData {
             laborName: string;
         }[];
     }[];
-    comments: {
-        fullComments:{
-            commentCalification: number;
-            commentMessage: string;
-            senderName: string;
-        }[];
-        data: {
-            cantidadTotalComentariosEmployee: number;
-            mediaCalificaciones: number;
-        }[];
-    }[];
+    comments: Comments;
     tempData: {
         userTempDataActive: number;
         userTempDataLastUpdate: string;

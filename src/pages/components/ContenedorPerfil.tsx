@@ -66,9 +66,14 @@ const ContenedorPerfil = ({
         acno=userData.tempData[0].userTempDataLastUpdate.slice(0, 4);
 
     }
-
+    console.log("sig")
+    console.log(userData)
+    console.log(userData && userData.comments && userData.comments.data ? userData.comments.data[0].mediaCalificaciones:"");
+    
+    
+    
     return (
-        <div className={` content-center ${paddingX} py-10 ${width} h-auto flex flex-row`}>
+        <div className={` content-center ${paddingX} pt-10  ${width} h-auto flex flex-row`}>
             <div>{(estadoDialog === true ? <EditarPerfil /> : <></>)}</div>
             <div className="w-1/3 pl-16 pr-16 pb-16"><img src="/icons/icon-user.png" alt="Imagen usuario" className="bg-gray-300 px-2 py-2 w-full aspect-square" /></div>
             <div className="px-16 flex flex-col w-2/3">
@@ -90,16 +95,16 @@ const ContenedorPerfil = ({
                     <section className="flex flex-wrap mt-4">
                         <div className="w-1/3 flex flex-row">
 
-                        {isLoading && userData.comments.length > 0 ? (
+                        {userData && userData.comments && userData.comments.data ? (
                             <>
-                                {userData.comments[0].data.length > 0 ? (
+                                {userData.comments.data.length > 0 ? (
                                     <>
-                                        {Array.from({ length: (((userData.comments[0].data[0].mediaCalificaciones - Math.floor(userData.comments[0].data[0].mediaCalificaciones)) >= 0.5) ? (Math.ceil(userData.comments[0].data[0].mediaCalificaciones)) : (Math.floor(userData.comments[0].data[0].mediaCalificaciones))) }, (_, index) => (
+                                        {Array.from({ length: (((userData.comments.data[0].mediaCalificaciones - Math.floor(userData.comments.data[0].mediaCalificaciones)) >= 0.5) ? (Math.ceil(userData.comments.data[0].mediaCalificaciones)) : (Math.floor(userData.comments.data[0].mediaCalificaciones))) }, (_, index) => (
                                             <img key={index} src={'/icons/star.svg'} alt={`Imagen ${index}`} className="w-1/5 flex-initial px-1" />
                                         ))}
                                         
-                                        {Array.from({ length: 5 - (((userData.comments[0].data[0].mediaCalificaciones - Math.floor(userData.comments[0].data[0].mediaCalificaciones)) >= 0.5) ? (Math.ceil(userData.comments[0].data[0].mediaCalificaciones)) : (Math.floor(userData.comments[0].data[0].mediaCalificaciones))) }, (_, index) => (
-                                            <img key={index} src={`/icons/icon-star${whiteStar ? '-white' : ''}.svg`} alt={`Imagen ${index}`} className="w-1/5 flex-initial px-1" />
+                                        {Array.from({ length: 5 - (((userData.comments.data[0].mediaCalificaciones - Math.floor(userData.comments.data[0].mediaCalificaciones)) >= 0.5) ? (Math.ceil(userData.comments.data[0].mediaCalificaciones)) : (Math.floor(userData.comments.data[0].mediaCalificaciones))) }, (_, index) => (
+                                            <img key={index} src={`/icons/icon-star.svg`} alt={`Imagen ${index}`} className="w-1/5 flex-initial px-1" />
                                         ))}
                                     </>
                                 ) : (
@@ -129,12 +134,12 @@ const ContenedorPerfil = ({
                             <p>Cargando perfil...</p>
                         ) : (
                             <>
-                                {userData && userData.comments && userData.comments.length > 0 ? (
+                                {userData && userData.comments && userData.comments.data.length > 0 ? (
                                     <>
-                                        {userData.comments[0].data.length > 0 ? (
+                                        {userData.comments.data.length > 0 ? (
                                             <>
-                                                {parseFloat(userData.comments[0].data[0].mediaCalificaciones.toString()).toFixed(2)} estrellas <br />
-                                                {userData.comments[0].data[0].cantidadTotalComentariosEmployee} Calificaciones
+                                                {parseFloat(userData.comments.data[0].mediaCalificaciones.toString()).toFixed(2)} estrellas <br />
+                                                {userData.comments.data[0].cantidadTotalComentariosEmployee} Calificaciones
                                             </>
                                         ) : (
                                             <p>0 Calificaciones</p>
