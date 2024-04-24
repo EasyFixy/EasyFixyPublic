@@ -3,12 +3,13 @@ import ContenedorLogoHorizontal from "../../componentes/contenedorLogoVerde/Cont
 import { Link } from "react-router-dom";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import EstimatePrice from "../components/EstimatePrice";
 
 const CreateJob = () => {
     const [title, setTitle] = useState<String>();
     const [dateAtWork, setDateAtWork] = useState<String>();
     const [description, setDescription] = useState<String>();
-    const [estimatePrice, setEtimatePrice] = useState<number>(10000);
+    const [estimatePrice, setEstimatePrice] = useState<number>(10000);
     const [ubication, setUbication] = useState<string>('');
 
     // FUNCION BUSCAR EMPLEADOS
@@ -38,18 +39,6 @@ const CreateJob = () => {
 
     // }
     // Función para aumentar el precio en 5000
-    const aumentarPrecio = () => {
-        setEtimatePrice(prevPrecio => prevPrecio + 5000);
-    };
-
-    // Función para disminuir el precio en 5000
-    const disminuirPrecio = () => {
-        
-        if(estimatePrice- 5000 >= 10000){
-
-            setEtimatePrice(prevPrecio => prevPrecio - 5000);
-        }
-    };
 
     const handleFieldsVerification = (e) => {
         const fechaActual = new Date().toISOString().split("T")[0]; // Obtener la fecha actual en formato ISO (yyyy-mm-dd)
@@ -69,10 +58,6 @@ const CreateJob = () => {
             e.preventDefault(); // Evita que el enlace se abra si no se cumple la condición
             toast.info("no puedes elegir una fecha tan lejana. Por favor, elige una fecha más cercana.");
         }
-    };
-    const handleChange = (event) => {
-        const nuevoPrecio = Number(event.target.value);
-        setEtimatePrice(nuevoPrecio);
     };
     
     return (
@@ -101,25 +86,9 @@ const CreateJob = () => {
                         placeholder="Dirección de trabajo"
                     />
                     <div className="flex flex-row justify-between w-full mb-5 h-10">
-                        <div className="w-2/6 flex flex-row items-center justify-between h-full">
+                        <div className="w-2/6 h-full">
                             
-                            <button className={`w-[10%] ${estimatePrice < 15000 ? 'invisible' : ''}`} onClick={disminuirPrecio}>
-                                <img src="/public/menos.svg" alt="" />
-                            </button>
-                            <input
-                                className="border border-solid border-[#292929] w-[75%] rounded-xl h-full  pl-[3%]"
-                                type="number"
-                                value={estimatePrice}
-                                min={10000}
-                                max={500000}
-                                step={5000}
-                                name="precio"
-                                onChange={handleChange}
-                                id="precio"
-                                placeholder="$ Precio estimado" />
-                            <button className="w-[10%]" onClick={aumentarPrecio}>
-                                <img src="/public/mas.svg" alt="" />
-                            </button>
+                            <EstimatePrice estimatePrice={estimatePrice} setEstimatePrice={setEstimatePrice}/>
                         </div>
                         <input
                             className="border border-solid border-[#292929] w-fit h-full rounded-xl"

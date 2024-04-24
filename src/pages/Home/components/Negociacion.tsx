@@ -167,6 +167,7 @@ const Negociacion = (props) => {
         }, 2000);
 
     }, []);
+    console.log('userData ',userData)
 
 
     function changeUser() {
@@ -229,8 +230,8 @@ const Negociacion = (props) => {
                 
                 {/* Sección de la derecha, el chat */}
                 <div className="ml-4 mt-2 pr-8 w-1/2 flex flex-col p-1 h-96">
-                    chat
-                    <Chat userId={userEnPlataforma} destinatary={userId}></Chat>
+                chat
+                    <Chat userId={userEnPlataforma} destinatary={userId} userData ={userData}></Chat>
                 </div>
 
                 </section>
