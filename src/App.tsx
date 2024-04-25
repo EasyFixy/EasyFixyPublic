@@ -13,6 +13,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import { decodeJWT, validationToken } from './Helpers/Token';
 import { useAppDispatch, useAppSelector } from './app/hooks';
 import { login } from './features/Auth/Auth';
+import UserChats from './pages/Chats/UserChats';
+import RetirarDinero from './pages/Payments/RetirarDinero';
 
 const App = () => {
   const dispatch = useAppDispatch();
@@ -35,7 +37,8 @@ const App = () => {
           <Route path="/policies-privacity" element={<PoliciesPrivacy />} />
           <Route path="/newPassword" element={<NewPassword />} />
           <Route path="/recuperarPassword" element={<RecuperarPassword />} />
-
+          <Route path="/Userchat" element={<UserChats/>} />
+          <Route path="/retirarDinero" element={<RetirarDinero/>} />
           {/* Protege las rutas dentro de '/my' */}
           {tokenIsValid ? (
             <Route path='my/*' element={<UserLogueado />} />
