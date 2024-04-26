@@ -1,6 +1,20 @@
-import React from 'react';
+import { useState} from "react";
+import CalificacionTrabajo from "../components/CalificacionTrabajo";
+
 
 const Modal = ({ isOpen, onClose, jobData, jobType }) => {
+
+  const [isModal2Open, setIsModal2Open] = useState(false);
+
+  const closeModal2 = () => {
+  setIsModal2Open(false);
+  };
+
+  const handleTerminarTrabajoClick = () => {
+    setIsModal2Open(true);
+    onClose(); // Cierra el primer modal
+  };
+
   return (
     <>
       {isOpen && (
@@ -62,7 +76,7 @@ const Modal = ({ isOpen, onClose, jobData, jobType }) => {
                 </div>
                 
                 <div className="absolute bottom-0 right-0 m-4 ">
-                    <button className="color4 hover:bg-orange-700 text-white px-4 py-2 rounded-md mt-2 ml-4">Terminar Trabajo</button> {/* Botón de seleccionar */}
+                    <button onClick={handleTerminarTrabajoClick} className="color4 hover:bg-orange-700 text-white px-4 py-2 rounded-md mt-2 ml-4">Terminar Trabajo</button> {/* Botón de seleccionar */}
                 </div>
               </div>
             </div>
@@ -216,6 +230,7 @@ const Modal = ({ isOpen, onClose, jobData, jobType }) => {
           )}
         </div>
       )}
+       <CalificacionTrabajo isOpen={isModal2Open} onClose={closeModal2} jobData={jobData}  />
     </>
   );
 };
