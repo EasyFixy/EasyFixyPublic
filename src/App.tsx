@@ -38,7 +38,7 @@ const App = () => {
           <Route path="/newPassword" element={<NewPassword />} />
           <Route path="/recuperarPassword" element={<RecuperarPassword />} />
           <Route path="/Userchat" element={<UserChats/>} />
-          <Route path="/retirarDinero" element={<RetirarDinero/>} />
+          
           {/* Protege las rutas dentro de '/my' */}
           {tokenIsValid ? (
             <Route path='my/*' element={<UserLogueado />} />
