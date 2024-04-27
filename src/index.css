@@ -82,3 +82,7 @@ input:focus {
     height: 100%;
     overflow-y: auto; /* Agrega scroll si es necesario */
 }
+
+.orange-arrow img {
+    fill: orange; /* Cambia el color de relleno de la imagen a naranja */
+}
