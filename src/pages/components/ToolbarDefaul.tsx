@@ -94,7 +94,7 @@ const ToolbarDefault = (props) => {
     const handleRequest = () => {
 
         //console.log("llega")
-        fetch(`${baseUrl}getBasicUserInfo?userId='${userId}`)
+        fetch(`${baseUrl}getBasicUserInfo?userId=${userId}`)
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
