@@ -23,10 +23,10 @@ const LandingPage = () =>{
             <div className="w-screen h-screen overflow-y-scroll pt-20">
                 <div className="backgroundLanding w-full pt-[30px] px-[5%] flex flex-col justify-between h-full pb-20 text-white">
 
-                    <h1 className="text-7xl w-1/2 mb-5">
+                    <h1 className="text-[4.5vw] leading-none w-1/2 mb-5">
                         Contrata a los mejores empleados para tus necesidades cotidianas, en línea.
                     </h1>
-                    <ul className="text-3xl mb-5">
+                    <ul className="text-[2vw] mb-5">
                         <li>
                             El mercado independiente más grande de Colombia
                         </li>
@@ -40,13 +40,13 @@ const LandingPage = () =>{
                             Paga solo cuando estés 100% satisfecho
                         </li>
                     </ul>
-                    <div className="flex flex-row text-3xl h-12 gap-14 ">
-                        <button className="mainBackground h-full rounded-full">
+                    <div className="flex flex-row text-[2vw] h-12 gap-14 ">
+                        <Link to={"/login"}className="mainBackground h-full rounded-full">
                             Contrata ahora mismo
-                        </button>
-                        <button className="bg-black h-full rounded-full w-fit px-3">
+                        </Link>
+                        <Link to={"/login"} className="bg-black h-full rounded-full w-fit px-3 text-[2vw]">
                             Gana dinero realizando trabajos
-                        </button>
+                        </Link>
                     </div>
                 </div>
                 <div className="h-10 w-full mainBackground ">
@@ -57,11 +57,11 @@ const LandingPage = () =>{
                     <div className="mainBackground h-[70%] w-1 mr-3">
 
                     </div>
-                    <h1 className="text-7xl w-1/3 font-bold mr-24">Haz el trabajo en nuestras diferentes 
+                    <h1 className="text-[4.5vw] leading-normal w-1/3 font-bold mr-24">Haz el trabajo en nuestras diferentes 
                         <span className="textNaranja"> categorías
                         </span>
                     </h1>
-                    <ul className="text-5xl">
+                    <ul className="text-[3vw]">
                         <li>
                             Electricista
                         </li>
