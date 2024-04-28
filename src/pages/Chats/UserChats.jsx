@@ -54,7 +54,7 @@ function UserChats() {
         <div className='w-screen h-screen flex flex-col'>
             <ToolbarDefault />
             <NavbarEmpleador/>
-            <div className="flex flex-row h-full w-screen">
+            <div className="flex flex-row h-full w-screen" style={{height: 'calc(100% - 4rem)'}}>
                 <div className="w-1/4 border-r border-gray-300 overflow-y-auto">
                     {/* Encabezado y buscador */}
                     <div className="p-4">
