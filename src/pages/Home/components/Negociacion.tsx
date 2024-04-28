@@ -254,6 +254,7 @@ const Negociacion = (props) => {
                     userId={userEnPlataforma}
                     destinatary={userId}
                     userData={userData}
+                    showEstimatePrice= {true}
                   ></Chat>
                 </div>
               </section>

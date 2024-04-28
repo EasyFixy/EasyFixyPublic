@@ -46,6 +46,7 @@ const Chat = (props) => {
     };
 
     useEffect(() => {
+        console.log('perro')
         const socket = io("http://localhost:3000/", {
             auth: {
                 userId: props.userId
@@ -103,15 +104,18 @@ const Chat = (props) => {
                         <img src="/icons/flecha-enviar.svg" alt="" className="w-8 h-8 ml-2"/>
                     </button>
                 </div>
-                <div className="flex flex-col items-center justify-center text-center">
-                    <h1 className="text-white">Puedes aumentar o disminuir el precio de la negociación</h1>
-                    <EstimatePrice estimatePrice={bidPrice} setEstimatePrice={handleBidPrice}/>
-                    {lastBidPrice !== "" && (
-                        <div className="blink">
-                            <p>¡El precio fue cambiado por {lastBidPrice}!</p>
-                        </div>
-                    )}
-                </div>
+                {props.showEstimatePrice &&
+
+                    <div className="flex flex-col items-center justify-center text-center">
+                        <h1 className="text-white">Puedes aumentar o disminuir el precio de la negociación</h1>
+                        <EstimatePrice estimatePrice={bidPrice} setEstimatePrice={handleBidPrice}/>
+                        {lastBidPrice !== "" && (
+                            <div className="blink">
+                                <p>¡El precio fue cambiado por {lastBidPrice}!</p>
+                            </div>
+                        )}
+                    </div>
+                }
                 
             </div>
         </>
