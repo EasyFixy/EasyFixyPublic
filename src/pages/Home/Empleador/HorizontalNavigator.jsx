@@ -13,7 +13,7 @@ const HorizontalNavigator = (props) => {
     const [seccionActiva, setSeccionActiva] = useState(0);
     const [inputValue, setInputValue] = useState('');
     const [datosFiltrados, setDatosFiltrados] = useState(props.sections[seccionActiva].array);
-
+    console.log(props.sections);
     const handleInputChange = (event) => {
         console.log("sellamo")
         setInputValue(event.target.value);
@@ -55,7 +55,7 @@ const HorizontalNavigator = (props) => {
                 <div className="rounded-xl shadow-2xl p-6 m-6">
                     <div className="">
                         {props.sections.map((section, index) => (
-                            <NavigatorDisplayElement seccionActiva={seccionActiva} datosFiltrados={datosFiltrados.length > 0 ? datosFiltrados : section.array} index={index} array={section.array} ></NavigatorDisplayElement>
+                            <NavigatorDisplayElement callBackFunction={props.callBackFunction} seccionActiva={seccionActiva} datosFiltrados={datosFiltrados.length > 0 ? datosFiltrados : section.array} index={index} array={section.array} ></NavigatorDisplayElement>
                         ))}
                     </div>
                 </div>

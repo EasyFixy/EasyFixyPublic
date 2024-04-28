@@ -13,9 +13,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import { decodeJWT, validationToken } from './Helpers/Token';
 import { useAppDispatch, useAppSelector } from './app/hooks';
 import { login } from './features/Auth/Auth';
-import Chat from './pages/components/Chat';
-import UserChats from './pages/Chats/UserChats';
-
 const App = () => {
   const dispatch = useAppDispatch();
   const reduxToken = useAppSelector(state => state.Auth);
@@ -37,7 +34,6 @@ const App = () => {
           <Route path="/policies-privacity" element={<PoliciesPrivacy />} />
           <Route path="/newPassword" element={<NewPassword />} />
           <Route path="/recuperarPassword" element={<RecuperarPassword />} />
-          <Route path="/Userchat" element={<UserChats/>} />
           {/* Protege las rutas dentro de '/my' */}
           {tokenIsValid ? (
             <Route path='my/*' element={<UserLogueado />} />
