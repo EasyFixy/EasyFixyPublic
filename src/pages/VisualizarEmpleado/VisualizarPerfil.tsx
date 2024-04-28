@@ -3,6 +3,7 @@ import ToolbarDefault from "../components/ToolbarDefaul";
 import ContenedorPerfil from "../components/ContenedorPerfil";
 import Comentarios from "../components/Comentarios";
 import PerfilesLaborales from "../components/PerfilesLaborales";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
 
 import { useEffect } from "react";
 import { UserData } from "../../models/PerfilEmpleado";
@@ -16,7 +17,7 @@ const VisualizarPerfil = () => {
     const baseUrl = import.meta.env.VITE_BASE_URL;
 
     // Obtener valores específicos de la URL
-    const userId = searchParams.get('userId');
+    const userId = useAppSelector((login) => login.Auth.id)
     const [userData, setUserData] = useState<UserData>({
         mainData: [
             {

@@ -175,12 +175,19 @@ const ToolbarDefault = (props) => {
                 <button className="flex flex-row items-center mr-8">
                     <img src="/icons/maletin.svg" alt="maletin de trabajo" />
                     <p className="text-white ml-2">Mis trabajos</p>
+                    {checked ? (
+                        <></>
+                    ) : (
+                        <Link to="/my/home/employer"></Link>
+                    )}
                 </button>
-
+                
+                <Link to={'/my/profile/employee'}>
                 <div className="flex flex-row items-center">
-                    <img src={user ? imagen : ""} alt="foto del usuario" />
+                    <img src="/icons/foto_user.svg" alt="foto del usuario" />
                     <p className="text-white ml-4">{user ? user.userName : ""}</p>
                 </div>
+                </Link>
             </div>
 
         </div>
