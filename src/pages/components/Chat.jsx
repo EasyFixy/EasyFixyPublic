@@ -15,7 +15,7 @@ const Chat = (props) => {
     const userData = props.userData;
     const [socket, setSocket] = useState()
     const [message, setMessage] = useState("")
-    const [messages, setMessages] = useState(props.)
+    const [messages, setMessages] = useState([])
     const [bidPrice, setBidPrice] = useState(10000);
     const [lastBidPrice, setLastBidPrice] = useState("");
 
