@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 //import jwt from 'jsonwebtoken';
 const NavigatorDisplayElement = (props) => {
     const [arrayRender, setArrayRender] = useState(props.array);
-
+    console.log("arrreglo a r ",arrayRender);
     const getDateDetails = (fechaISO) => {
         const diasSemana = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
         const meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];

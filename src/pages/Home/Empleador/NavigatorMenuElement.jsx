@@ -17,7 +17,7 @@ const NaigatorMenuElement = (props) => {
     }
 
     return (
-        <div className={props.index == props.seccionActiva ? "m-4 p-4 text-orange-500 underline" : "m-4 p-4"} key={props.index} onClick={handleClick}>
+        <div className={props.index == props.seccionActiva ? "m-4 p-4 text-orange-500 underline cursor-pointer" : "m-4 p-4 cursor-pointer"}  key={props.index} onClick={handleClick}>
             {props.name}
         </div>
     )
