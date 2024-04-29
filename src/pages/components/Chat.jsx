@@ -15,7 +15,7 @@ const Chat = (props) => {
     const userData = props.userData;
     const [socket, setSocket] = useState()
     const [message, setMessage] = useState("")
-    const [messages, setMessages] = useState([])
+    const [messages, setMessages] = useState(props.)
     const [bidPrice, setBidPrice] = useState(10000);
     const [lastBidPrice, setLastBidPrice] = useState("");
 
@@ -73,9 +73,9 @@ const Chat = (props) => {
     }, [messages]);
     
 
-    useEffect(() => {
-        setMessages([]);
-    }, [props.destinatary]);
+    // useEffect(() => {
+    //     setMessages([]);
+    // }, [props.destinatary]);
 
     return (
         <>

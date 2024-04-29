@@ -6,6 +6,7 @@ import { useState } from "react";
 import {useEffect, useRef } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { handleRequestWithToken } from "../../Helpers/Request";
+import NavbarEmpleador from "../components/NavbarEmpleador";
 
 function UserChats() {
     // Array de chats
@@ -86,6 +87,7 @@ function UserChats() {
     return (
         <div className='w-screen h-screen flex flex-col'>
             <ToolbarDefault />
+            <NavbarEmpleador/>
             <div className="flex flex-row h-full w-screen" style={{height: 'calc(100% - 4rem)'}}>
                 <div className="w-1/4 border-r border-gray-300 overflow-y-auto">
                     {/* Encabezado y buscador */}
@@ -101,7 +103,7 @@ function UserChats() {
                                     onClick={() => onClickSelected(chat)}
                                 >
                                     <div className="flex items-center">
-                                        <img src={`ruta-a-la-imagen-${chat.id}`} alt={`Avatar de ${chat.userName}`} className="w-10 h-10 rounded-full mr-2" />
+                                        <img src="/empleadologo.svg" alt={`Avatar de ${chat.userName}`} className="w-10 h-10 rounded-full mr-2" />
                                         <div>
                                             <span className="font-bold text-lg">{chat.userName}</span>
                                             <p className="text-lg">{chat.lastMessageText}</p>
@@ -143,7 +145,7 @@ function UserChats() {
                     {openChat && (
                         <div className="flex flex-col flex-grow">
                             <div className="flex items-center mb-4">
-                                <img src={`ruta-a-la-imagen-${selectedChat.desiredUserId}`} alt={`Avatar de ${selectedChat.userName}`} className="w-16 h-16 rounded-full mr-4" />
+                                <img src="/empleadologo.svg" alt={`Avatar de ${selectedChat.userName}`} className="w-16 h-16 rounded-full mr-4" />
                                 <span className="font-bold text-2xl">{selectedChat.userName}</span>
                             </div>
                             <hr className="border-gray-300 my-2" /> {/* Línea divisoria */}
