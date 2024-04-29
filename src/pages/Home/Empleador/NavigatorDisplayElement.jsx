@@ -33,7 +33,7 @@ const NavigatorDisplayElement = (props) => {
 
     return (
         props.seccionActiva == props.index ? (props.array.length != 0 ? (arrayRender.map((offer, index) => (
-            <div className="mx-auto bg-white rounded-xl shadow-md m-3" key={index} >
+            <div onClick={() => {props.callBackFunction(offer.jobOfferId, offer)}} className="mx-auto bg-white rounded-xl shadow-md m-3" key={index} >
                 <div className="border-t border-b border-gray-200 py-4 px-6 flex justify-between">
                     <div>{offer.jobOfferTittle}</div>
                     <div>{getDateDetails(offer.jobOfferDateAtCreate)}</div>

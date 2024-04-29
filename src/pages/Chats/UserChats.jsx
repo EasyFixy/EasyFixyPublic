@@ -4,6 +4,7 @@ import Chat from "../components/Chat";
 import ToolbarDefault from "../components/ToolbarDefaul";
 import { useState } from "react";
 import {useEffect, useRef } from "react";
+import NavbarEmpleador from "../components/NavbarEmpleador";
 
 function UserChats() {
     // Array de chats
@@ -22,7 +23,7 @@ function UserChats() {
         { id: 8, username: "Usuario 8", lastMessage: "Nada especial, solo descansar" },
         { id: 9, username: "Usuario 9", lastMessage: "¿Y tú?" },
         { id: 10, username: "Usuario 10", lastMessage: "Estoy pensando en salir a caminar" },
-        { id: 11, username: "Usuario 11", lastMessage: "Esteban es puto" },
+        { id: 10, username: "Usuario 11", lastMessage: "Esteban es puto" },
     ];
 
     const selectedChatInfo = selectedChat ? chats.find(chat => chat.id === selectedChat) : null;
@@ -52,6 +53,7 @@ function UserChats() {
     return (
         <div className='w-screen h-screen flex flex-col'>
             <ToolbarDefault />
+            <NavbarEmpleador/>
             <div className="flex flex-row h-full w-screen" style={{height: 'calc(100% - 4rem)'}}>
                 <div className="w-1/4 border-r border-gray-300 overflow-y-auto">
                     {/* Encabezado y buscador */}
@@ -67,7 +69,7 @@ function UserChats() {
                                     onClick={() => setSelectedChat(chat.id)}
                                 >
                                     <div className="flex items-center">
-                                        <img src={`ruta-a-la-imagen-${chat.id}`} alt={`Avatar de ${chat.username}`} className="w-10 h-10 rounded-full mr-2" />
+                                        <img src="/empleadologo.svg" className="w-10 h-10 rounded-full mr-2" />
                                         <div>
                                             <span className="font-bold text-lg">{chat.username}</span>
                                             <p className="text-lg">{chat.lastMessage}</p>
@@ -105,7 +107,7 @@ function UserChats() {
                     {selectedChatInfo && (
                         <div className="flex flex-col flex-grow">
                             <div className="flex items-center mb-4">
-                                <img src={`ruta-a-la-imagen-${selectedChatInfo.id}`} alt={`Avatar de ${selectedChatInfo.username}`} className="w-16 h-16 rounded-full mr-4" />
+                                <img src="/empleadologo.svg" className="w-16 h-16 rounded-full mr-4" />
                                 <span className="font-bold text-2xl">{selectedChatInfo.username}</span>
                             </div>
                             <hr className="border-gray-300 my-2" /> {/* Línea divisoria */}
