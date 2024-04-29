@@ -70,7 +70,7 @@ const NewPassword = () => {
         <div className='w-screen h-screen flex flex-col'>
             <NavbarLandingPage/>
             <div className="flex-1 flex w-full items-center justify-center relative">
-                <Link to={"/"}>
+                <Link to={"/login"}>
                     <div className="absolute top-4 left-5 flex flex-row gap-2">
                         <img src="/public/icons/arrow-circle-left.svg" alt="" />
                         <span>Back</span>
@@ -103,10 +103,12 @@ const NewPassword = () => {
                         />
                     </div>
                     <div className="flex flex-row justify-end px-[5%] py-3 gap-4">
-                        <Link to={"/"} className="flex justify-center items-center w-[22%] h-10 bg-[#585858] rounded-full text-white">
+                        <Link to={"/login"} className="flex justify-center items-center w-[22%] h-10 bg-[#585858] rounded-full text-white">
                             <button className="">Cancelar</button>
                         </Link>
-                        <button className="w-[22%] h-10 mainBackground rounded-full text-white" onClick={resetPassword}>Continuar</button>
+                        <button className="w-[22%] h-10 mainBackground rounded-full text-white" onClick={resetPassword}><Link to={"/login"}>
+                        Continuar
+                        </Link></button>
                     </div>
 
                 </div>
