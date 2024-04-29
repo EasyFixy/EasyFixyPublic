@@ -13,7 +13,6 @@ const LandingPage = () =>{
 
                 </div>
                 <div className="w-4/6 flex flex-row justify-between items-center font-bold text-base">
-                    <Link to={"/"}>Cómo funciona</Link>
                     <Link to={"/"}>¿Quienes somos?</Link>
                     <Link to={"/login"}>Iniciar sesión</Link>
                     <Link to={"/register"}>Registrarse</Link>
