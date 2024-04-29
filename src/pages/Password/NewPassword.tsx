@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { toast } from 'react-toastify';
+import NavbarLandingPage from "../components/NavbarLandingPage";
 import 'react-toastify/dist/ReactToastify.css';
 
 const NewPassword = () => {
@@ -67,7 +68,7 @@ const NewPassword = () => {
 
     return (
         <div className='w-screen h-screen flex flex-col'>
-            {/* <ToolbarDefault/> */}
+            <NavbarLandingPage/>
             <div className="flex-1 flex w-full items-center justify-center relative">
                 <Link to={"/"}>
                     <div className="absolute top-4 left-5 flex flex-row gap-2">

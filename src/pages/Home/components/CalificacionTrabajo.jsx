@@ -1,6 +1,15 @@
-import React from 'react';
+import {React, useState} from 'react';
 
 const CalificacionTrabajo = ({ isOpen, onClose, jobData }) => {
+
+
+    const [comentario, setComentario] = useState(""); // Variable de estado para almacenar el comentario
+
+    const handleComentarioChange = (e) => {
+      setComentario(e.target.value); // Actualiza el valor del comentario cuando cambia el input
+    };
+    console.log(comentario);
+
     return (
       <>
         {isOpen && (
@@ -17,7 +26,7 @@ const CalificacionTrabajo = ({ isOpen, onClose, jobData }) => {
               </div>
               <div className="mb-2 text-center"> {/* Texto "Cuentanos, ¿Cómo fue el trabajo de "Nombre del trabajador" */}
                 <h3 className="text-xl font-bold break-words">
-                  Cuentanos, ¿Cómo fue el trabajo de <span className="text-orange-500 break-words">Nombre del trabajador</span>?
+                  Cuentanos, ¿Cómo te fue con <span className="text-orange-500 break-words">Nombre del trabajador</span>?
                 </h3>
               </div>
               <div className="flex justify-center mb-4"> {/* Estrellas centradas */}
@@ -33,6 +42,8 @@ const CalificacionTrabajo = ({ isOpen, onClose, jobData }) => {
                   type="text"
                   placeholder="Escribe un comentario (Opcional)"
                   className="color3 border border-white px-4 py-2 rounded-md w-full text-white"
+                  value={comentario} // Valor del input se establece en la variable de estado
+                  onChange={handleComentarioChange} // Función para manejar cambios en el input
                 />
               </div>
               <div className="text-center"> {/* Botón de enviar centrado */}

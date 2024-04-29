@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import ToolbarDefault from "../components/ToolbarDefaul";
+import { Link } from "react-router-dom";
+import NavbarLandingPage from "../components/NavbarLandingPage";
 
 const RecuperarPassword = () => {
     const [email, setEmail] = useState("");
@@ -25,12 +26,14 @@ const RecuperarPassword = () => {
 
     return(
         <div className='w-screen h-screen flex flex-col'>
-            <ToolbarDefault/>
-            <div className="flex-1 flex w-full items-center justify-center relative">
+            <NavbarLandingPage/>
+            <div className="mt-[5%] flex-1 flex w-full items-center justify-center relative">
+                <Link to={'/login'}>
                 <div className="absolute top-4 left-5 flex flex-row gap-2">
                     <img src="/public/icons/arrow-circle-left.svg" alt="" />
                     <span>Back</span>
                 </div>
+                </Link>
                 <div className="w-[620px] h-[320px] border rounded-md border-[#666666] flex flex-col">
                     <div className="pl-[5%] w-full py-3">
                         <h1 className="text-3xl"> Recuperación de la cuenta</h1>
