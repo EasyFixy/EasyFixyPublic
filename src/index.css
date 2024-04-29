@@ -71,9 +71,20 @@ input:focus {
     transition: color 0.1s; 
   }
   
-  .orange-link:hover {
-    color: #FD7401; 
-  }
+.orange-link:hover {
+    color: #FD7401; }
+
+
+@keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+.blink {
+    color: var(--colorVerde);
+    animation: blink 1s infinite;
+}
 
   .selected-chat {
     border: 2px solid rgba(253, 116, 1, 0.5); /* Color FD7401 con 50% de transparencia */
