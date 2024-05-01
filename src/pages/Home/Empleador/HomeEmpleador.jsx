@@ -164,8 +164,8 @@ const HomeEmpleador = () => {
     }, []);
 
     return (
-        <div className='w-screen h-screen flex flex-col overflow-y-scroll'>
-            <ToolbarDefault tipe="employer" />
+        <div className='w-screen h-screen flex flex-col'>
+            {/* <ToolbarDefault tipe="employer" /> */}
             <NavbarEmpleador></NavbarEmpleador>
             <div className="flex flex-col justify-center w-full " style={{ padding: 30 + 'px' }}>
                 <h2 className="text-4xl font-bold mt-4">Mis trabajos</h2>

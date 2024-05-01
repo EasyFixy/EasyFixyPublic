@@ -86,7 +86,7 @@ function UserChats() {
 
     return (
         <div className='w-screen h-screen flex flex-col'>
-            <ToolbarDefault />
+            {/* <ToolbarDefault /> */}
             <NavbarEmpleador/>
             <div className="flex flex-row h-full w-screen" style={{height: 'calc(100% - 4rem)'}}>
                 <div className="w-1/4 border-r border-gray-300 overflow-y-auto">

@@ -22,13 +22,13 @@ const NavbarEmpleador = () =>{
     return(
         <div className="w-full h-8 color3 flex justify-between items-center p-4">
             <div className="flex flex-row justify-start items-center">
-                <button className="text-white ml-12">Chats</button>
+                <Link to={"/my/chats"}><button className="text-white ml-12">Chats</button></Link>
                 <Link to={""}><button className="text-white ml-12">Mis trabajos </button></Link>
-                <Link to={""}><button className="text-white ml-12">Mi perfil</button></Link>
+                <Link to={"/my/profile/employee"}><button className="text-white ml-12">Mi perfil</button></Link>
             </div>
             <div className="w-2/4 flex flex-row justify-end items-center">
                 
-                <button className="text-white mr-12">Soporte</button>
+                <a href=" https://wa.me/3208393883"><button className="text-white mr-12">Soporte</button></a>
                 <button className="text-white mr-12" onClick={logOut}>Salir</button>
             </div>
         </div>
