@@ -5,13 +5,15 @@ export interface AuthState {
     token: string;
     id: number| null;
     date: number | null;
+    checked: boolean;
   }
   
   const initialState: AuthState = {
     isLogged: false,
     token: "",
     id: null,
-    date: null
+    date: null,
+    checked: false
   }
 export const authSlice = createSlice({
     name: 'auth',
@@ -29,9 +31,12 @@ export const authSlice = createSlice({
             state.id = null;
             state.date = null;
         },
+        setChecked3: (state, action) => {
+            state.checked = action.payload;
+        },
     },
 })
 // Action creators are generated for each case reducer function
-export const { login, logout } = authSlice.actions
+export const { login, logout, setChecked3 } = authSlice.actions
 
 export default authSlice.reducer;
