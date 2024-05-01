@@ -31,6 +31,10 @@ body {
     background-color: var(--color3);
 }
 
+.color4{
+    background-color: var(--colorNaranja);
+}
+
 
 .textNaranja{
     color: var(--colorNaranja);
@@ -68,8 +72,8 @@ input:focus {
   }
   
 .orange-link:hover {
-    color: #FD7401; 
-}
+    color: #FD7401; }
+
 
 @keyframes blink {
     0% { opacity: 1; }
@@ -81,3 +85,43 @@ input:focus {
     color: var(--colorVerde);
     animation: blink 1s infinite;
 }
+
+  .selected-chat {
+    border: 2px solid rgba(253, 116, 1, 0.5); /* Color FD7401 con 50% de transparencia */
+    border-radius: 0.5rem; /* Ajusta según sea necesario */
+}
+
+.chat-container {
+    width: 100%;
+    max-width: 600px; /* Establece un tamaño máximo para el chat */
+    height: 100%;
+    overflow-y: auto; /* Agrega scroll si es necesario */
+}
+
+.orange-arrow img {
+    fill: orange; /* Cambia el color de relleno de la imagen a naranja */
+}
+
+.circle {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin: 20px; /* Incrementé el valor para separar más los círculos */
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+  
+  .pending {
+    background-color: yellow;
+  }
+  
+  .completed {
+    background-color: green;
+  }
+  
+  .offered {
+    background-color: blue;
+  }
+

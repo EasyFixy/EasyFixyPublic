@@ -1,5 +1,5 @@
-import React from "react";
-import { useState, useRef, useEffect } from "react";
+
+import React, { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useAppDispatch } from "../../app/hooks";
 import { removeToken } from "../../Helpers/Token"
@@ -20,15 +20,13 @@ const Chat = (props) => {
     const [lastBidPrice, setLastBidPrice] = useState("");
 
 
-    const handleSendMessage = () => { //manda mensaje
-        //console.log(message, destinatary)
+    const handleSendMessage = () => {
         if (message && message !== "") {
-            socket.emit('chat message', { destinatary: props.destinatary, msg: message })
-            addMessage({ msg: message, username: props.userId})
-            setMessage("")
-
+            socket.emit('chat message', { destinatary: props.destinatary, msg: message });
+            addMessage({ msg: message, username: props.userId });
+            setMessage("");
         }
-    }
+    };
     const handleBidPrice = (newValue) => {
         setBidPrice(newValue);
         setLastBidPrice('')
@@ -37,11 +35,18 @@ const Chat = (props) => {
         }
     };
     const addMessage = (msg) => {
-        console.log(msg.msg, msg.username, messages)
-        setMessages((state) => [...state, { msg: msg.msg, from: msg.username }])
-    }
+        setMessages((state) => [...state, { msg: msg.msg, from: msg.username }]);
+    };
+
+    const handleKeyDown = (event) => {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            handleSendMessage();
+        }
+    };
 
     useEffect(() => {
+        console.log('perro')
         const socket = io("http://localhost:3000/", {
             auth: {
                 userId: props.userId
@@ -63,27 +68,28 @@ const Chat = (props) => {
             }
         };
 
-        
-        setSocket(socket)
+        setSocket(socket);
         scrollToBottom();
     }, [messages]);
     
 
-    useEffect(() => {
-        setMessages([]);
-    }, [props.destinatary]);
+    // useEffect(() => {
+    //     setMessages([]);
+    // }, [props.destinatary]);
 
     return (
         <>
             <div className="bg-white w-full h-full flex flex-col border rounded-2xl">
-                <ul id="messages" ref={messagesContainerRef} className="flex-1 overflow-auto p-2 ">
+                <ul id="messages" ref={messagesContainerRef} className="flex-1 overflow-auto p-2" style={{ maxHeight: 'calc(100% - 50px)' }}>
                     {messages.map((elemento, index) => (
                         <span key={index} className={`w-100 flex justify-${elemento.from === props.userId ? 'end' : 'start'}`}>
-                        <li className={`text-white 
-                        ${elemento.from === props.userId ? 'bg-black' : 'bg-orange-500'}
-                        py-2 px-8 rounded-2xl mb-1 w-auto break-all`} 
-                        key={index}>
-                        {elemento.msg}</li></span>
+                            <li className={`text-white 
+                                ${elemento.from === props.userId ? 'bg-black' : 'bg-orange-500'}
+                                py-2 px-8 rounded-2xl mb-1 w-auto break-all`} 
+                                key={index}>
+                                {elemento.msg}
+                            </li>
+                        </span>
                     ))}
                 </ul>
                 <div id="form" className="flex-none flex justify-between items-center p-2 px-4 mb-2">
@@ -92,18 +98,24 @@ const Chat = (props) => {
                         type="text"
                         value={message}
                         onChange={(event) => { setMessage(event.target.value) }}
+                        onKeyDown={handleKeyDown}
                     />
-                    <button className="" onClick={handleSendMessage}><img src="/icons/flecha-enviar.svg" alt="" className="w-8 h-8 ml-2"/></button>
+                    <button className="" onClick={handleSendMessage}>
+                        <img src="/icons/flecha-enviar.svg" alt="" className="w-8 h-8 ml-2"/>
+                    </button>
                 </div>
-                <div className="flex flex-col items-center justify-center text-center">
-                    <h1 className="text-white">Puedes aumentar o disminuir el precio de la negociación</h1>
-                    <EstimatePrice estimatePrice={bidPrice} setEstimatePrice={handleBidPrice}/>
-                    {lastBidPrice !== "" && (
-                        <div className="blink">
-                            <p>¡El precio fue cambiado por {lastBidPrice}!</p>
-                        </div>
-                    )}
-                </div>
+                {props.showEstimatePrice &&
+
+                    <div className="flex flex-col items-center justify-center text-center">
+                        <h1 className="text-white">Puedes aumentar o disminuir el precio de la negociación</h1>
+                        <EstimatePrice estimatePrice={bidPrice} setEstimatePrice={handleBidPrice}/>
+                        {lastBidPrice !== "" && (
+                            <div className="blink">
+                                <p>¡El precio fue cambiado por {lastBidPrice}!</p>
+                            </div>
+                        )}
+                    </div>
+                }
                 
             </div>
         </>

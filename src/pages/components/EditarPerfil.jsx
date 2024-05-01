@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { handleRequestWithToken } from "../../Helpers/Request";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
 
 const EditarPerfil = () =>{
 
@@ -10,18 +11,21 @@ const EditarPerfil = () =>{
     const [cambios, setCambios] = useState(false);
     const baseUrl = import.meta.env.VITE_BASE_URL;
 
+    const token = useAppSelector(state => state.Auth.token);
+
     const editUserData = (e) => {
         e.preventDefault();
-        handleRequestWithToken(request)
+        handleRequestWithToken(request());
 
     }
     const request = () => {
         const data = {
             prefijo: prefijo,
             nacionalidad: nacionalidad,
-            telefono: telefono
+            telefono: telefono,
+            token: token
         };
-        const url = `${baseUrl}editUserData?prefijo=${encodeURIComponent(prefijo)}&nacionalidad=${encodeURIComponent(nacionalidad)}&telefono=${encodeURIComponent(telefono)}`;
+        const url = `${baseUrl}modifyUserInfo?token=${encodeURIComponent(token)}&user_prefix_national=${encodeURIComponent(prefijo)}&user_nationality=${encodeURIComponent(nacionalidad)}&phone_number=${encodeURIComponent(telefono)}`;
         fetch(url)
             .then(response => {
                 if (!response.ok) {
@@ -34,6 +38,7 @@ const EditarPerfil = () =>{
                 if (result.token) {
                     localStorage.setItem('token', result.token)
                     setCambios(true);
+                    window.location.reload();
                 } else {
                     setCambios(false);
                 }
