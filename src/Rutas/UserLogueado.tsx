@@ -12,6 +12,8 @@ import Skills from "../pages/Skills/Skills";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import UserChats from "../pages/Chats/UserChats";
 import RetirarDinero from '../pages/Payments/RetirarDinero';
+import DescripcionCompra from "../pages/Payments/DescripcionCompra";
+
 const UserLogueado = () => {
     const dispatch = useAppDispatch();
     const [isLogged, setIsLogged] = useState<boolean>(false);
@@ -31,6 +33,7 @@ const UserLogueado = () => {
             <Route path='profile/employee/create/skills' element={<Skills/>}/>
             <Route path='chats' element={<UserChats/>}/>
             <Route path="/retirarDinero" element={<RetirarDinero/>} />
+            <Route path="/buyDescription" element={<DescripcionCompra/>} />
         </Routes>
     )
 }
