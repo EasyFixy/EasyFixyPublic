@@ -101,7 +101,7 @@ const VisualizarPerfil = () => {
     return (
         <div className='w-screen h-screen flex flex-col overflow-y-scroll overflow-x-hidden'>
 
-            {/* <ToolbarDefault /> */}
+            {/* <ToolbarDefault/> */}
 
             <ContenedorPerfil estado={isMyAccount} isLoading={loading} userData={userData} />
 
@@ -137,7 +137,7 @@ const VisualizarPerfil = () => {
                             ))}
                         </div>
                     ) : (
-                        <p>Cargando comentarios...</p>
+                        <p>No hay calificaciones por mostrar...</p>
                     )}
                     </div>
                 </div>
@@ -146,7 +146,7 @@ const VisualizarPerfil = () => {
                     <h1 className="ml-8 pl-8 font-bold text-3xl text-orange-400 ">Perfiles laborales del empleado</h1>
                     <ul className="w-full ml-16 pl-2 mt-4 border-2 rounded-3xl border-grey-500 p-1">
                         {loading && userData && (!userData.comments || userData.comments.length === 0) ? (
-                            <p>Cargando comentarios...</p>
+                            <p>No hay perfiles por mostrar...</p>
                         ) : (
                             <>
                                 {userData && userData.resumes && userData.resumes.map((resume,index) => (<PerfilesLaborales key={index} isLoading={loading} laboresData={resume} />))}

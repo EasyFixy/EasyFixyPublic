@@ -64,7 +64,7 @@ const Skills = () => {
 
     return(
         <div className="w-screen h-screen flex flex-col">
-            <ToolbarDefault tipe="employee"/>
+            {/* <ToolbarDefault tipe="employee"/> */}
             <div className="flex flex-1 flex-col px-[7%] pt-[7%]">
                 <h1 className="font-bold text-3xl">
                 Cuentanos cuales son tus habilidades

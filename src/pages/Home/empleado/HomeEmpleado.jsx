@@ -8,7 +8,7 @@ const HomeEmpleado = () => {
     return (
         <div className="w-screen h-screen flex flex-col">
 
-            <ToolbarDefault tipe="employee"/>
+            {/* <ToolbarDefault tipe="employee"/> */}
             <NavbarEmpleado/>
             
             <div className="w-screen flex mt-8">

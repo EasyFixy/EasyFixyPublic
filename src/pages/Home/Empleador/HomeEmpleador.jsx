@@ -62,6 +62,8 @@ const HomeEmpleador = () => {
             array: jobOffertedOffers
         },
     ]
+    const token = localStorage.getItem('token');
+    console.log("el token es: ",token);
 
     function decodeJWT() {
         const token = localStorage.getItem('token');
@@ -78,7 +80,7 @@ const HomeEmpleador = () => {
 
     const fetchPendingOffers = () => {
         const token = decodeJWT()
-        console.log(token)
+        console.log("el token es",token)
         if (token) {
             fetch(`${baseUrl}getJobOffertedOffersByEmployer?token=${localStorage.getItem('token')}`)
                 .then(response => {
@@ -164,8 +166,8 @@ const HomeEmpleador = () => {
     }, []);
 
     return (
-        <div className='w-screen h-screen flex flex-col overflow-y-scroll'>
-            <ToolbarDefault tipe="employer" />
+        <div className='w-screen h-screen flex flex-col overflow-y-auto'>
+            {/* <ToolbarDefault tipe="employer" /> */}
             <NavbarEmpleador></NavbarEmpleador>
             <div className="flex flex-col justify-center w-full " style={{ padding: 30 + 'px' }}>
                 <h2 className="text-4xl font-bold mt-4">Mis trabajos</h2>
