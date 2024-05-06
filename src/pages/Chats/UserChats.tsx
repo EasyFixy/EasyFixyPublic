@@ -8,11 +8,12 @@ import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { handleRequestWithToken } from "../../Helpers/Request";
 import NavbarEmpleador from "../components/NavbarEmpleador";
 
-function UserChats() {
+const UserChats = () => {
     // Array de chats
     const [selectedChat, setSelectedChat] = useState<Record<string, string>>({});
     const [chats, setChats] = useState<Record<string, string>[]>([]);
     const [openChat, setOpenChat] = useState<boolean>(false);
+    const [messages, setMessages] = useState(null);
     const [showPopover, setShowPopover] = useState(false);
     const baseUrl = import.meta.env.VITE_BASE_URL;
     const userEnPlataforma = useAppSelector((state) => state.Auth.id);
@@ -21,10 +22,6 @@ function UserChats() {
     const buttonRef = useRef<HTMLDivElement>(null);
 
     const handleDeleteChat = () => {
-        // Lógica para borrar el chat seleccionado
-        console.log("Chat borrado");
-        // Aquí deberías implementar la lógica real para borrar el chat
-        // por ejemplo, haciendo una llamada a la API
         setShowPopover(false); // Cerrar la ventana después de borrar el chat
     };
 
@@ -53,10 +50,12 @@ function UserChats() {
             return response.json();
         })
         .then(data => {
-            setSelectedChat(prevSelectedChat => ({
-                ...prevSelectedChat,
-                messages: data.data // Suponiendo que data.data contiene los mensajes
+            const mappedMessages = data.data.map(item => ({
+                msg: item.messageText,
+                from: item.userId
             }));
+            setMessages(mappedMessages);
+            setOpenChat(true);
         })
         .catch(error => {
             console.error('Error:', error);
@@ -64,9 +63,29 @@ function UserChats() {
         });
     }
     const onClickSelected = (chat) =>{
+        console.log('onClickSelected');
         setSelectedChat(chat);
         handleRequestWithToken(dispatch,() => handleRequestMessagesByConversation(chat.desiredUserId))
-        setOpenChat(true);
+        
+    }
+    const setLastMessage = (msg) => {
+        console.log(msg);
+        console.log(chats);
+        const chatIndex = chats.findIndex(chat => chat.desiredUserId === selectedChat.desiredUserId);
+        if (chatIndex !== -1) {
+            // Actualiza el estado de los chats
+            setChats(prevState => {
+                const updatedChats = [...prevState];
+                // Actualiza el atributo lastMessageText del chat encontrado
+                updatedChats[chatIndex] = {
+                    ...updatedChats[chatIndex],
+                    lastMessageText: msg.msg,
+                    lastMessageSenderId: msg.username
+                };
+                return updatedChats;
+            });
+        }
+        
     }
     useEffect(() => {
         handleRequestWithToken(dispatch, handleRequestConversations)
@@ -75,14 +94,12 @@ function UserChats() {
                 setShowPopover(false);
             }
         };
-
         document.addEventListener("click", handleClickOutside);
 
         return () => {
             document.removeEventListener("click", handleClickOutside);
         };
     }, []);
-    
 
     return (
         <div className='w-screen h-screen flex flex-col'>
@@ -106,35 +123,14 @@ function UserChats() {
                                         <img src="/empleadologo.svg" alt={`Avatar de ${chat.userName}`} className="w-10 h-10 rounded-full mr-2" />
                                         <div>
                                             <span className="font-bold text-lg">{chat.userName}</span>
-                                            <p className="text-lg">{chat.lastMessageText}</p>
+                                            <p className="text-lg">
+                                                <span>{ userEnPlataforma !== null && parseInt(chat.lastMessageSenderId,10) == userEnPlataforma ? 'Tú: ' : ''}</span>
+                                                 {chat.lastMessageText}
+                                                 </p>
                                             <p className="text-[10px]">{chat.lastMessageDate.split('T')[0]}</p>
                                         </div>
                                     </div>
-                                    {selectedChat.desiredUserId === chat.desiredUserId && (
-                                        <div className="flex items-center" ref={buttonRef}>
-                                            <button 
-                                                className="rounded-full bg-gray-400 h-8 w-8 flex justify-center items-center mr-2"
-                                                onClick={() => setShowPopover(!showPopover)}
-                                            >
-                                                <span className="bg-white w-2 h-2 rounded-full"></span>
-                                                <span className="bg-white w-2 h-2 rounded-full mx-1"></span>
-                                                <span className="bg-white w-2 h-2 rounded-full"></span>
-                                            </button>
-                                            {showPopover && (
-                                                <div className="absolute mt-2 w-48 bg-white border rounded-lg overflow-hidden shadow-xl" style={{ 
-                                                    top: buttonRef?.current ? buttonRef.current.offsetTop + buttonRef.current.offsetHeight : 0,
-                                                    left: buttonRef?.current ? buttonRef.current.offsetLeft - 160 : 0
-                                                }}>
-                                                <button 
-                                                    className="w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                                                    onClick={handleDeleteChat}
-                                                >
-                                                    Borrar chat
-                                                </button>
-                                            </div>
-                                            )}
-                                        </div>
-                                    )}
+                                    
                                 </div>
                             ))}
                         </div>
@@ -151,8 +147,10 @@ function UserChats() {
                             <hr className="border-gray-300 my-2" /> {/* Línea divisoria */}
                             {/* Espacio entre la línea divisoria y el componente de chat */}
                             <div className="flex-grow">
-                                {/* Aquí va la implementación del chat abierto */}
-                                <Chat userId={userEnPlataforma} destinatary={selectedChat.desiredUserId} showEstimatePrice={false} />
+                                
+                                {messages !== null && (
+                                    <Chat userId={userEnPlataforma} destinatary={selectedChat.desiredUserId} showEstimatePrice={false} messages={messages} setLastMessage={setLastMessage}/>
+                                )}
                             </div>
                         </div>
                     )}

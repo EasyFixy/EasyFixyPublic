@@ -10,12 +10,10 @@ import EstimatePrice from "./EstimatePrice";
 const Chat = (props) => {
 
     const messagesContainerRef = useRef(null);  // <-- variable para tener el scroll abajo
-    //const props.userId = props.props.userId <-- este es el del usuario que esta en plataforma
-    // const destinatary = props.destinatary <-- este es el que cambia, el destinatario
     const userData = props.userData;
     const [socket, setSocket] = useState()
     const [message, setMessage] = useState("")
-    const [messages, setMessages] = useState(props.)
+    const [messages, setMessages] = useState(props.messages ? props.messages : []);
     const [bidPrice, setBidPrice] = useState(10000);
     const [lastBidPrice, setLastBidPrice] = useState("");
 
@@ -26,6 +24,7 @@ const Chat = (props) => {
             addMessage({ msg: message, username: props.userId });
             setMessage("");
         }
+        
     };
     const handleBidPrice = (newValue) => {
         setBidPrice(newValue);
@@ -34,8 +33,9 @@ const Chat = (props) => {
             socket.emit('bid price', { destinatary: destinatary, price: newValue });
         }
     };
-    const addMessage = (msg) => {
+    const addMessage = (msg, ) => {
         setMessages((state) => [...state, { msg: msg.msg, from: msg.username }]);
+        props.setLastMessage && props.setLastMessage(msg);
     };
 
     const handleKeyDown = (event) => {
@@ -46,14 +46,12 @@ const Chat = (props) => {
     };
 
     useEffect(() => {
-        console.log('perro')
         const socket = io("http://localhost:3000/", {
             auth: {
                 userId: props.userId
             }
         });
-        socket.on('chat message', (msg) => { // recibe mensaje
-            console.log(msg)
+        socket.on('chat message', (msg) => { 
             addMessage(msg)
         });
         socket.on('bid price', (data) => {
@@ -72,10 +70,9 @@ const Chat = (props) => {
         scrollToBottom();
     }, [messages]);
     
-
-    // useEffect(() => {
-    //     setMessages([]);
-    // }, [props.destinatary]);
+    useEffect(() => {
+        setMessages(props.messages ? props.messages : []);
+    }, [props.messages]);
 
     return (
         <>
