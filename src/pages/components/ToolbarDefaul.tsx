@@ -94,7 +94,7 @@ const ToolbarDefault = (props) => {
     const handleRequest = () => {
 
         //console.log("llega")
-        fetch(`${baseUrl}getBasicUserInfo?userId='${userId}`)
+        fetch(`${baseUrl}getBasicUserInfo?userId=${userId}`)
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
@@ -172,15 +172,21 @@ const ToolbarDefault = (props) => {
 
 
             <div className="w-2/4 flex flex-row justify-end items-center">
-                <button className="flex flex-row items-center mr-8">
+                <div className="flex flex-row items-center mr-8">
                     <img src="/icons/maletin.svg" alt="maletin de trabajo" />
-                    <p className="text-white ml-2">Mis trabajos</p>
-                </button>
-
+                    {checked ? (
+                        <Link to="/my/home/employer"><p className="text-white ml-2">Mis trabajos</p></Link>
+                    ) : (
+                        <Link to="/my/home/employee"><p className="text-white ml-2">Mis trabajos</p></Link>
+                    )}
+                </div>
+                
+                <Link to={'/my/profile/employee'}>
                 <div className="flex flex-row items-center">
-                    <img src={user ? imagen : ""} alt="foto del usuario" />
+                    <img src="/icons/foto_user.svg" alt="foto del usuario" />
                     <p className="text-white ml-4">{user ? user.userName : ""}</p>
                 </div>
+                </Link>
             </div>
 
         </div>

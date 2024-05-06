@@ -31,6 +31,10 @@ body {
     background-color: var(--color3);
 }
 
+.color4{
+    background-color: var(--colorNaranja);
+}
+
 
 .textNaranja{
     color: var(--colorNaranja);
@@ -93,3 +97,31 @@ input:focus {
     height: 100%;
     overflow-y: auto; /* Agrega scroll si es necesario */
 }
+
+.orange-arrow img {
+    fill: orange; /* Cambia el color de relleno de la imagen a naranja */
+}
+
+.circle {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin: 20px; /* Incrementé el valor para separar más los círculos */
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+  
+  .pending {
+    background-color: yellow;
+  }
+  
+  .completed {
+    background-color: green;
+  }
+  
+  .offered {
+    background-color: blue;
+  }
+

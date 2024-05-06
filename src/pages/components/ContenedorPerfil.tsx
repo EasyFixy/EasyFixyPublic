@@ -67,8 +67,8 @@ const ContenedorPerfil = ({
 
     }
     console.log("sig")
-    console.log(userData)
-    console.log(userData && userData.comments && userData.comments.data ? userData.comments.data[0].mediaCalificaciones:"");
+    //console.log(userData)
+    //console.log(userData && userData.comments && userData.comments.data ? userData.comments.data[0].mediaCalificaciones:"");
     
     
     

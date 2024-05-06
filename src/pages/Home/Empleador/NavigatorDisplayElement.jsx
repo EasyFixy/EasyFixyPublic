@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 //import jwt from 'jsonwebtoken';
 const NavigatorDisplayElement = (props) => {
     const [arrayRender, setArrayRender] = useState(props.array);
-
+    console.log("arrreglo a r ",arrayRender);
     const getDateDetails = (fechaISO) => {
         const diasSemana = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
         const meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
@@ -33,7 +33,7 @@ const NavigatorDisplayElement = (props) => {
 
     return (
         props.seccionActiva == props.index ? (props.array.length != 0 ? (arrayRender.map((offer, index) => (
-            <div className="mx-auto bg-white rounded-xl shadow-md m-3" key={index} >
+            <div onClick={() => {props.callBackFunction(offer.jobOfferId, offer)}} className="mx-auto bg-white rounded-xl shadow-md m-3" key={index} >
                 <div className="border-t border-b border-gray-200 py-4 px-6 flex justify-between">
                     <div>{offer.jobOfferTittle}</div>
                     <div>{getDateDetails(offer.jobOfferDateAtCreate)}</div>

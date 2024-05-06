@@ -41,8 +41,17 @@ const CreateJob = () => {
     // Función para aumentar el precio en 5000
 
     const handleFieldsVerification = (e) => {
-        const fechaActual = new Date().toISOString().split("T")[0]; // Obtener la fecha actual en formato ISO (yyyy-mm-dd)
+        // Obtener la fecha y hora actual
+        const now = new Date();
+        
+        // Ajustar la fecha y hora actual según la zona horaria local
+        const offset = now.getTimezoneOffset(); // Obtener el desplazamiento de zona horaria en minutos
+        const localNow = new Date(now.getTime() - (offset * 60000));
+        const fechaActual = localNow.toISOString().slice(0, 16);
+    // Obtener la fecha actual en formato ISO (yyyy-mm-dd)
         const fechaUnAnioDespues = new Date();
+        console.log('fechaActual ',fechaActual);
+        console.log(dateAtWork);
         fechaUnAnioDespues.setFullYear(fechaUnAnioDespues.getFullYear() + 1)
         if (!(title && description && dateAtWork && ubication)) {
 

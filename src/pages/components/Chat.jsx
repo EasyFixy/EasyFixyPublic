@@ -81,7 +81,7 @@ const Chat = (props) => {
                     {messages.map((elemento, index) => (
                         <span key={index} className={`w-100 flex justify-${elemento.from === props.userId ? 'end' : 'start'}`}>
                             <li className={`text-white 
-                                ${elemento.from === props.userId ? 'bg-black' : 'bg-orange-500'}
+                                ${elemento.from === props.userId ? 'bg-orange-500' : 'bg-black'}
                                 py-2 px-8 rounded-2xl mb-1 w-auto break-all`} 
                                 key={index}>
                                 {elemento.msg}

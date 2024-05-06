@@ -1,10 +1,12 @@
 import React from "react";
 import ToolbarDefault from "../components/ToolbarDefaul";
 import { Link } from "react-router-dom";
+import NavbarLandingPage from "../components/NavbarLandingPage";
+
 const PoliciesPrivacy = () =>{
     return(<div className='w-screen h-screen flex flex-col'>
-    <ToolbarDefault/>
-    <div className="flex-1 flex flex-row w-full overflow-y-scroll">
+    <NavbarLandingPage/>
+    <div className="mt-[5%] flex-1 flex flex-row w-full overflow-y-scroll">
             <div className="w-4/6 flex flex-col px-[7%] pt-7 text-[#585858] text-base">
                 <p className="text-[15px]">EasyFixy, inc.</p>
                 <h1 className="text-black text-2xl font-bold">Política de Tratamiento de Datos Personales de EasyFixy (Política de Privacidad)</h1>

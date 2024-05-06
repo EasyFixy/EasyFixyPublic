@@ -5,22 +5,20 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const DatosPerfilEmpleado = () => {
-
-    const [title, setTitle] = useState();
-    const [experience, setExperience] = useState();
-    const [description, setDescription] = useState();
+    const [title, setTitle] = useState("");
+    const [experience, setExperience] = useState("");
+    const [description, setDescription] = useState("");
 
     const handleFieldsVerification = (e) => {
         if (!(title && experience && description)) {
-
-          e.preventDefault(); // Evita que el enlace se abra si no se cumple la condición
-          toast.warn("Complete todos los datos");
+            e.preventDefault();
+            toast.warn("Complete todos los datos");
         }
-      };
+    };
+
     return (
         <div className='w-screen flex flex-col h-screen overflow-y-scroll'>
-            <ToolbarDefault tipe="employee"/>
-
+            {/* <ToolbarDefault tipe="employee"/> */}
 
             <div className="flex flex-col content-center px-64 py-10">
                 <div className="w-70 h-70">
@@ -38,7 +36,6 @@ const DatosPerfilEmpleado = () => {
                     placeholder="p.ej Arreglo electrodomésticos"
                     type="text"
                 />
-
                 <div className="mt-8">
                     <h1 className="text-xl mt-4 font-bold">Tiempo de experiencia (años)</h1>
                 </div>
@@ -51,19 +48,16 @@ const DatosPerfilEmpleado = () => {
                 <div className="mt-8">
                     <h1 className="text-xl mt-4 font-bold">Descríbete</h1>
                 </div>
-                <input
-                    className="mt-4 w-full h-20 border border-solid border-[#666666] text-[#666666] pl-4 relative rounded-3xl"
+                <textarea
+                    className="mt-4 w-full h-40 border border-solid border-[#666666] text-[#666666] pl-4 pt-4 pr-4 pb-2 relative rounded-3xl"
                     onChange={(event) => { setDescription(event.target.value) }}
                     placeholder="Describe tus habilidades, fortalezas y experiencias. Proporciona más detalles sobre los servicios que ofreces, las cosas en las que estás interesado y lo que te gusta hacer."
-                    type="text"
+                    style={{ resize: "vertical" }} // Permite al usuario redimensionar verticalmente
                 />
                 <div className="flex justify-center items-center">
-                    {/*<button className="w-auto mt-10 mr-80 py-0 color3 h-14 text-white px-4 rounded-full border border-black border-solid">Regresar</button>*/}
-                    {/* <button className="w-auto mt-10 mainBackground h-14 text-white px-4 py-0 rounded-full border border-black border-solid">Siguiente</button> */}
-                    <Link to={ '/my/categories?tipe=createResume&title='+title+'&experience='+experience+'d&description='+description} onClick={handleFieldsVerification} className="pt-4 w-auto mt-10 mainBackground h-14 text-white px-4 py-0 rounded-full border border-black border-solid">Siguiente</Link>
+                    <Link to={ `/my/categories?tipe=createResume&title=${title}&experience=${experience}&description=${description}`} onClick={handleFieldsVerification} className="pt-4 w-auto mt-10 mainBackground h-14 text-white px-4 py-0 rounded-full border border-black border-solid">Siguiente</Link>
                 </div>
             </div>
-
         </div>
     );
 }
