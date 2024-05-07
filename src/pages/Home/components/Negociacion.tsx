@@ -6,6 +6,7 @@ import Comentarios from "../../components/Comentarios";
 import PerfilesLaborales from "../../components/PerfilesLaborales";
 import Chat from "../../components/Chat";
 import { useAppSelector } from "../../../app/hooks";
+import PujarPrecio from "./PujarPrecio";
 
 interface queryWorker {
   labors: number[];
@@ -20,7 +21,6 @@ interface BestWorkers {
 
 const Negociacion = (props) => {
   const userEnPlataforma = useAppSelector((state) => state.Auth.id);
-  console.log("el usuario en plataforma es: ", userEnPlataforma);
 
   const [loading, setLoading] = useState(true);
   const [userId, setUserId] = useState(0);
@@ -37,11 +37,7 @@ const Negociacion = (props) => {
     navigator.geolocation.getCurrentPosition(function (position) {
       longitud = position.coords.longitude;
     });
-  } else {
-    console.log("La geolocalización no está disponible en este navegador.");
-  }
-
-  // console.log("los mejores trabajadores: ",bestWorkers);
+  } 
 
   // Peticion al back para obtener los mejores trabajadores
   function getBestWorkersForLabors() {
@@ -64,7 +60,6 @@ const Negociacion = (props) => {
         return response.json();
       })
       .then((data) => {
-        console.log("info w", data);
         setBestWorkest(data.data);
         setUserId(data.data[0].userId);
         getInfoPerfil(data.data[0].userId);
@@ -76,6 +71,7 @@ const Negociacion = (props) => {
   }
 
   const [userData, setUserData] = useState<UserData>({
+    userId: '',
     mainData: [
       {
         userName: "",
@@ -135,7 +131,6 @@ const Negociacion = (props) => {
       .then((response) => response.text())
       .then((data) => {
         const json = JSON.parse(data);
-        console.log("resultado getinfo", json);
         setUserData(json.data);
       })
       .catch((error) => {
@@ -153,7 +148,6 @@ const Negociacion = (props) => {
       //getInfoPerfil();
     }, 2000);
   }, []);
-  console.log("userData ", userData);
 
   function changeUser() {
     if (bestWorkers != null) {
@@ -254,13 +248,12 @@ const Negociacion = (props) => {
                     userId={userEnPlataforma}
                     destinatary={userId}
                     userData={userData}
-                    showEstimatePrice= {true}
                   ></Chat>
                 </div>
               </section>
-
+              
               <section className="flex justify-between items-center p-16 w-90 h-auto mt-4 ml-4 px-8 py-4  mr-8">
-                <div className="flex flex-col flex justify-between items-center">
+                <div className="flex flex-col justify-between items-center">
                   <h1 className="text-white text-3xl font-bold">Cancelar</h1>
                   <button onClick={changeUser}>
                     <img
@@ -270,10 +263,10 @@ const Negociacion = (props) => {
                     />
                   </button>
                 </div>
-                <div className="p-4 text-white border border-white border-solid rounded-2xl">
-                  Precio acordado
+                <div className="w-1/2 flex items-center justify-center">
+                  <PujarPrecio userData={userData} initialValue={props.priceJobOffer} destinatary={parseInt( userData?.userId,10)}/>
                 </div>
-                <div className="flex flex-col flex justify-between items-center">
+                <div className="flex flex-col justify-between items-center">
                   <h1 className="text-white text-3xl font-bold">Aceptar</h1>
                   <button>
                     <img

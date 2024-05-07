@@ -7,13 +7,9 @@ import EstimatePrice from "./EstimatePrice";
 const Chat = (props) => {
 
     const messagesContainerRef = useRef(null);  // <-- variable para tener el scroll abajo
-    const userData = props.userData;
     const [socket, setSocket] = useState()
     const [message, setMessage] = useState("")
     const [messages, setMessages] = useState(props.messages ? props.messages : []);
-    const [bidPrice, setBidPrice] = useState(10000);
-    const [lastBidPrice, setLastBidPrice] = useState("");
-
 
     const handleSendMessage = () => {
         if (message && message !== "") {
@@ -22,13 +18,6 @@ const Chat = (props) => {
             setMessage("");
         }
         
-    };
-    const handleBidPrice = (newValue) => {
-        setBidPrice(newValue);
-        setLastBidPrice('')
-        if (newValue >= 10000) {
-            socket.emit('bid price', { destinatary: destinatary, price: newValue });
-        }
     };
     const addMessage = (msg, ) => {
         setMessages((state) => [...state, { msg: msg.msg, from: msg.username }]);
@@ -50,10 +39,6 @@ const Chat = (props) => {
         });
         socket.on('chat message', (msg) => { 
             addMessage(msg)
-        });
-        socket.on('bid price', (data) => {
-            setBidPrice(data.price)
-            setLastBidPrice(userData?.mainData[0]?.userName ?? "")
         });
         /// Función para que el scroll en mensajes quede abajo
         const scrollToBottom = () => {
@@ -98,18 +83,6 @@ const Chat = (props) => {
                         <img src="/icons/flecha-enviar.svg" alt="" className="w-8 h-8 ml-2"/>
                     </button>
                 </div>
-                {props.showEstimatePrice &&
-
-                    <div className="flex flex-col items-center justify-center text-center">
-                        <h1 className="text-white">Puedes aumentar o disminuir el precio de la negociación</h1>
-                        <EstimatePrice estimatePrice={bidPrice} setEstimatePrice={handleBidPrice}/>
-                        {lastBidPrice !== "" && (
-                            <div className="blink">
-                                <p>¡El precio fue cambiado por {lastBidPrice}!</p>
-                            </div>
-                        )}
-                    </div>
-                }
                 
             </div>
         </>

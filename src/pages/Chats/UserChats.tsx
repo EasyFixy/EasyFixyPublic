@@ -63,14 +63,11 @@ const UserChats = () => {
         });
     }
     const onClickSelected = (chat) =>{
-        console.log('onClickSelected');
         setSelectedChat(chat);
         handleRequestWithToken(dispatch,() => handleRequestMessagesByConversation(chat.desiredUserId))
         
     }
     const setLastMessage = (msg) => {
-        console.log(msg);
-        console.log(chats);
         const chatIndex = chats.findIndex(chat => chat.desiredUserId === selectedChat.desiredUserId);
         if (chatIndex !== -1) {
             // Actualiza el estado de los chats

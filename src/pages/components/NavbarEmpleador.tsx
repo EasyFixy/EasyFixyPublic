@@ -14,7 +14,6 @@ const NavbarEmpleador = () =>{
         setChecked(prev => !prev);
     };
     const logOut = () => {
-        console.log("saliendo")
         removeToken(dispatch)
         navigate("/");
     }

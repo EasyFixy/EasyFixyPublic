@@ -142,7 +142,7 @@ const CategoriesLabors = () => {
                 console.log(data); // Guardar la respuesta del servidor en el estado
                 if (data.statusCode == 200) {
                     console.log("exitos")
-                    navigate("/my/home/employer?tipe=negotiation&labors="+encodeURIComponent(JSON.stringify(selectedLabors)));
+                    navigate("/my/home/employer?tipe=negotiation&labors="+encodeURIComponent(JSON.stringify(selectedLabors))+'&price='+encodeURIComponent(btoa(job.jobOfferStimatePrice.toString())));
                 } else {
                     toast.warn("Error Subiendo");
                 }

@@ -21,4 +21,5 @@ export interface UserData {
         userTempDataActive: number;
         userTempDataLastUpdate: string;
     }[];
+    userId: string
 }
