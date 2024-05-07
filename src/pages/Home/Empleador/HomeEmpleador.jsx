@@ -22,6 +22,8 @@ const HomeEmpleador = () => {
     const [tipe, setTipe] = useState();
     // Obtener valores específicos de la UR
     let laborsUriComponent = decodeURIComponent(searchParams.get('labors') ?? '')
+    let priceUriComponent = decodeURIComponent(searchParams.get('price') ?? '')
+    const priceJobOffer = priceUriComponent ? atob(priceUriComponent) : null;
     const laborsOfJobOffer = laborsUriComponent ? JSON.parse(laborsUriComponent) : null;
 
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -63,7 +65,6 @@ const HomeEmpleador = () => {
         },
     ]
     const token = localStorage.getItem('token');
-    console.log("el token es: ",token);
 
     function decodeJWT() {
         const token = localStorage.getItem('token');
@@ -80,7 +81,6 @@ const HomeEmpleador = () => {
 
     const fetchPendingOffers = () => {
         const token = decodeJWT()
-        console.log("el token es",token)
         if (token) {
             fetch(`${baseUrl}getJobOffertedOffersByEmployer?token=${localStorage.getItem('token')}`)
                 .then(response => {
@@ -90,9 +90,7 @@ const HomeEmpleador = () => {
                     return response.json();
                 })
                 .then(data => {
-                    console.log(data);
                     setJobOffertedOffers(data.data);
-                    console.log(jobOffertedOffers)
 
                     // Aquí puedes hacer algo con los datos, como actualizar el estado de un componente en React
                 })
@@ -100,8 +98,6 @@ const HomeEmpleador = () => {
                     console.error('Fetch error:', error);
                     // Aquí puedes manejar errores, como mostrar un mensaje de error al usuario
                 });
-        } else {
-            console.log("no logueado")
         }
         //fetch()
     }
@@ -117,7 +113,6 @@ const HomeEmpleador = () => {
                     return response.json();
                 })
                 .then(data => {
-                    console.log(data);
                     setJobPendingOffers(data.data);
 
                     // Aquí puedes hacer algo con los datos, como actualizar el estado de un componente en React
@@ -127,7 +122,6 @@ const HomeEmpleador = () => {
                     // Aquí puedes manejar errores, como mostrar un mensaje de error al usuario
                 });
         } else {
-            console.log("no logueado")
         }
         //fetch()
     }
@@ -143,23 +137,21 @@ const HomeEmpleador = () => {
                     return response.json();
                 })
                 .then(data => {
-                    console.log(data);
                     setJobsDone(data.data);
 
                     // Aquí puedes hacer algo con los datos, como actualizar el estado de un componente en React
                 })
                 .catch(error => {
-                    console.error('Fetch error:', error);
                     // Aquí puedes manejar errores, como mostrar un mensaje de error al usuario
                 });
         } else {
-            console.log("no logueado")
         }
         //fetch()
     }
 
     useEffect(() => {
         setTipe(searchParams.get('tipe'));
+
         fetchPendingOffers();
         fetchPendingJobs();
         fetchDoneJobs();
@@ -177,7 +169,7 @@ const HomeEmpleador = () => {
                     </button></Link>
                 </div>
             </div>
-            {tipe && tipe === "negotiation" ? (<Negociacion labors={laborsOfJobOffer}></Negociacion>) : ("")}
+            {tipe && tipe === "negotiation" ? (<Negociacion labors={laborsOfJobOffer} priceJobOffer={priceJobOffer} ></Negociacion>) : ("")}
                 <Modal isOpen={isModalOpen} onClose={closeModal} jobData ={selectedJobData} jobType ={selectedJobType} />
             
 

@@ -15,7 +15,6 @@ const NavbarEmpleado = () => {
     };
 
     const logOut = () => {
-        console.log("saliendo")
         removeToken(dispatch)
         //navigate("/");
     }

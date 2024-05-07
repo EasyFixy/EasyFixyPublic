@@ -102,7 +102,6 @@ const ToolbarDefault = (props) => {
                 return response.json();
             })
             .then(data => {
-                console.log(data)
                 setUser(data.data[0])
             })
             .catch(error => {

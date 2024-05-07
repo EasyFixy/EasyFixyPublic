@@ -66,11 +66,6 @@ const ContenedorPerfil = ({
         acno=userData.tempData[0].userTempDataLastUpdate.slice(0, 4);
 
     }
-    console.log("sig")
-    //console.log(userData)
-    //console.log(userData && userData.comments && userData.comments.data ? userData.comments.data[0].mediaCalificaciones:"");
-    
-    
     
     return (
         <div className={` content-center ${paddingX} pt-10  ${width} h-auto flex flex-row`}>
