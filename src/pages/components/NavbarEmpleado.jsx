@@ -1,23 +1,95 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { removeToken } from "../../Helpers/Token"
 import { useAppDispatch } from "../../app/hooks";
 import { logout } from "../../features/Auth/Auth";
 import { Navigate, useNavigate } from 'react-router-dom';
-const NavbarEmpleado = () => {
+import { useAppSelector } from "../../app/hooks";
+import { toast } from 'react-toastify';
 
+const NavbarEmpleado = () => {
+    const userEnPlataforma = useAppSelector((state) => state.Auth.id);
+    const token = useAppSelector((state) => state.Auth.token);
+    console.log(token)
     const [checked, setChecked] = useState(false);
+    const baseUrl = import.meta.env.VITE_BASE_URL;
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
+
+    const getUserLocation = (callback) => {
+        if ("geolocation" in navigator) {
+            // Obtener la geolocalización
+            navigator.geolocation.getCurrentPosition(function (position) {
+                // Acceder a las coordenadas
+                callback(true, position.coords);
+            });
+        } else {
+            // El navegador no soporta geolocalización
+            console.log("Geolocalización no soportada por este navegador.");
+            toast.warn("Permita la geolocalización");
+        }
+    }
+
+    const updateUserTempData = (status, coords) => {
+        console.log(status)
+        let urlUpdateTempsData;
+        if(status){
+            urlUpdateTempsData = `${baseUrl}updateUserTempData?token=${token}&userTempDataActive=1&userTempDataLatitude=${coords.latitude}&userTempDataLongitude=${coords.longitude}`
+        }else{
+            urlUpdateTempsData = `${baseUrl}updateUserTempData?token=${token}&userTempDataActive=0`
+        }
+        fetch(urlUpdateTempsData)
+            .then((response) => response.text())
+            .then((data) => {
+                const json = JSON.parse(data);
+                console.log(json)
+                if(json.statusCode===200){
+                    setChecked(status);
+                }else{
+                    toast.warn("Error cambiando estado");
+                }
+                
+            })
+            .catch((error) => {
+                console.error("Error fetching user status:", error);
+                toast.warn("Error cambiando estado");
+            })
+    }
+
     const toggleChecked = () => {
-        setChecked(prev => !prev);
+        let status = !checked;
+        if (status) {
+            getUserLocation(updateUserTempData)
+        }else{
+            updateUserTempData(false)
+        }
+        //setChecked(status);
+
     };
 
     const logOut = () => {
         removeToken(dispatch)
         //navigate("/");
     }
+
+    const getUserStatus = () => {
+        fetch(`${baseUrl}getUserStatus?userId=${userEnPlataforma}`)
+            .then((response) => response.text())
+            .then((data) => {
+                const json = JSON.parse(data);
+                console.log(json.data[0].userTempDataActive)
+                setChecked(json.data[0].userTempDataActive)
+            })
+            .catch((error) => {
+                console.error("Error fetching user status:", error);
+                toast.warn("Error interno");
+            })
+    }
+
+    useEffect(() => {
+        getUserStatus()
+    }, []);
 
     return (
         <div className="w-full h-8 color3 flex justify-between items-center p-4">
