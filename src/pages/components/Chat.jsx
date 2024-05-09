@@ -13,13 +13,13 @@ const Chat = (props) => {
 
     const handleSendMessage = () => {
         if (message && message !== "") {
-            socket.emit('chat message', { destinatary: props.destinatary, msg: message });
+            socket.emit('chat message', { destinatary: props.destinatary, msg: message, senderSocketId:socket.id });
             addMessage({ msg: message, username: props.userId });
             setMessage("");
         }
-        
+
     };
-    const addMessage = (msg, ) => {
+    const addMessage = (msg,) => {
         setMessages((state) => [...state, { msg: msg.msg, from: msg.username }]);
         props.setLastMessage && props.setLastMessage(msg);
     };
@@ -32,14 +32,38 @@ const Chat = (props) => {
     };
 
     useEffect(() => {
-        const socket = io("http://localhost:3000/", {
-            auth: {
-                userId: props.userId
+        console.log("entra");
+        if (props.socket) {
+            console.log("def")
+            console.log(props.socket)
+            if (!props.socket.hasListeners('chat message')) {
+                console.log("11");
+                props.socket.on('chat message', (msg) => {
+                    console.log(props.socket)
+                    console.log("llega mensaje")
+                    addMessage(msg)
+                });
+            }else{
+                console.log("22");
             }
-        });
-        socket.on('chat message', (msg) => { 
-            addMessage(msg)
-        });
+            console.log(props.socket)
+            setSocket(props.socket);
+            console.log(props.socket)
+        } else {
+            console.log("no def creacion de otro socket")
+            const socket = io("http://localhost:3000/", {
+                auth: {
+                    userId: props.userId
+                }
+            });
+            socket.on('chat message', (msg) => {
+                console.log("llega mensaje e")
+                addMessage(msg)
+            });
+            setSocket(socket);
+            console.log(socket)
+        }
+
         /// Función para que el scroll en mensajes quede abajo
         const scrollToBottom = () => {
             if (messagesContainerRef.current) {
@@ -48,10 +72,14 @@ const Chat = (props) => {
             }
         };
 
-        setSocket(socket);
+
         scrollToBottom();
     }, [messages]);
-    
+
+    useEffect(() => {
+        setSocket(props.socket);
+    }, [props.socket]);
+
     useEffect(() => {
         setMessages(props.messages ? props.messages : []);
     }, [props.messages]);
@@ -59,12 +87,12 @@ const Chat = (props) => {
     return (
         <>
             <div className="bg-white w-full h-full flex flex-col border rounded-2xl">
-                <ul id="messages" ref={messagesContainerRef} className="flex-1 overflow-auto p-2" style={{ maxHeight: 'calc(100% - 50px)' }}>
+                <ul id="messages" ref={messagesContainerRef} className="flex-1 overflow-auto p-2" style={{ maxHeight: '500px' }}>
                     {messages.map((elemento, index) => (
                         <span key={index} className={`w-100 flex justify-${elemento.from === props.userId ? 'end' : 'start'}`}>
                             <li className={`text-white 
                                 ${elemento.from === props.userId ? 'bg-orange-500' : 'bg-black'}
-                                py-2 px-8 rounded-2xl mb-1 w-auto break-all`} 
+                                py-2 px-8 rounded-2xl mb-1 w-auto break-all`}
                                 key={index}>
                                 {elemento.msg}
                             </li>
@@ -80,10 +108,10 @@ const Chat = (props) => {
                         onKeyDown={handleKeyDown}
                     />
                     <button className="" onClick={handleSendMessage}>
-                        <img src="/icons/flecha-enviar.svg" alt="" className="w-8 h-8 ml-2"/>
+                        <img src="/icons/flecha-enviar.svg" alt="" className="w-8 h-8 ml-2" />
                     </button>
                 </div>
-                
+
             </div>
         </>
     )

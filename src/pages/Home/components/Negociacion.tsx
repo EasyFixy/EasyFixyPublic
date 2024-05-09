@@ -7,6 +7,9 @@ import PerfilesLaborales from "../../components/PerfilesLaborales";
 import Chat from "../../components/Chat";
 import { useAppSelector } from "../../../app/hooks";
 import PujarPrecio from "./PujarPrecio";
+import { io, Socket } from "socket.io-client";
+import { log } from "console";
+import { toast } from 'react-toastify';
 
 interface queryWorker {
   labors: number[];
@@ -21,10 +24,11 @@ interface BestWorkers {
 
 const Negociacion = (props) => {
   const userEnPlataforma = useAppSelector((state) => state.Auth.id);
-
   const [loading, setLoading] = useState(true);
   const [userId, setUserId] = useState(0);
-
+  const [socket, setSocket] = useState<Socket | null>(null);
+  const [offerAccepted, setOfferAccepted] = useState<Boolean>(false);
+  const [oponentAccepted, setOponentAccepted] = useState<Boolean>(false);
   const baseUrl = import.meta.env.VITE_BASE_URL;
   // PARAMETROS DE LA PETICION
   const [bestWorkers, setBestWorkest] = useState<BestWorkers[]>([
@@ -37,7 +41,7 @@ const Negociacion = (props) => {
     navigator.geolocation.getCurrentPosition(function (position) {
       longitud = position.coords.longitude;
     });
-  } 
+  }
 
   // Peticion al back para obtener los mejores trabajadores
   function getBestWorkersForLabors() {
@@ -60,9 +64,15 @@ const Negociacion = (props) => {
         return response.json();
       })
       .then((data) => {
+        console.log(data)
         setBestWorkest(data.data);
         setUserId(data.data[0].userId);
         getInfoPerfil(data.data[0].userId);
+        if (socket) {
+          socket.emit('notifyEmployee', { destinatary: data.data[0].userId });
+        } else {
+          console.log("not socket")
+        }
       })
       .catch((error) => {
         console.error("Error al enviar los datos:", error);
@@ -132,6 +142,7 @@ const Negociacion = (props) => {
       .then((data) => {
         const json = JSON.parse(data);
         setUserData(json.data);
+        console.log(json)
       })
       .catch((error) => {
         console.error("Error fetching user profile:", error);
@@ -141,13 +152,88 @@ const Negociacion = (props) => {
       });
   }
 
+  function getInfoEmployer(employerId) {
+    setLoading(true);
+    const options = {
+      method: "GET",
+    };
+    let url = new URL(`${baseUrl}getEmployerProfile?userId=${employerId}`);
+    fetch(url, options)
+      .then((response) => response.text())
+      .then((data) => {
+        const json = JSON.parse(data);
+        setUserData(json.data);
+        console.log(json)
+      })
+      .catch((error) => {
+        console.error("Error fetching user profile:", error);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }
+
+  const notifyAccept = () =>{
+    console.log(offerAccepted)
+  }
+
   // se usa useEffect((),[]) sin parametros para solo hacer una vez la consulta a la BD, no se debe hacer cada vez que se renderice
   useEffect(() => {
-    getBestWorkersForLabors();
-    setTimeout(() => {
-      //getInfoPerfil();
-    }, 2000);
+    console.log("creando")
+    const socketo = io("http://localhost:3000/", {
+      auth: {
+        userId: userEnPlataforma
+      }
+    });
+    socketo.on('enterToBid', (notification) => {
+      console.log(notification.employer)
+      setUserId(notification.employer);
+      setTimeout(() => {
+        getInfoEmployer(notification.employer);
+      }, 3000);
+    });
+
+    socketo.on('employeeAccepted', (notification) => {
+      console.log("oponente acepta")
+      setOponentAccepted(true)
+      notifyAccept()
+      console.log(offerAccepted)
+      if(offerAccepted){
+        console.log('cerrando');
+        closeNegotiationPage();
+      }
+    });
+
+    socketo.on('notifiSocketChange', (msg) => {
+      console.log("cambiando");
+      if (socket) {
+        let socketo = socket;
+        socketo.id = msg.id
+        setSocket(socketo)
+        console.log(socketo)
+      }
+    });
+
+    console.log(socketo);
+
+    setSocket(socketo);
+
   }, []);
+
+  useEffect(() => {
+
+    switch (props.tipe) {
+      case 'employer':
+        getBestWorkersForLabors();
+        break;
+      case 'employee':
+        console.log("employeeeee")
+        break;
+      default:
+        console.log("error")
+    }
+
+  }, [socket]);
 
   function changeUser() {
     if (bestWorkers != null) {
@@ -157,17 +243,56 @@ const Negociacion = (props) => {
     }
   }
 
+  const acceptOfferEmployer = () => {
+
+  }
+
+  const acceptOfferEmployee = () => {
+    closeNegotiationPage()
+    props.updateUserTempData(false)
+  }
+
+  const closeNegotiationPage = () => {
+    console.log("cerrando")
+    toast.success("Ya se está gestionando el pago, sigue pendiente al estado del trabajo");
+    props.setPageStatusTipe("")
+  }
+
+  const acceptOffer = () => {
+
+    setOfferAccepted(true)
+    if (socket) {
+      socket.emit('acceptOffer', { destinatary: userId });
+    } else {
+      console.log("socket no iniciado")
+      toast.warn("Error Subiendo");
+    }
+    if (oponentAccepted) {
+      switch (props.tipe) {
+        case 'employer':
+          acceptOfferEmployer();
+          break;
+        case 'employee':
+          acceptOfferEmployee()
+          break;
+        default:
+          console.log("error")
+      }
+    }
+
+  }
+
   return (
-        <div className="absolute w-screen h-screen z-10 flex items-center justify-center top-0 left-0 m-auto bg-black bg-opacity-75 overflow-auto">
-          
-          <div className="w-4/5 h-full">
-          
-          
-            <div className="w-full h-auto bg-[#292929] ">
-            {userId === 0 ? (
-                "cargando... "
-            ) : (
-                <>
+    <div className="absolute w-screen h-screen z-10 flex items-center justify-center top-0 left-0 m-auto bg-black bg-opacity-75 overflow-auto">
+
+      <div className="w-4/5 h-full">
+
+
+        <div className="w-full h-auto bg-[#292929] ">
+          {userId === 0 ? (
+            "cargando... "
+          ) : (
+            <>
               <ContenedorPerfil
                 userData={userData}
                 estado={false}
@@ -245,13 +370,14 @@ const Negociacion = (props) => {
                 <div className="ml-4 mt-2 pr-8 w-1/2 flex flex-col p-1 h-96">
                   chat
                   <Chat
+                    socket={socket}
                     userId={userEnPlataforma}
                     destinatary={userId}
                     userData={userData}
                   ></Chat>
                 </div>
               </section>
-              
+
               <section className="flex justify-between items-center p-16 w-90 h-auto mt-4 ml-4 px-8 py-4  mr-8">
                 <div className="flex flex-col justify-between items-center">
                   <h1 className="text-white text-3xl font-bold">Cancelar</h1>
@@ -264,11 +390,11 @@ const Negociacion = (props) => {
                   </button>
                 </div>
                 <div className="w-1/2 flex items-center justify-center">
-                  <PujarPrecio userData={userData} initialValue={props.priceJobOffer} destinatary={parseInt( userData?.userId,10)}/>
+                  <PujarPrecio psocket={socket} userData={userData} initialValue={props.priceJobOffer} destinatary={parseInt(userData?.userId, 10)} setOfferAccepted={setOfferAccepted} setOponentAccepted={setOponentAccepted} offerAccepted={offerAccepted} oponentAccepted={oponentAccepted} />
                 </div>
                 <div className="flex flex-col justify-between items-center">
                   <h1 className="text-white text-3xl font-bold">Aceptar</h1>
-                  <button>
+                  <button onClick={acceptOffer}>
                     <img
                       src="/icons/Aceptar.svg"
                       alt="boton cancelar"
@@ -277,12 +403,12 @@ const Negociacion = (props) => {
                   </button>
                 </div>
               </section>
-              </>
-            )}
-            </div>
-            
-          </div>
+            </>
+          )}
         </div>
+
+      </div>
+    </div>
   );
 };
 export default Negociacion;

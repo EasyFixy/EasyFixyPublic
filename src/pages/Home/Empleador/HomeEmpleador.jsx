@@ -169,7 +169,7 @@ const HomeEmpleador = () => {
                     </button></Link>
                 </div>
             </div>
-            {tipe && tipe === "negotiation" ? (<Negociacion labors={laborsOfJobOffer} priceJobOffer={priceJobOffer} ></Negociacion>) : ("")}
+            {tipe && tipe === "negotiation" ? (<Negociacion tipe={'employer'} labors={laborsOfJobOffer} priceJobOffer={priceJobOffer} ></Negociacion>) : ("")}
                 <Modal isOpen={isModalOpen} onClose={closeModal} jobData ={selectedJobData} jobType ={selectedJobType} />
             
 
