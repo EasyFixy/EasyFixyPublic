@@ -13,6 +13,7 @@ import { useAppDispatch, useAppSelector } from "../app/hooks";
 import UserChats from "../pages/Chats/UserChats";
 import RetirarDinero from '../pages/Payments/RetirarDinero';
 import DescripcionCompra from "../pages/Payments/DescripcionCompra";
+import ToolbarDefault from "../pages/components/ToolbarDefaul";
 
 const UserLogueado = () => {
     const dispatch = useAppDispatch();
@@ -22,6 +23,8 @@ const UserLogueado = () => {
         setIsLogged(isLogged)
     }, []);
     return(
+        <>
+        <ToolbarDefault/>
         <Routes>
             <Route path='profile/employee/create/personalinformation' element={<DatosPerfilEmpleado/>}/>
             <Route path='profile/employee' element={<VerPerfilEmpleado/>}/>
@@ -35,6 +38,7 @@ const UserLogueado = () => {
             <Route path="/retirarDinero" element={<RetirarDinero/>} />
             <Route path="/buyDescription" element={<DescripcionCompra/>} />
         </Routes>
+        </>
     )
 }
 
