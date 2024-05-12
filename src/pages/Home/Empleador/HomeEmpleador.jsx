@@ -23,6 +23,7 @@ const HomeEmpleador = () => {
     // Obtener valores específicos de la UR
     let laborsUriComponent = decodeURIComponent(searchParams.get('labors') ?? '')
     let priceUriComponent = decodeURIComponent(searchParams.get('price') ?? '')
+    const jobOfferId = decodeURIComponent(searchParams.get('jobOfferId') ?? '')
     const priceJobOffer = priceUriComponent ? atob(priceUriComponent) : null;
     const laborsOfJobOffer = laborsUriComponent ? JSON.parse(laborsUriComponent) : null;
 
@@ -169,7 +170,7 @@ const HomeEmpleador = () => {
                     </button></Link>
                 </div>
             </div>
-            {tipe && tipe === "negotiation" ? (<Negociacion labors={laborsOfJobOffer} priceJobOffer={priceJobOffer} ></Negociacion>) : ("")}
+            {tipe && tipe === "negotiation" ? (<Negociacion tipe={'employer'} labors={laborsOfJobOffer} priceJobOffer={priceJobOffer} jobOfferId={jobOfferId}></Negociacion>) : ("")}
                 <Modal isOpen={isModalOpen} onClose={closeModal} jobData ={selectedJobData} jobType ={selectedJobType} />
             
 
