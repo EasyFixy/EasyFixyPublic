@@ -12,6 +12,8 @@ interface PropsPujarPrecio {
     setOponentAccepted: (flag: boolean) => void;
     offerAccepted: Boolean;
     oponentAccepted: Boolean;
+    bidPrice: number;
+    setBidPrice: (flag: number) => void;
 }
 
 const PujarPrecio = ({
@@ -22,9 +24,11 @@ const PujarPrecio = ({
     setOfferAccepted,
     setOponentAccepted,
     offerAccepted,
-    oponentAccepted
+    oponentAccepted,
+    bidPrice,
+    setBidPrice
 }: PropsPujarPrecio) => {
-    const [bidPrice, setBidPrice] = useState(initialValue ? parseInt(initialValue, 10) : 10000);
+    //const [bidPrice, setBidPrice] = useState(initialValue ? parseInt(initialValue, 10) : 10000);
     const [socket, setSocket] = useState<Socket | undefined>(undefined);
     const [lastBidPrice, setLastBidPrice] = useState("");
     const userId = useAppSelector((state) => state.Auth.id);

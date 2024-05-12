@@ -13,13 +13,14 @@ const Chat = (props) => {
 
     const handleSendMessage = () => {
         if (message && message !== "") {
-            socket.emit('chat message', { destinatary: props.destinatary, msg: message, senderSocketId:socket.id });
+            socket.emit('chat message', { destinatary: props.destinatary, msg: message, senderSocketId: socket.id });
             addMessage({ msg: message, username: props.userId });
             setMessage("");
         }
 
     };
-    const addMessage = (msg,) => {
+    const addMessage = (msg) => {
+        console.log("agregando msg "+ msg);
         setMessages((state) => [...state, { msg: msg.msg, from: msg.username }]);
         props.setLastMessage && props.setLastMessage(msg);
     };
@@ -41,9 +42,10 @@ const Chat = (props) => {
                 props.socket.on('chat message', (msg) => {
                     console.log(props.socket)
                     console.log("llega mensaje")
+                    console.log(msg)
                     addMessage(msg)
                 });
-            }else{
+            } else {
                 console.log("22");
             }
             console.log(props.socket)

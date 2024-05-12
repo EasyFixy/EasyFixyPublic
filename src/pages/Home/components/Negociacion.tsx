@@ -10,11 +10,13 @@ import PujarPrecio from "./PujarPrecio";
 import { io, Socket } from "socket.io-client";
 import { log } from "console";
 import { toast } from 'react-toastify';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 interface queryWorker {
   labors: number[];
   userLatitude: number;
   userLongitude: number;
+  excludeUserId: number | null;
 }
 
 interface BestWorkers {
@@ -29,7 +31,10 @@ const Negociacion = (props) => {
   const [socket, setSocket] = useState<Socket | null>(null);
   const [offerAccepted, setOfferAccepted] = useState<Boolean>(false);
   const [oponentAccepted, setOponentAccepted] = useState<Boolean>(false);
+  const [bidPrice, setBidPrice] = useState(props.priceJobOffer ? parseInt(props.priceJobOffer, 10) : 10000);
   const baseUrl = import.meta.env.VITE_BASE_URL;
+  const [lastOponentChange, setLastOponentChange] = useState(0);
+  const navigate = useNavigate();
   // PARAMETROS DE LA PETICION
   const [bestWorkers, setBestWorkest] = useState<BestWorkers[]>([
     { listingValue: 0, userId: 1 },
@@ -49,6 +54,7 @@ const Negociacion = (props) => {
       labors: props.labors,
       userLatitude: latitud,
       userLongitude: longitud,
+      excludeUserId: userEnPlataforma
     };
     fetch(`${baseUrl}getBestWorkersForLabors`, {
       method: "POST",
@@ -173,10 +179,6 @@ const Negociacion = (props) => {
       });
   }
 
-  const notifyAccept = () =>{
-    console.log(offerAccepted)
-  }
-
   // se usa useEffect((),[]) sin parametros para solo hacer una vez la consulta a la BD, no se debe hacer cada vez que se renderice
   useEffect(() => {
     console.log("creando")
@@ -193,15 +195,19 @@ const Negociacion = (props) => {
       }, 3000);
     });
 
+    socketo.on('oponentWayOut', (notification) => {
+      console.log("oponente salio ")
+      console.log(notification)
+      setLastOponentChange(notification.sender)
+    });
+
+    socketo.on('employeeIsBusy', (notification) => {
+      changeUser()
+    });
+
     socketo.on('employeeAccepted', (notification) => {
       console.log("oponente acepta")
       setOponentAccepted(true)
-      notifyAccept()
-      console.log(offerAccepted)
-      if(offerAccepted){
-        console.log('cerrando');
-        closeNegotiationPage();
-      }
     });
 
     socketo.on('notifiSocketChange', (msg) => {
@@ -235,16 +241,78 @@ const Negociacion = (props) => {
 
   }, [socket]);
 
+  // pare cambiar comportamiento cuando el oponente acepta un bid
+  useEffect(() => {
+    if (offerAccepted && oponentAccepted) {
+      switch (props.tipe) {
+        case 'employer':
+          acceptOfferEmployer();
+          break;
+        case 'employee':
+          acceptOfferEmployee()
+          break;
+        default:
+          console.log("error")
+      }
+    }
+  }, [oponentAccepted]);
+
+  useEffect(() => {
+    if (lastOponentChange === userId) {
+      switch (props.tipe) {
+        case 'employer':
+          changeUser();
+          break;
+        case 'employee':
+          setUserId(0)
+          break;
+        default:
+          console.log("error")
+      }
+      const timer = setTimeout(() => {
+        setLastOponentChange(-1);
+      }, 1000);
+    }
+  }, [lastOponentChange]);
+
   function changeUser() {
     if (bestWorkers != null) {
-      bestWorkers.shift();
-      setUserId(bestWorkers[0].userId);
-      getInfoPerfil(bestWorkers[0].userId);
+
+      switch (props.tipe) {
+        case 'employer':
+          if (socket) {
+            socket.emit('notifyOponentWayOut', { destinataryId: bestWorkers[0].userId });
+            bestWorkers.push(bestWorkers[0])
+            bestWorkers.shift();
+            setUserId(bestWorkers[0].userId);
+            getInfoPerfil(bestWorkers[0].userId);
+            socket.emit('notifyEmployee', { destinatary: bestWorkers[0].userId });
+          } else {
+            console.log("not socket")
+          }
+          break;
+        case 'employee':
+          if (socket) {
+            socket.emit('notifyOponentWayOut', { destinataryId: userId });
+            setUserId(0);
+          } else {
+            console.log("not socket")
+          }
+          break;
+        default:
+          console.log("error")
+      }
     }
   }
 
   const acceptOfferEmployer = () => {
-
+    const params = new URLSearchParams();
+    params.append('jobOfferId', props.jobOfferId);
+    params.append('employerId', userId.toString());
+    params.append('price', bidPrice.toString());
+    const queryString = params.toString();
+    console.log(queryString)
+    navigate(`/my/buyDescription?${queryString}`);
   }
 
   const acceptOfferEmployee = () => {
@@ -390,7 +458,7 @@ const Negociacion = (props) => {
                   </button>
                 </div>
                 <div className="w-1/2 flex items-center justify-center">
-                  <PujarPrecio psocket={socket} userData={userData} initialValue={props.priceJobOffer} destinatary={parseInt(userData?.userId, 10)} setOfferAccepted={setOfferAccepted} setOponentAccepted={setOponentAccepted} offerAccepted={offerAccepted} oponentAccepted={oponentAccepted} />
+                  <PujarPrecio psocket={socket} userData={userData} initialValue={props.priceJobOffer} destinatary={parseInt(userData?.userId, 10)} setOfferAccepted={setOfferAccepted} setOponentAccepted={setOponentAccepted} offerAccepted={offerAccepted} oponentAccepted={oponentAccepted} bidPrice={bidPrice} setBidPrice={setBidPrice} />
                 </div>
                 <div className="flex flex-col justify-between items-center">
                   <h1 className="text-white text-3xl font-bold">Aceptar</h1>
