@@ -298,7 +298,7 @@ const CategoriesLabors = () => {
     }
     return (
         <div className="w-screen h-screen flex flex-col">
-            <ToolbarDefault tipe={tipe === "createResume" ? ("employee") : ("employer")} />
+            {/* <ToolbarDefault tipe={tipe === "createResume" ? ("employee") : ("employer")} /> */}
             <div className="w-full flex-1 px-[5%] flex flex-col pb-[5%] pt-[3%] font-bold overflow-y-scroll">
                 <h1 className="text-5xl">
                     Categorias y labores
