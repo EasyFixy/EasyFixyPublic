@@ -10,7 +10,7 @@ const Chat = (props) => {
     const [socket, setSocket] = useState()
     const [message, setMessage] = useState("")
     const [messages, setMessages] = useState(props.messages ? props.messages : []);
-
+    const baseUrl = import.meta.env.VITE_BASE_URL;
     const handleSendMessage = () => {
         if (message && message !== "") {
             socket.emit('chat message', { destinatary: props.destinatary, msg: message, senderSocketId: socket.id });
@@ -53,7 +53,7 @@ const Chat = (props) => {
             console.log(props.socket)
         } else {
             console.log("no def creacion de otro socket")
-            const socket = io("http://localhost:3000/", {
+            const socket = io(baseUrl, {
                 auth: {
                     userId: props.userId
                 }

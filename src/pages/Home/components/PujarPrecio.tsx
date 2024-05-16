@@ -33,6 +33,7 @@ const PujarPrecio = ({
     const [lastBidPrice, setLastBidPrice] = useState("");
     const userId = useAppSelector((state) => state.Auth.id);
     const [userDataState, setUserDataState] = useState(userData);
+    const baseUrl = import.meta.env.VITE_BASE_URL;
     const handleBidPrice = (newValue) => {
         setBidPrice(newValue);
         setLastBidPrice('')
@@ -70,7 +71,7 @@ const PujarPrecio = ({
             setSocket(psocket);
             
         } else {
-            const socket = io("http://localhost:3000/", {
+            const socket = io(baseUrl, {
                 auth: {
                     userId: userId
                 }
