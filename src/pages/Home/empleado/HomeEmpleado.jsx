@@ -7,6 +7,7 @@ import MisTrabajos from "./MisTrabajos";
 import Negociacion from "../components/Negociacion";
 import { useAppSelector } from "../../../app/hooks";
 import { toast } from 'react-toastify';
+import Footer from "../../components/Footer.tsx";
 
 const HomeEmpleado = () => {
     const [tipe, setTipe] = useState();
@@ -54,18 +55,30 @@ const HomeEmpleado = () => {
     }, []);
 
     return (
-        <div className="w-screen h-screen flex flex-col">
-
+        <div className="w-screen h-screen flex flex-col overflow-y-auto pb-16">
             {/* <ToolbarDefault tipe="employee"/> */}
             <NavbarEmpleado checked={checked} setChecked={setChecked} setTipe={setTipe} updateUserTempData={updateUserTempData} />
-
-            <div className="w-screen flex mt-8">
-                <div className="w-3/4 h-auto ml-12 mr-4"><MisTrabajos /></div>
-                <div className="w-1/4 h-40 mr-8"><CajaGanancias /></div>
+    
+            <div className="flex flex-grow mt-8 ">
+                <div className="w-3/4 h-auto ml-12 mr-4">
+                    <MisTrabajos />
+                </div>
+                <div className="w-1/4 h-40 mr-8">
+                    <CajaGanancias />
+                </div>
             </div>
-            {tipe && tipe === "waitingBid" ? (<Negociacion updateUserTempData={updateUserTempData} tipe={"employee"} setPageStatusTipe={setTipe}></Negociacion>) : ("")}
+            
+            {tipe && tipe === "waitingBid" ? (
+                <Negociacion updateUserTempData={updateUserTempData} tipe={"employee"} setPageStatusTipe={setTipe} />
+            ) : (
+                ""
+            )}
+    
+            <div className="mt-auto w-full">
+                <Footer />
+            </div>
         </div>
-    )
+    );
 }
 
 export default HomeEmpleado;

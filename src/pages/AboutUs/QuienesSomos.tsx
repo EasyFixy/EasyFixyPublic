@@ -1,14 +1,13 @@
 import React from "react";
 import NavbarLandingPage from "../components/NavbarLandingPage";
-import NavbarEmpleado from "../components/NavbarEmpleado";
 import { Link } from "react-router-dom";
+import Footer from "../components/Footer";
 
 const QuienesSomos = () => {
     return (
         <>
             <div className="fixed top-0 w-full z-50">
-                <NavbarLandingPage />
-                
+                <NavbarLandingPage /> 
             </div>
             <div className="h-screen flex flex-col items-center overflow-y-auto pt-24">
                 <div className="w-full flex justify-center relative">
@@ -108,11 +107,18 @@ const QuienesSomos = () => {
                             <p className="mt-2">Juan Esteban Mahecha</p>
                         </div>
                     </div>
-                    <div className="text-center text-justify text-xl mb-8 mt-8">
+                    <div className="text-center text-justify text-xl mb-4 mt-8">
                     En nuestra empresa valoramos la calidad, transparencia y la confianza. Siempre buscamos que nuestros usuarios tanto trabajadores como empleadores ofrezcan la mejor calidad con sus servicios, dando confianza al usuario y transparencia al realizar el servicio.
                     </div>
+                    
                 </div>
+                <div className="bottom-0 w-full z-50">
+                <Footer /> 
+                </div>
+                 
             </div>
+            
+            
         </>
     );
 }
