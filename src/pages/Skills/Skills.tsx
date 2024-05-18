@@ -63,7 +63,7 @@ const Skills = () => {
                 skills: [selectedValues],
                 token: token
             };
-            // Opciones para la petición fetch
+            // Opciones para la petición
             const requestOptions = {
                 method: 'POST',
                 headers: {
@@ -87,12 +87,13 @@ const Skills = () => {
                 })
                 .catch(error => {
                     console.error('Error:', error);
+                    toast.error(`ha ocurrido un error agregando la habilidad`)
                     // Aquí puedes manejar el error como desees
                 });
         }
     }
     const deleteUserSkill = (deletedSkill: userSkill) => {
-        
+        console.log('deletedSkill ',deletedSkill);
         const url = `${baseUrl}deleteSkill?skillId=${deletedSkill.skillId}&token=${token}`;
         fetch(url)
             .then(response => {
@@ -109,6 +110,7 @@ const Skills = () => {
             })
             .catch(error => {
                 console.error('Error:', error);
+                toast.error(`ha ocurrido un error eliminando la habilidad`)
                 // Aquí puedes manejar el error como desees
             });
     }
