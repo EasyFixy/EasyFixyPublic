@@ -77,7 +77,7 @@ const QuienesSomos = () => {
                     <div className="grid grid-cols-2 gap-8">
                         <div>
                             <h2 className="font-bold text-7xl">Nuestra Misión</h2>
-                            <p className="mt-10 text-2xl leading-[2.5] w-[90%]">En EasyFixy tenemos como misión conectar trabajadores independientes con oportunidades laborales y simplificar el proceso de contratación de manera transparente y confiable.</p>
+                            <p className="mt-10 text-2xl leading-[2.5] w-[90%]">En EasyFixy tenemos como misión ofrecer mediante una plataforma web a las personas que tienen habilidades y disponibilidad de tiempo ser empleadas por personas que requieren sus servicios</p>
                             <p className="mt-10 text-2xl leading-[2.5] w-[90%] font-bold mt-10">EasyFixy no es solo una empresa, es un movimiento de crecimiento económico.</p>
                         </div>
                         <div className="flex justify-end">
