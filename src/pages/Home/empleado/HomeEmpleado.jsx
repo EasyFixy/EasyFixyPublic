@@ -49,12 +49,15 @@ const HomeEmpleado = () => {
         console.log('La página se está cerrando...');
         updateUserTempData(false)
     };
+    const setCloseNegociation = () => {
+        setOpenNegociation(false);
+        updateUserTempData(false);
+    }
 
     useEffect(() => {
         //setTipe(searchParams.get('tipe'));
         window.addEventListener('beforeunload', handleUnload);
     }, []);
-    console.log(openNegociation);
     return (
         <div className="w-screen h-screen flex flex-col">
 
@@ -67,7 +70,7 @@ const HomeEmpleado = () => {
             </div>
             <Negociacion 
                 isOpen={openNegociation}
-                setIsOpen = {setOpenNegociation}
+                setIsOpen = {setCloseNegociation}
                 updateUserTempData={updateUserTempData} 
                 tipe={"employee"} 
                 setPageStatusTipe={setTipe}

@@ -16,6 +16,8 @@ import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import Fade from '@mui/material/Fade';
 import Backdrop from '@mui/material/Backdrop';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
 
 interface queryWorker {
   labors: number[];
@@ -37,6 +39,7 @@ const style = {
   height: '93%',
   bgcolor: '#292929',
   boxShadow: 24,
+  border: '2px solid #292929'
 };
 
 
@@ -171,7 +174,9 @@ const Negociacion = (props) => {
         console.error("Error fetching user profile:", error);
       })
       .finally(() => {
-        setLoading(false);
+        setTimeout(() => {
+          setLoading(false);
+        }, 500);
       });
   }
 
@@ -192,7 +197,9 @@ const Negociacion = (props) => {
         console.error("Error fetching user profile:", error);
       })
       .finally(() => {
-        setLoading(false);
+        setTimeout(() => {
+          setLoading(false);
+        }, 500);
       });
   }
 
@@ -384,7 +391,7 @@ const Negociacion = (props) => {
       <Fade in={props.isOpen}>
 
         <Box sx={style}>
-            {userId === 0 ? (
+            {(userId === 0 || loading) ? (
               <div className="w-full h-full flex flex-col items-center justify-center">
 
                 <PacmanLoader color="#FD7401" />
@@ -398,6 +405,10 @@ const Negociacion = (props) => {
                 </h2>
               </div>
             ) : (
+              <>
+                <IconButton color="inherent" onClick={handleClose}>
+                  <CloseIcon />
+                </IconButton>
                <div className="w-full h-full overflow-y-auto">
 
                 <ContenedorPerfil
@@ -414,7 +425,7 @@ const Negociacion = (props) => {
                 <section className="w-90 h-auto ml-4 border border-white border-solid px-8 py-4 rounded-3xl mr-8">
                   <h1 className="font-bold text-3xl textNaranja">Habilidades </h1>
                   <ul className="flex flex-wrap mt-4">
-                    {loading || !userData || !userData.skills ? (
+                    { !userData || !userData.skills ? (
                       <p>Cargando perfil...</p>
                     ) : (
                       <>
@@ -436,7 +447,7 @@ const Negociacion = (props) => {
                   <div className="w-1/2 h-96 flex flex-col p-1 overflow-y-auto">
                     <div className="w-full ml-4 mt-2 pr-8 h-auto flex flex-col p-1">
                       {/* <Comentarios isLoading={loading} comenData={userData}/> */}
-                      {loading || !userData || !userData.resumes ? (
+                      { !userData || !userData.resumes ? (
                         <p>No hay perfiles por mostrar...</p>
                       ) : (
                         <>
@@ -456,7 +467,7 @@ const Negociacion = (props) => {
                     </h1>
                     <div className="ml-4 mt-2 pr-8 w-full h-auto flex flex-col p-1">
                       {/* <Comentarios isLoading={loading} comenData={userData}/> */}
-                      {loading || !userData || !userData.comments ? (
+                      {!userData || !userData.comments ? (
                         <p>Cargando comentarios...</p>
                       ) : (
                         <>
@@ -511,6 +522,7 @@ const Negociacion = (props) => {
                   </div>
                 </section>
                </div>
+              </>
             )}
         </Box>
       </Fade>
