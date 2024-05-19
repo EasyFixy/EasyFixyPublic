@@ -156,7 +156,6 @@ const HomeEmpleador = () => {
     },[tipe])
     useEffect(() => {
         setTipe(searchParams.get('tipe'));
-        
         fetchPendingOffers();
         fetchPendingJobs();
         fetchDoneJobs();

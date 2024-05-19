@@ -155,8 +155,25 @@ const Negociacion = (props) => {
       },
     ],
   });
-  const handleClose = () => props.setIsOpen(false);
+  const handleClose = () => {
+    props.setIsOpen(false);
+    switch (props.tipe) {
+      case 'employer':
+        if (socket) {
+          socket.emit('notifyOponentWayOut', { destinataryId: bestWorkers[0].userId });
+        }
+        break;
+      case 'employee':
+        if (socket) {
+          socket.emit('notifyOponentWayOut', { destinataryId: userId });
+          setUserId(0);
+        }
+        break;
+      default:
+        console.log("error")
+    }
 
+  }
   function getInfoPerfil(userId) {
     setLoading(true);
     const options = {
@@ -300,6 +317,7 @@ const Negociacion = (props) => {
   }, [lastOponentChange]);
 
   function changeUser() {
+    console.log('bestE ',bestWorkers);
     if (bestWorkers != null) {
 
       switch (props.tipe) {
@@ -405,11 +423,11 @@ const Negociacion = (props) => {
                 </h2>
               </div>
             ) : (
-              <>
-                <IconButton color="inherent" onClick={handleClose}>
+              <div className="w-full h-full overflow-y-auto">
+                <IconButton  onClick={handleClose}>
                   <CloseIcon />
                 </IconButton>
-               <div className="w-full h-full overflow-y-auto">
+               <div className="w-full">
 
                 <ContenedorPerfil
                   userData={userData}
@@ -522,7 +540,7 @@ const Negociacion = (props) => {
                   </div>
                 </section>
                </div>
-              </>
+              </div>
             )}
         </Box>
       </Fade>
