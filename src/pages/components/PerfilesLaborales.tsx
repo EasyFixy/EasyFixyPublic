@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 
 
@@ -20,8 +20,7 @@ interface PropsPerfilesLaborales {
     showDescription?: boolean,
     isLoading: boolean,
     laboresData: LaboresData
-}
-
+}   
 
 
 const PerfilesLaborales = ({
@@ -34,27 +33,83 @@ const PerfilesLaborales = ({
     laboresData
 
 }:PropsPerfilesLaborales) => {
+
+    const [editing, setEditing] = useState(false);
+    const [titulo, setInputTitulo] = useState('');
+    const [time_experiencia, setInputExperiencia] = useState(0);
+    const [description, setInputDescription] = useState('');
+
+    const handleEditClick = () => {
+        setEditing(true);
+    };
+    const handleEditClick2 = () => {
+        setEditing(false);
+    };
+    const handleChangeTitulo = (event) => {
+        setInputTitulo(event.target.value);
+    };
+    const handleChangeExperiencia = (event) => {
+        setInputExperiencia(event.target.value);
+    };
+    const handleChangeDescription = (event) => {
+        setInputDescription(event.target.value);
+    };
+
     return(
         <div className='w-full h-auto flex flex-col rounded-3xl border-2 border-grey-500 p-4 mr-8'>
             <h1>
-            {isLoading && laboresData ? (
-                            <p>Cargando perfil...</p>
-                        ) : (
-                            <p className={`${textColor} font-bold`}>
-                                {laboresData.resumeTitleLabor} : + {laboresData.resumeTimeExperience} Años de experiencia
-                            </p>
-                            
-                        )}
+            {editing ? (
+                <>
+                <input
+                    type="text"
+                    className={`${textColor} font-bold w-[20%] border border-black p-1 rounded-2xl`}
+                    value={titulo}
+                    onChange={handleChangeTitulo}
+                />
+                <> : + </>
+                <input
+                    type="text"
+                    className={`${textColor} font-bold w-[8%] border border-black p-1 rounded-2xl`}
+                    value={time_experiencia}
+                    onChange={handleChangeExperiencia}
+                />
+                <> Años de experiencia </>
+                </>
+            ) : (
+                <>
+                {isLoading && laboresData ? (
+                    <p>Cargando perfil...</p>
+                ) : (
+                    <p className={`${textColor} font-bold`}>
+                        {laboresData.resumeTitleLabor} : + {laboresData.resumeTimeExperience} Años de experiencia
+                    </p>
+                    
+                )}
+                </>
+            )}
+            
             </h1>
             <h1>
-            {isLoading && laboresData ? (
-                            <p>Cargando perfil...</p>
-                        ) : (
-                            <p className={`${textColor}`}>
-                                {laboresData.resumeDescription} 
-                            </p>
+            {editing ? (
+                <input
+                    type="text"
+                    className={`${textColor} mt-2 font-bold border border-black p-1 rounded-2xl`}
+                    value={description}
+                    onChange={handleChangeDescription}
+                />
+            ) : (
+                <>
+                {isLoading && laboresData ? (
+                    <p>Cargando perfil...</p>
+                ) : (
+                    <p className={`${textColor}`}>
+                        {laboresData.resumeDescription} 
+                    </p>
                             
-                        )}
+                )}
+                </>
+            )}
+            
             </h1>
             <h1 className={`${textColor} font-bold`}>Labores</h1>
             <ul className="flex flex-row">
@@ -65,7 +120,20 @@ const PerfilesLaborales = ({
                             
                         )}
             </ul>
+            <button className='mt-4 bg-black h-8 text-white w-40 rounded-full border border-black border-solid text-sm mr-4 mb-1'>Editar labores</button>
+            <>
+            {editing ? (
+                <td className='flex flex-row'>
+                    <button className='mt-4 bg-black h-8 text-white w-40 rounded-full border border-black border-solid mb-6 text-sm mr-4'>Guardar</button>
+                    <button className='mt-4 bg-black h-8 text-white w-40 rounded-full border border-black border-solid mb-6 text-sm' onClick={handleEditClick2}>Cancelar</button>
+                </td>
+            ) : (
+                <button className=" mainBackground h-8 text-white w-40 rounded-full border border-black border-solid mb-6 text-sm" onClick={handleEditClick}>Editar</button>
+            )}
+            </>
             
+            
+
         </div>
     );
 }
