@@ -359,13 +359,14 @@ const Negociacion = (props) => {
 
   const acceptOfferEmployee = () => {
     closeNegotiationPage()
-    props.updateUserTempData(false)
+    handleClose();
   }
 
   const closeNegotiationPage = () => {
     console.log("cerrando")
     toast.success("Ya se está gestionando el pago, sigue pendiente al estado del trabajo");
     props.setPageStatusTipe("")
+    
   }
 
   const acceptOffer = () => {
