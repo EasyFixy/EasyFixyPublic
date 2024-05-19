@@ -23,21 +23,23 @@ const EditarPerfil = ({ onClose }) =>{
         if(verifyFields()){
             request();
             toast.info('Información cambiada con éxito');
-            window.location.reload();
+            setTimeout(() => {
+                window.location.reload();
+            }, 3000); // 5000 milisegundos = 5 segundos
         } else {
             toast.info('Revisa bien los campos');
         }
     }
 
     const verifyFields = () => {
-        if (Object.keys(formData).length === 0) {
-            toast.info('Debes seleccionar un país');
-            return false;
-        }
-        if (!formData.userPhoneNumber) {
-            toast.info('Debes ingresar un número de teléfono');
-            return false;
-        }
+        // if (Object.keys(formData).length === 0) {
+        //     toast.info('Debes seleccionar un país');
+        //     return false;
+        // }
+        // if (!formData.userPhoneNumber) {
+        //     toast.info('Debes ingresar un número de teléfono');
+        //     return false;
+        // }
         return true;
     }
 
@@ -47,6 +49,8 @@ const EditarPerfil = ({ onClose }) =>{
             [e.target.name]: e.target.value
         });
     };
+
+    console.log(formData.name);
 
     const request = () => {
         const data = {
@@ -64,7 +68,7 @@ const EditarPerfil = ({ onClose }) =>{
                 // Aquí puedes trabajar con los datos obtenidos en la respuesta            
                 if (result.token) {
                     console.log(result);
-                    window.location.reload();
+                    
                 }
             })
             .catch(error => {
