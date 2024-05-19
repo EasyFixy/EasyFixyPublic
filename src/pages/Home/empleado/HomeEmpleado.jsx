@@ -15,6 +15,7 @@ const HomeEmpleado = () => {
     const [checked, setChecked] = useState(false);
     //const searchParams = new URLSearchParams(location.search);
     const userEnPlataforma = useAppSelector((state) => state.Auth.id);
+    const [openNegociation, setOpenNegociation] = useState(tipe && tipe === "waitingBid");
 
     const updateUserTempData = (status, coords) => {
         let urlUpdateTempsData;
@@ -31,6 +32,7 @@ const HomeEmpleado = () => {
                     setChecked(status);
                     if (status === true) {
                         setTipe('waitingBid')
+                        setOpenNegociation(true);
                     }
                 } else {
                     toast.warn("Error cambiando estado");
@@ -52,7 +54,7 @@ const HomeEmpleado = () => {
         //setTipe(searchParams.get('tipe'));
         window.addEventListener('beforeunload', handleUnload);
     }, []);
-
+    console.log(openNegociation);
     return (
         <div className="w-screen h-screen flex flex-col">
 
@@ -63,7 +65,14 @@ const HomeEmpleado = () => {
                 <div className="w-3/4 h-auto ml-12 mr-4"><MisTrabajos /></div>
                 <div className="w-1/4 h-40 mr-8"><CajaGanancias /></div>
             </div>
-            {tipe && tipe === "waitingBid" ? (<Negociacion updateUserTempData={updateUserTempData} tipe={"employee"} setPageStatusTipe={setTipe}></Negociacion>) : ("")}
+            <Negociacion 
+                isOpen={openNegociation}
+                setIsOpen = {setOpenNegociation}
+                updateUserTempData={updateUserTempData} 
+                tipe={"employee"} 
+                setPageStatusTipe={setTipe}
+            >
+            </Negociacion>
         </div>
     )
 }

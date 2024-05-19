@@ -74,24 +74,24 @@ const NavbarEmpleado = (props) => {
         //navigate("/");
     }
 
-    const getUserStatus = () => {
-        fetch(`${baseUrl}getUserStatus?userId=${userEnPlataforma}`)
-            .then((response) => response.text())
-            .then((data) => {
-                const json = JSON.parse(data);
-                //console.log(json.data[0].userTempDataActive)
-                props.setChecked(json.data[0].userTempDataActive)
-                props.setTipe(json.data[0].userTempDataActive ? 'waitingBid' : null)
-            })
-            .catch((error) => {
-                console.error("Error fetching user status:", error);
-                toast.warn("Error interno");
-            })
-    }
+    // const getUserStatus = () => {
+    //     fetch(`${baseUrl}getUserStatus?userId=${userEnPlataforma}`)
+    //         .then((response) => response.text())
+    //         .then((data) => {
+    //             const json = JSON.parse(data);
+    //             //console.log(json.data[0].userTempDataActive)
+    //             props.setChecked(json.data[0].userTempDataActive)
+    //             props.setTipe(json.data[0].userTempDataActive ? 'waitingBid' : null)
+    //         })
+    //         .catch((error) => {
+    //             console.error("Error fetching user status:", error);
+    //             toast.warn("Error interno");
+    //         })
+    // }
 
-    useEffect(() => {
-        getUserStatus()
-    }, []);
+    // useEffect(() => {
+    //     getUserStatus()
+    // }, []);
 
     return (
         <div className="w-full h-8 color3 flex justify-between items-center p-4">
