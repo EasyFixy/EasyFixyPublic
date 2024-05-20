@@ -7,9 +7,9 @@ import MisTrabajos from "./MisTrabajos";
 import Negociacion from "../components/Negociacion";
 import { useAppSelector } from "../../../app/hooks";
 import { toast } from 'react-toastify';
+import Footer from "../../components/Footer.tsx";
 import HorizontalNavigator from "../Empleador/HorizontalNavigator";
 import { decodeJWT } from "../../../Helpers/Token";
-
 
 const HomeEmpleado = () => {
     const [tipe, setTipe] = useState();
@@ -134,7 +134,7 @@ const HomeEmpleado = () => {
     }, []);
 
     return (
-        <div className="w-screen h-screen flex flex-col">
+       <div className="w-screen h-screen flex flex-col overflow-y-auto pb-16">
 
             {/* <ToolbarDefault tipe="employee"/> */}
             <NavbarEmpleado checked={checked} setChecked={setChecked} setTipe={setTipe} updateUserTempData={updateUserTempData} />
@@ -148,8 +148,12 @@ const HomeEmpleado = () => {
                 </div>
             </div>
             {tipe && tipe === "waitingBid" ? (<Negociacion updateUserTempData={updateUserTempData} tipe={"employee"} setPageStatusTipe={setTipe}></Negociacion>) : ("")}
+             
+             <div className="mt-auto w-full">
+                <Footer />
+            </div>
         </div>
-    )
+    );
 }
 
 export default HomeEmpleado;

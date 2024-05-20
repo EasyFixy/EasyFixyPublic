@@ -2,9 +2,11 @@ import React from "react";
 import ToolbarDefault from "../components/ToolbarDefaul";
 import { Link } from "react-router-dom";
 import NavbarLandingPage from "../components/NavbarLandingPage";
+import Footer from "../components/Footer";
 
 const PoliciesPrivacy = () =>{
-    return(<div className='w-screen h-screen flex flex-col'>
+    return(<>
+    <div className='w-screen h-screen flex flex-col'>
     <NavbarLandingPage/>
     <div className="mt-[5%] flex-1 flex flex-row w-full overflow-y-scroll">
             <div className="w-4/6 flex flex-col px-[7%] pt-7 text-[#585858] text-base">
@@ -86,6 +88,8 @@ const PoliciesPrivacy = () =>{
 
             </div>
         </div>
-    </div>)
+    </div>
+    </>
+    )
 }
 export default PoliciesPrivacy;

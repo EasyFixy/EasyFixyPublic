@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
+import Footer from "../components/Footer";
 
 const LandingPage = () =>{
 
@@ -13,12 +13,13 @@ const LandingPage = () =>{
 
                 </div>
                 <div className="w-4/6 flex flex-row justify-between items-center font-bold text-base">
-                    <Link to={"/"}>¿Quienes somos?</Link>
+                    <Link to={"/about-us"}>¿Quienes somos?</Link>
                     <Link to={"/login"}>Iniciar sesión</Link>
                     <Link to={"/register"}>Registrarse</Link>
                 </div>
 
             </div>
+            
             <div className="w-screen h-screen overflow-y-scroll pt-20">
                 <div className="backgroundLanding w-full pt-[30px] px-[5%] flex flex-col justify-between h-full pb-20 text-white">
 
@@ -90,8 +91,9 @@ const LandingPage = () =>{
                         </li>
                     </ul>
                 </div>
-                
+                <Footer />
             </div>
+            
         </>
     );
 }

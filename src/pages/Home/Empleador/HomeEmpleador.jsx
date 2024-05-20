@@ -9,7 +9,9 @@ import NavigatorDisplayElement from "./NavigatorDisplayElement";
 import HorizontalNavigator from "./HorizontalNavigator";
 import Negociacion from "../components/Negociacion";
 import Modal from "../components/Modal";
+import Footer from "../../components/Footer.tsx";
 import { decodeJWT } from "../../../Helpers/Token";
+
 //import jwt from 'jsonwebtoken';
 const HomeEmpleador = () => {
     const [jobOffertedOffers, setJobOffertedOffers] = useState([]);
@@ -147,10 +149,10 @@ const HomeEmpleador = () => {
     }, []);
 
     return (
-        <div className='w-screen h-screen flex flex-col overflow-y-auto'>
-            {/* <ToolbarDefault tipe="employer" /> */}
+        <div className="w-screen h-screen flex flex-col overflow-y-auto pb-16">
+            {/* <ToolbarDefault tipe="employer" /> */} 
             <NavbarEmpleador></NavbarEmpleador>
-            <div className="flex flex-col justify-center w-full " style={{ padding: 30 + 'px' }}>
+            <div className="flex flex-col justify-center w-full" style={{ padding: 30 + 'px' }}>
                 <h2 className="text-4xl font-bold mt-4">Mis trabajos</h2>
                 <HorizontalNavigator callBackFunction = {openModal} sections={sections}></HorizontalNavigator>
                 <div>
@@ -160,9 +162,9 @@ const HomeEmpleador = () => {
             </div>
             {tipe && tipe === "negotiation" ? (<Negociacion tipe={'employer'} labors={laborsOfJobOffer} priceJobOffer={priceJobOffer} jobOfferId={jobOfferId}></Negociacion>) : ("")}
                 <Modal isOpen={isModalOpen} onClose={closeModal} jobData ={selectedJobData} jobType ={selectedJobType} />
-            
-
-
+            <div className="mt-auto w-full z-50 ">
+                <Footer />
+            </div>
         </div>
     )
 }
