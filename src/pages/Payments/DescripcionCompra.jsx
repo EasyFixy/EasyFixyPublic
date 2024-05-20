@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";      
-import { handleRequestWithToken } from "../../Helpers/Request";
 import { useAppSelector } from "../../app/hooks";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Link } from "react-router-dom";
 
 
 const DescripcionCompra = () => {
@@ -15,7 +15,6 @@ const DescripcionCompra = () => {
     const[jobDescription, setJobDescription] = useState();
     const[dateCreate, setDateCreate] = useState();
     const[jobTittle, setJobTittle] = useState();
-    console.log(jobOfferId, userId,price)
 
     const token = useAppSelector(state => state.Auth.token);
     console.log(token)
@@ -41,7 +40,6 @@ const DescripcionCompra = () => {
                 } else {
                     toast.warn("Error interno");
                 }
-                console.log(result)
             })
             .catch(error => {
                 console.error('Hubo un problema con la solicitud fetch:', error);
@@ -125,7 +123,7 @@ const DescripcionCompra = () => {
                         <tr className="flex justify-start text-1xl mt-1"><td>Persona a pagar </td><td className="ml-auto">{employeeName}</td></tr>
                         <tr className="flex justify-start text-1xl mt-1"><td>Valor a pagar</td><td className="ml-auto">${price}</td></tr>
                         <div className="flex flex-row justify-center mt-8">
-                            <button className="bg-[#292929] flex flex-row text-white justify-center items-center px-8 py-2 rounded-3xl"><img src="/icons/arrow-circle-left.svg" alt="volver" className="pr-2"/>Volver</button>
+                            <button> <Link to={'/my/home/employer'} className="bg-[#292929] flex flex-row text-white justify-center items-center px-8 py-2 rounded-3xl"><img src="/icons/arrow-circle-left.svg" alt="volver" className="pr-2"/>Volver </Link></button>
                             <button className="bg-[#FD7401] flex flex-row text-white justify-center items-center px-8 py-2 rounded-3xl ml-8" onClick={next}>Siguiente<img src="/icons/arrow-circle-right.svg" alt="siguiente" /></button>
                         </div>
                     </div>
