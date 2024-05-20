@@ -11,7 +11,7 @@ export const countries = {
   AG: "Antigua and Barbuda",
   AR: {
     name:"Argentina", 
-    prefijo:'+54'
+    prefijo:'54'
   },
   AM: "Armenia",
   AW: "Aruba",
@@ -33,7 +33,7 @@ export const countries = {
   BW: "Botswana",
   BR: {
     name:"Brazil", 
-    prefijo:'+55'
+    prefijo:'55'
   },
   IO: "British Indian Ocean Territory",
   BG: "Bulgaria",
@@ -48,12 +48,12 @@ export const countries = {
   TD: "Chad",
   CL: {
     name:"Chile", 
-    prefijo:'+56'
+    prefijo:'56'
   },
   CN: "China",
   CO: {
     name:"Colombia", 
-    prefijo:'+57'
+    prefijo:'57'
   },
   KM: "Comoros",
   CG: "Congo",
@@ -72,7 +72,7 @@ export const countries = {
   DO: "Dominican Republic",
   EC: {
     name:"Ecuador", 
-    prefijo:'+593'
+    prefijo:'593'
   },
   EG: "Egypt",
   SV: "El Salvador",
@@ -176,7 +176,7 @@ export const countries = {
   PY: "Paraguay",
   PE: {
     name:"Peru", 
-    prefijo:'+51'
+    prefijo:'51'
   },
   PH: "Philippines",
   PN: "Pitcairn",
@@ -233,13 +233,13 @@ export const countries = {
   US: "United States",
   UY: {
     name:"Uruguay", 
-    prefijo:'+598'
+    prefijo:'598'
   },
   UZ: "Uzbekistan",
   VU: "Vanuatu",
   VE: {
     name:"Venezuela", 
-    prefijo:'+58'
+    prefijo:'58'
   },
   VN: "Viet Nam",
   VI: "Virgin Islands",
