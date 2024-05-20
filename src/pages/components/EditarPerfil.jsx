@@ -83,7 +83,17 @@ const EditarPerfil = () =>{
                     <button className="w-full backgroundVerde h-14 text-white w-64 rounded-full border border-black border-solid mb-6">Cancelar</button>
 
                 </form>
-
+            <p>dasd</p>
+            <p>dasd</p>
+            <p>dasd</p>
+            <p>dasd</p>
+            <p>dasd</p>
+            <p>dasd</p>
+            <p>dasd</p>
+            <p>dasd</p>
+            <p>dasd</p>
+            <p>dasd</p>
+            
         </div>
     )
 

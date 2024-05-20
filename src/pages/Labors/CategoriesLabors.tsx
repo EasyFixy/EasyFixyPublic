@@ -4,6 +4,7 @@ import { useLocation } from 'react-router-dom';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { login } from "../../features/Auth/Auth";
 
 const trabajos = [
     {
@@ -87,6 +88,7 @@ const CategoriesLabors = () => {
     const baseUrl = import.meta.env.VITE_BASE_URL;
     // Obtener valores específicos de la URL
     const tipe = searchParams.get('tipe');
+    
 
     const [selectedCategory, setCategorySelected] = useState<string>('');
     const [selectedLabors, setSelectedLabors] = useState<number[]>([]);
@@ -210,12 +212,37 @@ const CategoriesLabors = () => {
         }
     }
 
+    const editLaborsToResume = () => {
+        console.log("opirmido")
+        const idResume = searchParams.get('resumeId');
+        console.log(idResume);
+        
+        if (idResume) {
+
+            if (selectedLabors.length < 1) {
+                toast.warn("Seleccione almenos una labor");
+            } else {
+                console.log(selectedLabors)
+                const job: Job = {
+                    // aca manejar los datos
+                }
+                saveJobToDB(job);
+            }
+        } else {
+            toast.warn("Datos incompletos sección anterior");
+        }
+        
+    }
+    
+
     const handleSaveInfoCategories = () => {
         if (tipe) {
             if (tipe === "createResume") {
                 saveCategoriesToResume();
             } else if(tipe === "createJob"){
                 saveCategoriesToJob();
+            } else if(tipe === "modifyResume") {
+                editLaborsToResume();
             }
         }
     }
@@ -270,6 +297,7 @@ const CategoriesLabors = () => {
                 console.error('Error al enviar los datos:', error);
             });
     }
+    
 
     useEffect(() => {
         fetchCategories();
@@ -296,6 +324,9 @@ const CategoriesLabors = () => {
             fetchLabors(index);
         }
     }
+    console.log(categories);
+    
+    
     return (
         <div className="w-screen h-screen flex flex-col">
             {/* <ToolbarDefault tipe={tipe === "createResume" ? ("employee") : ("employer")} /> */}

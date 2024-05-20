@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 
 interface LaboresData {
+    resumeId: number,
     resumeDescription: string,
     resumeTimeExperience: number,
     resumeTitleLabor: string,
@@ -120,7 +121,7 @@ const PerfilesLaborales = ({
                             
                         )}
             </ul>
-            <button className='mt-4 bg-black h-8 text-white w-40 rounded-full border border-black border-solid text-sm mr-4 mb-1'>Editar labores</button>
+            <Link to={`/my/categories?tipe=modifyResume&resumeId=${laboresData.resumeId}`} className='mt-4 bg-black h-8 text-white w-40 rounded-full border border-black border-solid text-sm mr-4 mb-1 flex items-center justify-center text-center'>Editar labores</Link>
             <>
             {editing ? (
                 <td className='flex flex-row'>
