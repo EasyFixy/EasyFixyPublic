@@ -10,6 +10,7 @@ import HorizontalNavigator from "./HorizontalNavigator";
 import Negociacion from "../components/Negociacion";
 import Modal from "../components/Modal";
 import Footer from "../../components/Footer.tsx";
+import { decodeJWT } from "../../../Helpers/Token";
 
 //import jwt from 'jsonwebtoken';
 const HomeEmpleador = () => {
@@ -68,19 +69,6 @@ const HomeEmpleador = () => {
         },
     ]
     const token = localStorage.getItem('token');
-
-    function decodeJWT() {
-        const token = localStorage.getItem('token');
-        if (token) {
-            const base64Url = token.split('.')[1];
-            const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-            const jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
-                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-            }).join(''));
-
-            return JSON.parse(jsonPayload);
-        }
-    }
 
     const fetchPendingOffers = () => {
         const token = decodeJWT()
