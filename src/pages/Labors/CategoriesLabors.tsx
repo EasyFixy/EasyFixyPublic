@@ -5,6 +5,7 @@ import { Navigate, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { login } from "../../features/Auth/Auth";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
 
 const trabajos = [
     {
@@ -88,6 +89,11 @@ const CategoriesLabors = () => {
     const baseUrl = import.meta.env.VITE_BASE_URL;
     // Obtener valores específicos de la URL
     const tipe = searchParams.get('tipe');
+    const token = useAppSelector(state => state.Auth.token);
+    
+    const categoryId = searchParams.get('category'); // New - category ID from URL
+    const laborIds = searchParams.get('labors')?.split(',').map(id => parseInt(id)); // New - labor IDs from URL
+    
     
 
     const [selectedCategory, setCategorySelected] = useState<string>('');
@@ -95,7 +101,8 @@ const CategoriesLabors = () => {
     const [categories, setCategories] = useState<Category[]>([]);
     const [renderLabors, setRenderLabors] = useState<Labor[]>([]);
     
-
+    const [categoriesLoaded, setCategoriesLoaded] = useState(true);
+    
     const saveResumeToDB = (resume: Resume) => {
         console.log(JSON.stringify(resume))
         fetch(`${baseUrl}createLaboralUserResume`, {
@@ -213,26 +220,51 @@ const CategoriesLabors = () => {
     }
 
     const editLaborsToResume = () => {
-        console.log("opirmido")
-        const idResume = searchParams.get('resumeId');
-        console.log(idResume);
-        
-        if (idResume) {
-
+        console.log("oprimido");
+        const resumeId = searchParams.get('resumeId');
+    
+        if (resumeId) {
             if (selectedLabors.length < 1) {
-                toast.warn("Seleccione almenos una labor");
+                toast.warn("Seleccione al menos una labor");
             } else {
-                console.log(selectedLabors)
-                const job: Job = {
-                    // aca manejar los datos
-                }
-                saveJobToDB(job);
+                console.log(selectedLabors);
+                const url = `${baseUrl}updateLaborUserResume`;
+    
+                const requestBody = {
+                    token: token,
+                    resumeId: resumeId,
+                    laborIds: selectedLabors
+                };
+    
+                fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json' // Asegura que el servidor espera un cuerpo JSON
+                    },
+                    body: JSON.stringify(requestBody) // Convierte los datos a JSON
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('La solicitud no fue exitosa');
+                    }
+                    return response.json(); // Si esperas una respuesta JSON
+                })
+                .then(result => {
+                    // Aquí puedes trabajar con los datos obtenidos en la respuesta            
+                    if (result) {
+                        console.log(result);
+                        window.location.href = '/my/profile/employee'; // Redirige a la página de inicio
+                    }
+                })
+                .catch(error => {
+                    console.error('Hubo un problema con la solicitud fetch:', error);
+                });
             }
         } else {
-            toast.warn("Datos incompletos sección anterior");
+            toast.warn("No se recibió el id del resume, intenta más tarde.");
         }
-        
     }
+    
     
 
     const handleSaveInfoCategories = () => {
@@ -246,6 +278,8 @@ const CategoriesLabors = () => {
             }
         }
     }
+
+    
 
     const fetchCategories = () => {
         fetch(`${baseUrl}getJobCategories`)
@@ -302,6 +336,24 @@ const CategoriesLabors = () => {
     useEffect(() => {
         fetchCategories();
     }, []);
+
+    useEffect(() => {
+        if (categoriesLoaded && tipe === "modifyResume" && categoryId) {
+            const categoryIndex = categories.findIndex(cat => cat.laborCategoryId === parseInt(categoryId));
+            if (categoryIndex !== -1) {
+                setCategorySelected(categoryIndex.toString());
+                if (categories[categoryIndex].labors) {
+                    setRenderLabors(categories[categoryIndex].labors);
+                } else {
+                    fetchLabors(categoryIndex);
+                }
+                if (laborIds) {
+                    setSelectedLabors(laborIds);
+                }
+            }
+        }
+        
+    }, [categories, tipe]);
 
     const handleCheckboxChange = (index: number) => {
         const updatedSelectedLabors = [...selectedLabors];

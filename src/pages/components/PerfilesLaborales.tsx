@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
-
+import { toast } from 'react-toastify';
+import { useAppSelector } from "../../app/hooks";
 
 interface LaboresData {
     resumeId: number,
@@ -8,6 +9,8 @@ interface LaboresData {
     resumeTimeExperience: number,
     resumeTitleLabor: string,
     labors: {
+        laborCategoryId: number,
+        laborId: number,
         laborName: string
     }[];
 }
@@ -36,9 +39,13 @@ const PerfilesLaborales = ({
 }:PropsPerfilesLaborales) => {
 
     const [editing, setEditing] = useState(false);
-    const [titulo, setInputTitulo] = useState('');
-    const [time_experiencia, setInputExperiencia] = useState(0);
-    const [description, setInputDescription] = useState('');
+    const [titulo, setInputTitulo] = useState(laboresData.resumeTitleLabor);
+    const [time_experiencia, setInputExperiencia] = useState(laboresData.resumeTimeExperience);
+    const [description, setInputDescription] = useState(laboresData.resumeDescription);
+    const baseUrl = import.meta.env.VITE_BASE_URL;
+    const token = useAppSelector(state => state.Auth.token);
+    
+    
 
     const handleEditClick = () => {
         setEditing(true);
@@ -56,6 +63,66 @@ const PerfilesLaborales = ({
         setInputDescription(event.target.value);
     };
 
+    const validationFields = () => {
+        if(time_experiencia!=0 && titulo!='' && description!=''){
+            console.log('holaaa');
+            request();
+            handleEditClick2();
+            
+        }else{
+            toast.warn("No deje campos vacios");
+        }
+    }
+
+    const request = () => {
+        const url = `${baseUrl}updateUserResume`;
+        
+        const requestData = {
+            token: token,
+            resumeId: laboresData.resumeId,
+            resumeTitleLabor: titulo,
+            resumeTimeExperience: time_experiencia,
+            resumeDescription: description
+        };
+    
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json' // Asegura que el servidor espera un cuerpo JSON
+            },
+            body: JSON.stringify(requestData) // Convierte los datos a JSON
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('La solicitud no fue exitosa');
+            }
+            return response.json(); // Si esperas una respuesta JSON
+        })
+        .then(result => {
+            // Aquí puedes trabajar con los datos obtenidos en la respuesta            
+            if (result) {
+                console.log('Tamo bien');
+                console.log(result);
+            }
+        })
+        .catch(error => {
+            console.error('Hubo un problema con la solicitud fetch:', error);
+        });
+    };
+    
+    
+
+    useEffect(() => {
+        setInputTitulo(laboresData.resumeTitleLabor);
+        setInputExperiencia(laboresData.resumeTimeExperience);
+        setInputDescription(laboresData.resumeDescription);
+    }, [laboresData]);
+
+    // Crear un arreglo de los IDs de todas las labores
+    const laborIds = laboresData.labors.map(labor => labor.laborId);
+    console.log(laborIds);
+    
+
     return(
         <div className='w-full h-auto flex flex-col rounded-3xl border-2 border-grey-500 p-4 mr-8'>
             <h1>
@@ -63,15 +130,17 @@ const PerfilesLaborales = ({
                 <>
                 <input
                     type="text"
-                    className={`${textColor} font-bold w-[20%] border border-black p-1 rounded-2xl`}
+                    className={`${textColor} font-bold w-[20%] border border-black p-1 rounded-2xl pl-2`}
                     value={titulo}
+                    placeholder={titulo}
                     onChange={handleChangeTitulo}
                 />
                 <> : + </>
                 <input
-                    type="text"
-                    className={`${textColor} font-bold w-[8%] border border-black p-1 rounded-2xl`}
+                    type="age"
+                    className={`${textColor} font-bold w-[8%] border border-black p-1 rounded-2xl pl-2`}
                     value={time_experiencia}
+                    placeholder={time_experiencia}
                     onChange={handleChangeExperiencia}
                 />
                 <> Años de experiencia </>
@@ -82,7 +151,7 @@ const PerfilesLaborales = ({
                     <p>Cargando perfil...</p>
                 ) : (
                     <p className={`${textColor} font-bold`}>
-                        {laboresData.resumeTitleLabor} : + {laboresData.resumeTimeExperience} Años de experiencia
+                        {titulo} : + {time_experiencia} Años de experiencia
                     </p>
                     
                 )}
@@ -94,8 +163,9 @@ const PerfilesLaborales = ({
             {editing ? (
                 <input
                     type="text"
-                    className={`${textColor} mt-2 font-bold border border-black p-1 rounded-2xl`}
+                    className={`${textColor} mt-2 font-bold border border-black p-1 rounded-2xl pl-2`}
                     value={description}
+                    placeholder={description}
                     onChange={handleChangeDescription}
                 />
             ) : (
@@ -104,7 +174,7 @@ const PerfilesLaborales = ({
                     <p>Cargando perfil...</p>
                 ) : (
                     <p className={`${textColor}`}>
-                        {laboresData.resumeDescription} 
+                        {description} 
                     </p>
                             
                 )}
@@ -121,11 +191,11 @@ const PerfilesLaborales = ({
                             
                         )}
             </ul>
-            <Link to={`/my/categories?tipe=modifyResume&resumeId=${laboresData.resumeId}`} className='mt-4 bg-black h-8 text-white w-40 rounded-full border border-black border-solid text-sm mr-4 mb-1 flex items-center justify-center text-center'>Editar labores</Link>
+            <Link to={`/my/categories?tipe=modifyResume&resumeId=${laboresData.resumeId}&category=${laboresData.labors[0].laborCategoryId}&labors=${laborIds}`} className='mt-4 bg-black h-8 text-white w-40 rounded-full border border-black border-solid text-sm mr-4 mb-1 flex items-center justify-center text-center'>Editar labores</Link>
             <>
             {editing ? (
                 <td className='flex flex-row'>
-                    <button className='mt-4 bg-black h-8 text-white w-40 rounded-full border border-black border-solid mb-6 text-sm mr-4'>Guardar</button>
+                    <button className='mt-4 bg-black h-8 text-white w-40 rounded-full border border-black border-solid mb-6 text-sm mr-4' onClick={validationFields}>Guardar</button>
                     <button className='mt-4 bg-black h-8 text-white w-40 rounded-full border border-black border-solid mb-6 text-sm' onClick={handleEditClick2}>Cancelar</button>
                 </td>
             ) : (
