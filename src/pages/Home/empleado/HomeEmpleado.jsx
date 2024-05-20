@@ -16,6 +16,7 @@ const HomeEmpleado = () => {
     const baseUrl = import.meta.env.VITE_BASE_URL;
     const token = useAppSelector((state) => state.Auth.token);
     const [checked, setChecked] = useState(false);
+    const [profit, setProfit] = useState();
     const [jobPendingOffers, setJobPendingOffers] = useState([]);
     const [jobsDone, setJobsDone] = useState([]);
     const sections = [
@@ -52,6 +53,29 @@ const HomeEmpleado = () => {
         }
         //fetch()
     }
+    const fetchUserProfit = () => {
+        const token = decodeJWT()
+        if (token) {
+            fetch(`${baseUrl}getUserProfit?token=${localStorage.getItem('token')}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    setProfit(data.data[0].totalProfit)
+
+                    // Aquí puedes hacer algo con los datos, como actualizar el estado de un componente en React
+                })
+                .catch(error => {
+                    console.error('Fetch error:', error);
+                    // Aquí puedes manejar errores, como mostrar un mensaje de error al usuario
+                });
+        } else {
+        }
+        //fetch()
+    }
     const fetchPendingJobs = () => {
         const token = decodeJWT()
         if (token) {
@@ -76,6 +100,7 @@ const HomeEmpleado = () => {
         //fetch()
     }
     useEffect(() => {
+        fetchUserProfit();
         fetchPendingJobs();
         fetchDoneJobs();
     }, []);
@@ -144,7 +169,7 @@ const HomeEmpleado = () => {
                 <div className="w-full flex flex-row ">
 
                     <HorizontalNavigator callBackFunction = {openModal} sections={sections}></HorizontalNavigator>
-                    <div className=" w-[30%] h-40 ml-8"><CajaGanancias /></div>
+                    <div className=" w-[30%] h-40 ml-8"><CajaGanancias profit={profit}/></div>
                 </div>
             </div>
             {tipe && tipe === "waitingBid" ? (<Negociacion updateUserTempData={updateUserTempData} tipe={"employee"} setPageStatusTipe={setTipe}></Negociacion>) : ("")}
