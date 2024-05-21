@@ -66,10 +66,14 @@ const ContenedorPerfil = ({
         acno=userData.tempData[0].userTempDataLastUpdate.slice(0, 4);
 
     }
+
+    const handleCloseComponente = () => {
+        setEstadoDialog(false);
+      };
     
     return (
         <div className={` content-center ${paddingX} pt-10  ${width} h-auto flex flex-row`}>
-            <div>{(estadoDialog === true ? <EditarPerfil /> : <></>)}</div>
+            <div>{(estadoDialog === true ? <EditarPerfil onClose={handleCloseComponente} /> : <></>)}</div>
             <div className="w-1/3 pl-16 pr-16 pb-16"><img src="/icons/icon-user.png" alt="Imagen usuario" className="bg-gray-300 px-2 py-2 w-full aspect-square" /></div>
             <div className="px-16 flex flex-col w-2/3">
                 <div>

@@ -41,10 +41,10 @@ const LandingPage = () =>{
                         </li>
                     </ul>
                     <div className="flex flex-row text-[2vw] h-12 gap-14 ">
-                        <Link to={"/login"}className="mainBackground h-full rounded-full">
+                        <Link to={"/login"}className="mainBackground h-full rounded-full flex items-center justify-center px-4">
                             Contrata ahora mismo
                         </Link>
-                        <Link to={"/login"} className="bg-black h-full rounded-full w-fit px-3 text-[2vw]">
+                        <Link to={"/login"} className="bg-black h-full rounded-full w-fit flex items-center justify-center px-4 text-[2vw]">
                             Gana dinero realizando trabajos
                         </Link>
                     </div>
@@ -63,31 +63,28 @@ const LandingPage = () =>{
                     </h1>
                     <ul className="text-[3vw]">
                         <li>
-                            Electricista
+                            Comercial y Ventas
                         </li>
                         <li>
-                            Carpintero
+                            Informática
                         </li>
                         <li>
-                            técnico de electrodomésticos
+                            Artes y Oficios
                         </li>
                         <li>
-                            Plomero
+                            Turismo
                         </li>
                         <li>
-                            Técnico de gas
+                            Restauración
                         </li>
                         <li>
-                            Mudanzas
+                            Técnicos
                         </li>
                         <li>
-                            Pintor de interiores o exteriores
+                            Compras y logística
                         </li>
                         <li>
-                            Limpiador de muebles
-                        </li>
-                        <li>
-                            Personal de limpiez
+                            Profesiones varias
                         </li>
                     </ul>
                 </div>
