@@ -163,6 +163,9 @@ const HomeEmpleador = () => {
                     </button></Link>
                 </div>
             </div>
+            <div className="mt-auto w-full z-50 ">
+                {/*<Footer />*/}
+            </div>
             <Negociacion 
                 isOpen={openNegociation}
                 setIsOpen = {setOpenNegociation}
@@ -173,9 +176,7 @@ const HomeEmpleador = () => {
 
             </Negociacion>
                 <Modal isOpen={isModalOpen} onClose={closeModal} jobData ={selectedJobData} jobType ={selectedJobType} />
-            <div className="mt-auto w-full z-50 ">
-                <Footer />
-            </div>
+            
         </div>
     )
 }
