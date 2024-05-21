@@ -31,6 +31,7 @@ const HomeEmpleador = () => {
     const laborsOfJobOffer = laborsUriComponent ? JSON.parse(laborsUriComponent) : null;
 
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [openNegociation, setOpenNegociation] = useState(tipe && tipe === "negotiation");
 
     const openModal = (jobId, jobData) => {
             // Buscamos el trabajo en las secciones
@@ -139,10 +140,12 @@ const HomeEmpleador = () => {
         }
         //fetch()
     }
+    useEffect(()=>{
+        setOpenNegociation(tipe && tipe === "negotiation");
 
+    },[tipe])
     useEffect(() => {
         setTipe(searchParams.get('tipe'));
-
         fetchPendingOffers();
         fetchPendingJobs();
         fetchDoneJobs();
@@ -160,7 +163,15 @@ const HomeEmpleador = () => {
                     </button></Link>
                 </div>
             </div>
-            {tipe && tipe === "negotiation" ? (<Negociacion tipe={'employer'} labors={laborsOfJobOffer} priceJobOffer={priceJobOffer} jobOfferId={jobOfferId}></Negociacion>) : ("")}
+            <Negociacion 
+                isOpen={openNegociation}
+                setIsOpen = {setOpenNegociation}
+                tipe={'employer'} 
+                labors={laborsOfJobOffer} 
+                priceJobOffer={priceJobOffer} 
+                jobOfferId={jobOfferId}>
+
+            </Negociacion>
                 <Modal isOpen={isModalOpen} onClose={closeModal} jobData ={selectedJobData} jobType ={selectedJobType} />
             <div className="mt-auto w-full z-50 ">
                 <Footer />

@@ -30,6 +30,7 @@ const HomeEmpleado = () => {
     ]
     //const searchParams = new URLSearchParams(location.search);
     const userEnPlataforma = useAppSelector((state) => state.Auth.id);
+    const [openNegociation, setOpenNegociation] = useState(tipe && tipe === "waitingBid");
 
     const fetchDoneJobs = () => {
         const token = decodeJWT()
@@ -136,6 +137,7 @@ const HomeEmpleado = () => {
                     setChecked(status);
                     if (status === true) {
                         setTipe('waitingBid')
+                        setOpenNegociation(true);
                     }
                 } else {
                     toast.warn("Error cambiando estado");
@@ -152,12 +154,15 @@ const HomeEmpleado = () => {
         console.log('La página se está cerrando...');
         updateUserTempData(false)
     };
+    const setCloseNegociation = () => {
+        setOpenNegociation(false);
+        updateUserTempData(false);
+    }
 
     useEffect(() => {
         //setTipe(searchParams.get('tipe'));
         window.addEventListener('beforeunload', handleUnload);
     }, []);
-
     return (
        <div className="w-screen h-screen flex flex-col overflow-y-auto pb-16">
 
@@ -172,11 +177,19 @@ const HomeEmpleado = () => {
                     <div className=" w-[30%] h-40 ml-8"><CajaGanancias profit={profit}/></div>
                 </div>
             </div>
-            {tipe && tipe === "waitingBid" ? (<Negociacion updateUserTempData={updateUserTempData} tipe={"employee"} setPageStatusTipe={setTipe}></Negociacion>) : ("")}
-             
+            <Negociacion 
+                isOpen={openNegociation}
+                setIsOpen = {setCloseNegociation}
+                updateUserTempData={updateUserTempData} 
+                tipe={"employee"} 
+                setPageStatusTipe={setTipe}
+            >
+            </Negociacion>
+
              <div className="mt-auto w-full">
                 <Footer />
             </div>
+
         </div>
     );
 }
