@@ -95,7 +95,7 @@ const VisualizarPerfil = () => {
         getInfoPerfil();
     }, []);
 
-    console.log(userData);
+    console.log("Los resumes: ",userData.resumes);
     
 
     return (
@@ -156,6 +156,15 @@ const VisualizarPerfil = () => {
                 </div>
 
             </div>
+
+                    
+           <p>&nbsp;</p>     
+           <p>&nbsp;</p>     
+           <p>&nbsp;</p>     
+           <p>&nbsp;</p>         
+           <p>&nbsp;</p>     
+           <p>&nbsp;</p>     
+           <p></p>     
 
         </div>
     );
