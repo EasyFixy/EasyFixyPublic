@@ -138,7 +138,7 @@ const ToolbarDefault = (props) => {
 
             <div className="flex flex-row justify-start items-center">
                 <div className="flex flex-row">
-                    <img src="/icons/llaves.svg" alt="llaves" className="w-10 pl-2.5" />
+        <           img src={checked ? "/icons/LlavesNegras.svg": "/icons/llaves.svg" } alt="llaves" className="w-10 pl-2.5" />
                 </div>
 
                 {/* switch para intercambiar de rol */}
@@ -165,7 +165,7 @@ const ToolbarDefault = (props) => {
                 </label>
 
                 <div className="flex flex-row">
-                    <img src="/icons/user-icon.svg" alt="usuario" className="w-10 pl-2.5" />
+                    <img src={checked ?  "/icons/UserGris.svg": "/icons/user-icon.svg"} alt="usuario" className="w-10 pl-2.5" />
                 </div>
             </div>
 

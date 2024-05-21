@@ -38,9 +38,10 @@ body {
     /* #27806C; */
     --colorVerde: #FD7401;
     --color3: #292929;
-    --colorNaranja: rgb(253,116,1);
+    --color2: #666666; 
+    --colorNaranja: #FD7401;
     --colorGris: rgb(41,41,41);
-}
+}   
 .mainBackground{
     background-color: var(--colorNaranja);
 }
@@ -50,6 +51,9 @@ body {
 
 .color3{
     background-color: var(--color3);
+}
+.color2{
+    background-color: var(--color2);
 }
 
 .color4{

@@ -8,12 +8,7 @@ import { Link } from "react-router-dom";
 const NaigatorMenuElement = (props) => {
 
     const handleClick = (e) => {
-        console.log("oprimió")
-        props.handleInputChange({target:{value:""}})
         props.setSeccionActiva(props.index)
-        props.handleInputChange({target:{value:""}})
-        //e.target.click();
-        //props.handleInputChange({target:{value:""}})
     }
 
     return (

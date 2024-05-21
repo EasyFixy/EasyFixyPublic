@@ -13,9 +13,7 @@ const HorizontalNavigator = (props) => {
     const [seccionActiva, setSeccionActiva] = useState(0);
     const [inputValue, setInputValue] = useState('');
     const [datosFiltrados, setDatosFiltrados] = useState(props.sections[seccionActiva].array);
-    console.log(props.sections);
     const handleInputChange = (event) => {
-        console.log("sellamo")
         setInputValue(event.target.value);
         const filtrados = props.sections[seccionActiva].array.filter(item =>
             item.jobOfferTittle.toLowerCase().includes(event.target.value.toLowerCase())
@@ -23,19 +21,26 @@ const HorizontalNavigator = (props) => {
         );
 
         setDatosFiltrados(filtrados);
-        console.log(datosFiltrados)
     };
 
     useEffect(() => {
-        handleInputChange({target:{value:""}})
-    }, []); // Ejecutamos el efecto cada vez que cambie estadoPadre
+        handleInputChange({ target: { value: "" } });
+        setDatosFiltrados(props.sections[seccionActiva].array);
+    }, [seccionActiva, props.sections]); 
 
     return (
         <div className="" style={{ width: '70%' }}>
             <div className="w-100">
                 <div className="flex">
                     {props.sections.map((section, index) => (
-                        <NaigatorMenuElement index={index} name={section.name} datosFiltrados={datosFiltrados} seccionActiva={seccionActiva} handleInputChange={handleInputChange} setSeccionActiva={setSeccionActiva}></NaigatorMenuElement>
+                        <NaigatorMenuElement 
+                        index={index} 
+                        name={section.name} 
+                        datosFiltrados={datosFiltrados} 
+                        seccionActiva={seccionActiva} 
+                        setSeccionActiva={setSeccionActiva}
+                        >
+                        </NaigatorMenuElement>
                     ))}
                 </div>
                 <div className="mt-4 relative w-full">
@@ -54,9 +59,12 @@ const HorizontalNavigator = (props) => {
                 </div>
                 <div className="rounded-xl shadow-2xl p-6 m-6">
                     <div className="">
-                        {props.sections.map((section, index) => (
-                            <NavigatorDisplayElement callBackFunction={props.callBackFunction} seccionActiva={seccionActiva} datosFiltrados={datosFiltrados.length > 0 ? datosFiltrados : section.array} index={index} array={section.array} ></NavigatorDisplayElement>
-                        ))}
+                    <NavigatorDisplayElement
+                        callBackFunction={props.callBackFunction}
+                        seccionActiva={seccionActiva}
+                        datosFiltrados={datosFiltrados.length > 0 ? datosFiltrados : props.sections[seccionActiva].array}
+                        array={props.sections[seccionActiva].array}
+                    />
                     </div>
                 </div>
             </div>
