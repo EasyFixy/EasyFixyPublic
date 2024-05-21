@@ -14,6 +14,7 @@ import UserChats from "../pages/Chats/UserChats";
 import RetirarDinero from '../pages/Payments/RetirarDinero';
 import DescripcionCompra from "../pages/Payments/DescripcionCompra";
 import ToolbarDefault from "../pages/components/ToolbarDefaul";
+import ResumenPago from "../pages/Home/components/ResumenPago";
 
 const UserLogueado = () => {
     const dispatch = useAppDispatch();
@@ -37,6 +38,7 @@ const UserLogueado = () => {
             <Route path='chats' element={<UserChats/>}/>
             <Route path="/retirarDinero" element={<RetirarDinero/>} />
             <Route path="/buyDescription" element={<DescripcionCompra/>} />
+            <Route path="/resumenTrans" element={<ResumenPago/>} />
         </Routes>
         </>
     )

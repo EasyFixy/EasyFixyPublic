@@ -63,31 +63,28 @@ const LandingPage = () =>{
                     </h1>
                     <ul className="text-[3vw]">
                         <li>
-                            Electricista
+                            Comercial y Ventas
                         </li>
                         <li>
-                            Carpintero
+                            Informática
                         </li>
                         <li>
-                            técnico de electrodomésticos
+                            Artes y Oficios
                         </li>
                         <li>
-                            Plomero
+                            Turismo
                         </li>
                         <li>
-                            Técnico de gas
+                            Restauración
                         </li>
                         <li>
-                            Mudanzas
+                            Técnicos
                         </li>
                         <li>
-                            Pintor de interiores o exteriores
+                            Compras y logística
                         </li>
                         <li>
-                            Limpiador de muebles
-                        </li>
-                        <li>
-                            Personal de limpiez
+                            Profesiones varias
                         </li>
                     </ul>
                 </div>
