@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
+import Footer from "../components/Footer";
 
 const LandingPage = () =>{
 
@@ -13,12 +13,13 @@ const LandingPage = () =>{
 
                 </div>
                 <div className="w-4/6 flex flex-row justify-between items-center font-bold text-base">
-                    <Link to={"/"}>¿Quienes somos?</Link>
+                    <Link to={"/about-us"}>¿Quienes somos?</Link>
                     <Link to={"/login"}>Iniciar sesión</Link>
                     <Link to={"/register"}>Registrarse</Link>
                 </div>
 
             </div>
+            
             <div className="w-screen h-screen overflow-y-scroll pt-20">
                 <div className="backgroundLanding w-full pt-[30px] px-[5%] flex flex-col justify-between h-full pb-20 text-white">
 
@@ -62,36 +63,34 @@ const LandingPage = () =>{
                     </h1>
                     <ul className="text-[3vw]">
                         <li>
-                            Electricista
+                            Comercial y Ventas
                         </li>
                         <li>
-                            Carpintero
+                            Informática
                         </li>
                         <li>
-                            técnico de electrodomésticos
+                            Artes y Oficios
                         </li>
                         <li>
-                            Plomero
+                            Turismo
                         </li>
                         <li>
-                            Técnico de gas
+                            Restauración
                         </li>
                         <li>
-                            Mudanzas
+                            Técnicos
                         </li>
                         <li>
-                            Pintor de interiores o exteriores
+                            Compras y logística
                         </li>
                         <li>
-                            Limpiador de muebles
-                        </li>
-                        <li>
-                            Personal de limpieza
+                            Profesiones varias
                         </li>
                     </ul>
                 </div>
-                
+                <Footer />
             </div>
+            
         </>
     );
 }
