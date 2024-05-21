@@ -40,10 +40,10 @@ const LandingPage = () =>{
                         </li>
                     </ul>
                     <div className="flex flex-row text-[2vw] h-12 gap-14 ">
-                        <Link to={"/login"}className="mainBackground h-full rounded-full">
+                        <Link to={"/login"}className="mainBackground h-full rounded-full flex items-center justify-center px-4">
                             Contrata ahora mismo
                         </Link>
-                        <Link to={"/login"} className="bg-black h-full rounded-full w-fit px-3 text-[2vw]">
+                        <Link to={"/login"} className="bg-black h-full rounded-full w-fit flex items-center justify-center px-4 text-[2vw]">
                             Gana dinero realizando trabajos
                         </Link>
                     </div>
@@ -86,7 +86,7 @@ const LandingPage = () =>{
                             Limpiador de muebles
                         </li>
                         <li>
-                            Personal de limpiez
+                            Personal de limpieza
                         </li>
                     </ul>
                 </div>
