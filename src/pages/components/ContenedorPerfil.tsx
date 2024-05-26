@@ -74,8 +74,11 @@ const ContenedorPerfil = ({
     return (
         <div className={` content-center ${paddingX} pt-10  ${width} h-auto flex flex-row`}>
             <div>{(estadoDialog === true ? <EditarPerfil onClose={handleCloseComponente} /> : <></>)}</div>
-            <div className="w-1/3 pl-16 pr-16 pb-16"><img src="/icons/icon-user.png" alt="Imagen usuario" className="bg-gray-300 px-2 py-2 w-full aspect-square" /></div>
-            <div className="px-16 flex flex-col w-2/3">
+            <div className="w-auto pl-16 pr-16 pb-16">
+                <img src="/icons/icon-user.png" alt="Imagen usuario" className="bg-gray-300 px-2 py-2 w-full aspect-square min-w-[300px]" />
+            </div>
+
+            <div className="flex flex-col w-2/3">
                 <div>
                     <h1 className={`text-3xl ${nameColor} font-bold`}>
                     {isLoading ? (
@@ -92,75 +95,74 @@ const ContenedorPerfil = ({
 
                     </h1>
                     <section className="flex flex-wrap mt-4">
-                        <div className="w-1/3 flex flex-row">
-
-                        {userData && userData.comments && userData.comments.data ? (
-                            <>
+                        <div className="w-auto flex flex-row">
+                            {userData && userData.comments && userData.comments.data ? (
+                                <>
                                 {userData.comments.data.length > 0 ? (
                                     <>
-                                        {Array.from({ length: (((userData.comments.data[0].mediaCalificaciones - Math.floor(userData.comments.data[0].mediaCalificaciones)) >= 0.5) ? (Math.ceil(userData.comments.data[0].mediaCalificaciones)) : (Math.floor(userData.comments.data[0].mediaCalificaciones))) }, (_, index) => (
-                                            <img key={index} src={'/icons/star.svg'} alt={`Imagen ${index}`} className="w-1/5 flex-initial px-1" />
-                                        ))}
-                                        
-                                        {Array.from({ length: 5 - (((userData.comments.data[0].mediaCalificaciones - Math.floor(userData.comments.data[0].mediaCalificaciones)) >= 0.5) ? (Math.ceil(userData.comments.data[0].mediaCalificaciones)) : (Math.floor(userData.comments.data[0].mediaCalificaciones))) }, (_, index) => (
-                                            <img key={index} src={`/icons/icon-star.svg`} alt={`Imagen ${index}`} className="w-1/5 flex-initial px-1" />
-                                        ))}
+                                    {Array.from({ length: ((userData.comments.data[0].mediaCalificaciones - Math.floor(userData.comments.data[0].mediaCalificaciones)) >= 0.5) ? Math.ceil(userData.comments.data[0].mediaCalificaciones) : Math.floor(userData.comments.data[0].mediaCalificaciones) }, (_, index) => (
+                                        <img key={index} src="/icons/star.svg" alt={`Imagen ${index}`} className="w-1/5 flex-initial px-1 min-w-[30px]" />
+                                    ))}
+
+                                    {Array.from({ length: 5 - ((userData.comments.data[0].mediaCalificaciones - Math.floor(userData.comments.data[0].mediaCalificaciones)) >= 0.5 ? Math.ceil(userData.comments.data[0].mediaCalificaciones) : Math.floor(userData.comments.data[0].mediaCalificaciones)) }, (_, index) => (
+                                        <img key={index} src="/icons/icon-star.svg" alt={`Imagen ${index}`} className="w-1/5 flex-initial px-1 min-w-[30px]" />
+                                    ))}
                                     </>
                                 ) : (
                                     <>
-                                        <img src={`/icons/icon-star${whiteStar ? '-white' : ''}.svg`} alt="Estrellita" className="w-1/5 flex-initial px-1" />
-                                        <img src={`/icons/icon-star${whiteStar ? '-white' : ''}.svg`} alt="Estrellita" className="w-1/5 flex-initial px-1" />
-                                        <img src={`/icons/icon-star${whiteStar ? '-white' : ''}.svg`} alt="Estrellita" className="w-1/5 flex-initial px-1" />
-                                        <img src={`/icons/icon-star${whiteStar ? '-white' : ''}.svg`} alt="Estrellita" className="w-1/5 flex-initial px-1" />
-                                        <img src={`/icons/icon-star${whiteStar ? '-white' : ''}.svg`} alt="Estrellita" className="w-1/5 flex-initial px-1" />
+                                    <img src={`/icons/icon-star${whiteStar ? '-white' : ''}.svg`} alt="Estrellita" className="w-1/5 flex-initial px-1 min-w-[30px]" />
+                                    <img src={`/icons/icon-star${whiteStar ? '-white' : ''}.svg`} alt="Estrellita" className="w-1/5 flex-initial px-1 min-w-[30px]" />
+                                    <img src={`/icons/icon-star${whiteStar ? '-white' : ''}.svg`} alt="Estrellita" className="w-1/5 flex-initial px-1 min-w-[30px]" />
+                                    <img src={`/icons/icon-star${whiteStar ? '-white' : ''}.svg`} alt="Estrellita" className="w-1/5 flex-initial px-1 min-w-[30px]" />
+                                    <img src={`/icons/icon-star${whiteStar ? '-white' : ''}.svg`} alt="Estrellita" className="w-1/5 flex-initial px-1 min-w-[30px]" />
                                     </>
                                 )}
-                            </>
-                        ) : (
-                            <>
-                                <img src={`/icons/icon-star${whiteStar ? '-white' : ''}.svg`} alt="Estrellita" className="w-1/5 flex-initial px-1" />
-                                <img src={`/icons/icon-star${whiteStar ? '-white' : ''}.svg`} alt="Estrellita" className="w-1/5 flex-initial px-1" />
-                                <img src={`/icons/icon-star${whiteStar ? '-white' : ''}.svg`} alt="Estrellita" className="w-1/5 flex-initial px-1" />
-                                <img src={`/icons/icon-star${whiteStar ? '-white' : ''}.svg`} alt="Estrellita" className="w-1/5 flex-initial px-1" />
-                                <img src={`/icons/icon-star${whiteStar ? '-white' : ''}.svg`} alt="Estrellita" className="w-1/5 flex-initial px-1" />
-                            </>
-                        )}
-
-
+                                </>
+                            ) : (
+                                <>
+                                <img src={`/icons/icon-star${whiteStar ? '-white' : ''}.svg`} alt="Estrellita" className="w-1/5 flex-initial px-1 min-w-[30px]" />
+                                <img src={`/icons/icon-star${whiteStar ? '-white' : ''}.svg`} alt="Estrellita" className="w-1/5 flex-initial px-1 min-w-[30px]" />
+                                <img src={`/icons/icon-star${whiteStar ? '-white' : ''}.svg`} alt="Estrellita" className="w-1/5 flex-initial px-1 min-w-[30px]" />
+                                <img src={`/icons/icon-star${whiteStar ? '-white' : ''}.svg`} alt="Estrellita" className="w-1/5 flex-initial px-1 min-w-[30px]" />
+                                <img src={`/icons/icon-star${whiteStar ? '-white' : ''}.svg`} alt="Estrellita" className="w-1/5 flex-initial px-1 min-w-[30px]" />
+                                </>
+                            )}
                         </div>
-                        <h3 className={`${textColor} w-1/3 flex-initial px-16`}>
-                        {isLoading ? (
-                            <p>Cargando perfil...</p>
-                        ) : (
-                            <>
-                                {userData && userData.comments && userData.comments.data.length > 0 ? (
-                                    <>
-                                        {userData.comments.data.length > 0 ? (
-                                            <>
-                                                {parseFloat(userData.comments.data[0].mediaCalificaciones.toString()).toFixed(2)} estrellas <br />
-                                                {userData.comments.data[0].cantidadTotalComentariosEmployee} Calificaciones
-                                            </>
-                                        ) : (
-                                            <p>0 Calificaciones</p>
-                                        )}
-                                    </>
-                                ) : (
-                                    <p>No hay comentarios disponibles</p>
-                                )}
-                            </>
-                        )}
+
+                        <h3 className={`${textColor} w-1/3 flex-initial px-3`}>
+                            {isLoading ? (
+                                <p>Cargando perfil...</p>
+                            ) : (
+                                <>
+                                    {userData && userData.comments && userData.comments.data.length > 0 ? (
+                                        <>
+                                            {userData.comments.data.length > 0 ? (
+                                                <>
+                                                    {parseFloat(userData.comments.data[0].mediaCalificaciones.toString()).toFixed(2)} estrellas <br />
+                                                    {userData.comments.data[0].cantidadTotalComentariosEmployee} Calificaciones
+                                                </>
+                                            ) : (
+                                                <p>0 Calificaciones</p>
+                                            )}
+                                        </>
+                                    ) : (
+                                        <>No hay calificaciones disponibles</>
+                                    )}
+                                </>
+                            )}
                         </h3>
-                        <h3 className={`${textColor} w-1/3 flex-initial`}>{isLoading ? (
-                            <p>Cargando perfil...</p>
-                        ) : (
-                            <>
-                                {userData && userData.mainData && userData.mainData.length > 0 ? (
-                                    userData.mainData[0].antiguedadYears
-                                ) : (
-                                    <p>El id proporcionado no existe.</p>
-                                )}
-                            </>
-                        )}  trabajos realizados
+                        <h3 className={`${textColor} w-1/3 flex-initial`}>
+                            {isLoading ? (
+                                <p>Cargando perfil...</p>
+                            ) : (
+                                <>
+                                    {userData && userData.mainData && userData.mainData.length > 0 ? (
+                                        userData.mainData[0].antiguedadYears
+                                    ) : (
+                                        <p>None </p>
+                                    )}
+                                </>
+                            )} <> </> Años de experiencia
                         </h3>
                     </section>
                     <h2 className="mt-8 text-orange-500 px-4"> {isActive == 1 ? <>· Estoy en linea!</> : <>· No estoy en linea</>}</h2>
