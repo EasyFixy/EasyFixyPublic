@@ -3,8 +3,22 @@ import { useState } from "react";
 import EditarPerfil from "./EditarPerfil";
 import { useEffect } from "react";
 import { UserData } from "../../models/PerfilEmpleado";
+import Button from '@mui/material/Button';
+import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useNavigate } from "react-router-dom";
 
-
+const theme = createTheme({
+    palette: {
+        primary: {
+            main: '#000000',
+            // light: will be calculated from palette.primary.main,
+            // dark: will be calculated from palette.primary.main,
+            // contrastText: will be calculated to contrast with palette.primary.main
+          },
+    },
+  });
+  
 interface PropsContenedorPerfil {
     estado: boolean,
     nameColor?: string,
@@ -16,7 +30,20 @@ interface PropsContenedorPerfil {
     isLoading: boolean,
     userData: UserData
 }
-
+const meses = {
+    '01': 'enero',
+    '02': 'febrero',
+    '03': 'marzo',
+    '04': 'abril',
+    '05': 'mayo',
+    '06': 'junio',
+    '07': 'julio',
+    '08': 'agosto',
+    '09': 'septiembre',
+    '10': 'octubre',
+    '11': 'noviembre',
+    '12': 'diciembre'
+};
 const ContenedorPerfil = ({
     estado,
     nameColor = 'text-black',
@@ -35,22 +62,9 @@ const ContenedorPerfil = ({
     const mostrarEditar = () => {
         setEstadoDialog(!estadoDialog);
     }
+    const navigate = useNavigate();
 
-
-    const meses = {
-        '01': 'enero',
-        '02': 'febrero',
-        '03': 'marzo',
-        '04': 'abril',
-        '05': 'mayo',
-        '06': 'junio',
-        '07': 'julio',
-        '08': 'agosto',
-        '09': 'septiembre',
-        '10': 'octubre',
-        '11': 'noviembre',
-        '12': 'diciembre'
-    };
+    
     
     let mesNumero = '01';
     let mesNombre = meses[mesNumero];
@@ -171,10 +185,23 @@ const ContenedorPerfil = ({
                     </div>
 
                     <div>{(estado === true ?
-                        (<div>
-                            <button className="w-14 ml-2 mt-4 mainBackground h-7 text-white w-64 rounded-full border border-black border-solid mb-6" onClick={() => (mostrarEditar())}>Editar Perfil</button>
+                        (<div className="mb-6 ml-2 mt-4 flex flex-row items-center justify-content gap-1">
+                            <button className=" mainBackground h-7 text-white flex-1 rounded-full border border-black border-solid " onClick={() => (mostrarEditar())}>Editar Perfil
+                            </button>
+                            <ThemeProvider theme={theme}>
+                                <Button 
+                                    variant="outlined" 
+                                    color="primary" 
+                                    endIcon={<AccountBalanceWalletIcon />}
+                                    onClick={() =>{navigate('/my/retirarDinero')}}
+                                >
+                                    Retirar Dinero
+                                </Button>
+                                
+                            </ThemeProvider>
 
-                        </div>) : (<div></div>))}</div>
+                        </div>) :null)}
+                    </div>
 
                 </div>
             </div>
