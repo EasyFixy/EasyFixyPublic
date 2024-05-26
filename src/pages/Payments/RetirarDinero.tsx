@@ -1,15 +1,19 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import NavbarEmpleado from "../components/NavbarEmpleado";
 import { toast } from "react-toastify";
 import { useAppSelector } from "../../app/hooks";
+import { decodeJWT } from "../../Helpers/Token";
+import { useNavigate } from "react-router-dom";
 
 const RetirarDinero = () => {
   const [numeroTarjeta, setNumeroTarjeta] = useState("");
   const [nombreTarjeta, setNombreTarjeta] = useState("");
   const [tipoTarjeta, setTipoTarjeta] = useState("");
   const [cantidad, setCantidad] = useState("");
+  const [profit, setProfit] = useState('');
+  const navigate = useNavigate();
   const baseUrl = import.meta.env.VITE_BASE_URL;
-  const token = useAppSelector(state => state.Auth.token);
+  const token = decodeJWT()
   const handleRetirar = () => {
     // Validar los campos antes de proceder
     if (!numeroTarjeta) {
@@ -24,13 +28,13 @@ const RetirarDinero = () => {
       toast.warn("Por favor, seleccione el tipo de tarjeta.");
       return;
     }
-    if (!cantidad) {
-      toast.warn("Por favor, ingrese la cantidad a retirar.");
+    if (!cantidad || isNaN(parseFloat(cantidad)) || parseFloat(cantidad)> parseFloat(profit)) {
+      toast.warn("Por favor, ingrese una cantidad permitida a retirar.");
       return;
     }
     const requestData = {
       amount: cantidad,
-      token: token,
+      token: localStorage.getItem('token'),
       numeroTarjeta,
       nombreTarjeta,
       tipoTarjeta,
@@ -54,6 +58,7 @@ const RetirarDinero = () => {
       .then(data => {
           if(data.statusCode == 200){
               toast.success(`se ha creado correctamente el dispatch para retirar su dinero`)
+              navigate('/my/profile/employee')
           }else{
             toast.error(`no se pudo crear el dispatch para retirar dinero`)
           }
@@ -63,6 +68,34 @@ const RetirarDinero = () => {
           toast.error(`no se pudo crear el dispatch para retirar dinero`)
       });
   };
+  const formatCurrency = (value) => {
+    return value.toLocaleString('es-CO');
+  };
+  const fetchUserProfit = () => {
+    
+    if (token) {
+      fetch(`${baseUrl}getUserProfit?token=${localStorage.getItem('token')}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            setProfit(data.data[0].totalProfit)
+
+            // Aquí puedes hacer algo con los datos, como actualizar el estado de un componente en React
+        })
+        .catch(error => {
+            console.error('Fetch error:', error);
+            // Aquí puedes manejar errores, como mostrar un mensaje de error al usuario
+        });
+    } else {
+    }
+  }
+  useEffect(()=> {
+    fetchUserProfit();
+  },[])
     return (
       <div className="w-screen h-screen flex flex-col overflow-y-auto">
         <NavbarEmpleado />
@@ -138,7 +171,7 @@ const RetirarDinero = () => {
                     className="w-8 h-8 mr-2"
                   />
                   <span className="text-gray-700 mr-2">Pesos col</span>
-                  <span className="text-sm text-gray-500">$0.00</span>
+                  <span className="text-sm text-gray-500">${formatCurrency(profit)}</span>
                 </div>
                 <div className="flex justify-between items-center">
                   <input
