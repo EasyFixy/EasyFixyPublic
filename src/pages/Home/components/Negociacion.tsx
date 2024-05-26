@@ -223,7 +223,7 @@ const Negociacion = (props) => {
   // se usa useEffect((),[]) sin parametros para solo hacer una vez la consulta a la BD, no se debe hacer cada vez que se renderice
   useEffect(() => {
     console.log("creando")
-    const socketo = io("http://localhost:3000/", {
+    const socketo = io(baseUrl, {
       auth: {
         userId: userEnPlataforma
       }
