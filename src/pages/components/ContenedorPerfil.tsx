@@ -185,8 +185,8 @@ const ContenedorPerfil = ({
                     </div>
 
                     <div>{(estado === true ?
-                        (<div className="mb-6 ml-2 mt-4 flex flex-row items-center justify-content gap-1">
-                            <button className=" mainBackground h-7 text-white flex-1 rounded-full border border-black border-solid " onClick={() => (mostrarEditar())}>Editar Perfil
+                        (<div className="mb-6 ml-2 mt-4 flex h-7 flex-row items-center justify-content gap-1">
+                            <button className=" mainBackground h-full text-white flex-1 rounded-full border border-black border-solid " onClick={() => (mostrarEditar())}>Editar Perfil
                             </button>
                             <ThemeProvider theme={theme}>
                                 <Button 
@@ -194,6 +194,7 @@ const ContenedorPerfil = ({
                                     color="primary" 
                                     endIcon={<AccountBalanceWalletIcon />}
                                     onClick={() =>{navigate('/my/retirarDinero')}}
+                                    className="h-full"
                                 >
                                     Retirar Dinero
                                 </Button>
