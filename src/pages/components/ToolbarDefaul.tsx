@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 //import HomeEmpleado from "../Home Empleado/HomeEmpleado";
 //import HomeEmpleador from "../Home Empleador/HomeEmpleador";
-import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { Link, Navigate, useNavigate, useLocation } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { handleRequestWithToken } from "../../Helpers/Request";
 
@@ -87,9 +87,11 @@ const ToolbarDefault = (props) => {
     let imagen = '/icons/usuario.png'
     let nombre = 'Nombre de usuario'
     const navigate = useNavigate();
-    let location = props.tipe == "employee"
+    let location = useLocation()
+    
 
-    const [checked, setChecked] = useState(!location);
+    
+    const [checked, setChecked] = useState(!(location.pathname=='/my/home/employee'));
 
     const handleRequest = () => {
 
@@ -124,7 +126,7 @@ const ToolbarDefault = (props) => {
 
     useEffect(() => {
         handleRequestWithToken(dispatch, handleRequest)
-    }, []);
+    }, [location]);
 
     return (
         <div className="w-full h-16 mainBackground flex justify-between items-center p-4">

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { Route, Routes} from 'react-router-dom';
+import { Route, Routes, useLocation} from 'react-router-dom';
 import DatosPerfilEmpleado from '../pages/DatosPerfilEmpleado/DatosPerfilEmpleado';
 import VerPerfilEmpleado from '../pages/VisualizarEmpleado/VisualizarPerfil';
 import SeleccionRol from '../pages/SelecionarRol/SeleccionRol';
@@ -18,6 +18,9 @@ import ResumenPago from "../pages/Home/components/ResumenPago";
 
 const UserLogueado = () => {
     const dispatch = useAppDispatch();
+    const location = useLocation(); // Obtener la ubicación actual
+    console.log(location.pathname);
+    
     const [isLogged, setIsLogged] = useState<boolean>(false);
     useEffect(() => {
         const isLogged = validationToken(dispatch);
@@ -25,7 +28,7 @@ const UserLogueado = () => {
     }, []);
     return(
         <>
-        <ToolbarDefault/>
+        { location.pathname == '/my/selectrole' || location.pathname == '/my/createjob' ? (<></>) : (<ToolbarDefault/>)}
         <Routes>
             <Route path='profile/employee/create/personalinformation' element={<DatosPerfilEmpleado/>}/>
             <Route path='profile/employee' element={<VerPerfilEmpleado/>}/>
