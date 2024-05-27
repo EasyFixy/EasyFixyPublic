@@ -24,7 +24,6 @@ const HorizontalNavigator = (props) => {
     useEffect(() => {
         handleInputChange({ target: { value: "" } });
         const filtradosPorId = props.sections[seccionActiva].array.filter(item => !finishedJobs.includes(item.jobId));
-        console.log('props.sections[seccionActiva].array ',props.sections[seccionActiva].array, filtradosPorId);
         setDatosFiltrados(filtradosPorId);
     }, [seccionActiva, props.sections, finishedJobs]); 
 

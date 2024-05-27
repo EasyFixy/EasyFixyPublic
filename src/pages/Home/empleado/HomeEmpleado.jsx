@@ -155,7 +155,6 @@ const HomeEmpleado = () => {
     }
 
     const handleUnload = (event) => {
-        console.log('La página se está cerrando...');
         updateUserTempData(false)
     };
     const setCloseNegociation = () => {

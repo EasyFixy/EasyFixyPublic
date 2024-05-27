@@ -9,7 +9,6 @@ export const jobsSlice = createSlice({
     initialState,
     reducers: {
         addFinishedJob: (state, action: PayloadAction<number>) => {
-            console.log(action.payload);
             state.finishedJobs.push(action.payload);
         },
     },

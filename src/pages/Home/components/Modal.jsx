@@ -15,7 +15,6 @@ const StyledRating = styled(Rating)({
   },
 });
 const Modal = ({ isOpen, onClose, jobData, jobType, infoEmployee }) => {
-  console.log('infoempo ,', infoEmployee, jobType )
   const dispatch = useAppDispatch();
   const token = useAppSelector(state => state.Auth.token);
   const [isModal2Open, setIsModal2Open] = useState(false);
@@ -26,7 +25,6 @@ const Modal = ({ isOpen, onClose, jobData, jobType, infoEmployee }) => {
   const closeModal2 = () => {
   setIsModal2Open(false);
   };
-  console.log(jobData);
 
   const handleTerminarTrabajoClick = () => {
     
@@ -49,7 +47,6 @@ const Modal = ({ isOpen, onClose, jobData, jobType, infoEmployee }) => {
     })
     .then(data => {
       if(data.statusCode == 200){
-        console.log('jobData?.jobId ',jobData?.jobId);
         dispatch(addFinishedJob(jobData?.jobId));
         toast.success('se ha finalizado el trabajo, le informaremos al empleado');
         setIsModal2Open(true);
@@ -69,7 +66,6 @@ const Modal = ({ isOpen, onClose, jobData, jobType, infoEmployee }) => {
   const fetchUserJobInfo = () => {
     const token = decodeJWT()
     if (token) {
-      console.log('jobData?.jobId ',jobData?.jobId);
         fetch(`${baseUrl}getJobUsersInfo?jobId=${jobData?.jobId}`)
             .then(response => {
                 if (!response.ok) {
