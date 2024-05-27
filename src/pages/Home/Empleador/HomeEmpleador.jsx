@@ -163,16 +163,22 @@ const HomeEmpleador = () => {
                     </button></Link>
                 </div>
             </div>
-            <Negociacion 
-                isOpen={openNegociation}
-                setIsOpen = {setOpenNegociation}
-                tipe={'employer'} 
-                labors={laborsOfJobOffer} 
-                priceJobOffer={priceJobOffer} 
-                jobOfferId={jobOfferId}>
+            {
+                openNegociation && 
+                <Negociacion 
+                    isOpen={openNegociation}
+                    setIsOpen = {setOpenNegociation}
+                    tipe={'employer'} 
+                    labors={laborsOfJobOffer} 
+                    priceJobOffer={priceJobOffer} 
+                    jobOfferId={jobOfferId}>
 
-            </Negociacion>
-                <Modal isOpen={isModalOpen} onClose={closeModal} jobData ={selectedJobData} jobType ={selectedJobType} />
+                </Negociacion>
+            }
+            {isModalOpen && 
+                <Modal isOpen={isModalOpen} infoEmployee onClose={closeModal} jobData ={selectedJobData} jobType ={selectedJobType} />
+            
+            }
             <div className="mt-auto w-full z-50 ">
                 <Footer />
             </div>
