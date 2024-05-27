@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
+import Footer from "../components/Footer";
 
 const LandingPage = () =>{
 
@@ -13,12 +13,13 @@ const LandingPage = () =>{
 
                 </div>
                 <div className="w-4/6 flex flex-row justify-between items-center font-bold text-base">
-                    <Link to={"/"}>¿Quienes somos?</Link>
+                    <Link to={"/about-us"}>¿Quienes somos?</Link>
                     <Link to={"/login"}>Iniciar sesión</Link>
                     <Link to={"/register"}>Registrarse</Link>
                 </div>
 
             </div>
+            
             <div className="w-screen h-screen overflow-y-scroll pt-20">
                 <div className="backgroundLanding w-full pt-[30px] px-[5%] flex flex-col justify-between h-full pb-20 text-white">
 
@@ -40,10 +41,10 @@ const LandingPage = () =>{
                         </li>
                     </ul>
                     <div className="flex flex-row text-[2vw] h-12 gap-14 ">
-                        <Link to={"/login"}className="mainBackground h-full rounded-full">
+                        <Link to={"/login"}className="mainBackground h-full rounded-full flex items-center justify-center px-4">
                             Contrata ahora mismo
                         </Link>
-                        <Link to={"/login"} className="bg-black h-full rounded-full w-fit px-3 text-[2vw]">
+                        <Link to={"/login"} className="bg-black h-full rounded-full w-fit flex items-center justify-center px-4 text-[2vw]">
                             Gana dinero realizando trabajos
                         </Link>
                     </div>
@@ -62,36 +63,34 @@ const LandingPage = () =>{
                     </h1>
                     <ul className="text-[3vw]">
                         <li>
-                            Electricista
+                            Comercial y Ventas
                         </li>
                         <li>
-                            Carpintero
+                            Informática
                         </li>
                         <li>
-                            técnico de electrodomésticos
+                            Artes y Oficios
                         </li>
                         <li>
-                            Plomero
+                            Turismo
                         </li>
                         <li>
-                            Técnico de gas
+                            Restauración
                         </li>
                         <li>
-                            Mudanzas
+                            Técnicos
                         </li>
                         <li>
-                            Pintor de interiores o exteriores
+                            Compras y logística
                         </li>
                         <li>
-                            Limpiador de muebles
-                        </li>
-                        <li>
-                            Personal de limpiez
+                            Profesiones varias
                         </li>
                     </ul>
                 </div>
-                
+                <Footer />
             </div>
+            
         </>
     );
 }

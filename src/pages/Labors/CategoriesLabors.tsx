@@ -4,6 +4,8 @@ import { useLocation } from 'react-router-dom';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { login } from "../../features/Auth/Auth";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
 
 const trabajos = [
     {
@@ -87,13 +89,20 @@ const CategoriesLabors = () => {
     const baseUrl = import.meta.env.VITE_BASE_URL;
     // Obtener valores específicos de la URL
     const tipe = searchParams.get('tipe');
+    const token = useAppSelector(state => state.Auth.token);
+    
+    const categoryId = searchParams.get('category'); // New - category ID from URL
+    const laborIds = searchParams.get('labors')?.split(',').map(id => parseInt(id)); // New - labor IDs from URL
+    
+    
 
     const [selectedCategory, setCategorySelected] = useState<string>('');
     const [selectedLabors, setSelectedLabors] = useState<number[]>([]);
     const [categories, setCategories] = useState<Category[]>([]);
     const [renderLabors, setRenderLabors] = useState<Labor[]>([]);
     
-
+    const [categoriesLoaded, setCategoriesLoaded] = useState(true);
+    
     const saveResumeToDB = (resume: Resume) => {
         console.log(JSON.stringify(resume))
         fetch(`${baseUrl}createLaboralUserResume`, {
@@ -142,7 +151,7 @@ const CategoriesLabors = () => {
                 console.log(data); // Guardar la respuesta del servidor en el estado
                 if (data.statusCode == 200) {
                     console.log("exitos")
-                    navigate("/my/home/employer?tipe=negotiation&labors="+encodeURIComponent(JSON.stringify(selectedLabors)));
+                    navigate("/my/home/employer?tipe=negotiation&labors="+encodeURIComponent(JSON.stringify(selectedLabors))+'&price='+encodeURIComponent(btoa(job.jobOfferStimatePrice.toString()))+'&jobOfferId='+data.data.jobOffer.insertId);
                 } else {
                     toast.warn("Error Subiendo");
                 }
@@ -210,15 +219,67 @@ const CategoriesLabors = () => {
         }
     }
 
+    const editLaborsToResume = () => {
+        console.log("oprimido");
+        const resumeId = searchParams.get('resumeId');
+    
+        if (resumeId) {
+            if (selectedLabors.length < 1) {
+                toast.warn("Seleccione al menos una labor");
+            } else {
+                console.log(selectedLabors);
+                const url = `${baseUrl}updateLaborUserResume`;
+    
+                const requestBody = {
+                    token: token,
+                    resumeId: resumeId,
+                    laborIds: selectedLabors
+                };
+    
+                fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json' // Asegura que el servidor espera un cuerpo JSON
+                    },
+                    body: JSON.stringify(requestBody) // Convierte los datos a JSON
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('La solicitud no fue exitosa');
+                    }
+                    return response.json(); // Si esperas una respuesta JSON
+                })
+                .then(result => {
+                    // Aquí puedes trabajar con los datos obtenidos en la respuesta            
+                    if (result) {
+                        console.log(result);
+                        window.location.href = '/my/profile/employee'; // Redirige a la página de inicio
+                    }
+                })
+                .catch(error => {
+                    console.error('Hubo un problema con la solicitud fetch:', error);
+                });
+            }
+        } else {
+            toast.warn("No se recibió el id del resume, intenta más tarde.");
+        }
+    }
+    
+    
+
     const handleSaveInfoCategories = () => {
         if (tipe) {
             if (tipe === "createResume") {
                 saveCategoriesToResume();
             } else if(tipe === "createJob"){
                 saveCategoriesToJob();
+            } else if(tipe === "modifyResume") {
+                editLaborsToResume();
             }
         }
     }
+
+    
 
     const fetchCategories = () => {
         fetch(`${baseUrl}getJobCategories`)
@@ -270,10 +331,29 @@ const CategoriesLabors = () => {
                 console.error('Error al enviar los datos:', error);
             });
     }
+    
 
     useEffect(() => {
         fetchCategories();
     }, []);
+
+    useEffect(() => {
+        if (categoriesLoaded && tipe === "modifyResume" && categoryId) {
+            const categoryIndex = categories.findIndex(cat => cat.laborCategoryId === parseInt(categoryId));
+            if (categoryIndex !== -1) {
+                setCategorySelected(categoryIndex.toString());
+                if (categories[categoryIndex].labors) {
+                    setRenderLabors(categories[categoryIndex].labors);
+                } else {
+                    fetchLabors(categoryIndex);
+                }
+                if (laborIds) {
+                    setSelectedLabors(laborIds);
+                }
+            }
+        }
+        
+    }, [categories, tipe]);
 
     const handleCheckboxChange = (index: number) => {
         const updatedSelectedLabors = [...selectedLabors];
@@ -296,9 +376,12 @@ const CategoriesLabors = () => {
             fetchLabors(index);
         }
     }
+    console.log(categories);
+    
+    
     return (
         <div className="w-screen h-screen flex flex-col">
-            <ToolbarDefault tipe={tipe === "createResume" ? ("employee") : ("employer")} />
+            {/* <ToolbarDefault tipe={tipe === "createResume" ? ("employee") : ("employer")} /> */}
             <div className="w-full flex-1 px-[5%] flex flex-col pb-[5%] pt-[3%] font-bold overflow-y-scroll">
                 <h1 className="text-5xl">
                     Categorias y labores

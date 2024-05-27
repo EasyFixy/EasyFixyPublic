@@ -9,6 +9,9 @@ import NavigatorDisplayElement from "./NavigatorDisplayElement";
 import HorizontalNavigator from "./HorizontalNavigator";
 import Negociacion from "../components/Negociacion";
 import Modal from "../components/Modal";
+import Footer from "../../components/Footer.tsx";
+import { decodeJWT } from "../../../Helpers/Token";
+
 //import jwt from 'jsonwebtoken';
 const HomeEmpleador = () => {
     const [jobOffertedOffers, setJobOffertedOffers] = useState([]);
@@ -22,9 +25,13 @@ const HomeEmpleador = () => {
     const [tipe, setTipe] = useState();
     // Obtener valores específicos de la UR
     let laborsUriComponent = decodeURIComponent(searchParams.get('labors') ?? '')
+    let priceUriComponent = decodeURIComponent(searchParams.get('price') ?? '')
+    const jobOfferId = decodeURIComponent(searchParams.get('jobOfferId') ?? '')
+    const priceJobOffer = priceUriComponent ? atob(priceUriComponent) : null;
     const laborsOfJobOffer = laborsUriComponent ? JSON.parse(laborsUriComponent) : null;
 
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [openNegociation, setOpenNegociation] = useState(tipe && tipe === "negotiation");
 
     const openModal = (jobId, jobData) => {
             // Buscamos el trabajo en las secciones
@@ -62,23 +69,10 @@ const HomeEmpleador = () => {
             array: jobOffertedOffers
         },
     ]
-
-    function decodeJWT() {
-        const token = localStorage.getItem('token');
-        if (token) {
-            const base64Url = token.split('.')[1];
-            const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-            const jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
-                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-            }).join(''));
-
-            return JSON.parse(jsonPayload);
-        }
-    }
+    const token = localStorage.getItem('token');
 
     const fetchPendingOffers = () => {
         const token = decodeJWT()
-        console.log(token)
         if (token) {
             fetch(`${baseUrl}getJobOffertedOffersByEmployer?token=${localStorage.getItem('token')}`)
                 .then(response => {
@@ -88,9 +82,7 @@ const HomeEmpleador = () => {
                     return response.json();
                 })
                 .then(data => {
-                    console.log(data);
                     setJobOffertedOffers(data.data);
-                    console.log(jobOffertedOffers)
 
                     // Aquí puedes hacer algo con los datos, como actualizar el estado de un componente en React
                 })
@@ -98,8 +90,6 @@ const HomeEmpleador = () => {
                     console.error('Fetch error:', error);
                     // Aquí puedes manejar errores, como mostrar un mensaje de error al usuario
                 });
-        } else {
-            console.log("no logueado")
         }
         //fetch()
     }
@@ -115,7 +105,6 @@ const HomeEmpleador = () => {
                     return response.json();
                 })
                 .then(data => {
-                    console.log(data);
                     setJobPendingOffers(data.data);
 
                     // Aquí puedes hacer algo con los datos, como actualizar el estado de un componente en React
@@ -125,7 +114,6 @@ const HomeEmpleador = () => {
                     // Aquí puedes manejar errores, como mostrar un mensaje de error al usuario
                 });
         } else {
-            console.log("no logueado")
         }
         //fetch()
     }
@@ -141,21 +129,21 @@ const HomeEmpleador = () => {
                     return response.json();
                 })
                 .then(data => {
-                    console.log(data);
                     setJobsDone(data.data);
 
                     // Aquí puedes hacer algo con los datos, como actualizar el estado de un componente en React
                 })
                 .catch(error => {
-                    console.error('Fetch error:', error);
                     // Aquí puedes manejar errores, como mostrar un mensaje de error al usuario
                 });
         } else {
-            console.log("no logueado")
         }
         //fetch()
     }
+    useEffect(()=>{
+        setOpenNegociation(tipe && tipe === "negotiation");
 
+    },[tipe])
     useEffect(() => {
         setTipe(searchParams.get('tipe'));
         fetchPendingOffers();
@@ -164,10 +152,10 @@ const HomeEmpleador = () => {
     }, []);
 
     return (
-        <div className='w-screen h-screen flex flex-col overflow-y-scroll'>
-            <ToolbarDefault tipe="employer" />
+        <div className="w-screen h-screen flex flex-col overflow-y-auto pb-16">
+            {/* <ToolbarDefault tipe="employer" /> */} 
             <NavbarEmpleador></NavbarEmpleador>
-            <div className="flex flex-col justify-center w-full " style={{ padding: 30 + 'px' }}>
+            <div className="flex flex-col justify-center w-full" style={{ padding: 30 + 'px' }}>
                 <h2 className="text-4xl font-bold mt-4">Mis trabajos</h2>
                 <HorizontalNavigator callBackFunction = {openModal} sections={sections}></HorizontalNavigator>
                 <div>
@@ -175,11 +163,25 @@ const HomeEmpleador = () => {
                     </button></Link>
                 </div>
             </div>
-            {tipe && tipe === "negotiation" ? (<Negociacion labors={laborsOfJobOffer}></Negociacion>) : ("")}
-                <Modal isOpen={isModalOpen} onClose={closeModal} jobData ={selectedJobData} jobType ={selectedJobType} />
+            {
+                openNegociation && 
+                <Negociacion 
+                    isOpen={openNegociation}
+                    setIsOpen = {setOpenNegociation}
+                    tipe={'employer'} 
+                    labors={laborsOfJobOffer} 
+                    priceJobOffer={priceJobOffer} 
+                    jobOfferId={jobOfferId}>
+
+                </Negociacion>
+            }
+            {isModalOpen && 
+                <Modal isOpen={isModalOpen} infoEmployee onClose={closeModal} jobData ={selectedJobData} jobType ={selectedJobType} />
             
-
-
+            }
+            <div className="mt-auto w-full z-50 ">
+                <Footer />
+            </div>
         </div>
     )
 }

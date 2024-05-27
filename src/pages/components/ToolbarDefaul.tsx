@@ -104,7 +104,6 @@ const ToolbarDefault = (props) => {
                 return response.json();
             })
             .then(data => {
-                console.log(data)
                 setUser(data.data[0])
             })
             .catch(error => {
@@ -143,7 +142,7 @@ const ToolbarDefault = (props) => {
 
             <div className="flex flex-row justify-start items-center">
                 <div className="flex flex-row">
-                    <img src="/icons/llaves.svg" alt="llaves" className="w-10 pl-2.5" />
+        <           img src={checked ? "/icons/LlavesNegras.svg": "/icons/llaves.svg" } alt="llaves" className="w-10 pl-2.5" />
                 </div>
 
                 {/* switch para intercambiar de rol */}
@@ -170,21 +169,20 @@ const ToolbarDefault = (props) => {
                 </label>
 
                 <div className="flex flex-row">
-                    <img src="/icons/user-icon.svg" alt="usuario" className="w-10 pl-2.5" />
+                    <img src={checked ?  "/icons/UserGris.svg": "/icons/user-icon.svg"} alt="usuario" className="w-10 pl-2.5" />
                 </div>
             </div>
 
 
             <div className="w-2/4 flex flex-row justify-end items-center">
-                <button className="flex flex-row items-center mr-8">
+                <div className="flex flex-row items-center mr-8">
                     <img src="/icons/maletin.svg" alt="maletin de trabajo" />
-                    <p className="text-white ml-2">Mis trabajos</p>
                     {checked ? (
-                        <></>
+                        <Link to="/my/home/employer"><p className="text-white ml-2">Mis trabajos</p></Link>
                     ) : (
-                        <Link to="/my/home/employer"></Link>
+                        <Link to="/my/home/employee"><p className="text-white ml-2">Mis trabajos</p></Link>
                     )}
-                </button>
+                </div>
                 
                 <Link to={'/my/profile/employee'}>
                 <div className="flex flex-row items-center">

@@ -12,6 +12,10 @@ import Skills from "../pages/Skills/Skills";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import UserChats from "../pages/Chats/UserChats";
 import RetirarDinero from '../pages/Payments/RetirarDinero';
+import DescripcionCompra from "../pages/Payments/DescripcionCompra";
+import ToolbarDefault from "../pages/components/ToolbarDefaul";
+import ResumenPago from "../pages/Home/components/ResumenPago";
+
 const UserLogueado = () => {
     const dispatch = useAppDispatch();
     const [isLogged, setIsLogged] = useState<boolean>(false);
@@ -20,6 +24,8 @@ const UserLogueado = () => {
         setIsLogged(isLogged)
     }, []);
     return(
+        <>
+        <ToolbarDefault/>
         <Routes>
             <Route path='profile/employee/create/personalinformation' element={<DatosPerfilEmpleado/>}/>
             <Route path='profile/employee' element={<VerPerfilEmpleado/>}/>
@@ -31,7 +37,10 @@ const UserLogueado = () => {
             <Route path='profile/employee/create/skills' element={<Skills/>}/>
             <Route path='chats' element={<UserChats/>}/>
             <Route path="/retirarDinero" element={<RetirarDinero/>} />
+            <Route path="/buyDescription" element={<DescripcionCompra/>} />
+            <Route path="/resumenTrans" element={<ResumenPago/>} />
         </Routes>
+        </>
     )
 }
 
