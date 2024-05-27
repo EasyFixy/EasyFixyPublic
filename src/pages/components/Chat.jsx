@@ -20,8 +20,10 @@ const Chat = (props) => {
 
     };
     const addMessage = (msg) => {
-        console.log("agregando msg "+ msg);
+        console.log("agregando msge "+ msg);
         setMessages((state) => [...state, { msg: msg.msg, from: msg.username }]);
+        console.log(messages);
+        console.log(props.setLastMessage);
         props.setLastMessage && props.setLastMessage(msg);
     };
 
@@ -38,7 +40,7 @@ const Chat = (props) => {
             console.log("def")
             console.log(props.socket)
             if (!props.socket.hasListeners('chat message')) {
-                console.log("11");
+                console.log("12");
                 props.socket.on('chat message', (msg) => {
                     console.log(props.socket)
                     console.log("llega mensaje")

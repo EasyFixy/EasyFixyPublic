@@ -8,7 +8,7 @@ const CajaGanancias = (props) =>{
             <div className="flex flex-row">
                 <img src="/icons/bandera.png" alt="bandera de colombia" className="w-8 h-4"/>
                 <p className="">Pesos col</p>
-                <p className="ml-8 grid place-items-center">$ {props.profit ? props.profit : ""}</p>
+                <p className="ml-8 grid place-items-center">$ {props.profit || props.profit === 0 ? props.profit : "-"}</p>
             </div>
         </div>
     )

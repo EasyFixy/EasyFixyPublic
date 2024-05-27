@@ -65,7 +65,16 @@ const HomeEmpleado = () => {
                     return response.json();
                 })
                 .then(data => {
-                    setProfit(data.data[0].totalProfit)
+                    console.log(data)
+                    if(data.data){
+                        if(data.data.length > 0){
+                            setProfit(data.data[0].totalProfit)
+                        }else {
+                            setProfit(0)
+                        }
+                    }else{
+                        console.log("error trayendo")
+                    }
 
                     // Aquí puedes hacer algo con los datos, como actualizar el estado de un componente en React
                 })
