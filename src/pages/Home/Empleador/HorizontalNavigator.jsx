@@ -33,6 +33,7 @@ const HorizontalNavigator = (props) => {
                 <div className="flex">
                     {props.sections.map((section, index) => (
                         <NaigatorMenuElement 
+                        key={index}
                         index={index} 
                         name={section.name} 
                         datosFiltrados={datosFiltrados} 
