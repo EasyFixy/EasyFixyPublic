@@ -1,15 +1,13 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import ToolbarDefault from "../../components/ToolbarDefaul";
-import HorizontalNavContainerSwitch from "../../components/HorizontalNavContainerSwitch";
-import NavbarEmpleador from "../../components/NavbarEmpleador";
-import { Link } from "react-router-dom";
 import NaigatorMenuElement from "./NavigatorMenuElement";
 import NavigatorDisplayElement from "./NavigatorDisplayElement";
+import { useAppSelector } from "../../../app/hooks";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 //import jwt from 'jsonwebtoken';
 const HorizontalNavigator = (props) => {
+    const finishedJobs = useAppSelector(state => state.Jobs.finishedJobs);
     const [seccionActiva, setSeccionActiva] = useState(0);
     const [inputValue, setInputValue] = useState('');
     const [datosFiltrados, setDatosFiltrados] = useState(props.sections[seccionActiva].array);
@@ -25,8 +23,10 @@ const HorizontalNavigator = (props) => {
 
     useEffect(() => {
         handleInputChange({ target: { value: "" } });
-        setDatosFiltrados(props.sections[seccionActiva].array);
-    }, [seccionActiva, props.sections]); 
+        const filtradosPorId = props.sections[seccionActiva].array.filter(item => !finishedJobs.includes(item.jobId));
+        console.log('props.sections[seccionActiva].array ',props.sections[seccionActiva].array, filtradosPorId);
+        setDatosFiltrados(filtradosPorId);
+    }, [seccionActiva, props.sections, finishedJobs]); 
 
     return (
         <div className="" style={{ width: '70%' }}>
@@ -63,7 +63,7 @@ const HorizontalNavigator = (props) => {
                         callBackFunction={props.callBackFunction}
                         seccionActiva={seccionActiva}
                         datosFiltrados={datosFiltrados.length > 0 ? datosFiltrados : props.sections[seccionActiva].array}
-                        array={props.sections[seccionActiva].array}
+                        array={datosFiltrados}
                     />
                     </div>
                 </div>
