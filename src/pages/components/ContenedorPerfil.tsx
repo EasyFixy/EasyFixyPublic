@@ -75,7 +75,7 @@ const ContenedorPerfil = ({
         <div className={` content-center ${paddingX} pt-10  ${width} h-auto flex flex-row`}>
             <div>{(estadoDialog === true ? <EditarPerfil onClose={handleCloseComponente} /> : <></>)}</div>
             <div className="w-auto pl-16 pr-16 pb-16">
-                <img src="/icons/icon-user.png" alt="Imagen usuario" className="bg-gray-300 px-2 py-2 w-full aspect-square min-w-[300px]" />
+                <img src="/icons/icon-user.png" alt="Imagen usuario" className="bg-gray-300 px-2 py-2 w-full aspect-square max-w-[200px]" />
             </div>
 
             <div className="flex flex-col w-2/3">
@@ -101,30 +101,30 @@ const ContenedorPerfil = ({
                                 {userData.comments.data.length > 0 ? (
                                     <>
                                     {Array.from({ length: ((userData.comments.data[0].mediaCalificaciones - Math.floor(userData.comments.data[0].mediaCalificaciones)) >= 0.5) ? Math.ceil(userData.comments.data[0].mediaCalificaciones) : Math.floor(userData.comments.data[0].mediaCalificaciones) }, (_, index) => (
-                                        <img key={index} src="/icons/star.svg" alt={`Imagen ${index}`} className="w-1/5 flex-initial px-1 min-w-[30px]" />
+                                        <img key={index} src="/icons/star.svg" alt={`Imagen ${index}`} className="w-1/5 flex-initial px-1 max-w-[30px]" />
                                     ))}
 
                                     {Array.from({ length: 5 - ((userData.comments.data[0].mediaCalificaciones - Math.floor(userData.comments.data[0].mediaCalificaciones)) >= 0.5 ? Math.ceil(userData.comments.data[0].mediaCalificaciones) : Math.floor(userData.comments.data[0].mediaCalificaciones)) }, (_, index) => (
-                                        <img key={index} src="/icons/icon-star.svg" alt={`Imagen ${index}`} className="w-1/5 flex-initial px-1 min-w-[30px]" />
+                                        <img key={index} src="/icons/icon-star.svg" alt={`Imagen ${index}`} className="w-1/5 flex-initial px-1 max-w-[30px]" />
                                     ))}
                                     </>
                                 ) : (
                                     <>
-                                    <img src={`/icons/icon-star${whiteStar ? '-white' : ''}.svg`} alt="Estrellita" className="w-1/5 flex-initial px-1 min-w-[30px]" />
-                                    <img src={`/icons/icon-star${whiteStar ? '-white' : ''}.svg`} alt="Estrellita" className="w-1/5 flex-initial px-1 min-w-[30px]" />
-                                    <img src={`/icons/icon-star${whiteStar ? '-white' : ''}.svg`} alt="Estrellita" className="w-1/5 flex-initial px-1 min-w-[30px]" />
-                                    <img src={`/icons/icon-star${whiteStar ? '-white' : ''}.svg`} alt="Estrellita" className="w-1/5 flex-initial px-1 min-w-[30px]" />
-                                    <img src={`/icons/icon-star${whiteStar ? '-white' : ''}.svg`} alt="Estrellita" className="w-1/5 flex-initial px-1 min-w-[30px]" />
+                                    <img src={`/icons/icon-star${whiteStar ? '-white' : ''}.svg`} alt="Estrellita" className="w-1/5 flex-initial px-1 max-w-[30px]" />
+                                    <img src={`/icons/icon-star${whiteStar ? '-white' : ''}.svg`} alt="Estrellita" className="w-1/5 flex-initial px-1 max-w-[30px]" />
+                                    <img src={`/icons/icon-star${whiteStar ? '-white' : ''}.svg`} alt="Estrellita" className="w-1/5 flex-initial px-1 max-w-[30px]" />
+                                    <img src={`/icons/icon-star${whiteStar ? '-white' : ''}.svg`} alt="Estrellita" className="w-1/5 flex-initial px-1 max-w-[30px]" />
+                                    <img src={`/icons/icon-star${whiteStar ? '-white' : ''}.svg`} alt="Estrellita" className="w-1/5 flex-initial px-1 max-w-[30px]" />
                                     </>
                                 )}
                                 </>
                             ) : (
                                 <>
-                                <img src={`/icons/icon-star${whiteStar ? '-white' : ''}.svg`} alt="Estrellita" className="w-1/5 flex-initial px-1 min-w-[30px]" />
-                                <img src={`/icons/icon-star${whiteStar ? '-white' : ''}.svg`} alt="Estrellita" className="w-1/5 flex-initial px-1 min-w-[30px]" />
-                                <img src={`/icons/icon-star${whiteStar ? '-white' : ''}.svg`} alt="Estrellita" className="w-1/5 flex-initial px-1 min-w-[30px]" />
-                                <img src={`/icons/icon-star${whiteStar ? '-white' : ''}.svg`} alt="Estrellita" className="w-1/5 flex-initial px-1 min-w-[30px]" />
-                                <img src={`/icons/icon-star${whiteStar ? '-white' : ''}.svg`} alt="Estrellita" className="w-1/5 flex-initial px-1 min-w-[30px]" />
+                                <img src={`/icons/icon-star${whiteStar ? '-white' : ''}.svg`} alt="Estrellita" className="w-1/5 flex-initial px-1 max-w-[30px]" />
+                                <img src={`/icons/icon-star${whiteStar ? '-white' : ''}.svg`} alt="Estrellita" className="w-1/5 flex-initial px-1 max-w-[30px]" />
+                                <img src={`/icons/icon-star${whiteStar ? '-white' : ''}.svg`} alt="Estrellita" className="w-1/5 flex-initial px-1 max-w-[30px]" />
+                                <img src={`/icons/icon-star${whiteStar ? '-white' : ''}.svg`} alt="Estrellita" className="w-1/5 flex-initial px-1 max-w-[30px]" />
+                                <img src={`/icons/icon-star${whiteStar ? '-white' : ''}.svg`} alt="Estrellita" className="w-1/5 flex-initial px-1 max-w-[30px]" />
                                 </>
                             )}
                         </div>
