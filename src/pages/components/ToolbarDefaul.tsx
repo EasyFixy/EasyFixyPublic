@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { Link, Navigate, useNavigate, useLocation } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { handleRequestWithToken } from "../../Helpers/Request";
+import { setChecked3 } from "../../features/Auth/Auth";
 
 interface MainData {
     userName: string;
@@ -81,7 +82,8 @@ const ToolbarDefault = (props) => {
     const dispatch = useAppDispatch();
     const [user, setUser] = useState<User>();
     const baseUrl = import.meta.env.VITE_BASE_URL;
-    const userId = useAppSelector((login) => login.Auth.id)
+    const userId = useAppSelector((login) => login.Auth.id);
+    // const checked = useAppSelector((state) => state.Auth.checked); // Obtiene el valor de checked desde el Redux
 
     //console.log(userId)
     let imagen = '/icons/usuario.png'
@@ -115,7 +117,9 @@ const ToolbarDefault = (props) => {
 
 
     const toggleChecked = () => {
-        setChecked(prev => !prev);
+        const newChecked = !checked; // Nuevo valor de checked
+        setChecked(newChecked); // Actualizar estado local
+        dispatch(setChecked3(newChecked)); // Actualizar estado de Redux
         if (checked) {
             navigate("/my/home/employee");
         } else {
