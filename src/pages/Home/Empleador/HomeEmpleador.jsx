@@ -11,6 +11,7 @@ import Negociacion from "../components/Negociacion";
 import Modal from "../components/Modal";
 import Footer from "../../components/Footer.tsx";
 import { decodeJWT } from "../../../Helpers/Token";
+import CalificacionTrabajo from "../components/CalificacionTrabajo.jsx";
 
 //import jwt from 'jsonwebtoken';
 const HomeEmpleador = () => {
@@ -30,9 +31,12 @@ const HomeEmpleador = () => {
     const priceJobOffer = priceUriComponent ? atob(priceUriComponent) : null;
     const laborsOfJobOffer = laborsUriComponent ? JSON.parse(laborsUriComponent) : null;
 
+    const [employeeName, setEmployeeName] = useState("");
+    const [employeeId, setEmployeeId] = useState("");
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isModal2Open, setIsModal2Open] = useState(false);
     const [openNegociation, setOpenNegociation] = useState(tipe && tipe === "negotiation");
-
+    console.log(isModal2Open);
     const openModal = (jobId, jobData) => {
             // Buscamos el trabajo en las secciones
             const sectionIndex = sections.findIndex(section => section.array.some(job => job.jobOfferId === jobId));
@@ -55,6 +59,14 @@ const HomeEmpleador = () => {
 
     const closeModal = () => {
         setIsModalOpen(false);
+    };
+
+    const openModal2 = () => {
+        setIsModal2Open(true);
+    }
+
+    const closeModal2 = () => {
+        setIsModal2Open(false);
     };
 
     const sections = [
@@ -176,8 +188,11 @@ const HomeEmpleador = () => {
                 </Negociacion>
             }
             {isModalOpen && 
-                <Modal isOpen={isModalOpen} infoEmployee onClose={closeModal} jobData ={selectedJobData} jobType ={selectedJobType} />
+                <Modal isOpen={isModalOpen} infoEmployee onClose={closeModal} jobData ={selectedJobData} jobType ={selectedJobType} openCalificaciones={openModal2} setEmployeeName={setEmployeeName} setEmployeeId={setEmployeeId} />
             
+            }
+            {isModal2Open &&
+                <CalificacionTrabajo isOpen={isModal2Open} onClose={closeModal2} employeeName={employeeName} employeeId={employeeId}  />
             }
             <div className="mt-auto w-full z-50 ">
                 <Footer />

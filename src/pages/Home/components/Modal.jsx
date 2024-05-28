@@ -14,7 +14,7 @@ const StyledRating = styled(Rating)({
     color: '#ffffff', // Color blanco para el borde de estrellas vacías
   },
 });
-const Modal = ({ isOpen, onClose, jobData, jobType, infoEmployee }) => {
+const Modal = ({ isOpen, onClose, jobData, jobType, infoEmployee, openCalificaciones, setEmployeeName, setEmployeeId }) => {
   const dispatch = useAppDispatch();
   const token = useAppSelector(state => state.Auth.token);
   const [isModal2Open, setIsModal2Open] = useState(false);
@@ -51,6 +51,7 @@ const Modal = ({ isOpen, onClose, jobData, jobType, infoEmployee }) => {
         toast.success('se ha finalizado el trabajo, le informaremos al empleado');
         setIsModal2Open(true);
         onClose(); // Cierra el primer modal
+        openCalificaciones(openCalificaciones);
       }else{
         toast.error('ha habido un error finalizando el trabajo');
       }
@@ -75,7 +76,18 @@ const Modal = ({ isOpen, onClose, jobData, jobType, infoEmployee }) => {
             })
             .then(data => {
                 setInfoJobUser(data.data);
+                console.log(data);
                 setRatingValue(infoEmployee ? parseFloat(data.data?.calificacionMediaEmpleado) ?? 0 : parseFloat(data.data?.calificacionMediaEmpleador) ?? 0)
+
+                // Pasar el nombre del empleado al componente padre
+                if (infoEmployee) {
+                  setEmployeeName(data.data?.employeeName ?? "");
+                  setEmployeeId(data.data?.employeeId ?? "");
+                  console.log(data.data?.employeeName);
+                } else {
+                  setEmployeeName(data.data?.employerName ?? "");
+                  setEmployeeId(data.data?.employerId ?? "");
+                }
 
                 // Aquí puedes hacer algo con los datos, como actualizar el estado de un componente en React
             })
@@ -87,10 +99,17 @@ const Modal = ({ isOpen, onClose, jobData, jobType, infoEmployee }) => {
     }
     //fetch()
 }
+
+  const closeForEmployee = () => {
+    onClose(); // Cierra el primer modal
+    openCalificaciones(openCalificaciones);
+  }
+
   useEffect(()=>{
     fetchUserJobInfo();
   },[])
 
+  console.log(infoEmployee);
   return (
     <>
       {isOpen && (
@@ -163,6 +182,12 @@ const Modal = ({ isOpen, onClose, jobData, jobType, infoEmployee }) => {
                       <a href={jobData?.jobOrderId} target="_blank" rel="noopener noreferrer" className="color4 hover:bg-orange-700 text-white px-4 py-2 rounded-md mt-2 ml-4">
                         ir a Pagar
                       </a>
+                    </div>
+                  }
+                  {
+                    (!infoEmployee && jobType == 'Realizado' && jobData?.jobStatus == '4') &&
+                    <div className="absolute bottom-0 right-0 m-4 ">
+                        <button onClick={closeForEmployee} className="color4 hover:bg-orange-700 text-white px-4 py-2 rounded-md mt-2 ml-4">Terminar Trabajo</button> {/* Botón de seleccionar */}
                     </div>
                   }
                 </div>
