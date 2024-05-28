@@ -182,7 +182,7 @@ const HomeEmpleado = () => {
                 <h2 className="text-4xl font-bold mt-4">Mis trabajos</h2>
                 <div className="w-full flex flex-row ">
 
-                    <HorizontalNavigator callBackFunction = {openModal} sections={sections}></HorizontalNavigator>
+                    <HorizontalNavigator callBackFunction = {openModal} sections={sections} tipe={'employee'} ></HorizontalNavigator>
                     <div className=" w-[30%] h-40 ml-8"><CajaGanancias profit={profit}/></div>
                 </div>
             </div>

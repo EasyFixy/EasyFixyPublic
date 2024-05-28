@@ -479,6 +479,7 @@ const Negociacion = (props) => {
                               isLoading={loading}
                               laboresData={resume}
                               textColor="text-white"
+                              showEdit={false}
                             />
                           ))}
                         </>
