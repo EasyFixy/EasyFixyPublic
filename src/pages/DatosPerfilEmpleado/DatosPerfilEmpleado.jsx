@@ -17,7 +17,7 @@ const DatosPerfilEmpleado = () => {
     };
 
     return (
-        <div className='w-screen flex flex-col h-screen overflow-y-scroll'>
+        <div className="w-screen h-screen flex flex-col overflow-y-auto pb-16">
             {/* <ToolbarDefault tipe="employee"/> */}
 
             <div className="flex flex-col content-center px-64 py-10">
