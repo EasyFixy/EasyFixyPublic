@@ -53,6 +53,7 @@ const Negociacion = (props) => {
   const [bidPrice, setBidPrice] = useState(props.priceJobOffer ? parseInt(props.priceJobOffer, 10) : 10000);
   const baseUrl = import.meta.env.VITE_BASE_URL;
   const [lastOponentChange, setLastOponentChange] = useState(0);
+  const [inicialPriceValue, setInicialPriceValue] = useState();
   const navigate = useNavigate();
   // PARAMETROS DE LA PETICION
   const [bestWorkers, setBestWorkest] = useState<BestWorkers[]>([
@@ -94,7 +95,7 @@ const Negociacion = (props) => {
         setUserId(data.data[0].userId);
         getInfoPerfil(data.data[0].userId);
         if (socket) {
-          socket.emit('notifyEmployee', { destinatary: data.data[0].userId });
+          socket.emit('notifyEmployee', { destinatary: data.data[0].userId, inicialPriceValue: props.priceJobOffer });
         } else {
           console.log("not socket")
         }
@@ -231,6 +232,8 @@ const Negociacion = (props) => {
     socketo.on('enterToBid', (notification) => {
       console.log(notification.employer)
       setUserId(notification.employer);
+      setInicialPriceValue(notification.inicialPriceValue);
+      setBidPrice(notification.inicialPriceValue)
       setTimeout(() => {
         getInfoEmployer(notification.employer);
       }, 3000);
@@ -505,7 +508,6 @@ const Negociacion = (props) => {
 
                   {/* Sección de la derecha, el chat */}
                   <div className="ml-4 mt-2 pr-8 w-1/2 flex flex-col p-1 h-96">
-                    chat
                     <Chat
                       socket={socket}
                       userId={userEnPlataforma}
@@ -527,7 +529,7 @@ const Negociacion = (props) => {
                     </button>
                   </div>
                   <div className="w-1/2 flex items-center justify-center">
-                    <PujarPrecio psocket={socket} userData={userData} initialValue={props.priceJobOffer} destinatary={parseInt(userData?.userId, 10)} setOfferAccepted={setOfferAccepted} setOponentAccepted={setOponentAccepted} offerAccepted={offerAccepted} oponentAccepted={oponentAccepted} bidPrice={bidPrice} setBidPrice={setBidPrice} />
+                    <PujarPrecio psocket={socket} userData={userData} initialValue={props.priceJobOffer ? props.priceJobOffer : inicialPriceValue} destinatary={parseInt(userData?.userId, 10)} setOfferAccepted={setOfferAccepted} setOponentAccepted={setOponentAccepted} offerAccepted={offerAccepted} oponentAccepted={oponentAccepted} bidPrice={bidPrice} setBidPrice={setBidPrice} />
                   </div>
                   <div className="flex flex-col justify-between items-center">
                     <h1 className="text-white text-3xl font-bold">Aceptar</h1>
