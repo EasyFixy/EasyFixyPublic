@@ -10,6 +10,7 @@ import { toast } from 'react-toastify';
 import Footer from "../../components/Footer.tsx";
 import HorizontalNavigator from "../Empleador/HorizontalNavigator";
 import { decodeJWT } from "../../../Helpers/Token";
+import Modal from "../components/Modal";
 
 const HomeEmpleado = () => {
     const [tipe, setTipe] = useState();
@@ -18,6 +19,9 @@ const HomeEmpleado = () => {
     const [checked, setChecked] = useState(false);
     const [profit, setProfit] = useState();
     const [jobPendingOffers, setJobPendingOffers] = useState([]);
+    const [selectedJobData, setSelectedJobData] = useState(null);
+    const [selectedJobType, setSelectedJobType] = useState(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const [jobsDone, setJobsDone] = useState([]);
     const sections = [
         {
@@ -160,7 +164,6 @@ const HomeEmpleado = () => {
     }
 
     const handleUnload = (event) => {
-        console.log('La página se está cerrando...');
         updateUserTempData(false)
     };
     const setCloseNegociation = () => {
@@ -186,16 +189,20 @@ const HomeEmpleado = () => {
                     <div className=" w-[30%] h-40 ml-8"><CajaGanancias profit={profit}/></div>
                 </div>
             </div>
-            <Negociacion 
-                isOpen={openNegociation}
-                setIsOpen = {setCloseNegociation}
-                updateUserTempData={updateUserTempData} 
-                tipe={"employee"} 
-                setPageStatusTipe={setTipe}
-            >
-            </Negociacion>
-
-             <div className="mt-auto w-full">
+            {
+                openNegociation && 
+                <Negociacion 
+                    isOpen={openNegociation}
+                    setIsOpen = {setCloseNegociation}
+                    updateUserTempData={updateUserTempData} 
+                    tipe={"employee"} 
+                    setPageStatusTipe={setTipe}
+                />
+            }
+            {isModalOpen && 
+                <Modal isOpen={isModalOpen} infoEmployee={false} onClose={()=> {setIsModalOpen(false);}} jobData ={selectedJobData} jobType ={selectedJobType} />
+            }
+            <div className="mt-auto w-full">
                 <Footer />
             </div>
 
