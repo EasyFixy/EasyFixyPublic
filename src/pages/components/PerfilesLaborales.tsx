@@ -126,72 +126,71 @@ const PerfilesLaborales = ({
     
 
     return(
-        <div className='w-full h-auto flex flex-col rounded-3xl border-2 border-grey-500 p-4 mr-8'>
+        <div className='w-full h-auto flex flex-col rounded-3xl border-2 border-grey-500 p-4 mt-2'>
             <h1>
-            {editing ? (
-                <>
-                <input
-                    type="text"
-                    className={`${textColor} font-bold w-[20%] border border-black p-1 rounded-2xl pl-2`}
-                    value={titulo}
-                    placeholder={titulo}
-                    onChange={handleChangeTitulo}
-                />
-                <> : + </>
-                <input
-                    type="age"
-                    className={`${textColor} font-bold w-[8%] border border-black p-1 rounded-2xl pl-2`}
-                    value={time_experiencia}
-                    placeholder={time_experiencia}
-                    onChange={handleChangeExperiencia}
-                />
-                <> Años de experiencia </>
-                </>
-            ) : (
-                <>
-                {isLoading && laboresData ? (
-                    <p>Cargando perfil...</p>
+                {editing ? (
+                    <>
+                        <input
+                            type="text"
+                            className={`${textColor} font-bold w-[20%] border border-black p-1 rounded-2xl pl-2`}
+                            value={titulo}
+                            placeholder={titulo}
+                            onChange={handleChangeTitulo}
+                        />
+                        <> : + </>
+                        <input
+                            type="age"
+                            className={`${textColor} font-bold w-[8%] border border-black p-1 rounded-2xl pl-2`}
+                            value={time_experiencia}
+                            placeholder={time_experiencia}
+                            onChange={handleChangeExperiencia}
+                        />
+                        <> Años de experiencia </>
+                    </>
                 ) : (
-                    <p className={`${textColor} font-bold`}>
-                        {titulo} : + {time_experiencia} Años de experiencia
-                    </p>
-                    
+                    <>
+                    {isLoading && laboresData ? (
+                        <p>Cargando perfil...</p>
+                    ) : (
+                        <p className={`${textColor} font-bold`}>
+                            {titulo} : + {time_experiencia} Años de experiencia
+                        </p>
+                        
+                    )}
+                    </>
                 )}
-                </>
-            )}
-            
             </h1>
+
             <h1>
-            {editing ? (
-                <input
-                    type="text"
-                    className={`${textColor} mt-2 font-bold border border-black p-1 rounded-2xl pl-2`}
-                    value={description}
-                    placeholder={description}
-                    onChange={handleChangeDescription}
-                />
-            ) : (
-                <>
-                {isLoading && laboresData ? (
-                    <p>Cargando perfil...</p>
+                {editing ? (
+                    <input
+                        type="text"
+                        className={`${textColor} mt-2 font-bold border border-black p-1 rounded-2xl pl-2`}
+                        value={description}
+                        placeholder={description}
+                        onChange={handleChangeDescription}
+                    />
                 ) : (
-                    <p className={`${textColor}`}>
-                        {description} 
-                    </p>
-                            
+                    <>
+                    {isLoading && laboresData ? (
+                        <p>Cargando perfil...</p>
+                    ) : (
+                        <p className={`${textColor}`}>
+                            {description} 
+                        </p>
+                                
+                    )}
+                    </>
                 )}
-                </>
-            )}
-            
             </h1>
+
             <h1 className={`${textColor} font-bold`}>Labores</h1>
-            <ul className="flex flex-row">
-            {isLoading && laboresData.labors ? (
-                            <p>No hay labores agregadas...</p>
-                        ) : (
-                            laboresData.labors.map((labor, index) => (<li key={index} className={`${textColor} ml-8`}>{labor.laborName}</li>))
-                            
-                        )}
+            <ul className="flex flex-wrap">
+            {laboresData.labors.map((labor, index) => (
+                <li key={index} className={`${textColor} ml-8`} style={{ flexBasis: '60px' }}>
+                {labor.laborName}
+                </li>
+            ))}
             </ul>
             { showEdit && 
                 <>

@@ -95,13 +95,14 @@ const VisualizarPerfil = () => {
         getInfoPerfil();
     }, []);
     return (
-        <div className='w-screen h-screen flex flex-col overflow-y-scroll overflow-x-hidden'>
+        <div className='w-full h-screen flex flex-col overflow-y-scroll'>
 
             {/* <ToolbarDefault/> */}
 
             <ContenedorPerfil estado={isMyAccount} isLoading={loading} userData={userData} />
 
-            <section className="w-70 h-auto mt-4 ml-4 border border-black border-solid px-8 py-4 rounded-3xl">
+            <div className="w-full px-4">
+            <section className="w-full h-auto mt-4 border border-black border-solid px-8 py-4 rounded-3xl">
                 <h1 className="font-bold text-3xl">Skills</h1>
                 <ul className="flex flex-wrap mt-4">
                 {loading && userData && (!userData.skills || userData.skills.length === 0) ? (
@@ -116,14 +117,14 @@ const VisualizarPerfil = () => {
 
                 </ul>
             </section>
+            </div>
+            <div className="mt-8 w-full h-auto flex flex-row px-4">
 
-            <div className="mt-8 w-full h-auto flex flex-row">
-
-                <div className="w-1/2 h-auto flex flex-col">
-                    <h1 className="text-3xl font-bold pl-4">Calificaciones</h1>
-                    <div className="ml-4 mt-2 pr-8 w-full h-auto flex flex-col border-2 rounded-3xl border-grey-500 p-1">
+                <div className="w-[50%] h-auto flex flex-col pr-8">
+                    <h1 className="text-3xl font-bold">Calificaciones</h1>
+                    <div className="mt-2 w-full h-auto flex flex-col border-2 rounded-3xl border-grey-500">
                     {loading && userData && userData.comments ? (
-                        <div className="ml-4 mt-2 pr-8 w-full h-auto flex flex-col border-2 rounded-3xl border-grey-500 p-1">
+                        <div className="ml-4 mt-2 pr-8 w-[100%] h-auto flex flex-col border-2 rounded-3xl border-grey-500 p-1">
                             {userData.comments.map((commentGroup, index) => (
                                 <React.Fragment key={index}>
                                     {commentGroup.fullComments && commentGroup.fullComments.map((comentario, subIndex) => (
@@ -133,14 +134,14 @@ const VisualizarPerfil = () => {
                             ))}
                         </div>
                     ) : (
-                        <p>No hay calificaciones por mostrar...</p>
+                        <p className="p-4">No hay calificaciones por mostrar...</p>
                     )}
                     </div>
                 </div>
 
-                <div className="w-50 h-auto">
-                    <h1 className="ml-8 pl-8 font-bold text-3xl text-orange-400 ">Perfiles laborales del empleado</h1>
-                    <ul className="w-full ml-16 pl-2 mt-4 border-2 rounded-3xl border-grey-500 p-1">
+                <div className="w-[50%] h-auto">
+                    <h1 className="font-bold text-3xl text-orange-400 ">Perfiles laborales del empleado</h1>
+                    <ul className="w-full mt-4 border-2 rounded-3xl border-grey-500 px-2">
                         {loading && userData && (!userData.comments || userData.comments.length === 0) ? (
                             <p>No hay perfiles por mostrar...</p>
                         ) : (

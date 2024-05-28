@@ -138,16 +138,6 @@ const EditarPerfil = ({ onClose }) =>{
                     <button className="w-full backgroundVerde h-14 text-white w-64 rounded-full border border-black border-solid mb-6" onClick={handleClose}>Cancelar</button>
 
                 </form>
-            <p>dasd</p>
-            <p>dasd</p>
-            <p>dasd</p>
-            <p>dasd</p>
-            <p>dasd</p>
-            <p>dasd</p>
-            <p>dasd</p>
-            <p>dasd</p>
-            <p>dasd</p>
-            <p>dasd</p>
             
         </div>
     )
