@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { toast } from 'react-toastify';
 import NavbarLandingPage from "../components/NavbarLandingPage";
 import 'react-toastify/dist/ReactToastify.css';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 const NewPassword = () => {
     
@@ -16,11 +17,11 @@ const NewPassword = () => {
     const searchParams = new URLSearchParams(location.search);
     const id = searchParams.get('id')
     const tempPass = searchParams.get('tempPass')
-
+    const navigate = useNavigate();
     console.log(id, tempPass)
 
     const resetPassword = (e) => {
-        e.preventDefault();
+        //e.preventDefault();
         if (password === confirmPassword) {
             const data = {
                 id: id,
@@ -43,6 +44,7 @@ const NewPassword = () => {
                     if (result) {
                         console.log(result);
                         toast.success("Contraseña cambiada exitosamente");
+                        navigate("/login");
                     } else {
                         console.log('paila');
                         toast.warn("Error interno");
@@ -106,9 +108,9 @@ const NewPassword = () => {
                         <Link to={"/login"} className="flex justify-center items-center w-[22%] h-10 bg-[#585858] rounded-full text-white">
                             <button className="">Cancelar</button>
                         </Link>
-                        <button className="w-[22%] h-10 mainBackground rounded-full text-white" onClick={resetPassword}><Link to={"/login"}>
+                        <button className="w-[22%] h-10 mainBackground rounded-full text-white" onClick={resetPassword}>
                         Continuar
-                        </Link></button>
+                        </button>
                     </div>
 
                 </div>

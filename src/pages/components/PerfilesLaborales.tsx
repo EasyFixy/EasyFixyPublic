@@ -24,6 +24,7 @@ interface PropsPerfilesLaborales {
     showDescription?: boolean,
     isLoading: boolean,
     laboresData: LaboresData
+    showEdit?: boolean
 }   
 
 
@@ -34,7 +35,8 @@ const PerfilesLaborales = ({
     paddingX = 'px-32',
     whiteStar = false,
     isLoading = false,
-    laboresData
+    laboresData,
+    showEdit = true,
 
 }:PropsPerfilesLaborales) => {
 
@@ -190,18 +192,20 @@ const PerfilesLaborales = ({
                 </li>
             ))}
             </ul>
-
-            <Link to={`/my/categories?tipe=modifyResume&resumeId=${laboresData.resumeId}&category=${laboresData.labors[0].laborCategoryId}&labors=${laborIds}`} className='mt-4 bg-black h-8 text-white w-40 rounded-full border border-black border-solid text-sm mr-4 mb-1 flex items-center justify-center text-center'>Editar labores</Link>
-            <>
-            {editing ? (
-                <td className='flex flex-row'>
-                    <button className='mt-4 bg-black h-8 text-white w-40 rounded-full border border-black border-solid mb-6 text-sm mr-4' onClick={validationFields}>Guardar</button>
-                    <button className='mt-4 bg-black h-8 text-white w-40 rounded-full border border-black border-solid mb-6 text-sm' onClick={handleEditClick2}>Cancelar</button>
-                </td>
-            ) : (
-                <button className=" mainBackground h-8 text-white w-40 rounded-full border border-black border-solid mb-6 text-sm" onClick={handleEditClick}>Editar</button>
-            )}
-            </>
+            { showEdit && 
+                <>
+                <Link to={`/my/categories?tipe=modifyResume&resumeId=${laboresData.resumeId}&category=${laboresData.labors[0].laborCategoryId}&labors=${laborIds}`} className='mt-4 bg-black h-8 text-white w-40 rounded-full border border-black border-solid text-sm mr-4 mb-1 flex items-center justify-center text-center'>Editar labores</Link>
+            
+                    {editing ? (
+                        <td className='flex flex-row'>
+                            <button className='mt-4 bg-black h-8 text-white w-40 rounded-full border border-black border-solid mb-6 text-sm mr-4' onClick={validationFields}>Guardar</button>
+                            <button className='mt-4 bg-black h-8 text-white w-40 rounded-full border border-black border-solid mb-6 text-sm' onClick={handleEditClick2}>Cancelar</button>
+                        </td>
+                    ) : (
+                        <button className=" mainBackground h-8 text-white w-40 rounded-full border border-black border-solid mb-6 text-sm" onClick={handleEditClick}>Editar</button>
+                    )}
+                </>
+            }
             
             
 

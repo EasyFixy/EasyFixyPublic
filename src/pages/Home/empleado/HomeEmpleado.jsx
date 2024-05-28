@@ -10,6 +10,7 @@ import { toast } from 'react-toastify';
 import Footer from "../../components/Footer.tsx";
 import HorizontalNavigator from "../Empleador/HorizontalNavigator";
 import { decodeJWT } from "../../../Helpers/Token";
+import Modal from "../components/Modal";
 
 const HomeEmpleado = () => {
     const [tipe, setTipe] = useState();
@@ -18,6 +19,9 @@ const HomeEmpleado = () => {
     const [checked, setChecked] = useState(false);
     const [profit, setProfit] = useState();
     const [jobPendingOffers, setJobPendingOffers] = useState([]);
+    const [selectedJobData, setSelectedJobData] = useState(null);
+    const [selectedJobType, setSelectedJobType] = useState(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const [jobsDone, setJobsDone] = useState([]);
     const sections = [
         {
@@ -65,7 +69,16 @@ const HomeEmpleado = () => {
                     return response.json();
                 })
                 .then(data => {
-                    setProfit(data.data[0].totalProfit)
+                    console.log(data)
+                    if(data.data){
+                        if(data.data.length > 0){
+                            setProfit(data.data[0].totalProfit)
+                        }else {
+                            setProfit(0)
+                        }
+                    }else{
+                        console.log("error trayendo")
+                    }
 
                     // Aquí puedes hacer algo con los datos, como actualizar el estado de un componente en React
                 })
@@ -151,7 +164,6 @@ const HomeEmpleado = () => {
     }
 
     const handleUnload = (event) => {
-        console.log('La página se está cerrando...');
         updateUserTempData(false)
     };
     const setCloseNegociation = () => {
@@ -173,20 +185,24 @@ const HomeEmpleado = () => {
                 <h2 className="text-4xl font-bold mt-4">Mis trabajos</h2>
                 <div className="w-full flex flex-row ">
 
-                    <HorizontalNavigator callBackFunction = {openModal} sections={sections}></HorizontalNavigator>
+                    <HorizontalNavigator callBackFunction = {openModal} sections={sections} tipe={'employee'} ></HorizontalNavigator>
                     <div className=" w-[30%] h-40 ml-8"><CajaGanancias profit={profit}/></div>
                 </div>
             </div>
-            <Negociacion 
-                isOpen={openNegociation}
-                setIsOpen = {setCloseNegociation}
-                updateUserTempData={updateUserTempData} 
-                tipe={"employee"} 
-                setPageStatusTipe={setTipe}
-            >
-            </Negociacion>
-
-             <div className="mt-auto w-full">
+            {
+                openNegociation && 
+                <Negociacion 
+                    isOpen={openNegociation}
+                    setIsOpen = {setCloseNegociation}
+                    updateUserTempData={updateUserTempData} 
+                    tipe={"employee"} 
+                    setPageStatusTipe={setTipe}
+                />
+            }
+            {isModalOpen && 
+                <Modal isOpen={isModalOpen} infoEmployee={false} onClose={()=> {setIsModalOpen(false);}} jobData ={selectedJobData} jobType ={selectedJobType} />
+            }
+            <div className="mt-auto w-full">
                 <Footer />
             </div>
 

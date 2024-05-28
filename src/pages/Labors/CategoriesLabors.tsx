@@ -163,7 +163,6 @@ const CategoriesLabors = () => {
     }
 
     const saveCategoriesToResume = () => {
-        console.log("opirmido")
         const title = searchParams.get('title');
         const experience = searchParams.get('experience');
         const description = searchParams.get('description');
@@ -300,9 +299,6 @@ const CategoriesLabors = () => {
     }
 
     const fetchLabors = (indexCategory: number) => {
-        console.log("fetching labors")
-        console.log(categories[indexCategory].laborCategoryId)
-        console.log(indexCategory)
 
         fetch(`${baseUrl}getLaborsPerCategories`, {
             method: 'POST',
