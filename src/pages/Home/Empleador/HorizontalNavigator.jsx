@@ -64,6 +64,8 @@ const HorizontalNavigator = (props) => {
                         seccionActiva={seccionActiva}
                         datosFiltrados={datosFiltrados.length > 0 ? datosFiltrados : props.sections[seccionActiva].array}
                         array={datosFiltrados}
+                        tipe={props.tipe}
+
                     />
                     </div>
                 </div>

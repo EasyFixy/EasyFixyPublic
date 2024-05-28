@@ -35,7 +35,10 @@ const NavigatorDisplayElement = (props) => {
                     <div>{getDateDetails(offer.jobOfferDateAtCreate)}</div>
                 </div>
             </div>
-        ))) : (<div>No hay trabajos, crea el primero</div>))
+        ))) : props.tipe == 'employer' ? 
+            <div>No hay trabajos, crea el primero</div>
+            : <div>No hay trabajos</div>
+        )
 }
 
 export default NavigatorDisplayElement;

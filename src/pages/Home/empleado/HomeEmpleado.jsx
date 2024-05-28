@@ -69,7 +69,16 @@ const HomeEmpleado = () => {
                     return response.json();
                 })
                 .then(data => {
-                    setProfit(data.data[0].totalProfit)
+                    console.log(data)
+                    if(data.data){
+                        if(data.data.length > 0){
+                            setProfit(data.data[0].totalProfit)
+                        }else {
+                            setProfit(0)
+                        }
+                    }else{
+                        console.log("error trayendo")
+                    }
 
                     // Aquí puedes hacer algo con los datos, como actualizar el estado de un componente en React
                 })
@@ -176,7 +185,7 @@ const HomeEmpleado = () => {
                 <h2 className="text-4xl font-bold mt-4">Mis trabajos</h2>
                 <div className="w-full flex flex-row ">
 
-                    <HorizontalNavigator callBackFunction = {openModal} sections={sections}></HorizontalNavigator>
+                    <HorizontalNavigator callBackFunction = {openModal} sections={sections} tipe={'employee'} ></HorizontalNavigator>
                     <div className=" w-[30%] h-40 ml-8"><CajaGanancias profit={profit}/></div>
                 </div>
             </div>

@@ -94,10 +94,6 @@ const VisualizarPerfil = () => {
     useEffect(() => {
         getInfoPerfil();
     }, []);
-
-    console.log("Los resumes: ",userData.resumes);
-    
-
     return (
         <div className='w-screen h-screen flex flex-col overflow-y-scroll overflow-x-hidden'>
 
