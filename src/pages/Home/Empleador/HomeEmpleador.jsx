@@ -157,22 +157,34 @@ const HomeEmpleador = () => {
             <NavbarEmpleador></NavbarEmpleador>
             <div className="flex flex-col justify-center w-full" style={{ padding: 30 + 'px' }}>
                 <h2 className="text-4xl font-bold mt-4">Mis trabajos</h2>
-                <HorizontalNavigator callBackFunction = {openModal} sections={sections}></HorizontalNavigator>
+                <HorizontalNavigator 
+                    callBackFunction = {openModal} 
+                    sections={sections}
+                    tipe={'employer'} 
+                >
+
+                </HorizontalNavigator>
                 <div>
                     <Link to={"/my/createjob"}><button className="mainBackground self-end w-[185px] h-10 rounded-full text-white shadow-1">Crear Trabajo
                     </button></Link>
                 </div>
             </div>
-            <Negociacion 
-                isOpen={openNegociation}
-                setIsOpen = {setOpenNegociation}
-                tipe={'employer'} 
-                labors={laborsOfJobOffer} 
-                priceJobOffer={priceJobOffer} 
-                jobOfferId={jobOfferId}>
+            {
+                openNegociation && 
+                <Negociacion 
+                    isOpen={openNegociation}
+                    setIsOpen = {setOpenNegociation}
+                    tipe={'employer'} 
+                    labors={laborsOfJobOffer} 
+                    priceJobOffer={priceJobOffer} 
+                    jobOfferId={jobOfferId}>
 
-            </Negociacion>
-                <Modal isOpen={isModalOpen} onClose={closeModal} jobData ={selectedJobData} jobType ={selectedJobType} />
+                </Negociacion>
+            }
+            {isModalOpen && 
+                <Modal isOpen={isModalOpen} infoEmployee onClose={closeModal} jobData ={selectedJobData} jobType ={selectedJobType} />
+            
+            }
             <div className="mt-auto w-full z-50 ">
                 <Footer />
             </div>

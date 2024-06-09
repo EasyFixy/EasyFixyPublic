@@ -163,7 +163,6 @@ const CategoriesLabors = () => {
     }
 
     const saveCategoriesToResume = () => {
-        console.log("opirmido")
         const title = searchParams.get('title');
         const experience = searchParams.get('experience');
         const description = searchParams.get('description');
@@ -300,9 +299,6 @@ const CategoriesLabors = () => {
     }
 
     const fetchLabors = (indexCategory: number) => {
-        console.log("fetching labors")
-        console.log(categories[indexCategory].laborCategoryId)
-        console.log(indexCategory)
 
         fetch(`${baseUrl}getLaborsPerCategories`, {
             method: 'POST',
@@ -380,7 +376,7 @@ const CategoriesLabors = () => {
     
     
     return (
-        <div className="w-screen h-screen flex flex-col">
+        <div className="w-screen h-screen flex flex-col pb-2">
             {/* <ToolbarDefault tipe={tipe === "createResume" ? ("employee") : ("employer")} /> */}
             <div className="w-full flex-1 px-[5%] flex flex-col pb-[5%] pt-[3%] font-bold overflow-y-scroll">
                 <h1 className="text-5xl">

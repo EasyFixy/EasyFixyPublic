@@ -99,10 +99,10 @@ const UserChats = () => {
     }, []);
 
     return (
-        <div className='w-screen h-screen flex flex-col'>
+        <div className="w-screen h-screen flex flex-col overflow-y-auto pb-16 ">
             {/* <ToolbarDefault /> */}
             <NavbarEmpleador/>
-            <div className="flex flex-row h-full w-screen" style={{height: 'calc(100% - 6rem)'}}>
+            <div className="flex flex-row h-full w-screen" >
                 <div className="w-1/4 border-r border-gray-300 overflow-y-auto">
                     {/* Encabezado y buscador */}
                     <div className="p-4">
@@ -143,7 +143,7 @@ const UserChats = () => {
                             </div>
                             <hr className="border-gray-300 my-2" /> {/* Línea divisoria */}
                             {/* Espacio entre la línea divisoria y el componente de chat */}
-                            <div className="flex-grow">
+                            <div className="flex-grow pb-12">
                                 
                                 {messages !== null && (
                                     <Chat userId={userEnPlataforma} destinatary={selectedChat.desiredUserId} showEstimatePrice={false} messages={messages} setLastMessage={setLastMessage}/>
