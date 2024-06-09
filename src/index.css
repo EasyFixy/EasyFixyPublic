@@ -69,14 +69,14 @@ body {
 }
 .backgroundLanding{
     background-color: rgb(41, 41, 41);
-    background-image: url('public/ColombiaMap.png');
+    background-image: url('ColombiaMap.png');
     background-repeat: no-repeat;
     background-position: top right;
     background-size: contain;
 }
 .backgroundLanding2{
     background-color: rgb(41, 41, 41);
-    background-image: url('public/landingImage2.png');
+    background-image: url('landingImage2.png');
     background-repeat: no-repeat;
     background-size: cover;
 }
