@@ -6,7 +6,7 @@ const NavbarLandingPage = () => {
         <>
         <div className="w-full h-20 mainBackground px-[5%] flex fixed text-white">
             <div className="w-2/6 flex flex-row justify-start items-center">
-                <img src="/public/logo.svg" alt="logo" className="h-full" />
+                <img src="logo.svg" alt="logo" className="h-full" />
                 <p className="text-4xl fontNameLogo"> EasyFixy</p>
 
             </div>
