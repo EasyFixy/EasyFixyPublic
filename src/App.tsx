@@ -4,6 +4,7 @@ import Register from './pages/register/Register';
 import Login from './pages/Login/Login';
 import TermsConditions from './pages/PoliticasYCondiciones/TermsConditions';
 import PoliciesPrivacy from './pages/PoliticasYCondiciones/PoliciesPrivacy';
+import FAQ from './pages/PoliticasYCondiciones/FAQ';
 import NewPassword from './pages/Password/NewPassword';
 import RecuperarPassword from './pages/Password/RecuperarPassword';
 import UserLogueado from './Rutas/UserLogueado';
@@ -13,7 +14,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { decodeJWT, validationToken } from './Helpers/Token';
 import { useAppDispatch, useAppSelector } from './app/hooks';
 import { login } from './features/Auth/Auth';
-import Footer from './pages/components/Footer'
+
 import QuienesSomos from './pages/AboutUs/QuienesSomos';
 import HomeEmpleado from './pages/Home/empleado/HomeEmpleado';
 const App = () => {
@@ -38,6 +39,7 @@ const App = () => {
           <Route path="/newPassword" element={<NewPassword />} />
           <Route path="/recuperarPassword" element={<RecuperarPassword />} />
           <Route path="/about-us" element={<QuienesSomos/>} />
+          <Route path="/faq" element={<FAQ/>} />
           {/* Protege las rutas dentro de '/my' */}
           {tokenIsValid ? (
             <Route path='my/*' element={<UserLogueado />} />
