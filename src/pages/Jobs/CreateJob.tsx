@@ -84,6 +84,7 @@ const CreateJob = () => {
                     <h1 className="font-bold text-5xl mb-8">Cuentanos que es lo que necesitas <span className="textNaranja">hacer.</span></h1>
                     <input className="w-full border border-solid border-[#292929] h-8 rounded-xl mb-5 pl-[3%]"
                         onChange={(event) => { setTitle(event.target.value) }} type="text" placeholder="Nombre del Problema" />
+                    <label><strong>Descripcion: <span className="textNaranja"> recuerda describir los criterios de aceptación del trabajo</span>  </strong></label>
                     <textarea className="w-full border-solid border-[#292929] h-24 mb-5 pl-[3%] resize-none border rounded-md"
                         placeholder="Descripcion de problema"
                         onChange={(event) => { setDescription(event.target.value) }} />
