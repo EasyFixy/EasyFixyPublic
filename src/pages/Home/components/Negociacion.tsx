@@ -8,8 +8,8 @@ import Chat from "../../components/Chat";
 import { useAppSelector } from "../../../app/hooks";
 import PujarPrecio from "./PujarPrecio";
 import { io, Socket } from "socket.io-client";
-import { log } from "console";
-import { toast } from 'react-toastify';
+
+import { toast, ToastContainer } from 'react-toastify';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { PacmanLoader } from "react-spinners";
 import Modal from '@mui/material/Modal';
@@ -35,7 +35,7 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: '80%',
+  width: '95%',
   height: '93%',
   bgcolor: '#292929',
   boxShadow: 24,
@@ -54,6 +54,11 @@ const Negociacion = (props) => {
   const baseUrl = import.meta.env.VITE_BASE_URL;
   const [lastOponentChange, setLastOponentChange] = useState(0);
   const [inicialPriceValue, setInicialPriceValue] = useState();
+  const [isUserTab, setIsUserTab] = useState(true);
+  const [jobOfferId, setJobOfferId] = useState(props.jobOfferId ?? '');
+  const[jobDescription, setJobDescription] = useState();
+  const[dateCreate, setDateCreate] = useState();
+  const[jobTittle, setJobTittle] = useState();
   const navigate = useNavigate();
   // PARAMETROS DE LA PETICION
   const [bestWorkers, setBestWorkest] = useState<BestWorkers[]>([
@@ -95,7 +100,8 @@ const Negociacion = (props) => {
         setUserId(data.data[0].userId);
         getInfoPerfil(data.data[0].userId);
         if (socket) {
-          socket.emit('notifyEmployee', { destinatary: data.data[0].userId, inicialPriceValue: props.priceJobOffer });
+          console.log('emit ', props.jobOfferId );
+          socket.emit('notifyEmployee', { destinatary: data.data[0].userId, inicialPriceValue: props.priceJobOffer, jobOfferId: props.jobOfferId });
         } else {
           console.log("not socket")
         }
@@ -175,6 +181,35 @@ const Negociacion = (props) => {
     }
 
   }
+  useEffect(() => {
+    console.log('useefect joboffer ', jobOfferId)
+    const url = `${baseUrl}getJobOffer?jobOfferId=${encodeURIComponent(jobOfferId)}`;
+    fetch(url)
+      .then(response => {
+          if (!response.ok) {
+              throw new Error('La solicitud no fue exitosa');
+          }
+          return response.json(); // Si esperas una respuesta JSON
+      })
+      .then(result => {
+          // Aquí puedes trabajar con los datos obtenidos en la respuesta            
+          if (result && result.statusCode === 200) {
+              setJobDescription(result.data[0].jobOfferDescription)
+              setDateCreate(result.data[0].jobOfferDateAtCreate)
+              setJobTittle(result.data[0].jobOfferTittle)
+          } else {
+              toast.warn("Error interno");
+          }
+          console.log(result)
+      })
+      .catch(error => {
+          console.error('Hubo un problema con la solicitud fetch:', error);
+      });
+  },[jobOfferId])
+  const handleTab = () => {
+    setIsUserTab(prev => !prev);
+
+  };
   function getInfoPerfil(userId) {
     setLoading(true);
     const options = {
@@ -234,6 +269,8 @@ const Negociacion = (props) => {
       setUserId(notification.employer);
       setInicialPriceValue(notification.inicialPriceValue);
       setBidPrice(notification.inicialPriceValue)
+      console.log('notification ',notification.jobOfferId);
+      setJobOfferId(notification.jobOfferId)
       setTimeout(() => {
         getInfoEmployer(notification.employer);
       }, 3000);
@@ -331,7 +368,7 @@ const Negociacion = (props) => {
             bestWorkers.shift();
             setUserId(bestWorkers[0].userId);
             getInfoPerfil(bestWorkers[0].userId);
-            socket.emit('notifyEmployee', { destinatary: bestWorkers[0].userId });
+            socket.emit('notifyEmployee', { destinatary: bestWorkers[0].userId,  jobOfferId: props.jobOfferId  });
           } else {
             console.log("not socket")
           }
@@ -372,8 +409,30 @@ const Negociacion = (props) => {
     
   }
 
-  const acceptOffer = () => {
+  const showToast = () => {
+    return (
 
+    <div className={`flex gap-2`}>
+            
+            <div className={`flex-1`}>
+                <p className="font-12">{` Aceptar el trabajo implica el cumplimiento detallado de la oferta de trabajo!`}</p>
+                <div className={` flex flex-row items-start justify-start mt-1`}>
+                    <button className={`h-[18px] mr-2 flex flex-row items-center justify-center min-w-[57px] textNaranja bg-white border border-red-500 px-2 rounded-lg`} 
+                    onClick={accept}>
+                        Confirmar
+                    </button>
+                    <button
+                        className={`h-[18px] flex flex-row items-center justify-cente min-w-[57px] text-white custom-toast-error px-2 rounded-lg`}
+                        
+                    >
+                        cancelar
+                    </button>
+                </div>
+            </div>
+        </div>
+    )
+  }
+  const accept = () => {
     setOfferAccepted(true)
     if (socket) {
       socket.emit('acceptOffer', { destinatary: userId });
@@ -393,6 +452,19 @@ const Negociacion = (props) => {
           console.log("error")
       }
     }
+  }
+  const acceptOffer = () => {
+    setIsUserTab(false);
+    toast.info(
+      showToast(),
+      {
+        autoClose: 15000,
+        style: ({
+            zIndex: 5000
+        }),
+    }
+    );
+    
 
   }
 
@@ -413,6 +485,11 @@ const Negociacion = (props) => {
       <Fade in={props.isOpen}>
 
         <Box sx={style}>
+        <ToastContainer
+        position="top-right"
+        autoClose={4000}
+        closeOnClick
+      />
             {(userId === 0 || loading) ? (
               <div className="w-full h-full flex flex-col items-center justify-center">
 
@@ -432,7 +509,14 @@ const Negociacion = (props) => {
                   <CloseIcon />
                 </IconButton>
                <div className="w-full">
-
+                <button 
+                  className="bg-white border rounded h-10 px-2 ml-2 textNaranja font-bold"
+                  onClick={handleTab}
+                >
+                  {isUserTab  ? 'Ver oferta de trabajo' : 'Ver usuario'}
+                </button>
+                {isUserTab ?
+                <>
                 <ContenedorPerfil
                   userData={userData}
                   estado={false}
@@ -517,6 +601,33 @@ const Negociacion = (props) => {
                       ></Chat>
                   </div>
                 </section>
+                </>
+                : 
+                <>
+                <div className="w-full flex flex-row justify-center ">
+
+                  <section className="w-[70%] bg-white shadow-1 rounded-2xl">
+                      <div className="flex flex-col h-auto w-full  rounded-2xl border p-4">
+                          <tr className="text-4xl flex justify-center mt-8 font-bold">Descripción del trabajo</tr>
+                          <tr className="flex justify-start text-1xl mt-8"><td><strong>Fecha </strong></td><td className="ml-auto">{dateCreate}</td></tr>
+                          
+                          <ul className="p-4">
+                            <li>
+                              <strong>Nombre del trabajo:</strong><br/>
+                              {jobTittle}
+                            </li>
+                            <li>
+                              <strong>Descripcion del trabajo:</strong><br/>
+                              {jobDescription}
+                            </li>
+                          </ul>
+                          
+                      </div>
+                  </section>
+                </div>
+
+                </>
+                }
 
                 <section className="flex justify-between items-center p-16 w-90 h-auto mt-4 ml-4 px-8 py-4  mr-8">
                   <div className="flex flex-col justify-between items-center">
