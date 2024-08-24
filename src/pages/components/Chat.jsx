@@ -106,7 +106,7 @@ const Chat = (props) => {
             onKeyDown={handleKeyDown}
           />
           <button className="" onClick={handleSendMessage}>
-            <img src="/icons/flecha-enviar.svg" alt="" className="w-8 h-8 ml-2" />
+            <img src="/icons/flecha-enviar.png" alt="" className="w-8 h-8 ml-2" />
           </button>
         </div>
       </div>
