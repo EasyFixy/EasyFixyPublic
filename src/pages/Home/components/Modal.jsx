@@ -138,7 +138,7 @@ const Modal = ({ isOpen, onClose, jobData, jobType, infoEmployee }) => {
                   <div className="flex items-center mb-2">
                     <img src="/empleadologo.svg" alt="Profile" className="bg-gray-200 w-15 h-15  mr-4" />
                     <div>
-                      <p className="text-orange-500 font-bold">{infoEmployee ? infoJobUser?.employeeName ?? "" : infoJobUser?.employerName}</p>
+                      <p className="text-emerald-700 font-bold">{infoEmployee ? infoJobUser?.employeeName ?? "" : infoJobUser?.employerName}</p>
                       <p>Calificación promedio</p>
                       <div className="flex justify-between"> {/* Alineando los elementos a la derecha */}
                         <StyledRating
@@ -154,13 +154,13 @@ const Modal = ({ isOpen, onClose, jobData, jobType, infoEmployee }) => {
                   {
                     (infoEmployee && jobType == 'Pendiente' && jobData?.jobStatus == '1') &&
                     <div className="absolute bottom-0 right-0 m-4 ">
-                        <button onClick={handleTerminarTrabajoClick} className="color4 hover:bg-orange-700 text-white px-4 py-2 rounded-md mt-2 ml-4">Terminar Trabajo</button> {/* Botón de seleccionar */}
+                        <button onClick={handleTerminarTrabajoClick} className="color4 hover:bg-emerald-700 text-white px-4 py-2 rounded-md mt-2 ml-4">Terminar Trabajo</button> {/* Botón de seleccionar */}
                     </div>
                   }
                   {
                     (infoEmployee && jobType == 'Pendiente' && jobData?.jobStatus == '0') &&
                     <div className="absolute bottom-0 right-0 m-4 ">
-                      <a href={jobData?.jobOrderId} target="_blank" rel="noopener noreferrer" className="color4 hover:bg-orange-700 text-white px-4 py-2 rounded-md mt-2 ml-4">
+                      <a href={jobData?.jobOrderId} target="_blank" rel="noopener noreferrer" className="color4 hover:bg-emerald-700 text-white px-4 py-2 rounded-md mt-2 ml-4">
                         ir a Pagar
                       </a>
                     </div>

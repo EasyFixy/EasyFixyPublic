@@ -36,10 +36,10 @@ body {
 }
 :root{
     /* #27806C; */
-    --colorVerde: #FD7401;
+    --colorVerde: #27806C;
     --color3: #292929;
     --color2: #666666; 
-    --colorNaranja: #FD7401;
+    --colorNaranja: #27806C;
     --colorGris: rgb(41,41,41);
 }   
 .mainBackground{
@@ -97,7 +97,7 @@ input:focus {
   }
   
 .orange-link:hover {
-    color: #FD7401; }
+    color: #27806C; }
 
 
 @keyframes blink {
@@ -124,7 +124,7 @@ input:focus {
 }
 
 .orange-arrow img {
-    fill: orange; /* Cambia el color de relleno de la imagen a naranja */
+    fill: #27806C; /* Cambia el color de relleno de la imagen a naranja */
 }
 
 .circle {

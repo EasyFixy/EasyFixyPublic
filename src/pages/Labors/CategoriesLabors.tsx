@@ -405,7 +405,7 @@ const CategoriesLabors = () => {
                         {
                             renderLabors.map((value, index) => {
                                 return (
-                                    <div key={index} className={`text-xl w-full h-16 shadow-1 rounded-xl flex flex-row px-[5%] max-w-[450px] justify-between items-center ${selectedLabors.includes(value.laborId) ? 'bg-[#FD7401]' : ''}`} >
+                                    <div key={index} className={`text-xl w-full h-16 shadow-1 rounded-xl flex flex-row px-[5%] max-w-[450px] justify-between items-center ${selectedLabors.includes(value.laborId) ? 'bg-[#27806C]' : ''}`} >
                                         <p>{value.laborName}</p>
                                         <input type="checkbox" className=""
                                             checked={selectedLabors.includes(value.laborId)}

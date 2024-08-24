@@ -113,7 +113,7 @@ const UserChats = () => {
                             {chats.map(chat => (
                                 <div 
                                     key={chat.desiredUserId} 
-                                    className={`flex items-center justify-between mb-4 cursor-pointer ${selectedChat.desiredUserId === chat.desiredUserId ? 'bg-orange-400 bg-opacity-50' : ''}`} 
+                                    className={`flex items-center justify-between mb-4 cursor-pointer ${selectedChat.desiredUserId === chat.desiredUserId ? 'bg-emerald-700 bg-opacity-50' : ''}`} 
                                     onClick={() => onClickSelected(chat)}
                                 >
                                     <div className="flex items-center">
