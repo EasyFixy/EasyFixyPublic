@@ -14,7 +14,8 @@ const LandingPage = () =>{
             </div>
             <div className="w-4/6 flex flex-row justify-between items-center font-bold text-base">
                 <Link to={"/about-us"}>¿Quienes somos?</Link>
-                <a href="public\Manual de Técnico - EasyFixy.pdf" target="_blank" rel="noopener noreferrer">¿Cómo funciona?</a>
+                <a href="/Manual de Técnico - EasyFixy.pdf" target="_blank" rel="noopener noreferrer">¿Cómo funciona?</a>
+                <a href="/manual tecnico EasyFixy app.pdf" target="_blank" rel="noopener noreferrer"> Manual técnico</a>
                 <Link to={"/FAQ"}>Preguntas frecuentes</Link>
                 <Link to={"/login"}>Iniciar sesión</Link>
                 <Link to={"/register"}>Registrarse</Link>
