@@ -129,11 +129,11 @@ const ToolbarDefault = (props) => {
     }, [location]);
 
     return (
-        <div className="w-full h-16 mainBackground flex justify-between items-center p-4">
+        <div className="w-full h-fit sm:h-16 mainBackground flex justify-between items-center p-1 sm:p-4">
             <Link to={'/'}>
                 <div className="flex flex-row justify-start items-center">
-                    <p className="text-3xl "> EasyFixy</p>
-                    <img src="/icons/icon.svg" alt="logo" className="w-16 pl-2.5" />
+                    <p className="text-[0px] lg:text-3xl "> EasyFixy</p>
+                    <img src="/icons/icon.svg" alt="logo" className="sm:w-16 sm:pl-2.5 w-10" />
 
                 </div>
             </Link>
@@ -172,21 +172,21 @@ const ToolbarDefault = (props) => {
             </div>
 
 
-            <div className="w-2/4 flex flex-row justify-end items-center">
-                <div className="flex flex-row items-center mr-8">
-                    <img src="/icons/maletin.svg" alt="maletin de trabajo" />
+            <div className="w-2/4 flex flex-row justify-end items-center ">
+                <div className="flex flex-col sm:flex-row items-center sm:mr-8 ">
+                    <img src="/icons/maletin.svg" alt="maletin de trabajo" className="w-6 sm:w-fit"/>
                     {checked ? (
-                        <Link to="/my/home/employer"><p className="text-white ml-2">Mis trabajos</p></Link>
+                        <Link to="/my/home/employer"><p className="text-white text-center ml-2 text-sm sm:text-base">Mis trabajos</p></Link>
                     ) : (
-                        <Link to="/my/home/employee"><p className="text-white ml-2">Mis trabajos</p></Link>
+                        <Link to="/my/home/employee"><p className="text-white text-center ml-2 text-sm sm:text-base">Mis trabajos</p></Link>
                     )}
                 </div>
                 
                 <Link to={'/my/profile/employee'}>
-                <div className="flex flex-row items-center">
-                    <img src="/icons/foto_user.svg" alt="foto del usuario" />
-                    <p className="text-white ml-4">{user ? user.userName : ""}</p>
-                </div>
+                    <div className="flex items-center flex-col sm:flex-row ">
+                        <img src="/icons/foto_user.svg" alt="foto del usuario" className="w-6 sm:w-fit"  />
+                        <p className="text-white ml-4 text-center text-sm sm:text-base">{user ? user.userName : ""}</p>
+                    </div>
                 </Link>
             </div>
 
