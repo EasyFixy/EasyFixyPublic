@@ -200,7 +200,7 @@ const ContenedorPerfil = ({
     </section>
 
     {/* Estado en línea */}
-    <h2 className="mt-8 text-orange-500 px-4"> 
+    <h2 className="mt-8 text-cyan-700 px-4"> 
       {isActive == 1 ? <>· Estoy en linea!</> : <>· No estoy en linea</>}
     </h2>
 
