@@ -54,21 +54,21 @@ const NavbarEmpleado = (props) => {
     }, []);
 
     return (
-        <div className="w-full h-8 color3 flex justify-between items-center p-4">
-            <div className="flex flex-row justify-start items-center">
+        <div className="w-full h-max sm::h-8 color3 flex justify-around sm:justify-between items-center sm:p-4 p-1 flex-row flex-wrap">
+            <div className="flex flex-row sm:justify-start justify-around items-center lg:gap-12 gap-4">
                 <Link to={"/my/chats"} className="relative group">
-                    <button className="text-white ml-12 relative transition-all duration-300 group-hover:text-cyan-600 group-hover:scale-105 group-hover:before:content-[''] group-hover:before:absolute group-hover:before:w-full group-hover:before:h-1 group-hover:before:bg-cyan-600 group-hover:before:bottom-[-4px] group-hover:before:left-0 group-hover:before:transition-all group-hover:before:duration-300">Chats</button>
+                    <button className="text-white text-sm sm:text-base relative transition-all duration-300 group-hover:text-cyan-600 group-hover:scale-105 group-hover:before:content-[''] group-hover:before:absolute group-hover:before:w-full group-hover:before:h-1 group-hover:before:bg-cyan-600 group-hover:before:bottom-[-4px] group-hover:before:left-0 group-hover:before:transition-all group-hover:before:duration-300">Chats</button>
                 </Link>
                 <Link to={"/my/profile/employee/create/skills"} className="relative group">
-                    <button className="text-white ml-12 relative transition-all duration-300 group-hover:text-cyan-600 group-hover:scale-105 group-hover:before:content-[''] group-hover:before:absolute group-hover:before:w-full group-hover:before:h-1 group-hover:before:bg-cyan-600 group-hover:before:bottom-[-4px] group-hover:before:left-0 group-hover:before:transition-all group-hover:before:duration-300">Crear habilidades</button>
+                    <button className="text-white text-sm sm:text-base relative transition-all duration-300 group-hover:text-cyan-600 group-hover:scale-105 group-hover:before:content-[''] group-hover:before:absolute group-hover:before:w-full group-hover:before:h-1 group-hover:before:bg-cyan-600 group-hover:before:bottom-[-4px] group-hover:before:left-0 group-hover:before:transition-all group-hover:before:duration-300">Crear habilidades</button>
                 </Link>
                 <Link to={"/my/profile/employee/create/personalinformation"} className="relative group">
-                    <button className="text-white ml-12 relative transition-all duration-300 group-hover:text-cyan-600 group-hover:scale-105 group-hover:before:content-[''] group-hover:before:absolute group-hover:before:w-full group-hover:before:h-1 group-hover:before:bg-cyan-600 group-hover:before:bottom-[-4px] group-hover:before:left-0 group-hover:before:transition-all group-hover:before:duration-300">Crear perfil</button>
+                    <button className="text-white text-sm sm:text-base relative transition-all duration-300 group-hover:text-cyan-600 group-hover:scale-105 group-hover:before:content-[''] group-hover:before:absolute group-hover:before:w-full group-hover:before:h-1 group-hover:before:bg-cyan-600 group-hover:before:bottom-[-4px] group-hover:before:left-0 group-hover:before:transition-all group-hover:before:duration-300">Crear perfil</button>
                 </Link>
             </div>
-            <div className="w-2/4 flex flex-row justify-end items-center">
-                <p className="text-white mr-4">No activo</p>
-                <label htmlFor="second-toggle" className="flex items-center cursor-pointer mr-4">
+            <div className="lg:w-2/4 flex flex-row justify-end items-center lg:gap-12 gap-4">
+                <p className="text-white text-sm sm:text-base">No activo</p>
+                <label htmlFor="second-toggle" className="flex items-center cursor-pointer ">
                     <div className="relative">
                         <input
                             id="second-toggle"
@@ -84,11 +84,11 @@ const NavbarEmpleado = (props) => {
                         ></div>
                     </div>
                 </label>
-                <p className={`mr-12 ${props.checked ? 'text-green-500' : 'text-white'}`}>Activo</p>
+                <p className={` ${props.checked ? 'text-green-500' : 'text-white'} text-sm sm:text-base`}>Activo</p>
                 <a href="https://wa.me/3208393883" className="relative group">
-                    <button className="text-white mr-12 relative transition-all duration-300 group-hover:text-cyan-600 group-hover:scale-105 group-hover:before:content-[''] group-hover:before:absolute group-hover:before:w-full group-hover:before:h-1 group-hover:before:bg-cyan-600 group-hover:before:bottom-[-4px] group-hover:before:left-0 group-hover:before:transition-all group-hover:before:duration-300">Soporte</button>
+                    <button className="text-white  text-sm sm:text-base relative transition-all duration-300 group-hover:text-cyan-600 group-hover:scale-105 group-hover:before:content-[''] group-hover:before:absolute group-hover:before:w-full group-hover:before:h-1 group-hover:before:bg-cyan-600 group-hover:before:bottom-[-4px] group-hover:before:left-0 group-hover:before:transition-all group-hover:before:duration-300">Soporte</button>
                 </a>
-                <button className="text-white mr-12 relative transition-all duration-300 group-hover:text-cyan-600 group-hover:scale-105 group-hover:before:content-[''] group-hover:before:absolute group-hover:before:w-full group-hover:before:h-1 group-hover:before:bg-cyan-600 group-hover:before:bottom-[-4px] group-hover:before:left-0 group-hover:before:transition-all group-hover:before:duration-300" onClick={logOut}>Salir</button>
+                <button className="text-white  text-sm sm:text-base relative transition-all duration-300 group-hover:text-cyan-600 group-hover:scale-105 group-hover:before:content-[''] group-hover:before:absolute group-hover:before:w-full group-hover:before:h-1 group-hover:before:bg-cyan-600 group-hover:before:bottom-[-4px] group-hover:before:left-0 group-hover:before:transition-all group-hover:before:duration-300" onClick={logOut}>Salir</button>
             </div>
         </div>
     );

@@ -181,12 +181,12 @@ const HomeEmpleado = () => {
             {/* <ToolbarDefault tipe="employee"/> */}
             <NavbarEmpleado checked={checked} setChecked={setChecked} setTipe={setTipe} updateUserTempData={updateUserTempData} />
                 {/* <div className="w-3/4 h-auto ml-12 mr-4"><MisTrabajos /></div> */}
-            <div className="flex flex-col justify-center w-full " style={{ padding: 30 + 'px' }}>
-                <h2 className="text-4xl font-bold mt-4">Mis trabajos</h2>
-                <div className="w-full flex flex-row ">
+            <div className="flex flex-col justify-center w-full sm:p-7 p-2" >
+                <h2 className="sm:text-4xl text-2xl font-bold lg:mt-4">Mis trabajos</h2>
+                <div className="w-full flex lg:flex-row flex-col-reverse ">
 
                     <HorizontalNavigator callBackFunction = {openModal} sections={sections} tipe={'employee'} ></HorizontalNavigator>
-                    <div className=" w-[30%] h-40 ml-8"><CajaGanancias profit={profit}/></div>
+                    <div className=" lg:w-[30%] lg:h-40 h-max lg:ml-8"><CajaGanancias profit={profit}/></div>
                 </div>
             </div>
             {

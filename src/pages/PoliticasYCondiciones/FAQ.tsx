@@ -55,15 +55,15 @@ const FAQ = () => {
 
     return (
         <>
-        <div className='w-screen h-screen overflow-y-auto '>
+        <div className='w-screen h-screen flex flex-col '>
             <NavbarLandingPage></NavbarLandingPage>
-                <div className="mx-auto pt-24 p-8 overflow-y-auto">
-                    <h1 className="text-4xl font-bold text-center mb-8">Preguntas Frecuentes</h1>
+                <div className="mx-auto flex-1 p-8 overflow-y-auto">
+                    <h1 className="text-2xl sm:text-4xl font-bold text-center mb-8">Preguntas Frecuentes</h1>
                     <div className="flex flex-col space-y-4 w-full">
                         {faqs.map((faq, index) => (
                             <div key={index} className="border-b-2 pb-4">
-                                <h2 className="text-2xl font-semibold">{faq.question}</h2>
-                                <p className="mt-2 text-lg">{faq.answer}</p>
+                                <h2 className="text-1xl sm:text-2xl font-semibold">{faq.question}</h2>
+                                <p className="mt-2 text-base lg:text-lg">{faq.answer}</p>
                             </div>
                         ))}
                     </div>

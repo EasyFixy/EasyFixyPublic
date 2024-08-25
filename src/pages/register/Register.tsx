@@ -130,15 +130,15 @@ const Register = () => {
     };
 
     return (
-        <div className='w-screen h-screen flex flex-row '>
-            <div className='w-1/2 flex flex-col px-16 py-10 overflow-y-scroll'> 
+        <div className='w-screen h-screen flex flex-col-reverse lg:flex-row'>
+            <div className='flex-1 flex flex-col px-2 lg:px-16 py-10 overflow-y-scroll'> 
                 <div>
                     <span className='textNaranja text-2xl font-bold'>EasyFixy</span>
                 </div>
-                <div className='flex flex-col items-center'>
+                <div className='flex flex-col items-center w-full'>
 
                     <h1 className='text-3xl font-bold mb-6'>Crea tu cuenta</h1>
-                    <form onSubmit={onSubmit} className='flex flex-col w-[400px]'>
+                    <form onSubmit={onSubmit} className='flex flex-col sm:w-[400px] w-full'>
                         <CommonInput
                             label="Nombre Completo"
                             type="text"
@@ -265,7 +265,9 @@ const Register = () => {
 
             </div>
             
-            <ContenedorLogoHorizontal/>
+            <ContenedorLogoHorizontal
+                customStyle='lg:w-1/2'
+            />
             
         </div>  
     );
