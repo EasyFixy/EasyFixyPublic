@@ -10,7 +10,7 @@ const HorizontalNavContainerSwitch = (props) => {
             <div className="w-100">
                 <div className="flex">
                 {content.map((seccion, index) => (
-                    <div className={index==seccionActiva ? "m-4 p-4 text-emerald-700 underline": "m-4 p-4"} key={index} onClick={() => setSeccionActiva(index)}>
+                    <div className={index==seccionActiva ? "m-4 p-4 text-cyan-700 underline": "m-4 p-4"} key={index} onClick={() => setSeccionActiva(index)}>
                         {seccion.name}
                     </div>
                 ))}

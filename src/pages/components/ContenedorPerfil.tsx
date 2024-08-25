@@ -179,7 +179,7 @@ const ContenedorPerfil = ({
                             )} <> </> Años de experiencia
                         </h3>
                     </section>
-                    <h2 className="mt-8 text-emerald-700 px-4"> {isActive == 1 ? <>· Estoy en linea!</> : <>· No estoy en linea</>}</h2>
+                    <h2 className="mt-8 text-cyan-700 px-4"> {isActive == 1 ? <>· Estoy en linea!</> : <>· No estoy en linea</>}</h2>
                     <div className="flex flex-row mt-2">
                         <img src="/icons/bandera.png" alt="bandera país" />
                         <h2 className={`${textColor}`}>Bogotá,Colombia</h2>

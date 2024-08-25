@@ -47,7 +47,7 @@ const QuienesSomos = () => {
                         <div className="ml-4">
                             <h2 className="text-[#292929] text-3xl font-bold">Empleador</h2>
                             <p className="text-[#666666] text-xl     mt-6 mb-6 font-bold">EasyFixy, te da la oportunidad de contratar trabajadores calificados para tus necesidades de servicios cotidianos, de manera rápida, sencilla y eficiente.</p>
-                            <Link to="/login" className="text-emerald-700 text-2xl underline font-bold mt-8">Ir al sitio</Link>
+                            <Link to="/login" className="text-cyan-700 text-2xl underline font-bold mt-8">Ir al sitio</Link>
                         </div>
                     </div>
                     
@@ -58,7 +58,7 @@ const QuienesSomos = () => {
                         <div className="ml-4">
                             <h2 className="text-[#292929] text-3xl font-bold">Trabajador</h2>
                             <p className="text-[#666666] text-xl mt-6 mb-6 font-bold">Somos EasyFixy, una plataforma donde conectamos a trabajadores independientes con trabajos cotidianos a su medida, de manera rápida y eficiente.</p>
-                            <Link to="/login" className="text-emerald-700 text-2xl underline font-bold mt-8">Ir al sitio</Link>
+                            <Link to="/login" className="text-cyan-700 text-2xl underline font-bold mt-8">Ir al sitio</Link>
                         </div>
                     </div>
                 </div>

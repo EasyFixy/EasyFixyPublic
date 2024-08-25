@@ -74,7 +74,7 @@ const RecuperarPassword = () => {
                     <Link to={'/login'}>
                 <div className="absolute top-4 left-5 flex flex-row gap-2">
                         <button> <Link to={'/login'} className="flex items-center gap-1 focus:outline-none">
-                            <div className="emerald-arrow">
+                            <div className="cyan-arrow">
                                 <img src="/public/icons/arrow-circle-left.svg" alt="" />
                             </div>
                             <span>Regresar</span>
@@ -106,7 +106,7 @@ const RecuperarPassword = () => {
                             <button onClick={handleSendResetEmail} className="w-[22%] h-10 mainBackground rounded-full text-white">Continuar</button>
                         </div>
                         <br />
-                        {message && <div className="px-[5%] pb-3 text-emerald-700">{message}</div>}
+                        {message && <div className="px-[5%] pb-3 text-cyan-700">{message}</div>}
                         {isLoading && (
                             <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-25">
                                 <ThreeDots color="#00BFFF" height={80} width={80} />

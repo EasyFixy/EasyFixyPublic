@@ -35,11 +35,11 @@ body {
     left: 0;
 }
 :root{
-    /* #27806C; */
-    --colorVerde: #27806C;
+    /* #0E7490; */
+    --colorVerde: #0E7490;
     --color3: #292929;
     --color2: #666666; 
-    --colorNaranja: #27806C;
+    --colorNaranja: #0E7490;
     --colorGris: rgb(41,41,41);
 }   
 .mainBackground{
@@ -97,7 +97,7 @@ input:focus {
   }
   
 .orange-link:hover {
-    color: #27806C; }
+    color: #0c5d74; }
 
 
 @keyframes blink {
@@ -112,7 +112,7 @@ input:focus {
 }
 
   .selected-chat {
-    border: 2px solid rgba(253, 116, 1, 0.5); /* Color FD7401 con 50% de transparencia */
+    border: 2px solid #0E7490; /* Color FD7401 con 50% de transparencia */
     border-radius: 0.5rem; /* Ajusta según sea necesario */
 }
 
@@ -124,7 +124,7 @@ input:focus {
 }
 
 .orange-arrow img {
-    fill: #27806C; /* Cambia el color de relleno de la imagen a naranja */
+    fill: #0E7490; /* Cambia el color de relleno de la imagen a naranja */
 }
 
 .circle {

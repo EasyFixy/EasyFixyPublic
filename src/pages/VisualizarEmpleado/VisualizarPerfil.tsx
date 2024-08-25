@@ -140,7 +140,7 @@ const VisualizarPerfil = () => {
                 </div>
 
                 <div className="w-[50%] h-auto">
-                    <h1 className="font-bold text-3xl text-emerald-700 ">Perfiles laborales del empleado</h1>
+                    <h1 className="font-bold text-3xl text-cyan-700 ">Perfiles laborales del empleado</h1>
                     <ul className="w-full mt-4 border-2 rounded-3xl border-grey-500 px-2">
                         {loading && userData && (!userData.comments || userData.comments.length === 0) ? (
                             <p>No hay perfiles por mostrar...</p>

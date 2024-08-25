@@ -19,7 +19,7 @@ function SeleccionRol() {
                         <div className="flex flex-row mx-4 my-2 w-auto h-auto border border-black border-solid">
                             <img src="/icons/rol1.png" alt="provisional" className="w-25 h-25 px-4 py-4" />
                             <p className="ml-4 mt-16">Quiero trabajar</p>
-                            <div className="ml-4 mt-14 font-bold text-5xl text-emerald-700">⭢</div>
+                            <div className="ml-4 mt-14 font-bold text-5xl text-cyan-700">⭢</div>
                         </div>
                     </Link>
 
@@ -30,7 +30,7 @@ function SeleccionRol() {
                         <div className="flex flex-row mx-4 my-2 w-auto h-auto border border-black border-solid">
                             <img src="/icons/rol2.png" alt="provisional" className="w-25 h-25 px-4 py-4" />
                             <p className="ml-4 mt-16">Quiero contratar</p>
-                            <div className="ml-4 mt-14 font-bold text-5xl text-emerald-700">⭢</div>
+                            <div className="ml-4 mt-14 font-bold text-5xl text-cyan-700">⭢</div>
                         </div>
                     </Link>
 
