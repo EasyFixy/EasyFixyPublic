@@ -94,17 +94,17 @@ const NavbarEmpleado = (props) => {
     }, []);
 
     return (
-        <div className="w-full h-8 color3 flex justify-between items-center p-4">
-            <div className="flex flex-row justify-start items-center">
-                <Link to={"/my/chats"}><button className="text-white ml-12">Chats</button></Link>
-                <Link to={"/my/profile/employee/create/skills"}><button className="text-white ml-12">Crear habilidades</button></Link>
-                <Link to={"/my/profile/employee/create/personalinformation"}><button className="text-white ml-12">Crear perfil</button></Link>
+        <div className="w-full h-max sm::h-8 color3 flex justify-around sm:justify-between items-center sm:p-4 p-1 flex-row flex-wrap">
+            <div className="flex flex-row sm:justify-start justify-around items-center lg:gap-12 gap-4">
+                <Link to={"/my/chats"}><button className="text-white text-sm sm:text-base">Chats</button></Link>
+                <Link to={"/my/profile/employee/create/skills"}><button className="text-white text-sm sm:text-base">Crear habilidades</button></Link>
+                <Link to={"/my/profile/employee/create/personalinformation"}><button className="text-white text-sm sm:text-base">Crear perfil</button></Link>
             </div>
-            <div className="w-2/4 flex flex-row justify-end items-center">
-                <p className="text-white mr-4">No activo</p>
+            <div className="lg:w-2/4 flex flex-row justify-end items-center lg:gap-12 gap-4">
+                <p className="text-white text-sm sm:text-base">No activo</p>
 
                 {/* switch para intercambiar de activo a no activo*/}
-                <label htmlFor="second-toggle" className="flex items-center cursor-pointer mr-4">
+                <label htmlFor="second-toggle" className="flex items-center cursor-pointer ">
                     <div className="relative">
                         <input
                             id="second-toggle"
@@ -121,9 +121,9 @@ const NavbarEmpleado = (props) => {
                     </div>
                 </label>
 
-                <p className={`mr-12 ${props.checked ? 'text-green-500' : 'text-white'}`}>Activo</p>
-                <a href=" https://wa.me/3208393883"><button className="text-white mr-12">Soporte</button></a>
-                <button className="text-white mr-12" onClick={logOut}>Salir</button>
+                <p className={` ${props.checked ? 'text-green-500' : 'text-white'} text-sm sm:text-base`}>Activo</p>
+                <a href=" https://wa.me/3208393883"><button className="text-white  text-sm sm:text-base">Soporte</button></a>
+                <button className="text-white  text-sm sm:text-base" onClick={logOut}>Salir</button>
             </div>
         </div>
     )

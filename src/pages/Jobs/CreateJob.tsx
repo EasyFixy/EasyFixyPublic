@@ -70,11 +70,11 @@ const CreateJob = () => {
     };
     
     return (
-        <div className="w-screen h-screen flex flex-row relative">
+        <div className="w-screen h-screen flex flex-col-reverse lg:flex-row relative">
             <button className="absolute left-4 top-4">
                 <img src="/public/ButtonBack.svg" alt="" />
             </button>
-            <div className="w-[55%] px-[5%] py-[5%] flex flex-col overflow-y-scroll">
+            <div className="flex-1 px-[5%] py-[5%] flex flex-col overflow-y-scroll">
                 <div>
 
                     <div className="flex flex-row items-center mb-14">
@@ -127,11 +127,11 @@ const CreateJob = () => {
                             <img src="/public/likeIcon.svg" alt="" />
                             <p className=" font-normal text-base"> Paga solo cuando estés 100% satisfecho</p>
                         </div>
-
+ 
                     </div>
                 </div>
             </div>
-            <ContenedorLogoHorizontal width="w-[45%]" />
+            <ContenedorLogoHorizontal customStyle="lg:w-[45%]" />
 
         </div>
 

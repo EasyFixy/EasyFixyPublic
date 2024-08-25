@@ -19,16 +19,16 @@ const NavbarEmpleador = () =>{
     }
 
     return(
-        <div className="w-full h-8 color3 flex justify-between items-center p-4">
-            <div className="flex flex-row justify-start items-center">
-                <Link to={"/my/chats"}><button className="text-white ml-12">Chats</button></Link>
-                <Link to={""}><button className="text-white ml-12">Mis trabajos </button></Link>
-                <Link to={"/my/profile/employee"}><button className="text-white ml-12">Mi perfil</button></Link>
+        <div className="w-full h-max sm::h-8  color3 flex justify-between items-center sm:p-4 p-1">
+            <div className="flex flex-row justify-start items-center lg:gap-12 gap-4">
+                <Link to={"/my/chats"}><button className="text-white text-sm sm:text-base">Chats</button></Link>
+                <Link to={""}><button className="text-white text-sm sm:text-base">Mis trabajos </button></Link>
+                <Link to={"/my/profile/employee"}><button className="text-white text-sm sm:text-base">Mi perfil</button></Link>
             </div>
-            <div className="w-2/4 flex flex-row justify-end items-center">
+            <div className="lg:w-2/4 flex flex-row justify-end items-center lg:gap-12 gap-4">
                 
-                <a href=" https://wa.me/3208393883"><button className="text-white mr-12">Soporte</button></a>
-                <button className="text-white mr-12" onClick={logOut}>Salir</button>
+                <a href=" https://wa.me/3208393883"><button className="text-white text-sm sm:text-base">Soporte</button></a>
+                <button className="text-white text-sm sm:text-base" onClick={logOut}>Salir</button>
             </div>
         </div>
     )
