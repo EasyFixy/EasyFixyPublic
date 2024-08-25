@@ -28,8 +28,8 @@ const HorizontalNavigator = (props) => {
     }, [seccionActiva, props.sections, finishedJobs]); 
 
     return (
-        <div className="" style={{ width: '70%' }}>
-            <div className="w-100">
+        <div className="lg:w-[70%]">
+            <div className="w-full ">
                 <div className="flex">
                     {props.sections.map((section, index) => (
                         <NaigatorMenuElement 
@@ -57,7 +57,7 @@ const HorizontalNavigator = (props) => {
                         className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5"
                     />
                 </div>
-                <div className="rounded-xl shadow-2xl p-6 m-6">
+                <div className="rounded-xl shadow-2xl lg:p-6 lg:m-6 ">
                     <div className="">
                     <NavigatorDisplayElement
                         callBackFunction={props.callBackFunction}

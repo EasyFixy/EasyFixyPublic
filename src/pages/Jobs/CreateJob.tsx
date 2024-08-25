@@ -70,11 +70,11 @@ const CreateJob = () => {
     };
     
     return (
-        <div className="w-screen h-screen flex flex-row relative">
+        <div className="w-screen h-screen flex flex-col-reverse lg:flex-row relative">
             <button className="absolute left-4 top-4">
                 <img src="/public/ButtonBack.svg" alt="" />
             </button>
-            <div className="w-[55%] px-[5%] py-[5%] flex flex-col overflow-y-scroll">
+            <div className="flex-1 px-[5%] py-[5%] flex flex-col overflow-y-scroll">
                 <div>
 
                     <div className="flex flex-row items-center mb-14">
@@ -82,14 +82,14 @@ const CreateJob = () => {
                         <p className="text-4xl fontNameLogo"> EasyFixy</p>
                     </div>
                     <h1 className="font-bold text-5xl mb-8">Cuentanos que es lo que necesitas <span className="textNaranja">hacer.</span></h1>
-                    <input className="w-full border border-solid border-[#292929] h-8 rounded-xl mb-5 pl-[3%]"
+                    <input className="w-full border border-solid border-[#0E7490] h-8 rounded-xl mb-5 pl-[3%]"
                         onChange={(event) => { setTitle(event.target.value) }} type="text" placeholder="Nombre del Problema" />
                     <label><strong>Descripcion: <span className="textNaranja"> recuerda describir los criterios de aceptación del trabajo</span>  </strong></label>
-                    <textarea className="w-full border-solid border-[#292929] h-24 mb-5 pl-[3%] resize-none border rounded-md"
+                    <textarea className="w-full border-solid border-[#0e7490] h-24 mb-5 pl-[3%] resize-none border rounded-md"
                         placeholder="Descripcion de problema"
                         onChange={(event) => { setDescription(event.target.value) }} />
                     <input
-                        className="w-full border border-solid border-[#292929] h-8 rounded-xl mb-5 pl-[3%]"
+                        className="w-full border border-solid border-[#0e7490] h-8 rounded-xl mb-5 pl-[3%]"
                         type="text"
                         value={ubication}
                         onChange={(event) => { setUbication(event.target.value) }}
@@ -101,7 +101,7 @@ const CreateJob = () => {
                             <EstimatePrice estimatePrice={estimatePrice} setEstimatePrice={setEstimatePrice}/>
                         </div>
                         <input
-                            className="border border-solid border-[#292929] w-fit h-full rounded-xl"
+                            className="border border-solid border-[#0E7490] w-fit h-full rounded-xl"
                             type="datetime-local"
                             name="date"
                             onChange={(event) => { setDateAtWork(event.target.value) }}
@@ -127,11 +127,11 @@ const CreateJob = () => {
                             <img src="/public/likeIcon.svg" alt="" />
                             <p className=" font-normal text-base"> Paga solo cuando estés 100% satisfecho</p>
                         </div>
-
+ 
                     </div>
                 </div>
             </div>
-            <ContenedorLogoHorizontal width="w-[45%]" />
+            <ContenedorLogoHorizontal customStyle="lg:w-[45%]" />
 
         </div>
 

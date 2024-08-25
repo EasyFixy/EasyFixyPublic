@@ -65,17 +65,17 @@ const Login = () => {
     }
 
     return (
-        <div className="w-screen h-screen flex flex-row ">
+        <div className="w-screen h-screen flex flex-col lg:flex-row">
             <ContenedorLogoHorizontal />
 
-            <div className='w-1/2 flex flex-col justify-center items-center px-16 py-10'>
+            <div className='flex-1 flex flex-col justify-center items-center px-1'>
 
                 <div className='flex flex-col items-center'>
                     <   h1 className='text-4xl font-bold mb-6'>Iniciar sesión</h1>
                 </div>
 
-                <form>
-                    <div className="w-[400px] flex flex-col mb-6">
+                <form className="w-11/12  flex flex-col justify-center items-center">
+                    <div className="sm:w-[400px] w-full flex flex-col mb-6">
                         <label className="font-boldv">Correo electrónico</label>
                         <input
                             className="w-full h-12 border border-solid border-[#666666] text-[#666666] pl-4 relative rounded-3xl"
@@ -83,7 +83,7 @@ const Login = () => {
                             placeholder="Type here"
                             type="text" />
                     </div>
-                    <div className="w-[400px] flex flex-col mb-6">
+                    <div className="sm:w-[400px] w-full flex flex-col mb-6">
                         <label className="custom-label">Password:</label>
                         <input
                             className="w-full h-12 border border-solid border-[#666666] text-[#666666] pl-4 relative rounded-3xl"
@@ -92,13 +92,13 @@ const Login = () => {
                             type="password" />
                     </div>
 
-                    <div className="flex flex-row flex justify-center items-center">
+                    <div className="flex flex-row justify-center items-center">
                         <input name="cbipeliculas" type="checkbox" />
                         <h1>Remember me</h1>
                         <Link to={'/recuperarPassword'} className="textNaranja ml-4">¿Olvidaste la contraseña?</Link>
                     </div>
 
-                    <button className="w-full mt-10 mainBackground h-14 text-white w-64 rounded-full border border-black border-solid mb-6" onClick={handdleLogin}>Iniciar sesión →</button>
+                    <button className=" sm:w-[400px] w-full mt-10 mainBackground h-14 text-white rounded-full border border-black border-solid mb-6" onClick={handdleLogin}>Iniciar sesión →</button>
                     <div className="flex flex-row justify-center items-center ">
                         <h1>No tengo una cuenta!</h1>
                         <Link to={'/register'} className="textNaranja ml-4">Sign Up</Link>
