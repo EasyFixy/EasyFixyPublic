@@ -31,8 +31,8 @@ const NavigatorDisplayElement = (props) => {
     return (props.array.length != 0 ? (arrayRender.map((offer, index) => (
             <div onClick={() => {props.callBackFunction(offer.jobOfferId, offer)}} className="mx-auto bg-white rounded-xl shadow-md m-3" key={index} >
                 <div className="border-t border-b border-gray-200 py-4 px-6 flex justify-between">
-                    <div>{offer.jobOfferTittle}</div>
-                    <div>{getDateDetails(offer.jobOfferDateAtCreate)}</div>
+                    <div className="text-sm sm:text-base">{offer.jobOfferTittle}</div>
+                    <div className="text-sm sm:text-base">{getDateDetails(offer.jobOfferDateAtCreate)}</div>
                 </div>
             </div>
         ))) : props.tipe == 'employer' ? 

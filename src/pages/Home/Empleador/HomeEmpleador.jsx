@@ -155,8 +155,8 @@ const HomeEmpleador = () => {
         <div className="w-screen h-screen flex flex-col overflow-y-auto pb-16">
             {/* <ToolbarDefault tipe="employer" /> */} 
             <NavbarEmpleador></NavbarEmpleador>
-            <div className="flex flex-col justify-center w-full" style={{ padding: 30 + 'px' }}>
-                <h2 className="text-4xl font-bold mt-4">Mis trabajos</h2>
+            <div className="flex flex-col justify-center w-full sm:p-7 p-2">
+                <h2 className="sm:text-4xl text-2xl font-bold mt-4">Mis trabajos</h2>
                 <HorizontalNavigator 
                     callBackFunction = {openModal} 
                     sections={sections}

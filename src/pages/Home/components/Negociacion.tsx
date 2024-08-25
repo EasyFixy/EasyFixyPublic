@@ -493,7 +493,7 @@ const Negociacion = (props) => {
             {(userId === 0 || loading) ? (
               <div className="w-full h-full flex flex-col items-center justify-center">
 
-                <PacmanLoader color="#FD7401" />
+                <PacmanLoader color="#0e7490" />
                 <h2 className="text-white text-center text-xl mt-2">
                   Espera un Momento! <br />
                   {

@@ -5,28 +5,29 @@ import Footer from "../components/Footer";
 const LandingPage = () =>{
     
     return(
-        <>
-            <div className="w-full h-20 mainBackground px-[5%] flex fixed text-white ">
-            <div className="w-2/6 flex flex-row justify-start items-center animate-fadeIn">
-                <img src="logo.svg" alt="logo" className="h-full" />
-                <Link to="/" className="text-4xl fontNameLogo ml-2 relative transform transition duration-300 ">EasyFixy</Link>
-            </div>
-            <div className="w-4/6 flex flex-row justify-between items-center font-bold text-base">
-                <Link to={"/about-us"} className="relative transform transition duration-300 hover:scale-110 hover:before:content-[''] hover:before:absolute hover:before:w-full hover:before:h-1 hover:before:bg-white hover:before:bottom-[-4px]">¿Quienes somos?</Link>
-                <a href="/Manual de Técnico - EasyFixy.pdf" target="_blank" rel="noopener noreferrer" className="relative transform transition duration-300 hover:scale-110 hover:before:content-[''] hover:before:absolute hover:before:w-full hover:before:h-1 hover:before:bg-white hover:before:bottom-[-4px]">¿Cómo funciona?</a>
-                <Link to={"/FAQ"} className="relative transform transition duration-300 hover:scale-110 hover:before:content-[''] hover:before:absolute hover:before:w-full hover:before:h-1 hover:before:bg-white hover:before:bottom-[-4px]">Preguntas frecuentes</Link>
-                <Link to={"/login"} className="relative transform transition duration-300 hover:scale-110 hover:before:content-[''] hover:before:absolute hover:before:w-full hover:before:h-1 hover:before:bg-white hover:before:bottom-[-4px]">Iniciar sesión</Link>
-                <Link to={"/register"} className="relative transform transition duration-300 hover:scale-110 hover:before:content-[''] hover:before:absolute hover:before:w-full hover:before:h-1 hover:before:bg-white hover:before:bottom-[-4px]">Registrarse</Link>
-            </div>
-        </div>
-            
-            <div className="w-screen h-screen overflow-y-scroll pt-20">
-                <div className="backgroundLanding w-full pt-[30px] px-[5%] flex flex-col justify-between h-full pb-20 text-white">
+        <div className='w-screen h-screen flex flex-col'>
+            <div className="w-full min-h-20 mainBackground px-[2%] flex flex-row text-white shadow-1 z-10">
+                <div className="h-full lg:w-1/4 flex flex-col md:flex-row justify-start items-center mr-1  animate-fadeIn">
+                    <img src="logo.svg" alt="logo" className="h-20" />
+                    <Link to="/" className="text-2xl md:text-3xl fontNameLogo ml-2 relative transform transition duration-300 "> EasyFixy</Link>
 
-                    <h1 className="text-[4.5vw] leading-none w-1/2 mb-5">
+                </div>
+                <div className="flex-1 flex flex-col md:flex-row justify-around items-end md:items-center font-bold text-sm md:text-base text-end md:text-center">
+                    <Link to={"/about-us"}  className="relative transform transition duration-300 hover:scale-110 hover:before:content-[''] hover:before:absolute hover:before:w-full hover:before:h-1 hover:before:bg-white hover:before:bottom-[-4px]" >¿Quienes somos?</Link>
+                    <a href="public\Manual de Técnico - EasyFixy.pdf" target="_blank" rel="noopener noreferrer"  className="relative transform transition duration-300 hover:scale-110 hover:before:content-[''] hover:before:absolute hover:before:w-full hover:before:h-1 hover:before:bg-white hover:before:bottom-[-4px]">¿Cómo funciona?</a>
+                    <Link to={"/FAQ"}  className="relative transform transition duration-300 hover:scale-110 hover:before:content-[''] hover:before:absolute hover:before:w-full hover:before:h-1 hover:before:bg-white hover:before:bottom-[-4px]">Preguntas frecuentes</Link>
+                    <Link to={"/login"}  className="relative transform transition duration-300 hover:scale-110 hover:before:content-[''] hover:before:absolute hover:before:w-full hover:before:h-1 hover:before:bg-white hover:before:bottom-[-4px]">Iniciar sesión</Link>
+                    <Link to={"/register"}  className="relative transform transition duration-300 hover:scale-110 hover:before:content-[''] hover:before:absolute hover:before:w-full hover:before:h-1 hover:before:bg-white hover:before:bottom-[-4px]">Registrarse</Link>
+                </div>
+            </div>
+            
+            <div className="w-full flex-1 overflow-y-scroll">
+                <div className="backgroundLanding w-full pt-[30px] px-[5%] flex flex-col justify-between min-h-[500px] h-max pb-20 text-white">
+
+                    <h1 className="text-base sm:text-2xl leading-none sm:w-1/2 mb-6">
                         Contrata a los mejores empleados para tus necesidades cotidianas, en línea.
                     </h1>
-                    <ul className="text-[2vw] mb-5">
+                    <ul className="text-sm lg:text-xl mb-6">
                         <li>
                             El mercado independiente más grande de Colombia
                         </li>
@@ -40,11 +41,11 @@ const LandingPage = () =>{
                             Paga solo cuando estés 100% satisfecho
                         </li>
                     </ul>
-                    <div className="flex flex-row text-[2vw] h-12 gap-14 ">
-                        <Link to={"/login"}className="mainBackground h-full rounded-full flex items-center justify-center px-4">
+                    <div className="flex flex-col md:flex-row lg:text-xl h-12 gap-3 md:gap-14 mb-6 ">
+                        <Link to={"/login"}className="mainBackground h-full w-max rounded-full flex items-center justify-center px-4 shadow-1 ">
                             Contrata ahora mismo
                         </Link>
-                        <Link to={"/login"} className="bg-black h-full rounded-full w-fit flex items-center justify-center px-4 text-[2vw]">
+                        <Link to={"/login"} className="bg-black h-full rounded-full w-max flex items-center justify-center px-4 shadow-1">
                             Gana dinero realizando trabajos
                         </Link>
                     </div>
@@ -52,16 +53,16 @@ const LandingPage = () =>{
                 <div className="h-10 w-full mainBackground ">
 
                 </div>
-                <div className="h-full w-full backgroundLanding2 flex flex-row px-[5%] justify-start items-center text-white">
+                <div className="min-h-[500px] h-max w-full backgroundLanding2 flex  flex-col md:flex-row px-[5%] justify-start items-center text-white">
                     
-                    <div className="mainBackground h-[70%] w-1 mr-3">
+                    <div className="mainBackground md:h-[400px] md:w-1 mr-3">
 
                     </div>
-                    <h1 className="text-[4.5vw] leading-normal w-1/3 font-bold mr-24">Haz el trabajo en nuestras diferentes 
+                    <h1 className="text-base sm:text-3xl leading-normal md:w-1/3  font-bold md:mr-24 my-10">Haz el trabajo en nuestras diferentes 
                         <span className="textNaranja"> categorías
                         </span>
                     </h1>
-                    <ul className="text-[3vw]">
+                    <ul className="text-base sm:text-2xl">
                         <li>
                             Comercial y Ventas
                         </li>
@@ -91,7 +92,7 @@ const LandingPage = () =>{
                 <Footer />
             </div>
             
-        </>
+        </div>
     );
 }
 export default LandingPage;
