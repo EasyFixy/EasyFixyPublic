@@ -528,7 +528,7 @@ const Negociacion = (props) => {
                   whiteStar={true}
                   showDescription={false}
                   />
-                <section className="w-90 h-auto ml-4 border border-white border-solid px-8 py-4 rounded-3xl mr-8">
+                <section className="w-90 h-auto ml-4 border border-white border-solid px-8 py-4 rounded-3xl mr-8 mt-8">
                   <h1 className="font-bold text-3xl textNaranja">Habilidades </h1>
                   <ul className="flex flex-wrap mt-4">
                     { !userData || !userData.skills ? (
@@ -548,18 +548,18 @@ const Negociacion = (props) => {
                   Perfiles Laborales del empleado
                 </h1>
 
-                <section className="w-full flex flex-row">
+                <section className="w-full flex flex-col lg:flex-row">
                   {/* Sección de la izquierda donde se muestra el perfil y los comentarios */}
-                  <div className="w-1/2 h-96 flex flex-col p-1 overflow-y-auto">
+                  <div className="w-full lg:w-1/2 h-96 flex flex-col p-1 overflow-y-auto">
                     <div className="w-full ml-4 mt-2 pr-8 h-auto flex flex-col p-1">
                       {/* <Comentarios isLoading={loading} comenData={userData}/> */}
-                      { !userData || !userData.resumes ? (
+                      {!userData || !userData.resumes ? (
                         <p>No hay perfiles por mostrar...</p>
                       ) : (
                         <>
-                          {userData.resumes.map((resume, _) => (
+                          {userData.resumes.map((resume, index) => (
                             <PerfilesLaborales
-                              key={_}
+                              key={index}
                               isLoading={loading}
                               laboresData={resume}
                               textColor="text-white"
@@ -578,12 +578,12 @@ const Negociacion = (props) => {
                         <p>Cargando comentarios...</p>
                       ) : (
                         <>
-                          {userData.comments.fullComments.map((comentario, _) => (
+                          {userData.comments.fullComments.map((comentario, index) => (
                             <Comentarios
-                            key={_}
-                            isLoading={loading}
-                            comenData={comentario}
-                            textColor="text-white"
+                              key={index}
+                              isLoading={loading}
+                              comenData={comentario}
+                              textColor="text-white"
                             />
                           ))}
                         </>
@@ -592,15 +592,16 @@ const Negociacion = (props) => {
                   </div>
 
                   {/* Sección de la derecha, el chat */}
-                  <div className="ml-4 mt-2 pr-8 w-1/2 flex flex-col p-1 h-96">
+                  <div className="w-full lg:w-1/2 flex flex-col p-1 h-96 mt-4 lg:mt-0">
                     <Chat
                       socket={socket}
                       userId={userEnPlataforma}
                       destinatary={userId}
                       userData={userData}
-                      ></Chat>
+                    />
                   </div>
-                </section>
+                  </section>
+
                 </>
                 : 
                 <>
@@ -629,31 +630,48 @@ const Negociacion = (props) => {
                 </>
                 }
 
-                <section className="flex justify-between items-center p-16 w-90 h-auto mt-4 ml-4 px-8 py-4  mr-8">
-                  <div className="flex flex-col justify-between items-center">
-                    <h1 className="text-white text-3xl font-bold">Cancelar</h1>
-                    <button onClick={changeUser}>
-                      <img
-                        src="/icons/Cancelar.svg"
-                        alt="boton cancelar"
-                        className="w-10"
-                        />
-                    </button>
-                  </div>
-                  <div className="w-1/2 flex items-center justify-center">
-                    <PujarPrecio psocket={socket} userData={userData} initialValue={props.priceJobOffer ? props.priceJobOffer : inicialPriceValue} destinatary={parseInt(userData?.userId, 10)} setOfferAccepted={setOfferAccepted} setOponentAccepted={setOponentAccepted} offerAccepted={offerAccepted} oponentAccepted={oponentAccepted} bidPrice={bidPrice} setBidPrice={setBidPrice} />
-                  </div>
-                  <div className="flex flex-col justify-between items-center">
-                    <h1 className="text-white text-3xl font-bold">Aceptar</h1>
-                    <button onClick={acceptOffer}>
-                      <img
-                        src="/icons/Aceptar.svg"
-                        alt="boton cancelar"
-                        className="w-10"
-                      />
-                    </button>
-                  </div>
-                </section>
+<section className="flex flex-col lg:flex-row justify-between items-center p-8 lg:p-16 w-full h-auto mt-4 mx-4">
+  {/* Sección de cancelar */}
+  <div className="flex flex-row lg:flex-col justify-between items-center mb-4 lg:mb-0">
+    <h1 className="text-white text-2xl lg:text-3xl font-bold mr-4 lg:mr-0">Cancelar</h1>
+    <button onClick={changeUser}>
+      <img
+        src="/icons/Cancelar.svg"
+        alt="boton cancelar"
+        className="w-10"
+      />
+    </button>
+  </div>
+
+  {/* Sección de PujarPrecio */}
+  <div className="w-full lg:w-1/2 flex items-center justify-center mb-4 lg:mb-0">
+    <PujarPrecio 
+      psocket={socket} 
+      userData={userData} 
+      initialValue={props.priceJobOffer ? props.priceJobOffer : inicialPriceValue} 
+      destinatary={parseInt(userData?.userId, 10)} 
+      setOfferAccepted={setOfferAccepted} 
+      setOponentAccepted={setOponentAccepted} 
+      offerAccepted={offerAccepted} 
+      oponentAccepted={oponentAccepted} 
+      bidPrice={bidPrice} 
+      setBidPrice={setBidPrice} 
+    />
+  </div>
+
+  {/* Sección de aceptar */}
+  <div className="flex flex-row lg:flex-col justify-between items-center">
+    <h1 className="text-white text-2xl lg:text-3xl font-bold mr-4 lg:mr-0">Aceptar</h1>
+    <button onClick={acceptOffer}>
+      <img
+        src="/icons/Aceptar.svg"
+        alt="boton aceptar"
+        className="w-10"
+      />
+    </button>
+  </div>
+</section>
+
                </div>
               </div>
             )}
