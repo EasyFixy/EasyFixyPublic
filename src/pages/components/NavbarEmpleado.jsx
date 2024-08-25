@@ -1,11 +1,7 @@
-import React from "react";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { removeToken } from "../../Helpers/Token"
-import { useAppDispatch } from "../../app/hooks";
-import { logout } from "../../features/Auth/Auth";
-import { Navigate, useNavigate } from 'react-router-dom';
-import { useAppSelector } from "../../app/hooks";
+import { removeToken } from "../../Helpers/Token";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { toast } from 'react-toastify';
 
 const NavbarEmpleado = (props) => {
@@ -13,65 +9,30 @@ const NavbarEmpleado = (props) => {
     const token = useAppSelector((state) => state.Auth.token);
     const baseUrl = import.meta.env.VITE_BASE_URL;
     const dispatch = useAppDispatch();
-    const navigate = useNavigate();
 
     const getUserLocation = (callback) => {
         if ("geolocation" in navigator) {
-            // Obtener la geolocalización
             navigator.geolocation.getCurrentPosition(function (position) {
-                // Acceder a las coordenadas
                 callback(true, position.coords);
             });
         } else {
-            // El navegador no soporta geolocalización
             console.log("Geolocalización no soportada por este navegador.");
             toast.warn("Permita la geolocalización");
         }
     }
 
-    /*const updateUserTempData = (status, coords) => {
-        let urlUpdateTempsData;
-        if (status) {
-            urlUpdateTempsData = `${baseUrl}updateUserTempData?token=${token}&userTempDataActive=1&userTempDataLatitude=${coords.latitude}&userTempDataLongitude=${coords.longitude}`
-        } else {
-            urlUpdateTempsData = `${baseUrl}updateUserTempData?token=${token}&userTempDataActive=0`
-        }
-        fetch(urlUpdateTempsData)
-            .then((response) => response.text())
-            .then((data) => {
-                const json = JSON.parse(data);
-                if (json.statusCode === 200) {
-                    setChecked(status);
-                    if (status === true) {
-                        props.setTipe('waitingBid')
-                    }
-                } else {
-                    toast.warn("Error cambiando estado");
-                }
-
-            })
-            .catch((error) => {
-                console.error("Error fetching user status:", error);
-                toast.warn("Error cambiando estado");
-            })
-    }*/
-
-    
-
     const toggleChecked = () => {
         let status = !props.checked;
         if (status) {
-            getUserLocation(props.updateUserTempData)
+            getUserLocation(props.updateUserTempData);
         } else {
-            props.updateUserTempData(false)
+            props.updateUserTempData(false);
         }
-        //setChecked(status);
-
     };
 
     const logOut = () => {
-        removeToken(dispatch)
-        //navigate("/");
+        removeToken(dispatch);
+        // navigate("/");
     }
 
     const getUserStatus = () => {
@@ -79,31 +40,34 @@ const NavbarEmpleado = (props) => {
             .then((response) => response.text())
             .then((data) => {
                 const json = JSON.parse(data);
-                //console.log(json.data[0].userTempDataActive)
-                props.setChecked(json.data[0].userTempDataActive)
-                props.setTipe(json.data[0].userTempDataActive ? 'waitingBid' : null)
+                props.setChecked(json.data[0].userTempDataActive);
+                props.setTipe(json.data[0].userTempDataActive ? 'waitingBid' : null);
             })
             .catch((error) => {
                 console.error("Error fetching user status:", error);
                 toast.warn("Error interno");
-            })
+            });
     }
 
     useEffect(() => {
-        getUserStatus()
+        getUserStatus();
     }, []);
 
     return (
         <div className="w-full h-max sm::h-8 color3 flex justify-around sm:justify-between items-center sm:p-4 p-1 flex-row flex-wrap">
             <div className="flex flex-row sm:justify-start justify-around items-center lg:gap-12 gap-4">
-                <Link to={"/my/chats"}><button className="text-white text-sm sm:text-base">Chats</button></Link>
-                <Link to={"/my/profile/employee/create/skills"}><button className="text-white text-sm sm:text-base">Crear habilidades</button></Link>
-                <Link to={"/my/profile/employee/create/personalinformation"}><button className="text-white text-sm sm:text-base">Crear perfil</button></Link>
+                <Link to={"/my/chats"} className="relative group">
+                    <button className="text-white text-sm sm:text-base relative transition-all duration-300 group-hover:text-cyan-600 group-hover:scale-105 group-hover:before:content-[''] group-hover:before:absolute group-hover:before:w-full group-hover:before:h-1 group-hover:before:bg-cyan-600 group-hover:before:bottom-[-4px] group-hover:before:left-0 group-hover:before:transition-all group-hover:before:duration-300">Chats</button>
+                </Link>
+                <Link to={"/my/profile/employee/create/skills"} className="relative group">
+                    <button className="text-white text-sm sm:text-base relative transition-all duration-300 group-hover:text-cyan-600 group-hover:scale-105 group-hover:before:content-[''] group-hover:before:absolute group-hover:before:w-full group-hover:before:h-1 group-hover:before:bg-cyan-600 group-hover:before:bottom-[-4px] group-hover:before:left-0 group-hover:before:transition-all group-hover:before:duration-300">Crear habilidades</button>
+                </Link>
+                <Link to={"/my/profile/employee/create/personalinformation"} className="relative group">
+                    <button className="text-white text-sm sm:text-base relative transition-all duration-300 group-hover:text-cyan-600 group-hover:scale-105 group-hover:before:content-[''] group-hover:before:absolute group-hover:before:w-full group-hover:before:h-1 group-hover:before:bg-cyan-600 group-hover:before:bottom-[-4px] group-hover:before:left-0 group-hover:before:transition-all group-hover:before:duration-300">Crear perfil</button>
+                </Link>
             </div>
             <div className="lg:w-2/4 flex flex-row justify-end items-center lg:gap-12 gap-4">
                 <p className="text-white text-sm sm:text-base">No activo</p>
-
-                {/* switch para intercambiar de activo a no activo*/}
                 <label htmlFor="second-toggle" className="flex items-center cursor-pointer ">
                     <div className="relative">
                         <input
@@ -120,13 +84,14 @@ const NavbarEmpleado = (props) => {
                         ></div>
                     </div>
                 </label>
-
                 <p className={` ${props.checked ? 'text-green-500' : 'text-white'} text-sm sm:text-base`}>Activo</p>
-                <a href=" https://wa.me/3208393883"><button className="text-white  text-sm sm:text-base">Soporte</button></a>
-                <button className="text-white  text-sm sm:text-base" onClick={logOut}>Salir</button>
+                <a href="https://wa.me/3208393883" className="relative group">
+                    <button className="text-white  text-sm sm:text-base relative transition-all duration-300 group-hover:text-cyan-600 group-hover:scale-105 group-hover:before:content-[''] group-hover:before:absolute group-hover:before:w-full group-hover:before:h-1 group-hover:before:bg-cyan-600 group-hover:before:bottom-[-4px] group-hover:before:left-0 group-hover:before:transition-all group-hover:before:duration-300">Soporte</button>
+                </a>
+                <button className="text-white  text-sm sm:text-base relative transition-all duration-300 group-hover:text-cyan-600 group-hover:scale-105 group-hover:before:content-[''] group-hover:before:absolute group-hover:before:w-full group-hover:before:h-1 group-hover:before:bg-cyan-600 group-hover:before:bottom-[-4px] group-hover:before:left-0 group-hover:before:transition-all group-hover:before:duration-300" onClick={logOut}>Salir</button>
             </div>
         </div>
-    )
+    );
 }
 
 export default NavbarEmpleado;

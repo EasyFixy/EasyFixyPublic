@@ -89,7 +89,7 @@ const Chat = (props) => {
           {messages.map((elemento, index) => (
             <span key={index} className={`w-100 flex justify-${elemento.from === props.userId ? 'end' : 'start'}`}>
               <li className={`text-white 
-                  ${elemento.from === props.userId ? 'bg-orange-500' : 'bg-black'}
+                  ${elemento.from === props.userId ? 'bg-cyan-700' : 'bg-black'}
                   py-2 px-8 rounded-2xl mb-1 w-auto break-all`}
                   key={index}>
                 {elemento.msg}
@@ -99,14 +99,14 @@ const Chat = (props) => {
         </ul>
         <div id="form" className="flex-none flex justify-between items-center p-2 px-4 mb-2">
           <input
-            className="w-full h-10 border border-black rounded focus:outline-none focus:border-orange-500 p-2"
+            className="w-full h-10 border border-black rounded focus:outline-none focus:border-cyan-700 p-2"
             type="text"
             value={message}
             onChange={(event) => setMessage(event.target.value)}
             onKeyDown={handleKeyDown}
           />
           <button className="" onClick={handleSendMessage}>
-            <img src="/icons/flecha-enviar.svg" alt="" className="w-8 h-8 ml-2" />
+            <img src="/icons/flecha-enviar.png" alt="" className="w-8 h-8 ml-2" />
           </button>
         </div>
       </div>

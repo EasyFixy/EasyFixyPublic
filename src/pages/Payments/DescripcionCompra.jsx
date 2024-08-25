@@ -124,7 +124,7 @@ const DescripcionCompra = () => {
                         <tr className="flex justify-start text-1xl mt-1"><td>Valor a pagar</td><td className="ml-auto">${price}</td></tr>
                         <div className="flex flex-row justify-center mt-8">
                             <button> <Link to={'/my/home/employer'} className="bg-[#292929] flex flex-row text-white justify-center items-center px-8 py-2 rounded-3xl"><img src="/icons/arrow-circle-left.svg" alt="volver" className="pr-2"/>Volver </Link></button>
-                            <button className="bg-[#FD7401] flex flex-row text-white justify-center items-center px-8 py-2 rounded-3xl ml-8" onClick={next}>Siguiente<img src="/icons/arrow-circle-right.svg" alt="siguiente" /></button>
+                            <button className="bg-[#0E7490] flex flex-row text-white justify-center items-center px-8 py-2 rounded-3xl ml-8" onClick={next}>Siguiente<img src="/icons/arrow-circle-right.svg" alt="siguiente" /></button>
                         </div>
                     </div>
                 </section>

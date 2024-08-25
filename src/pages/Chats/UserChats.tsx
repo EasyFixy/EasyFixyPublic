@@ -113,11 +113,11 @@ const UserChats = () => {
                             {chats.map(chat => (
                                 <div 
                                     key={chat.desiredUserId} 
-                                    className={`flex items-center justify-between mb-4 cursor-pointer ${selectedChat.desiredUserId === chat.desiredUserId ? 'bg-orange-400 bg-opacity-50' : ''}`} 
+                                    className={`flex items-center justify-between mb-4 cursor-pointer ${selectedChat.desiredUserId === chat.desiredUserId ? 'bg-cyan-700 bg-opacity-50' : ''}`} 
                                     onClick={() => onClickSelected(chat)}
                                 >
                                     <div className="flex items-center">
-                                        <img src="/empleadologo.svg" alt={`Avatar de ${chat.userName}`} className="w-10 h-10 rounded-full mr-2" />
+                                        <img src="/empleadologo.png" alt={`Avatar de ${chat.userName}`} className="w-10 h-10 rounded-full mr-2" />
                                         <div>
                                             <span className="font-bold text-lg">{chat.userName}</span>
                                             <p className="text-lg">

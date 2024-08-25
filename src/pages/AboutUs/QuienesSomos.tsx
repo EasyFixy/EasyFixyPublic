@@ -22,7 +22,7 @@ const QuienesSomos = () => {
                 <div className="w-4/5 flex justify-center p-4 font-bold text-[#292929] text-4xl">
                     <p className="text-center">Con EasyFixy</p>
                 </div>
-                <div className="w-4/5 p-1 text-gray-500 text-xl mb-8">
+                <div className="w-4/5 p-1 text-gray-500 text-2xl mb-8">
                     <p className="text-center mt-4">Los usuarios acceden a un activo ecosistema de bienes y servicios, las personas pueden tanto encontrar solución a sus problemas cotidianos, como también generar un dinero extra trabajando en lo que mejor saben hacer.</p>
                 </div>
                 <div className="w-screen bg-[#292929] text-white p-8 flex flex-col items-start">
@@ -45,18 +45,18 @@ const QuienesSomos = () => {
                         <div className="ml-4">
                             <h2 className="text-[#292929] text-1xl sm:text-2xl font-bold">Empleador</h2>
                             <p className="text-[#666666] text-xs sm:text-base mt-6 mb-6 font-bold">EasyFixy, te da la oportunidad de contratar trabajadores calificados para tus necesidades de servicios cotidianos, de manera rápida, sencilla y eficiente.</p>
-                            <Link to="/login" className="text-orange-500 text-1xl sm:text-2xl underline font-bold mt-8">Ir al sitio</Link>
+                            <Link to="/login" className="text-cyan-700 text-1xl sm:text-2xl underline font-bold mt-8">Ir al sitio</Link>
                         </div>
                     </div>
                     
-                    <img src="/icons/loop.svg" alt="loop" className="max-w-full sm:max-w-lg  h-auto -my-14 sm:-my-28" />
+                    <img src="/icons/loop.png" alt="loop" className="max-w-full sm:max-w-lg  h-auto -my-14 sm:-my-28" />
 
                     <div className=" mb-8 bg-white rounded-lg border border-gray-300 p-4 sm:w-[60%] mx-2 flex  flex-row items-start z-10 ">
                         <img src="/icons/TrabajadorColor.svg" alt="EmpleadorColor" className="sm:w-1/3 w-1/4 max-w-max  h-auto" />
                         <div className="ml-4">
                             <h2 className="text-[#292929] text-1xl sm:text-2xl font-bold">Trabajador</h2>
                             <p className="text-[#666666] text-xs sm:text-base mt-6 mb-6 font-bold">Somos EasyFixy, una plataforma donde conectamos a trabajadores independientes con trabajos cotidianos a su medida, de manera rápida y eficiente.</p>
-                            <Link to="/login" className="text-orange-500 text-1xl sm:text-2xl underline font-bold mt-8">Ir al sitio</Link>
+                            <Link to="/login" className="text-cyan-700 text-1xl sm:text-2xl underline font-bold mt-8">Ir al sitio</Link>
                         </div>
                     </div>
                 </div>
@@ -67,7 +67,7 @@ const QuienesSomos = () => {
                         </div>
                         <div className="text-center">
                             <h2 className="font-bold text-2xl lg:text-7xl">Nuestra Historia</h2>
-                            <p className="mt-10 text-base lg:text-2xl lg:leading-[2] text-justify">Nuestra empresa fue fundada a inicios de 2024 por un grupo de estudiantes, amantes a la programación, con el sueño de empezar a emprender por medio de esta plataforma. Empezamos con un pequeño catalogo de servicios, pero poco a poco nos dimos cuenta de la demanda de servicios que son solicitados por los Colombianos día a día. Con el tiempo hemos aumentado nuestro número de usuarios lo que nos ha permitido poder cubrir las necesidades de servicios a miles de Colombianos.</p>
+                            <p className="mt-10 text-base lg:text-3xl lg:leading-[2] text-justify">Nuestra empresa fue fundada a inicios de 2024 por un grupo de estudiantes, amantes a la programación, con el sueño de empezar a emprender por medio de esta plataforma. Empezamos con un pequeño catalogo de servicios, pero poco a poco nos dimos cuenta de la demanda de servicios que son solicitados por los Colombianos día a día. Con el tiempo hemos aumentado nuestro número de usuarios lo que nos ha permitido poder cubrir las necesidades de servicios a miles de Colombianos.</p>
                         </div>
                     </div>
                 </div>

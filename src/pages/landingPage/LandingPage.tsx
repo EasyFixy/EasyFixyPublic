@@ -7,17 +7,17 @@ const LandingPage = () =>{
     return(
         <div className='w-screen h-screen flex flex-col'>
             <div className="w-full min-h-20 mainBackground px-[2%] flex flex-row text-white shadow-1 z-10">
-                <div className="h-full lg:w-1/4 flex flex-col md:flex-row justify-start items-center mr-1">
+                <div className="h-full lg:w-1/4 flex flex-col md:flex-row justify-start items-center mr-1  animate-fadeIn">
                     <img src="logo.svg" alt="logo" className="h-20" />
-                    <p className="text-2xl md:text-3xl fontNameLogo"> EasyFixy</p>
+                    <Link to="/" className="text-2xl md:text-3xl fontNameLogo ml-2 relative transform transition duration-300 "> EasyFixy</Link>
 
                 </div>
                 <div className="flex-1 flex flex-col md:flex-row justify-around items-end md:items-center font-bold text-sm md:text-base text-end md:text-center">
-                    <Link to={"/about-us"}>¿Quienes somos?</Link>
-                    <a href="public\Manual de Técnico - EasyFixy.pdf" target="_blank" rel="noopener noreferrer">¿Cómo funciona?</a>
-                    <Link to={"/FAQ"}>Preguntas frecuentes</Link>
-                    <Link to={"/login"}>Iniciar sesión</Link>
-                    <Link to={"/register"}>Registrarse</Link>
+                    <Link to={"/about-us"}  className="relative transform transition duration-300 hover:scale-110 hover:before:content-[''] hover:before:absolute hover:before:w-full hover:before:h-1 hover:before:bg-white hover:before:bottom-[-4px]" >¿Quienes somos?</Link>
+                    <a href="public\Manual de Técnico - EasyFixy.pdf" target="_blank" rel="noopener noreferrer"  className="relative transform transition duration-300 hover:scale-110 hover:before:content-[''] hover:before:absolute hover:before:w-full hover:before:h-1 hover:before:bg-white hover:before:bottom-[-4px]">¿Cómo funciona?</a>
+                    <Link to={"/FAQ"}  className="relative transform transition duration-300 hover:scale-110 hover:before:content-[''] hover:before:absolute hover:before:w-full hover:before:h-1 hover:before:bg-white hover:before:bottom-[-4px]">Preguntas frecuentes</Link>
+                    <Link to={"/login"}  className="relative transform transition duration-300 hover:scale-110 hover:before:content-[''] hover:before:absolute hover:before:w-full hover:before:h-1 hover:before:bg-white hover:before:bottom-[-4px]">Iniciar sesión</Link>
+                    <Link to={"/register"}  className="relative transform transition duration-300 hover:scale-110 hover:before:content-[''] hover:before:absolute hover:before:w-full hover:before:h-1 hover:before:bg-white hover:before:bottom-[-4px]">Registrarse</Link>
                 </div>
             </div>
             
