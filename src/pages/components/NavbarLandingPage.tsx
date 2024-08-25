@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const NavbarLandingPage = () => {
     return(
         <>
-        <div className="w-full min-h-20 mainBackground px-[2%] flex text-white animate-slideDown  shadow-1 z-50 flex-row">
+        <div className="w-full min-h-20 mainBackground px-[2%] flex text-white animate-slideDown shadow-1 z-50 flex-row">
             <div className="h-full lg:w-1/4 flex flex-col md:flex-row justify-start items-center animate-fadeIn  mr-1">
                 <img src="logo.svg" alt="logo" className="h-20" />
                 <Link to="/" className="text-2xl md:text-3xl fontNameLogo ml-2 transform transition duration-300 ">EasyFixy</Link>
