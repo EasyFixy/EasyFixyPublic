@@ -7,6 +7,7 @@ import {useEffect, useRef } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { handleRequestWithToken } from "../../Helpers/Request";
 import NavbarEmpleador from "../components/NavbarEmpleador";
+import { useNavigate } from 'react-router-dom';
 
 const UserChats = () => {
     // Array de chats
@@ -20,6 +21,12 @@ const UserChats = () => {
     const dispatch = useAppDispatch();
     const token = localStorage.getItem('token');
     const buttonRef = useRef<HTMLDivElement>(null);
+
+    const navigate = useNavigate();
+
+    const goBack = () => {
+        navigate(-1); // Navega a la página anterior en el historial
+    };
 
     const handleDeleteChat = () => {
         setShowPopover(false); // Cerrar la ventana después de borrar el chat
@@ -104,6 +111,9 @@ const UserChats = () => {
             <NavbarEmpleador/>
             <div className="flex flex-row h-full w-screen" >
                 <div className="w-1/4 border-r border-gray-300 overflow-y-auto">
+                <button onClick={goBack} className="left-4 top-4 mt-4">
+                    <img src="/public/ButtonBack.svg" alt="" />
+                </button>
                     {/* Encabezado y buscador */}
                     <div className="p-4">
                         <h1 className="text-4xl font-bold mb-4">Chats</h1>

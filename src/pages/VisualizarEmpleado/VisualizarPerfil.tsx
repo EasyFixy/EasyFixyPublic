@@ -7,6 +7,7 @@ import { useAppDispatch, useAppSelector } from "../../app/hooks";
 
 import { useEffect } from "react";
 import { UserData } from "../../models/PerfilEmpleado";
+import { useNavigate } from 'react-router-dom';
 
 
 const VisualizarPerfil = () => {
@@ -15,6 +16,12 @@ const VisualizarPerfil = () => {
     const [isMyAccount, setIsMyAccount] = useState(true);
     const searchParams = new URLSearchParams(location.search);
     const baseUrl = import.meta.env.VITE_BASE_URL;
+    const navigate = useNavigate();
+
+  const goBack = () => {
+    navigate(-1); // Navega a la página anterior en el historial
+  };
+    
 
     // Obtener valores específicos de la URL
     const userId = useAppSelector((login) => login.Auth.id)
@@ -98,6 +105,9 @@ const VisualizarPerfil = () => {
         <div className='w-full h-screen flex flex-col overflow-y-scroll'>
 
             {/* <ToolbarDefault/> */}
+            <button onClick={goBack} className="left-4 top-4 mt-4">
+                    <img src="/public/ButtonBack.svg" alt="" />
+                </button>
 
             <ContenedorPerfil estado={isMyAccount} isLoading={loading} userData={userData} />
 

@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import EstimatePrice from "../components/EstimatePrice";
+import { useNavigate } from 'react-router-dom';
 
 const CreateJob = () => {
     const [title, setTitle] = useState<String>();
@@ -11,6 +12,12 @@ const CreateJob = () => {
     const [description, setDescription] = useState<String>();
     const [estimatePrice, setEstimatePrice] = useState<number>(10000);
     const [ubication, setUbication] = useState<string>('');
+
+    const navigate = useNavigate();
+
+    const goBack = () => {
+        navigate(-1); // Navega a la página anterior en el historial
+    };
 
     // FUNCION BUSCAR EMPLEADOS
     // DESCOMENTAR Y AGREGAR PARAMETROS NECESARIOS
@@ -71,7 +78,7 @@ const CreateJob = () => {
     
     return (
         <div className="w-screen h-screen flex flex-col-reverse lg:flex-row relative">
-            <button className="absolute left-4 top-4">
+            <button onClick={goBack} className="absolute left-4 top-4">
                 <img src="/public/ButtonBack.svg" alt="" />
             </button>
             <div className="flex-1 px-[5%] py-[5%] flex flex-col overflow-y-scroll">
