@@ -7,6 +7,8 @@ import { handleRequestWithToken } from "../../Helpers/Request";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../app/hooks";
 import { toast } from "react-toastify";
+
+
 interface Skill {
     value: string;
     label: string;
@@ -29,6 +31,9 @@ const Skills = () => {
         value: "",
         label: ""
     };
+
+  
+
     const navigate = useNavigate();
     const token = useAppSelector(state => state.Auth.token);
     const userId = useAppSelector(state => state.Auth.id);
@@ -135,6 +140,11 @@ const Skills = () => {
                 // Aquí puedes manejar el error como desees
             });
     }
+
+    const goBack = () => {
+        navigate(-1); // Navega a la página anterior en el historial
+      };
+      
     useEffect(() => {
         handleRequestWithToken(dispatch, getUserSkills)
     }, []);
@@ -142,6 +152,9 @@ const Skills = () => {
     return(
         <div className="w-screen h-screen flex flex-col">
             {/* <ToolbarDefault tipe="employee"/> */}
+            <button onClick={goBack} className="left-4 top-4 mt-4">
+                    <img src="/public/ButtonBack.svg" alt="" />
+                </button>
             <div className="flex flex-1 flex-col px-[7%] pt-[7%]">
                 <h1 className="font-bold text-3xl">
                 Cuentanos cuales son tus habilidades

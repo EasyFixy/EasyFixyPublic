@@ -3,11 +3,13 @@ import ToolbarDefault from "../components/ToolbarDefaul";
 import { Link } from "react-router-dom";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from "react-router-dom";
 
 const DatosPerfilEmpleado = () => {
     const [title, setTitle] = useState("");
     const [experience, setExperience] = useState("");
     const [description, setDescription] = useState("");
+    const navigate = useNavigate();
 
     const handleFieldsVerification = (e) => {
         if (!(title && experience && description)) {
@@ -16,10 +18,17 @@ const DatosPerfilEmpleado = () => {
         }
     };
 
+    const goBack = () => {
+        navigate(-1); // Navega a la página anterior en el historial
+      };
+
     return (
         <div className="w-screen h-screen flex flex-col overflow-y-auto pb-16">
             {/* <ToolbarDefault tipe="employee"/> */}
-
+            <button onClick={goBack} className="left-4 top-4 mt-4">
+                    <img src="/public/ButtonBack.svg" alt="" />
+                </button>
+                
             <div className="flex flex-col content-center px-64 py-10">
                 <div className="w-70 h-70">
                     <img src="/icons/icon-datos-perfil.svg" alt="Icono de perfil" />
