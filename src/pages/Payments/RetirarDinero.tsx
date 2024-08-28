@@ -111,7 +111,7 @@ const RetirarDinero = () => {
       <div className="flex-grow flex flex-col items-center mt-8">
         <div className="w-full max-w-xl">
           <h2 className="text-4xl font-bold mb-4">Retirar Dinero</h2>
-          <h3 className="text-orange-500 font-bold mb-4 underline">Tarjeta</h3>
+          <h3 className="text-cyan-700 font-bold mb-4 underline">Tarjeta</h3>
           <div className="rounded-lg overflow-hidden shadow-1 p-6 mx-auto">
             <form className="w-full">
               <div className="mb-4">
@@ -149,7 +149,7 @@ const RetirarDinero = () => {
               <div className="mb-4">
                 <label
                   htmlFor="tipoTarjeta"
-                  className="block text-orange-500 text-sm font-bold mb-2 underline"
+                  className="block text-cyan-700 text-sm font-bold mb-2 underline"
                 >
                   Tipo de tarjeta
                 </label>
@@ -192,7 +192,7 @@ const RetirarDinero = () => {
                 />
                 <button
                   type="submit"
-                  className="bg-orange-500 text-white py-2 px-4 rounded hover:bg-orange-600 focus:outline-none focus:shadow-outline w-1/3"
+                  className="bg-cyan-700 text-white py-2 px-4 rounded hover:bg-cyan-800 focus:outline-none focus:shadow-outline w-1/3"
                 >
                   Retirar
                 </button>

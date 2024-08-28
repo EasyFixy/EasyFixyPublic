@@ -7,6 +7,7 @@ import { useAppDispatch, useAppSelector } from "../../app/hooks";
 
 import { useEffect } from "react";
 import { UserData } from "../../models/PerfilEmpleado";
+import { useNavigate } from 'react-router-dom';
 
 
 const VisualizarPerfil = () => {
@@ -15,6 +16,12 @@ const VisualizarPerfil = () => {
     const [isMyAccount, setIsMyAccount] = useState(true);
     const searchParams = new URLSearchParams(location.search);
     const baseUrl = import.meta.env.VITE_BASE_URL;
+    const navigate = useNavigate();
+
+  const goBack = () => {
+    navigate(-1); // Navega a la página anterior en el historial
+  };
+    
 
     // Obtener valores específicos de la URL
     const userId = useAppSelector((login) => login.Auth.id)
@@ -98,6 +105,9 @@ const VisualizarPerfil = () => {
         <div className='w-full h-screen flex flex-col overflow-y-scroll'>
 
             {/* <ToolbarDefault/> */}
+            <button onClick={goBack} className="left-4 top-4 mt-4">
+                    <img src="/public/ButtonBack.svg" alt="" />
+                </button>
 
             <ContenedorPerfil estado={isMyAccount} isLoading={loading} userData={userData} />
 
@@ -140,7 +150,7 @@ const VisualizarPerfil = () => {
                 </div>
 
                 <div className="w-[50%] h-auto">
-                    <h1 className="font-bold text-3xl text-orange-400 ">Perfiles laborales del empleado</h1>
+                    <h1 className="font-bold text-3xl text-cyan-700 ">Perfiles laborales del empleado</h1>
                     <ul className="w-full mt-4 border-2 rounded-3xl border-grey-500 px-2">
                         {loading && userData && (!userData.comments || userData.comments.length === 0) ? (
                             <p>No hay perfiles por mostrar...</p>

@@ -1,14 +1,14 @@
 import React from "react";
-import { Interface } from "readline";
 
 interface PropsContenedorLogo {
-    width?: string;
+    customStyle?: string;
+
 }
-const ContenedorLogoHorizontal = ({width = "w-1/2"}:PropsContenedorLogo) =>{
+const ContenedorLogoHorizontal = ({customStyle = "lg:w-1/2"}:PropsContenedorLogo) =>{
     return(
-        <div className={`h-full h-screen ${width} mainBackground flex justify-center items-center`}>
-            <div className="w-96 h-96">
-                <img src="/icons/icon.svg" alt="Icono principal" />
+        <div className={`lg:h-full h-[10%] ${customStyle} mainBackground flex justify-center items-center shadow-1`}>
+            <div className="lg:w-96 lg:h-96 h-full">
+                <img src="/icons/icon.svg" alt="Icono principal" className="w-full h-full " />
             </div>
         </div>
     )

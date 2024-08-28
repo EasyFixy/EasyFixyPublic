@@ -26,7 +26,7 @@ const CalificacionTrabajo = ({ isOpen, onClose, jobData }) => {
               </div>
               <div className="mb-2 text-center"> {/* Texto "Cuentanos, ¿Cómo fue el trabajo de "Nombre del trabajador" */}
                 <h3 className="text-xl font-bold break-words">
-                  Cuentanos, ¿Cómo te fue con <span className="text-orange-500 break-words">Nombre del trabajador</span>?
+                  Cuentanos, ¿Cómo te fue con <span className="text-cyan-700 break-words">Nombre del trabajador</span>?
                 </h3>
               </div>
               <div className="flex justify-center mb-4"> {/* Estrellas centradas */}
@@ -47,7 +47,7 @@ const CalificacionTrabajo = ({ isOpen, onClose, jobData }) => {
                 />
               </div>
               <div className="text-center"> {/* Botón de enviar centrado */}
-                <button className="color4 hover:bg-orange-700 text-white px-4 py-2 rounded-md">Enviar</button>
+                <button className="color4 hover:bg-cyan-700 text-white px-4 py-2 rounded-md">Enviar</button>
               </div>
             </div>
           </div>

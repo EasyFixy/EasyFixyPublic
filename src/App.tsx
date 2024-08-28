@@ -14,9 +14,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import { decodeJWT, validationToken } from './Helpers/Token';
 import { useAppDispatch, useAppSelector } from './app/hooks';
 import { login } from './features/Auth/Auth';
-
 import QuienesSomos from './pages/AboutUs/QuienesSomos';
-import HomeEmpleado from './pages/Home/empleado/HomeEmpleado';
+
 const App = () => {
   const dispatch = useAppDispatch();
   const reduxToken = useAppSelector(state => state.Auth);
